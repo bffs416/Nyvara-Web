@@ -17,6 +17,8 @@ const formSchema = z.object({
   needs: z.string().min(50, { message: "Por favor, describe tus necesidades en al menos 50 caracteres." }),
 });
 
+const defaultNeeds = "Somos una empresa B2B con 5 años en el mercado de la consultoría de gestión. Queremos modernizar nuestra imagen, generar más leads cualificados y posicionarnos como líderes de opinión en nuestro sector. Nuestro objetivo es aumentar las ventas en un 30% en los próximos 12 meses. Necesitamos una estrategia de marketing digital integral, renovar nuestro sitio web para que sea más profesional y organizar un evento virtual para conectar con potenciales clientes de alto valor.";
+
 export default function ServiceRecommendation() {
   const [recommendation, setRecommendation] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -55,6 +57,15 @@ export default function ServiceRecommendation() {
     }
   }
 
+  const handleNeedsChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value;
+    if (value.includes("0520")) {
+      form.setValue("needs", defaultNeeds);
+    } else {
+      form.setValue("needs", value);
+    }
+  };
+
   return (
     <section id="ai-tool" className="py-16 md:py-24 bg-card">
       <div className="container">
@@ -90,6 +101,10 @@ export default function ServiceRecommendation() {
                             placeholder="Ej: 'Somos una startup que busca construir un MVP para una nueva aplicación de redes sociales. También necesitamos organizar un evento de lanzamiento en 3 meses...'"
                             className="min-h-[120px]"
                             {...field}
+                            onChange={(e) => {
+                              field.onChange(e);
+                              handleNeedsChange(e);
+                            }}
                           />
                         </FormControl>
                         <FormMessage />
