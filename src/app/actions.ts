@@ -81,32 +81,33 @@ export async function handleSurveyAndRecommend(
   
   console.log('Paso 2: Los datos del formulario han sido validados con éxito.');
 
-  const supabase = createClient();
-  console.log('Paso 3: Intentando guardar los datos en Supabase...');
-  
-  const { error: dbError } = await supabase
-    .from('survey_responses')
-    .insert([
-        { response_data: validatedData.data }
-    ]);
-
-  if (dbError) {
-    console.error('Error al guardar en Supabase:', dbError.message);
-    return { error: `No se pudieron guardar tus respuestas. Causa: ${dbError.message}` };
-  }
-  
-  console.log('Paso 4: ¡Éxito! Los datos se guardaron correctamente en Supabase.');
-  
-  const summary = summarizeSurveyData(validatedData.data);
-  console.log('Paso 5: Resumen generado para la IA:', summary);
-
   try {
+    const supabase = createClient();
+    console.log('Paso 3: Intentando guardar los datos en Supabase...');
+    
+    const { error: dbError } = await supabase
+      .from('survey_responses')
+      .insert([
+          { response_data: validatedData.data }
+      ]);
+
+    if (dbError) {
+      console.error('Error al guardar en Supabase:', dbError.message);
+      return { error: `No se pudieron guardar tus respuestas. Causa: ${dbError.message}` };
+    }
+    
+    console.log('Paso 4: ¡Éxito! Los datos se guardaron correctamente en Supabase.');
+    
+    const summary = summarizeSurveyData(validatedData.data);
+    console.log('Paso 5: Resumen generado para la IA:', summary);
+
     console.log('Paso 6: Enviando el resumen al servicio de recomendación de IA...');
     const result = await recommendServices({ needs: summary });
     console.log('Paso 7: ¡Recomendación de IA recibida con éxito!');
     return { recommendation: result };
-  } catch (error) {
-    console.error('La recomendación de servicio de IA falló:', error);
-    return { error: 'No se pudo obtener la recomendación del servicio de IA.' };
+
+  } catch (error: any) {
+    console.error('Error en el proceso de handleSurveyAndRecommend:', error);
+    return { error: 'Ocurrió un error inesperado en el servidor. ' + (error.message || '') };
   }
 }
