@@ -53,6 +53,12 @@
       "description": "Avatar de Juan García.",
       "imageUrl": "https://picsum.photos/seed/t2/100/100",
       "imageHint": "person portrait"
+    },
+    {
+      "id": "hero-image",
+      "description": "Imagen abstracta de tecnología y negocios.",
+      "imageUrl": "https://picsum.photos/seed/hero/1200/675",
+      "imageHint": "abstract technology"
     }
   ]
 }

@@ -8,6 +8,7 @@ import EventsGallery from '@/components/sections/events-gallery';
 import Testimonials from '@/components/sections/testimonials';
 import ServiceRecommendation from '@/components/sections/service-recommendation';
 import Contact from '@/components/sections/contact';
+import HeroImage from '@/components/sections/hero-image';
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
+        <HeroImage />
         <Services />
         <About />
         <Portfolio />
