@@ -67,7 +67,7 @@ const Header = () => {
         <div className="mr-auto flex">
            <Link href="/" className="mr-6 flex items-center space-x-2 cursor-pointer">
             <motion.div whileHover={{ scale: 1.05 }}>
-                <NyvaraLogo className="h-8 w-40" />
+                <NyvaraLogo className="h-10 w-48" />
             </motion.div>
           </Link>
         </div>
