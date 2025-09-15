@@ -45,6 +45,15 @@ const Header = () => {
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
+  const handleContactClick = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+    closeMobileMenu();
+  };
+
+
   return (
     <motion.header
       initial={{ y: -100 }}
@@ -72,8 +81,8 @@ const Header = () => {
         </div>
         
         <div className="flex flex-1 items-center justify-end space-x-4">
-            <Button asChild className="hidden md:inline-flex">
-              <Link href="/#contact">Contacto</Link>
+            <Button onClick={handleContactClick} className="hidden md:inline-flex">
+              Contacto
             </Button>
 
             {/* Mobile Menu Button */}
@@ -98,8 +107,8 @@ const Header = () => {
                     {item.name}
                   </Link>
               ))}
-              <Button asChild className="w-full mt-4">
-                <Link href="/#contact" onClick={closeMobileMenu}>Contacto</Link>
+              <Button onClick={handleContactClick} className="w-full mt-4">
+                Contacto
               </Button>
             </div>
           </motion.div>
