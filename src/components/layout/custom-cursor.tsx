@@ -23,12 +23,10 @@ const CustomCursor = () => {
       <motion.div
         className="custom-cursor-blur"
         animate={{ x: position.x - 16, y: position.y - 16 }}
-        transition={{ type: 'spring', damping: 25, stiffness: 300 }}
       />
       <motion.div
         className="custom-cursor-dot"
         animate={{ x: position.x - 4, y: position.y - 4 }}
-        transition={{ type: 'spring', damping: 35, stiffness: 700 }}
       />
     </>
   );
