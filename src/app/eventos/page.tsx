@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Palette, Presentation, Rocket, Users, ArrowRight, Info, Send } from 'lucide-react';
+import { Palette, Presentation, Rocket, Users, Info, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import {
@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dialog";
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
+import { siteConfig } from '@/lib/config';
 
 const EventosCorporativos = () => {
   const [selectedService, setSelectedService] = useState<any>(null);
@@ -26,6 +27,8 @@ const EventosCorporativos = () => {
     animate: { opacity: 1, y: 0, transition: { duration: 0.8 } },
     exit: { opacity: 0, y: -50, transition: { duration: 0.6 } }
   };
+
+  const whatsappUrl = `https://wa.me/${siteConfig.contact.phone}?text=${encodeURIComponent(siteConfig.contact.whatsappMessage)}`;
 
   const serviceItems = [
     {
@@ -135,9 +138,9 @@ const EventosCorporativos = () => {
                 Contáctanos hoy y descubre cómo podemos transformar tu visión en realidad
               </p>
               <Button size="lg" asChild>
-                  <Link href="/#contact">
+                  <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
                     Envíanos un Mensaje <Send className="ml-2" />
-                  </Link>
+                  </a>
               </Button>
             </motion.section>
 
@@ -149,8 +152,8 @@ const EventosCorporativos = () => {
                   <DialogTitle className="text-3xl font-bold text-primary font-headline mb-4">{selectedService.title}</DialogTitle>
                 </DialogHeader>
                 <div className="text-muted-foreground space-y-6">
+                  <div className="italic mb-4 text-base">{selectedService.details.analogy}</div>
                     <div>
-                      <div className="italic mb-4 text-base">{selectedService.details.analogy}</div>
                       <h4 className="font-bold text-lg text-primary mb-2">¿Qué es exactamente?</h4>
                       <p className="text-foreground/90">{selectedService.details.whatIs}</p>
                     </div>
