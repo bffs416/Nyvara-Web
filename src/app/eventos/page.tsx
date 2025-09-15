@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Palette, Presentation, Rocket, Users, ArrowRight, Info } from 'lucide-react';
+import { Palette, Presentation, Rocket, Users, ArrowRight, Info, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import {
@@ -130,13 +130,13 @@ const EventosCorporativos = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8, once: true }}
             >
-              <h2 className="text-4xl font-bold mb-4 font-headline">¿Planeando un evento?</h2>
+              <h2 className="text-4xl font-bold mb-4 font-headline">¿Listo para <span className="text-primary">Comenzar?</span></h2>
               <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Déjanos encargarnos de los detalles para que tú puedas enfocarte en tus invitados. ¡Contáctanos y hagamos que tu próximo evento sea un éxito rotundo!
+                Contáctanos hoy y descubre cómo podemos transformar tu visión en realidad
               </p>
               <Button size="lg" asChild>
                   <Link href="/#contact">
-                    Solicitar Asesoría <ArrowRight className="ml-2" />
+                    Envíanos un Mensaje <Send className="ml-2" />
                   </Link>
               </Button>
             </motion.section>
