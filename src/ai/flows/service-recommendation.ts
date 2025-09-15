@@ -26,16 +26,9 @@ const RecommendedServiceSchema = z.object({
   suggestedActions: z.array(z.string()).describe('Una lista de acciones o pasos concretos a seguir dentro de este servicio.'),
 });
 
-const StrategicAnalysisSchema = z.object({
-  strength: z.string().describe("El principal punto fuerte o 'superpoder' del negocio del cliente, identificado a partir de sus respuestas."),
-  opportunity: z.string().describe("Un área clave de oportunidad o debilidad que, si se aborda, podría desbloquear un crecimiento significativo. Debe ser sugerente y no revelar la solución completa."),
-  nextStep: z.string().describe("Una frase que actúe como llamada a la acción, indicando que el siguiente paso es trabajar con Nyvara para desarrollar esta estrategia."),
-});
-
 const ServiceRecommendationOutputSchema = z.object({
   title: z.string().describe('Un título atractivo y conciso para la recomendación.'),
   summary: z.string().describe('Un resumen introductorio de la estrategia general recomendada.'),
-  strategicAnalysis: StrategicAnalysisSchema.describe("Un breve análisis estratégico que resalta fortalezas y oportunidades."),
   recommendedServices: z.array(RecommendedServiceSchema).describe('Una lista de los servicios recomendados.'),
 });
 
@@ -55,17 +48,11 @@ const prompt = ai.definePrompt({
   output: {schema: ServiceRecommendationOutputSchema},
   prompt: `Eres un consultor experto en Nyvara, una empresa especializada en Desarrollo de Software, Eventos Corporativos y Formación.
 
-Un cliente potencial ha descrito sus necesidades y objetivos. Tu tarea es doble:
+Un cliente potencial ha descrito sus necesidades y objetivos. Tu tarea es:
 
-1.  **Análisis Estratégico (Breve y Sugerente):**
-    *   **Punto Fuerte:** Identifica la principal fortaleza del cliente en una frase corta y potente.
-    *   **Oportunidad:** Señala su mayor área de oportunidad o debilidad de una manera que genere intriga y demuestre que has identificado algo clave, pero sin dar la solución completa.
-    *   **Siguiente Paso:** Escribe una llamada a la acción para que contacten a Nyvara.
-    *   **IMPORTANTE:** Este análisis debe ser un "teaser", diseñado para que el cliente piense "Necesito que Nyvara me ayude a desarrollar esto".
-
-2.  **Recomendación de Servicios (Detallada):**
-    *   Basado en su descripción, recomienda los servicios que mejor le ayudarían.
-    *   Para cada servicio, proporciona su nombre, una justificación clara y de 3 a 4 acciones sugeridas.
+**Recomendación de Servicios (Detallada):**
+*   Basado en su descripción, recomienda los servicios que mejor le ayudarían.
+*   Para cada servicio, proporciona su nombre, una justificación clara y de 3 a 4 acciones sugeridas.
 
 Organiza toda la respuesta en el formato JSON solicitado.
 

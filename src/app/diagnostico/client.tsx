@@ -6,11 +6,10 @@ import SurveyForm from '@/components/sections/survey-form';
 import { handleSurveySubmission, handleRecommendationGeneration, summarizeSurveyDataForDownload } from '@/app/client-actions';
 import type { SurveyFormData } from '@/lib/types';
 import type { ServiceRecommendationOutput } from '@/ai/flows/service-recommendation';
-import { Loader2, ServerCrash, Lightbulb, Download, Send, Bot, Rocket, Gem, Target } from 'lucide-react';
+import { Loader2, ServerCrash, Lightbulb, Download, Send, Bot } from 'lucide-react';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const RecommendationResults = ({ recommendation }: { recommendation: ServiceRecommendationOutput }) => (
   <motion.div
@@ -25,39 +24,6 @@ const RecommendationResults = ({ recommendation }: { recommendation: ServiceReco
       <p className="text-muted-foreground mt-2 max-w-3xl mx-auto">{recommendation.summary}</p>
     </div>
 
-    {/* Strategic Analysis Section */}
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 0.3, duration: 0.5 }}
-    >
-      <Card className="bg-background/50 border-primary/30 shadow-inner">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-3 text-2xl font-headline text-primary">
-            <Rocket />
-            Análisis Estratégico Rápido
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="grid md:grid-cols-3 gap-6 text-center">
-            <div className="bg-card p-4 rounded-lg">
-                <Gem className="mx-auto h-8 w-8 text-primary mb-3" />
-                <h4 className="font-bold text-lg text-foreground mb-2">Tu Mayor Fortaleza</h4>
-                <p className="text-muted-foreground text-sm">"{recommendation.strategicAnalysis.strength}"</p>
-            </div>
-             <div className="bg-card p-4 rounded-lg">
-                <Target className="mx-auto h-8 w-8 text-primary mb-3" />
-                <h4 className="font-bold text-lg text-foreground mb-2">Tu Próximo Gran Salto</h4>
-                <p className="text-muted-foreground text-sm">"{recommendation.strategicAnalysis.opportunity}"</p>
-            </div>
-             <div className="bg-card p-4 rounded-lg border-2 border-primary/50 shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)]">
-                <Send className="mx-auto h-8 w-8 text-primary mb-3" />
-                <h4 className="font-bold text-lg text-primary mb-2">Nuestro Siguiente Paso</h4>
-                <p className="text-muted-foreground text-sm font-semibold">"{recommendation.strategicAnalysis.nextStep}"</p>
-            </div>
-        </CardContent>
-      </Card>
-    </motion.div>
-    
     {/* Recommended Services Section */}
     <div className="space-y-6">
       {recommendation.recommendedServices.map((service, index) => (
