@@ -124,7 +124,7 @@ const MarketingPage = () => {
                       <DialogTitle className="text-3xl font-bold text-primary font-headline mb-4">{item.title}</DialogTitle>
                       <DialogDescription as="div" className="text-muted-foreground space-y-6">
                         <div>
-                          <p className="italic mb-4 text-base">{item.details.analogy}</p>
+                          <div className="italic mb-4 text-base">{item.details.analogy}</div>
                           <h4 className="font-bold text-lg text-primary mb-2">¿Qué es exactamente?</h4>
                           <p className="text-foreground/90">{item.details.whatIs}</p>
                         </div>
