@@ -139,9 +139,9 @@ const EventosCorporativos = () => {
                     <DialogFooter className="mt-6">
                       <DialogClose asChild>
                          <Button asChild className="w-full">
-                           <Link href="/#contact">
-                              Solicitar más información
-                           </Link>
+                           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                              Solicitar Asesoría <Send className="ml-2" />
+                           </a>
                          </Button>
                       </DialogClose>
                     </DialogFooter>
