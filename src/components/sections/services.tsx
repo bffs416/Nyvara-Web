@@ -109,22 +109,12 @@ export default function Services() {
                           </ul>
                       </div>
                       
-                      {service.link === '/eventos' ? (
-                        <Button asChild className="w-full mt-auto" variant="outline">
-                          <Link href={service.link}>
+                      <DialogTrigger asChild>
+                         <Button onClick={() => setSelectedService(service)} className="w-full mt-auto" variant="outline">
                             Ver más
                             <ArrowRight size={16} />
-                          </Link>
                         </Button>
-                      ) : (
-                        <DialogTrigger asChild>
-                           <Button onClick={() => setSelectedService(service)} className="w-full mt-auto" variant="outline">
-                              Ver más
-                              <Info className="ml-2" size={16} />
-                          </Button>
-                        </DialogTrigger>
-                      )}
-
+                      </DialogTrigger>
                   </CardContent>
                 </Card>
               </motion.div>
