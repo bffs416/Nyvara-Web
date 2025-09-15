@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -18,13 +19,18 @@ const CustomCursor = () => {
   }, []);
 
   return (
-    <div
-      className="custom-cursor"
-      style={{
-        left: `${position.x}px`,
-        top: `${position.y}px`,
-      }}
-    />
+    <>
+      <motion.div
+        className="custom-cursor-blur"
+        animate={{ x: position.x - 16, y: position.y - 16 }}
+        transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+      />
+      <motion.div
+        className="custom-cursor-dot"
+        animate={{ x: position.x - 4, y: position.y - 4 }}
+        transition={{ type: 'spring', damping: 35, stiffness: 700 }}
+      />
+    </>
   );
 };
 
