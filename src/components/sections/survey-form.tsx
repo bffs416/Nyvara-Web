@@ -300,8 +300,8 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
               </div>
               
                <div className={currentStep === 13 ? 'block' : 'hidden'}>
-                <h2 className="font-headline text-3xl text-primary mb-2">Paso Final: Análisis y Recomendación</h2>
-                <p className="text-muted-foreground mb-6">¡Has completado el diagnóstico! Ahora, vamos a analizar tus respuestas para generar una recomendación estratégica con IA.</p>
+                <h2 className="font-headline text-3xl text-primary mb-2">Paso Final: Generar Resumen</h2>
+                <p className="text-muted-foreground mb-6">¡Has completado el diagnóstico! Ahora, genera un resumen de tus respuestas.</p>
                 <div>
                   <h3 className="font-headline text-xl text-primary mb-4">Análisis de Competencia (Opcional)</h3>
                   <p className="text-muted-foreground mb-6">Nombra algunos competidores clave para enriquecer el análisis.</p>
@@ -318,8 +318,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                   <Button type="button" variant="outline" size="sm" className="mt-2" onClick={() => append({ name: '' })}><PlusCircle className="mr-2 h-4 w-4" />Añadir Competidor</Button>
                 </div>
                  <Button type="submit" className="mt-8 w-full md:w-auto">
-                    <Bot className="mr-2 h-4 w-4" />
-                    Generar Recomendación con IA
+                    Generar Resumen
                   </Button>
               </div>
 

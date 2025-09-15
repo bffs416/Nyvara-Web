@@ -12,7 +12,9 @@
 import { 
     handleServiceRecommendation,
     handleContactSubmission,
-    handleSurveyAndRecommend 
+    handleSurveySubmission,
+    handleRecommendationGeneration,
+    summarizeSurveyDataForDownload
 } from './actions';
 
 // We need to re-export the server actions individually
@@ -21,5 +23,7 @@ import {
 export {
     handleServiceRecommendation,
     handleContactSubmission,
-    handleSurveyAndRecommend
+    handleSurveySubmission,
+    handleRecommendationGeneration,
+    summarizeSurveyDataForDownload
 };
