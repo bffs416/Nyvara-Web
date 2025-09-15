@@ -3,6 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 import WhatsAppButton from '@/components/layout/whatsapp-button';
 import ScrollToTop from '@/components/layout/scroll-to-top';
+import CustomCursor from '@/components/layout/custom-cursor';
 
 export const metadata: Metadata = {
   title: 'Nyvara Solutions Hub',
@@ -22,6 +23,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body bg-background text-foreground antialiased">
+        <CustomCursor />
         <ScrollToTop />
         {children}
         <Toaster />
