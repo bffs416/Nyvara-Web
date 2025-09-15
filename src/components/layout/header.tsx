@@ -27,6 +27,7 @@ const Header = () => {
   }, []);
 
   const handleNavClick = (sectionId: string) => {
+    // In Next.js with a single-page layout, we can directly scroll
     const element = document.querySelector(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -35,29 +36,21 @@ const Header = () => {
   };
 
   const NavLink = ({ href, children }: { href: string, children: React.ReactNode }) => (
-      <Link
-        href={href}
-        onClick={(e) => {
-          e.preventDefault();
-          handleNavClick(href);
-        }}
+      <button
+        onClick={() => handleNavClick(href)}
         className="transition-colors hover:text-primary"
       >
         {children}
-      </Link>
+      </button>
   );
 
   const MobileNavLink = ({ href, children }: { href: string, children: React.ReactNode }) => (
-     <Link
-        href={href}
-        onClick={(e) => {
-          e.preventDefault();
-          handleNavClick(href);
-        }}
+     <button
+        onClick={() => handleNavClick(href)}
         className="text-foreground hover:text-primary transition-colors duration-300 text-left py-2"
       >
         {children}
-      </Link>
+      </button>
   );
 
   return (
@@ -70,7 +63,7 @@ const Header = () => {
     >
       <nav className="container flex h-20 items-center">
         <div className="mr-auto flex">
-           <Link href="/" className="mr-6 flex items-center space-x-2">
+           <Link href="/" className="mr-6 flex items-center space-x-2 cursor-pointer">
             <motion.div whileHover={{ scale: 1.05 }}>
                 <NyvaraLogo className="h-8 w-auto text-primary" />
             </motion.div>

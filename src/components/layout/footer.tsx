@@ -1,27 +1,136 @@
-import { Github, Twitter, Linkedin } from "lucide-react";
-import NyvaraLogo from "@/components/icons/nyvara-logo";
+'use client';
 
-export default function Footer() {
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Instagram, Linkedin } from 'lucide-react';
+import { toast } from '@/hooks/use-toast';
+import Link from 'next/link';
+import NyvaraLogo from '@/components/icons/nyvara-logo';
+
+const Footer = () => {
+  const handleSocialClick = (platform: string, url: string) => {
+    toast({
+      title: `Redirigiendo a nuestro ${platform}`,
+      description: "Gracias por conectar con nosotros.",
+    });
+    window.open(url, '_blank');
+  };
+
+  const scrollToSection = (id: string) => {
+    const element = document.querySelector(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const currentYear = new Date().getFullYear();
+
+  const servicesLinks = [
+    { name: 'Desarrollo de Software', sectionId: '#portfolio' },
+    { name: 'Eventos Corporativos', sectionId: '#events' },
+    { name: 'Formación Profesional', sectionId: '#services' },
+  ];
+
+  const companyLinks = [
+    { name: 'Sobre Nosotros', sectionId: '#hero' },
+    { name: 'Servicios', sectionId: '#services' },
+    { name: 'Contacto', sectionId: '#contact' },
+  ];
+
   return (
-    <footer className="border-t border-border/40 bg-card">
-      <div className="container py-12">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex flex-col items-center md:items-start gap-4">
-            <NyvaraLogo className="h-6 w-auto text-primary" />
-            <p className="text-sm text-muted-foreground max-w-sm text-center md:text-left">
-              Tu socio en excelencia digital y eventos memorables.
+    <footer className="bg-card border-t border-border/40 pt-20 pb-10">
+      <div className="container mx-auto px-6">
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="md:col-span-1"
+          >
+            <h3 className="text-lg font-semibold text-primary mb-5">Sobre Nyvara</h3>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Tu socio estratégico para el crecimiento. Integramos marketing, eventos y tecnología para convertir tus objetivos en resultados medibles.
             </p>
-          </div>
-          <div className="flex items-center space-x-4">
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Twitter size={20} /></a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Github size={20} /></a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Linkedin size={20} /></a>
-          </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-lg font-semibold text-primary mb-5">Servicios</h3>
+            <ul className="space-y-4">
+              {servicesLinks.map((service) => (
+                <li key={service.name}>
+                  <button onClick={() => scrollToSection(service.sectionId)} className="text-foreground/80 hover:text-primary transition-colors duration-300 text-sm text-left w-full">
+                    {service.name}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-lg font-semibold text-primary mb-5">Navegación</h3>
+            <ul className="space-y-4">
+              {companyLinks.map((link) => (
+                 <li key={link.name}>
+                   <button onClick={() => scrollToSection(link.sectionId)} className="text-foreground/80 hover:text-primary transition-colors duration-300 text-sm text-left w-full">
+                     {link.name}
+                   </button>
+                 </li>
+              ))}
+              <li>
+                <span className="text-muted-foreground/50 text-sm cursor-not-allowed">Blog (Próximamente)</span>
+              </li>
+            </ul>
+          </motion.div>
         </div>
-        <div className="mt-8 pt-8 border-t border-border/40 text-center text-sm text-muted-foreground">
-          © {new Date().getFullYear()} Nyvara Group. Todos los derechos reservados.
-        </div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="flex justify-center mt-20"
+        >
+          <NyvaraLogo className="h-10 w-auto text-primary" />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="border-t border-border/40 mt-12 pt-8"
+        >
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+            <p className="text-muted-foreground text-xs text-center md:text-left order-1">
+              © {currentYear} Nyvara Group. Todos los derechos reservados.
+            </p>
+            
+            <div className="flex space-x-6 order-3 md:order-2">
+              <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors duration-300 cursor-pointer text-xs">Política de Privacidad</Link>
+              <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors duration-300 cursor-pointer text-xs">Términos de Servicio</Link>
+            </div>
+
+            <div className="flex justify-center space-x-6 order-2 md:order-3">
+              <button onClick={() => handleSocialClick('Instagram', 'https://instagram.com')} className="text-muted-foreground hover:text-primary transition-colors"><Instagram size={22} /></button>
+              <button onClick={() => handleSocialClick('LinkedIn', 'https://linkedin.com')} className="text-muted-foreground hover:text-primary transition-colors"><Linkedin size={22} /></button>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;
