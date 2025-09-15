@@ -19,7 +19,7 @@ import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 
 const EventosCorporativos = () => {
-  const [selectedService, setSelectedService] = useState(null);
+  const [selectedService, setSelectedService] = useState<any>(null);
 
   const pageVariants = {
     initial: { opacity: 0, y: 50 },
@@ -70,12 +70,6 @@ const EventosCorporativos = () => {
     }
   ];
 
-  const handleNavClick = (sectionId: string) => {
-    // Since we are navigating from a different page, we need a full navigation.
-    // For sections on the same page, smooth scroll is fine.
-    window.location.href = `/${sectionId}`;
-  };
-
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
@@ -87,7 +81,7 @@ const EventosCorporativos = () => {
           exit="exit"
           className="bg-background text-foreground pt-32 pb-20"
         >
-        <Dialog>
+        <Dialog onOpenChange={() => setSelectedService(null)}>
           <div className="container mx-auto px-6">
             {/* Header Section */}
             <motion.section
@@ -140,8 +134,10 @@ const EventosCorporativos = () => {
               <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
                 Déjanos encargarnos de los detalles para que tú puedas enfocarte en tus invitados. ¡Contáctanos y hagamos que tu próximo evento sea un éxito rotundo!
               </p>
-              <Button size="lg" onClick={() => handleNavClick('#contact')}>
-                  Solicitar Asesoría <ArrowRight className="ml-2" />
+              <Button size="lg" asChild>
+                  <Link href="/#contact">
+                    Solicitar Asesoría <ArrowRight className="ml-2" />
+                  </Link>
               </Button>
             </motion.section>
 
@@ -164,11 +160,13 @@ const EventosCorporativos = () => {
                   </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className="mt-6">
-                    <Button asChild className="w-full" onClick={() => handleNavClick('#contact')}>
+                  <DialogClose asChild>
+                    <Button asChild className="w-full">
                       <Link href="/#contact">
                         Solicitar más información
                       </Link>
                     </Button>
+                  </DialogClose>
                 </DialogFooter>
               </DialogContent>
             )}

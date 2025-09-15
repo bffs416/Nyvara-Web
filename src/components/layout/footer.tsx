@@ -19,29 +19,41 @@ const Footer = () => {
   };
 
   const handleNavClick = (href: string) => {
-    if (href.startsWith('/')) {
-      window.location.href = href;
-    } else {
-      const element = document.querySelector(href);
-      if (element) {
+    const element = document.querySelector(href);
+    if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
-      }
     }
   };
 
   const currentYear = new Date().getFullYear();
 
   const servicesLinks = [
-    { name: 'Marketing que Convierte', href: '#services' },
+    { name: 'Marketing que Convierte', href: '/#services' },
     { name: 'Eventos Corporativos', href: '/eventos' },
-    { name: 'Tecnología que Impulsa', href: '#services' },
+    { name: 'Tecnología que Impulsa', href: '/#services' },
   ];
 
   const companyLinks = [
-    { name: 'Sobre Nosotros', href: '#nosotros' },
-    { name: 'Servicios', href: '#services' },
-    { name: 'Contacto', href: '#contact' },
+    { name: 'Sobre Nosotros', href: '/#nosotros' },
+    { name: 'Servicios', href: '/#services' },
+    { name: 'Contacto', href: '/#contact' },
   ];
+  
+  const NavLink = ({ href, children }: { href: string, children: React.ReactNode }) => {
+    if (href.startsWith('/#')) {
+        return (
+            <button onClick={() => handleNavClick(href.replace('/', ''))} className="text-foreground/80 hover:text-primary transition-colors duration-300 text-sm text-left w-full">
+                {children}
+            </button>
+        );
+    }
+    return (
+        <Link href={href} className="text-foreground/80 hover:text-primary transition-colors duration-300 text-sm text-left w-full">
+            {children}
+        </Link>
+    );
+  };
+
 
   return (
     <footer className="bg-card border-t border-border/40 pt-20 pb-10">
@@ -71,9 +83,9 @@ const Footer = () => {
             <ul className="space-y-4">
               {servicesLinks.map((service) => (
                 <li key={service.name}>
-                  <button onClick={() => handleNavClick(service.href)} className="text-foreground/80 hover:text-primary transition-colors duration-300 text-sm text-left w-full">
+                  <NavLink href={service.href}>
                     {service.name}
-                  </button>
+                  </NavLink>
                 </li>
               ))}
             </ul>
@@ -89,9 +101,9 @@ const Footer = () => {
             <ul className="space-y-4">
               {companyLinks.map((link) => (
                  <li key={link.name}>
-                   <button onClick={() => handleNavClick(link.href)} className="text-foreground/80 hover:text-primary transition-colors duration-300 text-sm text-left w-full">
+                   <NavLink href={link.href}>
                      {link.name}
-                   </button>
+                   </NavLink>
                  </li>
               ))}
               <li>

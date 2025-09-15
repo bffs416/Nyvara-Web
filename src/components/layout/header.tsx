@@ -6,17 +6,19 @@ import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import NyvaraLogo from '@/components/icons/nyvara-logo';
+import { usePathname } from 'next/navigation';
 
 const navItems = [
-  { name: 'Servicios', href: '#services' },
+  { name: 'Servicios', href: '/#services' },
   { name: 'Eventos', href: '/eventos' },
-  { name: 'Nosotros', href: '#nosotros' },
-  { name: 'Testimonios', href: '#testimonials' },
+  { name: 'Nosotros', href: '/#nosotros' },
+  { name: 'Testimonios', href: '/#testimonials' },
 ];
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,36 +27,60 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+    }
+  }, [pathname]);
 
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
-    if (href.startsWith('/')) {
-      window.location.href = href;
-    } else {
-      const element = document.querySelector(href);
-      if (element) {
+    const element = document.querySelector(href.replace('/', ''));
+    if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
-      }
     }
   };
-
-  const NavLink = ({ href, children }: { href: string, children: React.ReactNode }) => (
-      <button
-        onClick={() => handleNavClick(href)}
-        className="transition-colors hover:text-primary"
-      >
+  
+  const NavLink = ({ href, children }: { href: string, children: React.ReactNode }) => {
+    if (href.startsWith('/#')) {
+      return (
+          <button
+            onClick={() => handleNavClick(href)}
+            className="transition-colors hover:text-primary"
+          >
+            {children}
+          </button>
+      )
+    }
+    return (
+      <Link href={href} className="transition-colors hover:text-primary">
         {children}
-      </button>
-  );
-
-  const MobileNavLink = ({ href, children }: { href: string, children: React.ReactNode }) => (
-     <button
-        onClick={() => handleNavClick(href)}
+      </Link>
+    );
+  };
+  
+  const MobileNavLink = ({ href, children }: { href: string, children: React.ReactNode }) => {
+     if (href.startsWith('/#')) {
+      return (
+          <button
+            onClick={() => handleNavClick(href)}
+            className="text-foreground hover:text-primary transition-colors duration-300 text-left py-2"
+          >
+            {children}
+          </button>
+      )
+    }
+    return (
+     <Link
+        href={href}
         className="text-foreground hover:text-primary transition-colors duration-300 text-left py-2"
       >
         {children}
-      </button>
-  );
+      </Link>
+    );
+  };
+
 
   return (
     <motion.header
@@ -81,11 +107,8 @@ const Header = () => {
         </div>
         
         <div className="flex flex-1 items-center justify-end space-x-4">
-            <Button
-              onClick={() => handleNavClick('#contact')}
-              className="hidden md:inline-flex"
-            >
-              Contacto
+            <Button asChild className="hidden md:inline-flex">
+              <Link href="/#contact">Contacto</Link>
             </Button>
 
             {/* Mobile Menu Button */}
@@ -108,11 +131,8 @@ const Header = () => {
               {navItems.map((item) => (
                   <MobileNavLink key={item.name} href={item.href}>{item.name}</MobileNavLink>
               ))}
-              <Button
-                onClick={() => handleNavClick('#contact')}
-                className="w-full"
-              >
-                Contacto
+              <Button asChild className="w-full">
+                <Link href="/#contact">Contacto</Link>
               </Button>
             </div>
           </motion.div>
