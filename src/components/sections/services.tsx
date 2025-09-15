@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Megaphone, Calendar, Code, ArrowRight, Info } from 'lucide-react';
+import { Megaphone, Calendar, Code, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
@@ -23,7 +23,7 @@ const services = [
       title: "Marketing que Convierte",
       description: "Atraemos a tu cliente ideal, convertimos su interés en acción y lo fidelizamos a través de estrategias de datos. Construimos audiencias, no solo seguidores.",
       features: ["Estrategia de Marca", "Publicidad Inteligente (Ads)", "Posicionamiento SEO", "Contenido que Enamora"],
-      link: "#",
+      link: "/marketing",
       details: {
         analogy: 'Imagina que tu marca es una estrella de rock. Nosotros somos el mánager que organiza la gira mundial: preparamos el escenario (estrategia), llenamos estadios (campañas), nos aseguramos de que los fans canten cada canción (contenido) y vendemos todos los discos (conversión).',
         whatIs: 'Es el arte y la ciencia de conectar tu marca con las personas correctas, en el momento preciso y con el mensaje adecuado. No se trata de hacer ruido, sino de construir relaciones rentables a largo plazo, utilizando datos para optimizar cada acción y maximizar el retorno de tu inversión.',
@@ -109,12 +109,22 @@ export default function Services() {
                           </ul>
                       </div>
                       
-                      <DialogTrigger asChild>
-                         <Button onClick={() => setSelectedService(service)} className="w-full mt-auto" variant="outline">
-                            Ver más
-                            <ArrowRight size={16} />
+                      {service.link.startsWith("/") ? (
+                        <Button asChild className="w-full mt-auto" variant="outline">
+                           <Link href={service.link}>
+                              Ver más
+                              <ArrowRight size={16} />
+                           </Link>
                         </Button>
-                      </DialogTrigger>
+                      ) : (
+                        <DialogTrigger asChild>
+                           <Button onClick={() => setSelectedService(service)} className="w-full mt-auto" variant="outline">
+                              Ver más
+                              <ArrowRight size={16} />
+                          </Button>
+                        </DialogTrigger>
+                      )}
+
                   </CardContent>
                 </Card>
               </motion.div>

@@ -28,7 +28,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const servicesLinks = [
-    { name: 'Marketing que Convierte', href: '/#services' },
+    { name: 'Marketing que Convierte', href: '/marketing' },
     { name: 'Eventos Corporativos', href: '/eventos' },
     { name: 'Tecnología que Impulsa', href: '/#services' },
   ];
@@ -42,9 +42,9 @@ const Footer = () => {
   const NavLink = ({ href, children }: { href: string, children: React.ReactNode }) => {
     if (href.startsWith('/#')) {
         return (
-            <button onClick={() => handleNavClick(href.replace('/', ''))} className="text-foreground/80 hover:text-primary transition-colors duration-300 text-sm text-left w-full">
+            <Link href={href} className="text-foreground/80 hover:text-primary transition-colors duration-300 text-sm text-left w-full">
                 {children}
-            </button>
+            </Link>
         );
     }
     return (
