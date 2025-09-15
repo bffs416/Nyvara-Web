@@ -1,3 +1,5 @@
+'use client';
+
 import React, { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import Header from '@/components/layout/header';
