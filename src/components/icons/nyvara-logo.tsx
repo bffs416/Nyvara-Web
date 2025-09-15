@@ -10,7 +10,7 @@ export default function NyvaraLogo({ className }: { className?: string }) {
       <text
         x="0"
         y="18"
-        fontFamily="'Playfair Display', serif"
+        fontFamily="'Cormorant Garamond', serif"
         fontSize="22"
         fontWeight="700"
         fill="currentColor"
@@ -20,7 +20,7 @@ export default function NyvaraLogo({ className }: { className?: string }) {
       <text
         x="120"
         y="18"
-        fontFamily="'PT Sans', sans-serif"
+        fontFamily="'Lato', sans-serif"
         fontSize="20"
         fontWeight="400"
         fill="currentColor"
