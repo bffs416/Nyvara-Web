@@ -23,7 +23,7 @@ const services = [
       title: "Marketing que Convierte",
       description: "Atraemos a tu cliente ideal, convertimos su interés en acción y lo fidelizamos a través de estrategias de datos. Construimos audiencias, no solo seguidores.",
       features: ["Estrategia de Marca", "Publicidad Inteligente (Ads)", "Posicionamiento SEO", "Contenido que Enamora"],
-      link: "#services",
+      link: "#",
       details: {
         analogy: 'Imagina que tu marca es una estrella de rock. Nosotros somos el mánager que organiza la gira mundial: preparamos el escenario (estrategia), llenamos estadios (campañas), nos aseguramos de que los fans canten cada canción (contenido) y vendemos todos los discos (conversión).',
         whatIs: 'Es el arte y la ciencia de conectar tu marca con las personas correctas, en el momento preciso y con el mensaje adecuado. No se trata de hacer ruido, sino de construir relaciones rentables a largo plazo, utilizando datos para optimizar cada acción y maximizar el retorno de tu inversión.',
@@ -47,7 +47,7 @@ const services = [
       title: "Tecnología que Impulsa",
       description: "Creamos el motor tecnológico que tu negocio necesita para escalar, desde aplicaciones web hasta soluciones de software a la medida.",
       features: ["Software a Medida", "Soluciones Web", "Diseño de Bases de Datos", "Aplicaciones Móviles"],
-      link: "#services",
+      link: "#",
       details: {
         analogy: 'Tu negocio es un coche de carreras de Fórmula 1. Nosotros somos el equipo de ingenieros que diseña y construye el motor. Creamos una pieza de ingeniería a medida, perfectamente ajustada a tu chasis (modelo de negocio), para que puedas superar a la competencia en cada curva.',
         whatIs: 'Es el diseño y construcción de herramientas digitales que resuelven problemas específicos de tu negocio. No adaptamos tu empresa a un software genérico; creamos software que se adapta a tu empresa, automatizando procesos, mejorando la eficiencia y abriendo nuevas oportunidades de mercado.',
@@ -109,26 +109,21 @@ export default function Services() {
                           </ul>
                       </div>
                       
-                      <DialogTrigger asChild>
-                        <Button 
-                          onClick={() => service.link.startsWith('/') ? null : setSelectedService(service)} 
-                          asChild={service.link.startsWith('/')}
-                          className="w-full mt-auto" 
-                          variant="outline"
-                        >
-                          {service.link.startsWith('/') ? (
-                            <Link href={service.link}>
-                              Ver más
-                              <ArrowRight size={16} />
-                            </Link>
-                          ) : (
-                            <span>
+                      {service.link === '/eventos' ? (
+                        <Button asChild className="w-full mt-auto" variant="outline">
+                          <Link href={service.link}>
+                            Ver más
+                            <ArrowRight size={16} />
+                          </Link>
+                        </Button>
+                      ) : (
+                        <DialogTrigger asChild>
+                           <Button onClick={() => setSelectedService(service)} className="w-full mt-auto" variant="outline">
                               Ver más
                               <Info className="ml-2" size={16} />
-                            </span>
-                          )}
-                        </Button>
-                      </DialogTrigger>
+                          </Button>
+                        </DialogTrigger>
+                      )}
 
                   </CardContent>
                 </Card>
