@@ -55,7 +55,7 @@ const DesarrolloSoftware = () => {
       details: {
         analogy: 'Una base de datos es la biblioteca central de tu negocio. Si los libros (datos) están desordenados, encontrar información es una pesadilla. Nosotros diseñamos las estanterías lógicas y el sistema de catalogación para que encuentres cualquier dato en segundos.',
         whatIs: 'Es la arquitectura fundamental sobre la que se apoya cualquier software. Implica diseñar el modelo lógico y físico de la base de datos (SQL o NoSQL), definir las relaciones y establecer las reglas para garantizar la integridad y seguridad de la información.',
-        howWeHelp: 'Diseamos bases de datos optimizadas para el rendimiento y la escalabilidad. Aseguramos que tus aplicaciones respondan rápidamente, que tus datos estén protegidos y que la estructura pueda crecer junto con tu negocio.'
+        howWeHelp: 'Diseñamos bases de datos optimizadas para el rendimiento y la escalabilidad. Aseguramos que tus aplicaciones respondan rápidamente, que tus datos estén protegidos y que la estructura pueda crecer junto con tu negocio.'
       }
     },
     {
