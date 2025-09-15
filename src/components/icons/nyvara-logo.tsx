@@ -1,14 +1,16 @@
 import Image from 'next/image';
+import { cn } from '@/lib/utils';
 
 export default function NyvaraLogo({ className }: { className?: string }) {
   return (
-    <Image
-      src="/Logo.png"
-      alt="Nyvara Group Logo"
-      width={205}
-      height={24}
-      className={className}
-      priority
-    />
+    <div className={cn("relative", className)}>
+      <Image
+        src="/Logo.png"
+        alt="Nyvara Group Logo"
+        fill
+        className="object-contain"
+        priority
+      />
+    </div>
   );
 }

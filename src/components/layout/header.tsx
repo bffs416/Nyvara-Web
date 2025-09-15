@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import NyvaraLogo from '@/components/icons/nyvara-logo';
 import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 const navItems = [
   { name: 'Inicio', href: '/' },
@@ -66,7 +67,7 @@ const Header = () => {
         <div className="mr-auto flex">
            <Link href="/" className="mr-6 flex items-center space-x-2 cursor-pointer">
             <motion.div whileHover={{ scale: 1.05 }}>
-                <NyvaraLogo className="h-8 w-auto" />
+                <NyvaraLogo className="h-8 w-40" />
             </motion.div>
           </Link>
         </div>
