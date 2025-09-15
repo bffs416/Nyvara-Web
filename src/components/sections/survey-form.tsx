@@ -19,14 +19,18 @@ import { Q4_OPTIONS, Q5_OPTIONS, Q7_OPTIONS, Q8_OPTIONS, Q9_OPTIONS, Q10_CHALLEN
 import { COUNTRIES } from "@/lib/countries";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command";
-import { ChevronsUpDown, Check, PlusCircle, Trash2, RotateCcw, Download, PartyPopper } from "lucide-react";
+import { ChevronsUpDown, Check, PlusCircle, Trash2, RotateCcw, Download, PartyPopper, Bot } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SAMPLE_SURVEY_DATA } from "@/lib/sample-data";
 
 
-const TOTAL_STEPS = 15;
+const TOTAL_STEPS = 14;
 
-export default function SurveyForm() {
+interface SurveyFormProps {
+  onSubmit: (data: SurveyFormData) => void;
+}
+
+export default function SurveyForm({ onSubmit }: SurveyFormProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [showJumpButton, setShowJumpButton] = useState(false);
   const { toast } = useToast();
@@ -79,11 +83,24 @@ export default function SurveyForm() {
   }
 
   const handleNext = async () => {
-    if (currentStep < TOTAL_STEPS -1) {
+    const isStepValid = await form.trigger(getFieldNamesForStep(currentStep));
+    if (isStepValid && currentStep < TOTAL_STEPS - 1) {
         setCurrentStep(currentStep + 1);
         window.scrollTo(0, 0);
     }
   };
+  
+  const getFieldNamesForStep = (step: number): (keyof SurveyFormData)[] => {
+      const stepFields: Record<number, (keyof SurveyFormData)[]> = {
+          0: ["q1_name", "q1_location", "q1_country", "q1_phone", "q1_role"],
+          1: ["q2_services"],
+          2: ["q3_persona"],
+          5: ["q6_why"],
+          6: ["q7_why"],
+          11: ["q13_colors"]
+      };
+      return stepFields[step] || [];
+  }
 
   const handlePrev = () => {
     if (currentStep > 0) {
@@ -91,75 +108,6 @@ export default function SurveyForm() {
       window.scrollTo(0, 0);
     }
   };
-  
-  const exportToCsv = (data: SurveyFormData) => {
-    const spanishHeaders: Record<keyof SurveyFormData, string> = {
-        q1_name: "Nombre del profesional o la clínica",
-        q1_location: "Ubicación de la clínica o consultorio",
-        q1_country: "País",
-        q1_phone: "Número de contacto",
-        q1_experience: "Años de experiencia en medicina estética",
-        q1_role: "¿Cuál es tu cargo o rol principal?",
-        q2_services: "¿Cuáles son los tratamientos y servicios principales que ofrecen?",
-        q2_unique: "¿Existen servicios o especialidades únicas que los diferencien?",
-        q3_persona: "Si tu marca personal fuera una persona, ¿quién sería y por qué?",
-        q4_perception: "Percepción de Marca deseada",
-        q4_other: "Otra percepción",
-        q5_emotions: "Emociones a evocar",
-        q5_other: "Otras emociones",
-        q6_why: "Impacto que buscas generar",
-        q7_differentiation: "Diferenciación de la competencia",
-        q7_why: "Descripción de la diferenciación",
-        q7_other: "Otra diferenciación",
-        q8_value: "Propuesta de valor",
-        q8_other: "Otra propuesta de valor",
-        q9_presence: "Presencia Online",
-        q9_other: "Otros canales de presencia",
-        q10_rating: "Calificación de presencia digital",
-        q10_challenges: "Mayores desafíos en marketing digital",
-        q10_other: "Otro desafío",
-        q11_training: "¿Interesa capacitar a otros profesionales?",
-        q12_details: "Temas específicos para capacitar",
-        q13_colors: "Paleta de colores de la marca y por qué",
-        q14_hobby: "Hobby o interés personal",
-        q15_final: "Reflexión final",
-        competitors: "Competidores clave"
-    };
-
-    const headers = (Object.keys(spanishHeaders) as Array<keyof SurveyFormData>);
-    const csvRows = [];
-    csvRows.push(headers.map(h => `"${spanishHeaders[h]}"`).join(','));
-
-    const values = headers.map(header => {
-        const value = data[header as keyof SurveyFormData];
-        if (Array.isArray(value)) {
-            if (header === 'competitors') {
-                return `"${(value as {name?: string}[]).map(c => c.name).join('; ')}"`;
-            }
-            return `"${value.join('; ')}"`;
-        }
-        if (typeof value === 'string') {
-            return `"${value.replace(/"/g, '""')}"`;
-        }
-        return value;
-    });
-    csvRows.push(values.join(','));
-
-    const blob = new Blob([`\uFEFF${csvRows.join('\n')}`], { type: 'text/csv;charset=utf-8;' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    const doctorName = data.q1_name || 'respuestas';
-    const fileName = `Diagnostico Nyvara ${doctorName}.csv`;
-    a.setAttribute('hidden', '');
-    a.setAttribute('href', url);
-    a.setAttribute('download', fileName);
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    
-    setCurrentStep(TOTAL_STEPS);
-    window.scrollTo(0, 0);
-  }
   
   const watchedTraining = form.watch("q11_training");
   const watchedRating = form.watch("q10_rating");
@@ -178,7 +126,7 @@ export default function SurveyForm() {
       <Card className="shadow-2xl relative min-h-[500px]">
         <CardContent className="p-8">
           <Form {...form}>
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-8">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <div className={currentStep === 0 ? 'block' : 'hidden'}>
                 <h2 className="font-headline text-3xl text-primary mb-2">Sección 1: Información Básica</h2>
                 <div className="space-y-4">
@@ -359,52 +307,35 @@ export default function SurveyForm() {
               </div>
               
                <div className={currentStep === 13 ? 'block' : 'hidden'}>
-                <h2 className="font-headline text-3xl text-primary mb-2">Análisis de Competencia</h2>
-                <p className="text-muted-foreground mb-6">Nombra algunos competidores clave en tu mercado.</p>
-                {fields.map((field, index) => (
-                  <FormField key={field.id} control={form.control} name={`competitors.${index}.name`} render={({ field }) => (
-                    <FormItem className="flex items-center gap-2 mb-2">
-                      <FormLabel className="sr-only">Competidor {index + 1}</FormLabel>
-                      <FormControl><Input placeholder={`Nombre del competidor ${index + 1}`} {...field} value={field.value ?? ""} /></FormControl>
-                       <Button type="button" variant="ghost" size="icon" onClick={() => remove(index)} disabled={fields.length <= 1}><Trash2 className="h-4 w-4" /></Button>
-                      <FormMessage />
-                    </FormItem>
-                  )} />
-                ))}
-                <Button type="button" variant="outline" size="sm" className="mt-2" onClick={() => append({ name: '' })}><PlusCircle className="mr-2 h-4 w-4" />Añadir Competidor</Button>
-              </div>
-
-               <div className={currentStep === 14 ? 'block' : 'hidden'}>
-                <h2 className="font-headline text-3xl text-primary mb-2">Paso Final: Exportar Datos</h2>
-                <p className="text-muted-foreground mb-6">¡Casi has terminado! Haz clic en el botón de abajo para descargar tus respuestas.</p>
-                 <Button type="button" onClick={() => exportToCsv(form.getValues())} className="mt-8">
-                    <Download className="mr-2 h-4 w-4" />
-                    Exportar a CSV y finalizar
+                <h2 className="font-headline text-3xl text-primary mb-2">Paso Final: Análisis y Recomendación</h2>
+                <p className="text-muted-foreground mb-6">¡Has completado el diagnóstico! Ahora, vamos a analizar tus respuestas para generar una recomendación estratégica con IA.</p>
+                <div>
+                  <h3 className="font-headline text-xl text-primary mb-4">Análisis de Competencia (Opcional)</h3>
+                  <p className="text-muted-foreground mb-6">Nombra algunos competidores clave para enriquecer el análisis.</p>
+                  {fields.map((field, index) => (
+                    <FormField key={field.id} control={form.control} name={`competitors.${index}.name`} render={({ field }) => (
+                      <FormItem className="flex items-center gap-2 mb-2">
+                        <FormLabel className="sr-only">Competidor {index + 1}</FormLabel>
+                        <FormControl><Input placeholder={`Nombre del competidor ${index + 1}`} {...field} value={field.value ?? ""} /></FormControl>
+                         <Button type="button" variant="ghost" size="icon" onClick={() => remove(index)} disabled={fields.length <= 1}><Trash2 className="h-4 w-4" /></Button>
+                        <FormMessage />
+                      </FormItem>
+                    )} />
+                  ))}
+                  <Button type="button" variant="outline" size="sm" className="mt-2" onClick={() => append({ name: '' })}><PlusCircle className="mr-2 h-4 w-4" />Añadir Competidor</Button>
+                </div>
+                 <Button type="submit" className="mt-8 w-full md:w-auto">
+                    <Bot className="mr-2 h-4 w-4" />
+                    Generar Recomendación con IA
                   </Button>
               </div>
-              
-              <div className={currentStep === 15 ? 'block' : 'hidden'}>
-                <div className="text-center flex flex-col items-center justify-center h-full min-h-[300px]">
-                  <PartyPopper className="h-16 w-16 text-primary mb-4" />
-                  <h2 className="font-headline text-3xl text-primary mb-4">¡Gracias por completar el diagnóstico!</h2>
-                  <p className="text-lg text-muted-foreground max-w-md mx-auto mb-6">Tu archivo CSV se ha descargado correctamente.</p>
-                  <p className="text-md text-muted-foreground max-w-md mx-auto">Por favor, comparte el archivo descargado con Ana de Nyvara Group. En breve recibirás tu diagnóstico personalizado.</p>
-                </div>
-              </div>
-
 
               <div className="mt-8 pt-6 border-t-2 border-secondary flex justify-between items-center">
                 <div>
-                  <Button type="button" onClick={handlePrev} disabled={currentStep === 0 || currentStep > TOTAL_STEPS - 1} variant="secondary">Anterior</Button>
-                   {(currentStep > TOTAL_STEPS - 1) && (
-                     <Button type="button" onClick={handleStartOver} variant="ghost" className="ml-2">
-                        <RotateCcw className="mr-2 h-4 w-4" />
-                        Volver al inicio
-                     </Button>
-                   )}
+                  <Button type="button" onClick={handlePrev} disabled={currentStep === 0} variant="secondary">Anterior</Button>
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  {currentStep < TOTAL_STEPS ? `Paso ${currentStep + 1} de ${TOTAL_STEPS}` : 'Completado'}
+                  Paso {currentStep + 1} de {TOTAL_STEPS}
                 </div>
                 
                 {currentStep < TOTAL_STEPS - 1 ? (
