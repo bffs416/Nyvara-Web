@@ -1,8 +1,12 @@
+
+'use client';
+
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { motion } from "framer-motion";
 
 const testimonials = [
   {
@@ -29,12 +33,18 @@ export default function Testimonials() {
   return (
     <section id="testimonials" className="py-16 md:py-24">
       <div className="container">
-        <div className="text-center mb-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
           <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary">Lo que dicen nuestros clientes</h2>
           <p className="mt-4 max-w-2xl mx-auto text-foreground/80">
             Historias de éxito de empresas a las que hemos ayudado a prosperar.
           </p>
-        </div>
+        </motion.div>
         <Carousel opts={{ align: "start", loop: true }} className="w-full max-w-4xl mx-auto">
           <CarouselContent>
             {testimonials.map((testimonial, index) => (

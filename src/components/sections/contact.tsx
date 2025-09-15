@@ -69,7 +69,13 @@ export default function Contact() {
   return (
     <section id="contact" className="py-20 relative">
       <div className="container mx-auto px-6">
-        <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className="text-center mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }} 
+          whileInView={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 0.8 }} 
+          viewport={{ once: true }} 
+          className="text-center mb-16"
+        >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">¿Listo para <span className="text-primary">Comenzar?</span></h2>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto">Contáctanos hoy y descubre cómo podemos transformar tu visión en realidad</p>
         </motion.div>
