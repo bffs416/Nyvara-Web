@@ -10,7 +10,6 @@ import NyvaraLogo from '@/components/icons/nyvara-logo';
 const navItems = [
   { name: 'Servicios', href: '#services' },
   { name: 'Nosotros', href: '#nosotros' },
-  { name: 'Portafolio', href: '#portfolio' },
   { name: 'Eventos', href: '#events' },
   { name: 'Testimonios', href: '#testimonials' },
 ];

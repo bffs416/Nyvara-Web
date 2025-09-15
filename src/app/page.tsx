@@ -3,7 +3,6 @@ import Footer from '@/components/layout/footer';
 import Hero from '@/components/sections/hero';
 import Services from '@/components/sections/services';
 import About from '@/components/sections/about';
-import Portfolio from '@/components/sections/portfolio';
 import EventsGallery from '@/components/sections/events-gallery';
 import Testimonials from '@/components/sections/testimonials';
 import ServiceRecommendation from '@/components/sections/service-recommendation';
@@ -19,7 +18,6 @@ export default function Home() {
         <HeroImage />
         <Services />
         <About />
-        <Portfolio />
         <EventsGallery />
         <Testimonials />
         <ServiceRecommendation />

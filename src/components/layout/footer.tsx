@@ -28,9 +28,9 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const servicesLinks = [
-    { name: 'Desarrollo de Software', sectionId: '#portfolio' },
+    { name: 'Marketing que Convierte', sectionId: '#services' },
     { name: 'Eventos Corporativos', sectionId: '#events' },
-    { name: 'Formación Profesional', sectionId: '#services' },
+    { name: 'Tecnología que Impulsa', sectionId: '#services' },
   ];
 
   const companyLinks = [
