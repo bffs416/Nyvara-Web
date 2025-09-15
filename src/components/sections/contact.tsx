@@ -15,6 +15,7 @@ import { Loader2, Mail, Phone, MapPin, Send } from 'lucide-react';
 import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { siteConfig } from '@/lib/config';
 
 const formSchema = z.object({
     name: z.string().min(2, { message: "El nombre debe tener al menos 2 caracteres." }),
@@ -60,8 +61,8 @@ export default function Contact() {
   }
 
   const contactInfo = [
-    { icon: <Mail size={24} />, title: "Email", info: "nyvaragroup@gmail.com", link: "mailto:nyvaragroup@gmail.com" },
-    { icon: <Phone size={24} />, title: "Teléfono", info: "+57 320 3004537", link: "tel:+573203004537" },
+    { icon: <Mail size={24} />, title: "Email", info: siteConfig.contact.email, link: `mailto:${siteConfig.contact.email}` },
+    { icon: <Phone size={24} />, title: "Teléfono", info: `+${siteConfig.contact.phone}`, link: `https://wa.me/${siteConfig.contact.phone}?text=${encodeURIComponent(siteConfig.contact.whatsappMessage)}` },
     { icon: <MapPin size={24} />, title: "Ubicación", info: "Bogota, Colombia", link: null }
   ];
 
@@ -85,7 +86,7 @@ export default function Contact() {
                       <div>
                         <div className="font-semibold text-foreground">{item.title}</div>
                         <div className="text-muted-foreground">
-                          {item.link ? <a href={item.link} className="hover:underline">{item.info}</a> : <span>{item.info}</span>}
+                          {item.link ? <a href={item.link} className="hover:underline" target="_blank" rel="noopener noreferrer">{item.info}</a> : <span>{item.info}</span>}
                         </div>
                       </div>
                     </Card>

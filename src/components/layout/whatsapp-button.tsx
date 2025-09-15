@@ -2,10 +2,11 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { siteConfig } from '@/lib/config';
 
 const WhatsAppButton = () => {
-  const phoneNumber = '573203004537';
-  const message = 'Hola, estoy interesado en sus servicios y me gustaría recibir más información.';
+  const phoneNumber = siteConfig.contact.phone;
+  const message = siteConfig.contact.whatsappMessage;
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   const WhatsAppIcon = () => (
