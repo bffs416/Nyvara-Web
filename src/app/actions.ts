@@ -145,15 +145,26 @@ export async function handleSurveySubmission(
   
   console.log('Paso 2: Datos validados.');
 
+  // Prepara los datos para la inserción, asegurando que los arrays vacíos se manejen correctamente.
+  const { competitors, ...restOfData } = validatedData.data;
+  const submissionData = {
+    ...restOfData,
+    competitors: competitors?.map(c => c.name).filter(Boolean) as string[] | undefined,
+    q4_perception: restOfData.q4_perception || [],
+    q5_emotions: restOfData.q5_emotions || [],
+    q7_differentiation: restOfData.q7_differentiation || [],
+    q8_value: restOfData.q8_value || [],
+    q9_presence: restOfData.q9_presence || [],
+    q10_challenges: restOfData.q10_challenges || [],
+  };
+
   try {
     const supabase = createClient();
     console.log('Paso 3: Intentando guardar los datos...');
     
     const { error: dbError } = await supabase
       .from('survey_responses')
-      .insert([
-          { response_data: validatedData.data }
-      ]);
+      .insert([submissionData]);
 
     if (dbError) {
       console.error('Error al guardar en Supabase:', dbError.message);
