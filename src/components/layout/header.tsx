@@ -9,6 +9,7 @@ import NyvaraLogo from '@/components/icons/nyvara-logo';
 import { usePathname } from 'next/navigation';
 
 const navItems = [
+  { name: 'Inicio', href: '/' },
   { name: 'Servicios', href: '/#services' },
   { name: 'Nosotros', href: '/#nosotros' },
   { name: 'Testimonios', href: '/#testimonials' },
