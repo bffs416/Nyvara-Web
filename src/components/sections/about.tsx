@@ -60,7 +60,7 @@ const About = () => {
                 viewport={{ once: true }}
                 className="hover:scale-105 transition-transform duration-300"
               >
-                <Card className="bg-card p-6 text-center h-full border-border/50 hover:border-primary/50 hover:shadow-[0_0_15px_2px_hsl(var(--primary)/0.7)]">
+                <Card className="bg-card p-6 text-center h-full border-border/50 hover:border-primary/50 hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)]">
                     <div className="text-primary mb-4 flex justify-center">
                     {value.icon}
                     </div>

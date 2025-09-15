@@ -40,7 +40,7 @@ export default function Portfolio() {
             {projects.map((project, index) => (
               <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                 <div className="p-1 h-full">
-                  <Card className="overflow-hidden bg-card border-border/50 h-full flex flex-col hover:shadow-[0_0_15px_2px_hsl(var(--primary)/0.7)] transition-shadow duration-300">
+                  <Card className="overflow-hidden bg-card border-border/50 h-full flex flex-col hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] transition-shadow duration-300">
                     <CardContent className="p-0 flex flex-col flex-grow">
                       <Image
                         src={project.image.imageUrl}

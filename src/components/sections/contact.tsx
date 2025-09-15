@@ -80,7 +80,7 @@ export default function Contact() {
               <div className="space-y-6">
                 {contactInfo.map((item, index) => (
                   <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: index * 0.1 }} viewport={{ once: true }}>
-                    <Card className="p-4 flex items-center space-x-4 bg-card border-border/50 hover:border-primary/50 hover:shadow-[0_0_15px_2px_hsl(var(--primary)/0.7)] hover:scale-105 transition-transform duration-300">
+                    <Card className="p-4 flex items-center space-x-4 bg-card border-border/50 hover:border-primary/50 hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] hover:scale-105 transition-transform duration-300">
                       <div className="text-primary">{item.icon}</div>
                       <div>
                         <div className="font-semibold text-foreground">{item.title}</div>
@@ -105,7 +105,7 @@ export default function Contact() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }}>
-            <Card className="p-8 bg-card border-border/50 hover:shadow-[0_0_15px_2px_hsl(var(--primary)/0.7)]">
+            <Card className="p-8 bg-card border-border/50 hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)]">
             <h3 className="text-2xl font-bold mb-6 text-foreground">Envíanos un Mensaje</h3>
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
