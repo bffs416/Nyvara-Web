@@ -9,8 +9,17 @@
  * helps prevent bundling server-only dependencies into the client-side code.
  */
 
-export { 
+import { 
     handleServiceRecommendation,
     handleContactSubmission,
     handleSurveyAndRecommend 
 } from './actions';
+
+// We need to re-export the server actions individually
+// instead of using `export * from './actions'` to comply with
+// the "use server" directive.
+export {
+    handleServiceRecommendation,
+    handleContactSubmission,
+    handleSurveyAndRecommend
+};
