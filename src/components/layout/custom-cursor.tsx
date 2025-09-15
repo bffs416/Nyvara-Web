@@ -59,7 +59,8 @@ const CustomCursor = () => {
         style={{ x: dotX, y: dotY }}
         animate={{ 
           width: cursorSize, 
-          height: cursorSize 
+          height: cursorSize,
+          backgroundColor: isHovering ? 'hsl(var(--primary))' : '#000000'
         }}
         transition={{ type: 'spring', stiffness: 700, damping: 30 }}
       />
