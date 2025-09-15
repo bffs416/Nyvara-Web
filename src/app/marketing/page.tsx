@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { BarChart, Users, Mail, CheckCircle, ArrowRight, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -19,7 +19,6 @@ import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 
 const MarketingPage = () => {
-  const [selectedService, setSelectedService] = useState<any>(null);
 
   const pageVariants = {
     initial: { opacity: 0, y: 50 },
@@ -81,7 +80,6 @@ const MarketingPage = () => {
           exit="exit"
           className="bg-background text-foreground pt-32 pb-20"
         >
-        <Dialog onOpenChange={() => setSelectedService(null)}>
           <div className="container mx-auto px-6">
             <motion.section 
               className="text-center mb-20"
@@ -104,22 +102,49 @@ const MarketingPage = () => {
               transition={{ delay: 0.3, duration: 0.8 }}
             >
               {serviceItems.map((item, index) => (
-                <DialogTrigger asChild key={index} onClick={() => setSelectedService(item)}>
-                  <motion.div 
-                    className="bg-card p-8 rounded-xl cursor-pointer border border-border/50 hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)]"
-                    whileHover={{ y: -10 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="text-primary">{item.icon}</div>
-                      <h3 className="text-2xl font-bold font-headline">{item.title}</h3>
-                    </div>
-                    <p className="text-muted-foreground mb-4">{item.description}</p>
-                    <div className="flex items-center text-sm text-primary font-semibold">
-                      Ver más <Info className="ml-2" size={16} />
-                    </div>
-                  </motion.div>
-                </DialogTrigger>
+                <Dialog key={index}>
+                  <DialogTrigger asChild>
+                    <motion.div 
+                      className="bg-card p-8 rounded-xl cursor-pointer border border-border/50 hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] h-full flex flex-col"
+                      whileHover={{ y: -10 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="text-primary">{item.icon}</div>
+                        <h3 className="text-2xl font-bold font-headline">{item.title}</h3>
+                      </div>
+                      <p className="text-muted-foreground mb-4 flex-grow">{item.description}</p>
+                      <div className="flex items-center text-sm text-primary font-semibold mt-auto">
+                        Ver más <Info className="ml-2" size={16} />
+                      </div>
+                    </motion.div>
+                  </DialogTrigger>
+                   <DialogContent className="bg-background border-border text-foreground max-w-2xl">
+                    <DialogHeader>
+                      <DialogTitle className="text-3xl font-bold text-primary font-headline mb-4">{item.title}</DialogTitle>
+                      <DialogDescription as="div" className="text-muted-foreground space-y-6">
+                        <div>
+                          <p className="italic mb-4 text-base">{item.details.analogy}</p>
+                          <h4 className="font-bold text-lg text-primary mb-2">¿Qué es exactamente?</h4>
+                          <p className="text-foreground/90">{item.details.whatIs}</p>
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-lg text-primary mb-2">¿Cómo te apoyamos en Nyvara?</h4>
+                          <p className="text-foreground/90">{item.details.howWeHelp}</p>
+                        </div>
+                      </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter className="mt-6">
+                      <DialogClose asChild>
+                          <Button asChild className="w-full">
+                            <Link href="/#contact">
+                              Solicitar más información
+                            </Link>
+                          </Button>
+                      </DialogClose>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
               ))}
             </motion.section>
 
@@ -141,35 +166,6 @@ const MarketingPage = () => {
               </Button>
             </motion.section>
           </div>
-
-          {selectedService && (
-            <DialogContent className="bg-background border-border text-foreground max-w-2xl">
-              <DialogHeader>
-                <DialogTitle className="text-3xl font-bold text-primary font-headline mb-4">{selectedService.title}</DialogTitle>
-                <DialogDescription as="div" className="text-muted-foreground space-y-6">
-                  <div>
-                    <p className="italic mb-4 text-base">{selectedService.details.analogy}</p>
-                    <h4 className="font-bold text-lg text-primary mb-2">¿Qué es exactamente?</h4>
-                    <p className="text-foreground/90">{selectedService.details.whatIs}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-lg text-primary mb-2">¿Cómo te apoyamos en Nyvara?</h4>
-                    <p className="text-foreground/90">{selectedService.details.howWeHelp}</p>
-                  </div>
-                </DialogDescription>
-              </DialogHeader>
-              <DialogFooter className="mt-6">
-                <DialogClose asChild>
-                    <Button asChild className="w-full">
-                      <Link href="/#contact">
-                        Solicitar más información
-                      </Link>
-                    </Button>
-                </DialogClose>
-              </DialogFooter>
-            </DialogContent>
-          )}
-        </Dialog>
         </motion.div>
       </main>
       <Footer />
