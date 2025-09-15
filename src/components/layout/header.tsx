@@ -9,6 +9,7 @@ import NyvaraLogo from '@/components/icons/nyvara-logo';
 
 const navItems = [
   { name: 'Servicios', href: '#services' },
+  { name: 'Eventos', href: '/eventos' },
   { name: 'Nosotros', href: '#nosotros' },
   { name: 'Testimonios', href: '#testimonials' },
 ];
@@ -25,12 +26,16 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (sectionId: string) => {
-    const element = document.querySelector(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
+    if (href.startsWith('/')) {
+      window.location.href = href;
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
 
   const NavLink = ({ href, children }: { href: string, children: React.ReactNode }) => (

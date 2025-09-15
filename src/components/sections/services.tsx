@@ -19,14 +19,14 @@ const services = [
       title: "Eventos que Impactan",
       description: "Transformamos cada evento en una poderosa herramienta de negocio. Diseñamos experiencias memorables que fortalecen tu marca y crean conexiones de valor.",
       features: ["Stands y Ferias", "Congresos y Conferencias", "Lanzamientos de Producto", "Team Building Estratégico"],
-      link: "#events"
+      link: "/eventos"
     },
     {
       icon: <Code size={36} className="text-primary-foreground" />,
       title: "Tecnología que Impulsa",
       description: "Creamos el motor tecnológico que tu negocio necesita para escalar, desde aplicaciones web hasta soluciones de software a la medida.",
       features: ["Software a Medida", "Soluciones Web", "Diseño de Bases de Datos", "Aplicaciones Móviles"],
-      link: "#portfolio"
+      link: "#services"
     }
   ];
 

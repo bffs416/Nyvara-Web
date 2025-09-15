@@ -18,25 +18,29 @@ const Footer = () => {
     window.open(url, '_blank');
   };
 
-  const scrollToSection = (id: string) => {
-    const element = document.querySelector(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const handleNavClick = (href: string) => {
+    if (href.startsWith('/')) {
+      window.location.href = href;
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
   const currentYear = new Date().getFullYear();
 
   const servicesLinks = [
-    { name: 'Marketing que Convierte', sectionId: '#services' },
-    { name: 'Eventos Corporativos', sectionId: '#services' },
-    { name: 'Tecnología que Impulsa', sectionId: '#services' },
+    { name: 'Marketing que Convierte', href: '#services' },
+    { name: 'Eventos Corporativos', href: '/eventos' },
+    { name: 'Tecnología que Impulsa', href: '#services' },
   ];
 
   const companyLinks = [
-    { name: 'Sobre Nosotros', sectionId: '#nosotros' },
-    { name: 'Servicios', sectionId: '#services' },
-    { name: 'Contacto', sectionId: '#contact' },
+    { name: 'Sobre Nosotros', href: '#nosotros' },
+    { name: 'Servicios', href: '#services' },
+    { name: 'Contacto', href: '#contact' },
   ];
 
   return (
@@ -67,7 +71,7 @@ const Footer = () => {
             <ul className="space-y-4">
               {servicesLinks.map((service) => (
                 <li key={service.name}>
-                  <button onClick={() => scrollToSection(service.sectionId)} className="text-foreground/80 hover:text-primary transition-colors duration-300 text-sm text-left w-full">
+                  <button onClick={() => handleNavClick(service.href)} className="text-foreground/80 hover:text-primary transition-colors duration-300 text-sm text-left w-full">
                     {service.name}
                   </button>
                 </li>
@@ -85,7 +89,7 @@ const Footer = () => {
             <ul className="space-y-4">
               {companyLinks.map((link) => (
                  <li key={link.name}>
-                   <button onClick={() => scrollToSection(link.sectionId)} className="text-foreground/80 hover:text-primary transition-colors duration-300 text-sm text-left w-full">
+                   <button onClick={() => handleNavClick(link.href)} className="text-foreground/80 hover:text-primary transition-colors duration-300 text-sm text-left w-full">
                      {link.name}
                    </button>
                  </li>
