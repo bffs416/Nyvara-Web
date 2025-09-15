@@ -47,8 +47,14 @@ export default function Hero() {
         <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-primary/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 floating-animation" style={{ animationDelay: '4s' }}></div>
       </div>
 
-      <div className="container mx-auto px-6 text-center relative z-10">
-        <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-4xl mx-auto">
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="container mx-auto px-6 text-center relative z-10"
+      >
+        <div className="max-w-4xl mx-auto">
           
           <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 1, delay: 0.2 }} className="mb-6 flex justify-center">
             <NyvaraLogo className="max-w-[250px] md:max-w-[280px] rounded-xl" />
@@ -99,8 +105,8 @@ export default function Hero() {
               <div className="text-muted-foreground">Clientes Satisfechos</div>
             </div>
           </motion.div>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </section>
   );
 }
