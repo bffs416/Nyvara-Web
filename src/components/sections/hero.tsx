@@ -14,7 +14,9 @@ const CallToAction = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.8 }}
     >
-      Convirtamos tus ideas en realidad.
+      Integramos <span className="text-foreground font-semibold">Marketing de vanguardia</span>, 
+      <span className="text-foreground font-semibold"> Eventos de alto impacto</span> y 
+      <span className="text-foreground font-semibold"> Tecnología a la medida</span> para convertir tus objetivos en realidad.
     </motion.p>
   );
 };
