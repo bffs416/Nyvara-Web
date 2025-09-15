@@ -11,34 +11,34 @@ export async function handleServiceRecommendation(input: z.infer<typeof serviceR
   const validatedInput = serviceRecSchema.safeParse(input);
 
   if (!validatedInput.success) {
-    return { error: 'Invalid input.' };
+    return { error: 'Entrada inválida.' };
   }
 
   try {
     const result = await recommendServices(validatedInput.data);
     return result;
   } catch (error) {
-    console.error('Service recommendation failed:', error);
-    return { error: 'Failed to get recommendation from AI service.' };
+    console.error('La recomendación de servicio falló:', error);
+    return { error: 'No se pudo obtener la recomendación del servicio de IA.' };
   }
 }
 
 const contactFormSchema = z.object({
-    name: z.string().min(2, "Name must be at least 2 characters."),
-    email: z.string().email("Please enter a valid email."),
-    message: z.string().min(10, "Message must be at least 10 characters."),
+    name: z.string().min(2, "El nombre debe tener al menos 2 caracteres."),
+    email: z.string().email("Por favor, introduce un email válido."),
+    message: z.string().min(10, "El mensaje debe tener al menos 10 caracteres."),
 });
 
 export async function handleContactSubmission(input: z.infer<typeof contactFormSchema>) {
     const validatedInput = contactFormSchema.safeParse(input);
 
     if (!validatedInput.success) {
-        return { success: false, error: 'Invalid input.' };
+        return { success: false, error: 'Entrada inválida.' };
     }
     
-    // Here you would typically send an email, save to a database, etc.
-    // For this demo, we'll just log it and return success.
-    console.log("New contact submission:", validatedInput.data);
+    // Aquí normalmente enviarías un email, guardarías en una base de datos, etc.
+    // Para esta demostración, solo lo registraremos y devolveremos éxito.
+    console.log("Nuevo envío de contacto:", validatedInput.data);
 
     return { success: true };
 }

@@ -7,20 +7,20 @@ import { Badge } from "@/components/ui/badge";
 const projects = [
   {
     image: PlaceHolderImages.find(img => img.id === 'portfolio-1')!,
-    title: "Fintech Analytics Dashboard",
-    description: "A comprehensive dashboard for financial data visualization and analysis, boosting client decision-making speed by 40%.",
+    title: "Dashboard de Analítica Fintech",
+    description: "Un completo dashboard para visualización y análisis de datos financieros, aumentando la velocidad de toma de decisiones del cliente en un 40%.",
     tags: ["React", "D3.js", "Node.js"]
   },
   {
     image: PlaceHolderImages.find(img => img.id === 'portfolio-2')!,
-    title: "HealthConnect Mobile App",
-    description: "A patient-centric mobile app connecting users with healthcare providers, featuring secure messaging and appointment scheduling.",
+    title: "App Móvil HealthConnect",
+    description: "Una aplicación móvil centrada en el paciente que conecta a los usuarios con proveedores de atención médica, con mensajería segura y programación de citas.",
     tags: ["React Native", "Firebase", "GraphQL"]
   },
   {
     image: PlaceHolderImages.find(img => img.id === 'portfolio-3')!,
-    title: "LuxeStyle E-commerce",
-    description: "An elegant e-commerce platform for a luxury fashion brand, leading to a 150% increase in online sales.",
+    title: "E-commerce LuxeStyle",
+    description: "Una elegante plataforma de comercio electrónico para una marca de moda de lujo, que llevó a un aumento del 150% en las ventas online.",
     tags: ["Shopify", "Next.js", "Tailwind CSS"]
   }
 ];
@@ -30,9 +30,9 @@ export default function Portfolio() {
     <section id="portfolio" className="py-16 md:py-24">
       <div className="container">
         <div className="text-center mb-12">
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary">Software Development Portfolio</h2>
+          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary">Portafolio de Desarrollo de Software</h2>
           <p className="mt-4 max-w-2xl mx-auto text-foreground/80">
-            Innovative solutions that drive results.
+            Soluciones innovadoras que generan resultados.
           </p>
         </div>
         <Carousel opts={{ loop: true }} className="w-full max-w-5xl mx-auto">

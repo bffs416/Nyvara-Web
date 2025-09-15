@@ -9,7 +9,7 @@ export default function Footer() {
           <div className="flex flex-col items-center md:items-start gap-4">
             <NyvaraLogo className="h-6 w-auto text-primary" />
             <p className="text-sm text-muted-foreground max-w-sm text-center md:text-left">
-              Your partner in digital excellence and memorable events.
+              Tu socio en excelencia digital y eventos memorables.
             </p>
           </div>
           <div className="flex items-center space-x-4">
@@ -19,7 +19,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-border/40 text-center text-sm text-muted-foreground">
-          © {new Date().getFullYear()} Nyvara Group. All rights reserved.
+          © {new Date().getFullYear()} Nyvara Group. Todos los derechos reservados.
         </div>
       </div>
     </footer>

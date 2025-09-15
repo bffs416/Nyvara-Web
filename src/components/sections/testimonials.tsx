@@ -7,21 +7,21 @@ import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carouse
 const testimonials = [
   {
     image: PlaceHolderImages.find(img => img.id === 'testimonial-1')!,
-    name: "Jane Doe",
+    name: "Juana Pérez",
     title: "CEO, Tech Innovators",
-    quote: "Nyvara Group's development team is top-notch. They delivered our project on time and exceeded our expectations. Their professionalism and skill are unmatched.",
+    quote: "El equipo de desarrollo de Nyvara Group es de primera. Entregaron nuestro proyecto a tiempo y superaron nuestras expectativas. Su profesionalismo y habilidad son inigualables.",
   },
   {
     image: PlaceHolderImages.find(img => img.id === 'testimonial-2')!,
-    name: "John Smith",
-    title: "Marketing Director, EventPros",
-    quote: "The corporate event they organized for us was flawless. Every detail was handled with care, allowing us to focus on our guests. Highly recommended!",
+    name: "Juan García",
+    title: "Director de Marketing, EventPros",
+    quote: "El evento corporativo que organizaron para nosotros fue impecable. Cada detalle se manejó con cuidado, permitiéndonos centrarnos en nuestros invitados. ¡Muy recomendable!",
   },
   {
     image: PlaceHolderImages.find(img => img.id === 'testimonial-1')!,
-    name: "Emily White",
-    title: "HR Manager, Future Corp",
-    quote: "The training sessions were incredibly insightful and engaging. Our team's productivity has noticeably improved since. A fantastic investment in our people.",
+    name: "Emily Blanco",
+    title: "Gerente de RRHH, Future Corp",
+    quote: "Las sesiones de formación fueron increíblemente reveladoras y atractivas. La productividad de nuestro equipo ha mejorado notablemente desde entonces. Una fantástica inversión en nuestra gente.",
   }
 ];
 
@@ -30,9 +30,9 @@ export default function Testimonials() {
     <section id="testimonials" className="py-16 md:py-24">
       <div className="container">
         <div className="text-center mb-12">
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary">What Our Clients Say</h2>
+          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary">Lo que dicen nuestros clientes</h2>
           <p className="mt-4 max-w-2xl mx-auto text-foreground/80">
-            Success stories from businesses we've helped thrive.
+            Historias de éxito de empresas a las que hemos ayudado a prosperar.
           </p>
         </div>
         <Carousel opts={{ align: "start", loop: true }} className="w-full max-w-4xl mx-auto">

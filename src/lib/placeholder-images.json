@@ -2,55 +2,55 @@
   "placeholderImages": [
     {
       "id": "portfolio-1",
-      "description": "A dashboard for a financial analytics platform.",
+      "description": "Un dashboard para una plataforma de analítica financiera.",
       "imageUrl": "https://picsum.photos/seed/p1/600/400",
       "imageHint": "dashboard analytics"
     },
     {
       "id": "portfolio-2",
-      "description": "A mobile app for a healthcare startup.",
+      "description": "Una aplicación móvil para una startup de salud.",
       "imageUrl": "https://picsum.photos/seed/p2/600/400",
       "imageHint": "mobile app"
     },
     {
       "id": "portfolio-3",
-      "description": "An e-commerce website for a fashion brand.",
+      "description": "Un sitio de comercio electrónico para una marca de moda.",
       "imageUrl": "https://picsum.photos/seed/p3/600/400",
       "imageHint": "ecommerce fashion"
     },
     {
       "id": "event-1",
-      "description": "A corporate conference in a large hall.",
+      "description": "Una conferencia corporativa en un gran salón.",
       "imageUrl": "https://picsum.photos/seed/e1/600/400",
       "imageHint": "conference hall"
     },
     {
       "id": "event-2",
-      "description": "A team building event outdoors.",
+      "description": "Un evento de team building al aire libre.",
       "imageUrl": "https://picsum.photos/seed/e2/600/400",
       "imageHint": "team building"
     },
     {
       "id": "event-3",
-      "description": "An awards gala dinner.",
+      "description": "Una cena de gala de premiación.",
       "imageUrl": "https://picsum.photos/seed/e3/600/400",
       "imageHint": "gala dinner"
     },
     {
       "id": "event-4",
-      "description": "A product launch event.",
+      "description": "Un evento de lanzamiento de producto.",
       "imageUrl": "https://picsum.photos/seed/e4/600/400",
       "imageHint": "product launch"
     },
     {
       "id": "testimonial-1",
-      "description": "Avatar for Jane Doe.",
+      "description": "Avatar de Juana Pérez.",
       "imageUrl": "https://picsum.photos/seed/t1/100/100",
       "imageHint": "person portrait"
     },
     {
       "id": "testimonial-2",
-      "description": "Avatar for John Smith.",
+      "description": "Avatar de Juan García.",
       "imageUrl": "https://picsum.photos/seed/t2/100/100",
       "imageHint": "person portrait"
     }

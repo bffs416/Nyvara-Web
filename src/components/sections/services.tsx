@@ -4,18 +4,18 @@ import { Code, Calendar, Presentation } from "lucide-react";
 const services = [
   {
     icon: <Code className="h-8 w-8 text-primary" />,
-    title: "Software Development",
-    description: "Custom software, web, and mobile applications tailored to your business needs, delivering performance and scalability.",
+    title: "Desarrollo de Software",
+    description: "Software a medida, aplicaciones web y móviles adaptadas a las necesidades de tu negocio, ofreciendo rendimiento y escalabilidad.",
   },
   {
     icon: <Calendar className="h-8 w-8 text-primary" />,
-    title: "Corporate Events",
-    description: "End-to-end event management for memorable and impactful corporate gatherings, from planning to execution.",
+    title: "Eventos Corporativos",
+    description: "Gestión integral de eventos para reuniones corporativas memorables e impactantes, desde la planificación hasta la ejecución.",
   },
   {
     icon: <Presentation className="h-8 w-8 text-primary" />,
-    title: "Professional Training",
-    description: "Specialized training programs designed to upskill your team and drive professional growth within your organization.",
+    title: "Formación Profesional",
+    description: "Programas de formación especializados diseñados para mejorar las habilidades de tu equipo e impulsar el crecimiento profesional en tu organización.",
   },
 ];
 
@@ -24,9 +24,9 @@ export default function Services() {
     <section id="services" className="py-16 md:py-24 bg-card">
       <div className="container">
         <div className="text-center mb-12">
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary">Our Core Services</h2>
+          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary">Nuestros Servicios Principales</h2>
           <p className="mt-4 max-w-2xl mx-auto text-foreground/80">
-            Three pillars of excellence to drive your business forward.
+            Tres pilares de excelencia para impulsar tu negocio.
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-8">

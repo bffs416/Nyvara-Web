@@ -16,9 +16,9 @@ import { Card } from '@/components/ui/card';
 
 
 const formSchema = z.object({
-    name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-    email: z.string().email({ message: "Please enter a valid email." }),
-    message: z.string().min(10, { message: "Message must be at least 10 characters." }),
+    name: z.string().min(2, { message: "El nombre debe tener al menos 2 caracteres." }),
+    email: z.string().email({ message: "Por favor, introduce un email válido." }),
+    message: z.string().min(10, { message: "El mensaje debe tener al menos 10 caracteres." }),
 });
 
 export default function Contact() {
@@ -41,14 +41,14 @@ export default function Contact() {
 
     if (result.success) {
         toast({
-            title: "Message Sent!",
-            description: "Thank you for reaching out. We'll get back to you shortly.",
+            title: "¡Mensaje Enviado!",
+            description: "Gracias por contactarnos. Nos pondremos en contacto contigo en breve.",
         });
         form.reset();
     } else {
         toast({
             title: "Error",
-            description: "Something went wrong. Please try again.",
+            description: "Algo salió mal. Por favor, inténtalo de nuevo.",
             variant: "destructive",
         });
     }
@@ -58,9 +58,9 @@ export default function Contact() {
     <section id="contact" className="py-16 md:py-24">
       <div className="container max-w-2xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary">Let's Build Together</h2>
+          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary">Construyamos Juntos</h2>
           <p className="mt-4 text-foreground/80">
-            Have a project in mind or want to learn more about our services? Drop us a line.
+            ¿Tienes un proyecto en mente o quieres saber más sobre nuestros servicios? Escríbenos.
           </p>
         </div>
         <Card className="p-8 bg-card">
@@ -71,9 +71,9 @@ export default function Contact() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Nombre</FormLabel>
                   <FormControl>
-                    <Input placeholder="Your Name" {...field} />
+                    <Input placeholder="Tu Nombre" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -86,7 +86,7 @@ export default function Contact() {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input type="email" placeholder="your.email@example.com" {...field} />
+                    <Input type="email" placeholder="tu.email@ejemplo.com" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -97,10 +97,10 @@ export default function Contact() {
               name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Message</FormLabel>
+                  <FormLabel>Mensaje</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Tell us how we can help..."
+                      placeholder="Cuéntanos cómo podemos ayudarte..."
                       className="min-h-[120px]"
                       {...field}
                     />
@@ -113,9 +113,9 @@ export default function Contact() {
                 {isLoading ? (
                     <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Sending...
+                        Enviando...
                     </>
-                ) : 'Send Message'}
+                ) : 'Enviar Mensaje'}
             </Button>
           </form>
         </Form>

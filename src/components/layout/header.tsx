@@ -3,11 +3,11 @@ import NyvaraLogo from "@/components/icons/nyvara-logo";
 import { Button } from "@/components/ui/button";
 
 const navItems = [
-  { name: "Services", href: "#services" },
-  { name: "Portfolio", href: "#portfolio" },
-  { name: "Events", href: "#events" },
-  { name: "Testimonials", href: "#testimonials" },
-  { name: "Contact", href: "#contact" },
+  { name: "Servicios", href: "#services" },
+  { name: "Portafolio", href: "#portfolio" },
+  { name: "Eventos", href: "#events" },
+  { name: "Testimonios", href: "#testimonials" },
+  { name: "Contacto", href: "#contact" },
 ];
 
 export default function Header() {
@@ -33,7 +33,7 @@ export default function Header() {
         <div className="flex flex-1 items-center justify-end space-x-2">
           <Button asChild className="hidden lg:inline-flex">
             <Link href="#ai-tool">
-              Get a Recommendation
+              Obtén una recomendación
             </Link>
           </Button>
         </div>

@@ -13,9 +13,9 @@ export default function EventsGallery() {
     <section id="events" className="py-16 md:py-24 bg-card">
       <div className="container">
         <div className="text-center mb-12">
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary">Corporate Events Gallery</h2>
+          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary">Galería de Eventos Corporativos</h2>
           <p className="mt-4 max-w-2xl mx-auto text-foreground/80">
-            Creating moments that matter.
+            Creando momentos que importan.
           </p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

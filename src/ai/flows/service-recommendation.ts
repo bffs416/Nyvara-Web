@@ -14,7 +14,7 @@ import {z} from 'genkit';
 const ServiceRecommendationInputSchema = z.object({
   needs: z
     .string()
-    .describe('A detailed description of the client’s needs and goals.'),
+    .describe('Una descripción detallada de las necesidades y objetivos del cliente.'),
 });
 export type ServiceRecommendationInput = z.infer<
   typeof ServiceRecommendationInputSchema
@@ -24,7 +24,7 @@ const ServiceRecommendationOutputSchema = z.object({
   recommendation: z
     .string()
     .describe(
-      'A detailed recommendation of which services offered by Nyvara Group would best suit the client’s needs, and why.'
+      'Una recomendación detallada de qué servicios ofrecidos por Nyvara Group se adaptarían mejor a las necesidades del cliente, y por qué.'
     ),
 });
 export type ServiceRecommendationOutput = z.infer<
@@ -41,11 +41,11 @@ const prompt = ai.definePrompt({
   name: 'serviceRecommendationPrompt',
   input: {schema: ServiceRecommendationInputSchema},
   output: {schema: ServiceRecommendationOutputSchema},
-  prompt: `You are an expert consultant at Nyvara Group, a company specializing in Software Development, Corporate Events, and Training.
+  prompt: `Eres un consultor experto en Nyvara Group, una empresa especializada en Desarrollo de Software, Eventos Corporativos y Formación.
 
-A potential client has described their needs and goals. Based on their description, recommend the services that would best help them. Explain why each recommended service is a good fit.
+Un cliente potencial ha descrito sus necesidades y objetivos. Basado en su descripción, recomienda los servicios que mejor le ayudarían. Explica por qué cada servicio recomendado es una buena opción.
 
-Client Needs and Goals: {{{needs}}}`,
+Necesidades y Objetivos del Cliente: {{{needs}}}`,
 });
 
 const recommendServicesFlow = ai.defineFlow(
