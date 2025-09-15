@@ -10,7 +10,6 @@ import { usePathname } from 'next/navigation';
 
 const navItems = [
   { name: 'Servicios', href: '/#services' },
-  { name: 'Eventos', href: '/eventos' },
   { name: 'Nosotros', href: '/#nosotros' },
   { name: 'Testimonios', href: '/#testimonials' },
 ];
@@ -30,57 +29,20 @@ const Header = () => {
   
   useEffect(() => {
     if (isMobileMenuOpen) {
-      setIsMobileMenuOpen(false);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
     }
+    return () => {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isMobileMenuOpen]);
+  
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
   }, [pathname]);
 
-  const handleNavClick = (href: string) => {
-    setIsMobileMenuOpen(false);
-    const element = document.querySelector(href.replace('/', ''));
-    if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-  
-  const NavLink = ({ href, children }: { href: string, children: React.ReactNode }) => {
-    if (href.startsWith('/#')) {
-      return (
-          <button
-            onClick={() => handleNavClick(href)}
-            className="transition-colors hover:text-primary"
-          >
-            {children}
-          </button>
-      )
-    }
-    return (
-      <Link href={href} className="transition-colors hover:text-primary">
-        {children}
-      </Link>
-    );
-  };
-  
-  const MobileNavLink = ({ href, children }: { href: string, children: React.ReactNode }) => {
-     if (href.startsWith('/#')) {
-      return (
-          <button
-            onClick={() => handleNavClick(href)}
-            className="text-foreground hover:text-primary transition-colors duration-300 text-left py-2"
-          >
-            {children}
-          </button>
-      )
-    }
-    return (
-     <Link
-        href={href}
-        className="text-foreground hover:text-primary transition-colors duration-300 text-left py-2"
-      >
-        {children}
-      </Link>
-    );
-  };
-
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
     <motion.header
@@ -102,7 +64,9 @@ const Header = () => {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8 text-sm font-medium">
             {navItems.map((item) => (
-                <NavLink key={item.name} href={item.href}>{item.name}</NavLink>
+              <Link key={item.name} href={item.href} className="transition-colors hover:text-primary">
+                {item.name}
+              </Link>
             ))}
         </div>
         
@@ -125,14 +89,16 @@ const Header = () => {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="absolute top-full left-0 right-0 md:hidden mt-2 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-t border-border/40"
+            className="absolute top-full left-0 right-0 h-screen md:hidden bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-t border-border/40"
           >
-            <div className="container flex flex-col space-y-2 p-4">
+            <div className="container flex flex-col space-y-4 p-4 mt-4">
               {navItems.map((item) => (
-                  <MobileNavLink key={item.name} href={item.href}>{item.name}</MobileNavLink>
+                  <Link key={item.name} href={item.href} onClick={closeMobileMenu} className="text-foreground text-lg hover:text-primary transition-colors duration-300 text-left py-2">
+                    {item.name}
+                  </Link>
               ))}
-              <Button asChild className="w-full">
-                <Link href="/#contact">Contacto</Link>
+              <Button asChild className="w-full mt-4">
+                <Link href="/#contact" onClick={closeMobileMenu}>Contacto</Link>
               </Button>
             </div>
           </motion.div>
