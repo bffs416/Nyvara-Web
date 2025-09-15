@@ -45,7 +45,7 @@ const About = () => {
             <div className="text-muted-foreground space-y-6 leading-relaxed">
                 <p>En el mercado de hoy, la mayoría de las empresas se ven obligadas a contratar a un puñado de proveedores que no se comunican entre sí. El marketing, la tecnología y los eventos terminan trabajando en sus propios mundos, sin una visión estratégica compartida.</p>
                 <p className="text-foreground font-semibold">Nosotros lo cambiamos todo.</p>
-                <p>Nyvara Group nació para ser la solución integral que tu negocio necesita. Unificamos la creatividad del marketing de vanguardia, el poder de la tecnología a la medida y la emoción de los eventos de alto impacto bajo un mismo techo.</p>
+                <p>Nyvara nació para ser la solución integral que tu negocio necesita. Unificamos la creatividad del marketing de vanguardia, el poder de la tecnología a la medida y la emoción de los eventos de alto impacto bajo un mismo techo.</p>
                 <p>Somos tu socio estratégico, tu cerebro centralizado, diseñado para romper los silos y liberar el verdadero potencial de tu marca.</p>
                 <p className="text-primary font-bold">Una visión. Un equipo. Un crecimiento sin límites.</p>
             </div>

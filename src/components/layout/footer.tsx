@@ -132,7 +132,7 @@ const Footer = () => {
         >
           <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
             <p className="text-muted-foreground text-xs text-center md:text-left order-1">
-              © {currentYear} Nyvara Group. Todos los derechos reservados.
+              © {currentYear} Nyvara. Todos los derechos reservados.
             </p>
             
             <div className="flex space-x-6 order-3 md:order-2">

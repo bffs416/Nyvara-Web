@@ -46,7 +46,7 @@ const prompt = ai.definePrompt({
   name: 'serviceRecommendationPrompt',
   input: {schema: ServiceRecommendationInputSchema},
   output: {schema: ServiceRecommendationOutputSchema},
-  prompt: `Eres un consultor experto en Nyvara Group, una empresa especializada en Desarrollo de Software, Eventos Corporativos y Formación.
+  prompt: `Eres un consultor experto en Nyvara, una empresa especializada en Desarrollo de Software, Eventos Corporativos y Formación.
 
 Un cliente potencial ha descrito sus necesidades y objetivos. Basado en su descripción, recomienda los servicios que mejor le ayudarían.
 

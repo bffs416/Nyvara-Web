@@ -76,7 +76,7 @@ export default function ServiceRecommendation() {
             <div className="inline-block rounded-lg bg-accent px-3 py-1 text-sm text-primary font-semibold">ASISTENTE CON IA</div>
             <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary">Encuentra tu Solución Perfecta</h2>
             <p className="text-foreground/80 text-lg">
-              ¿No estás seguro por dónde empezar? Describe tus objetivos y desafíos comerciales, y nuestra herramienta con IA te recomendará los mejores servicios de Nyvara Group para ayudarte a tener éxito. Es rápido, fácil y personalizado para ti.
+              ¿No estás seguro por dónde empezar? Describe tus objetivos y desafíos comerciales, y nuestra herramienta con IA te recomendará los mejores servicios de Nyvara para ayudarte a tener éxito. Es rápido, fácil y personalizado para ti.
             </p>
           </div>
           <Card className="bg-background">

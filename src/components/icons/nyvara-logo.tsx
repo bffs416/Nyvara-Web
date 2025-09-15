@@ -6,7 +6,7 @@ export default function NyvaraLogo({ className }: { className?: string }) {
     <div className={cn("relative", className)}>
       <Image
         src="/Logo.png"
-        alt="Nyvara Group Logo"
+        alt="Nyvara Logo"
         fill
         className="object-contain"
         priority
