@@ -4,7 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
-import ServiceRecommendation from '@/components/sections/service-recommendation';
+import SurveyForm from '@/components/sections/survey-form';
 
 const DiagnosticoPage = () => {
   const pageVariants = {
@@ -26,17 +26,17 @@ const DiagnosticoPage = () => {
         >
           <div className="container mx-auto px-6">
              <motion.section
-              className="text-center mb-20"
+              className="text-center mb-12"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7 }}
             >
-              <h1 className="text-5xl md:text-7xl font-bold mb-4 text-primary font-headline">Diagnóstico con IA</h1>
+              <h1 className="text-5xl md:text-7xl font-bold mb-4 text-primary font-headline">Diagnóstico Estratégico</h1>
               <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto">
-                Utiliza nuestra herramienta inteligente para descubrir las soluciones perfectas para tu negocio.
+                Completa este formulario para descubrir el potencial oculto de tu marca.
               </p>
             </motion.section>
-            <ServiceRecommendation />
+            <SurveyForm />
           </div>
         </motion.div>
       </main>
