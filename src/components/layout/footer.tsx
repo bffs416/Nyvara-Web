@@ -3,11 +3,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Instagram, Linkedin } from 'lucide-react';
-import { toast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
 import NyvaraLogo from '@/components/icons/nyvara-logo';
 
 const Footer = () => {
+  const { toast } = useToast()
+
   const handleSocialClick = (platform: string, url: string) => {
     toast({
       title: `Redirigiendo a nuestro ${platform}`,
@@ -32,7 +34,7 @@ const Footer = () => {
   ];
 
   const companyLinks = [
-    { name: 'Sobre Nosotros', sectionId: '#hero' },
+    { name: 'Sobre Nosotros', sectionId: '#nosotros' },
     { name: 'Servicios', sectionId: '#services' },
     { name: 'Contacto', sectionId: '#contact' },
   ];

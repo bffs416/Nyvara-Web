@@ -9,6 +9,7 @@ import NyvaraLogo from '@/components/icons/nyvara-logo';
 
 const navItems = [
   { name: 'Servicios', href: '#services' },
+  { name: 'Nosotros', href: '#nosotros' },
   { name: 'Portafolio', href: '#portfolio' },
   { name: 'Eventos', href: '#events' },
   { name: 'Testimonios', href: '#testimonials' },
@@ -27,7 +28,6 @@ const Header = () => {
   }, []);
 
   const handleNavClick = (sectionId: string) => {
-    // In Next.js with a single-page layout, we can directly scroll
     const element = document.querySelector(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
