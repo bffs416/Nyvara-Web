@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { BarChart, Users, Mail, CheckCircle, ArrowRight, Info } from 'lucide-react';
+import { BarChart, Users, Mail, CheckCircle, Send, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import {
@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dialog";
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
+import { siteConfig } from '@/lib/config';
 
 const MarketingPage = () => {
 
@@ -25,6 +26,8 @@ const MarketingPage = () => {
     animate: { opacity: 1, y: 0, transition: { duration: 0.8 } },
     exit: { opacity: 0, y: -50, transition: { duration: 0.6 } }
   };
+
+  const whatsappUrl = `https://wa.me/${siteConfig.contact.phone}?text=${encodeURIComponent(siteConfig.contact.whatsappMessage)}`;
 
   const serviceItems = [
     { 
@@ -124,8 +127,8 @@ const MarketingPage = () => {
                       <DialogTitle className="text-3xl font-bold text-primary font-headline mb-4">{item.title}</DialogTitle>
                     </DialogHeader>
                      <div className="text-muted-foreground space-y-6">
+                        <div className="italic mb-4 text-base">{item.details.analogy}</div>
                         <div>
-                          <div className="italic mb-4 text-base">{item.details.analogy}</div>
                           <h4 className="font-bold text-lg text-primary mb-2">¿Qué es exactamente?</h4>
                           <p className="text-foreground/90">{item.details.whatIs}</p>
                         </div>
@@ -160,9 +163,9 @@ const MarketingPage = () => {
                 Nuestro equipo de expertos está preparado para diseñar una estrategia a la medida de tus objetivos. ¡Contáctanos hoy!
               </p>
               <Button size="lg" asChild>
-                <Link href="/#contact">
-                  Solicitar Asesoría <ArrowRight className="ml-2" />
-                </Link>
+                  <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                    Envíanos un Mensaje <Send className="ml-2" />
+                  </a>
               </Button>
             </motion.section>
           </div>
