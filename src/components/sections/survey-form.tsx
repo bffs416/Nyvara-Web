@@ -19,7 +19,7 @@ import { Q4_OPTIONS, Q5_OPTIONS, Q7_OPTIONS, Q8_OPTIONS, Q9_OPTIONS, Q10_CHALLEN
 import { COUNTRIES } from "@/lib/countries";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command";
-import { ChevronsUpDown, Check, PlusCircle, Trash2, RotateCcw, Download, PartyPopper, Bot } from "lucide-react";
+import { ChevronsUpDown, Check, PlusCircle, Trash2, Bot } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SAMPLE_SURVEY_DATA } from "@/lib/sample-data";
 
@@ -74,13 +74,6 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
     }
   }, [watchedName, form, toast]);
 
-
-  const handleStartOver = () => {
-    form.reset();
-    setCurrentStep(0);
-    setShowJumpButton(false);
-    window.scrollTo(0, 0);
-  }
 
   const handleNext = async () => {
     const isStepValid = await form.trigger(getFieldNamesForStep(currentStep));

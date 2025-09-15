@@ -17,32 +17,32 @@ export const surveySchema = z.object({
   q3_persona: z.string().min(1, "Describe la personalidad de tu marca."),
   
   // Section 4
-  q4_perception: z.array(z.string()).max(3, "Selecciona como máximo 3 opciones."),
+  q4_perception: z.array(z.string()).max(3, "Selecciona como máximo 3 opciones.").optional(),
   q4_other: z.string().optional(),
 
   // Section 5
-  q5_emotions: z.array(z.string()).max(3, "Selecciona como máximo 3 opciones."),
+  q5_emotions: z.array(z.string()).max(3, "Selecciona como máximo 3 opciones.").optional(),
   q5_other: z.string().optional(),
   
   // Section 6
   q6_why: z.string().min(1, "Describe el impacto que buscas."),
   
   // Section 7
-  q7_differentiation: z.array(z.string()).max(3, "Selecciona como máximo 3 opciones."),
+  q7_differentiation: z.array(z.string()).max(3, "Selecciona como máximo 3 opciones.").optional(),
   q7_why: z.string().min(1, "Describe tu diferenciación."),
   q7_other: z.string().optional(),
   
   // Section 8
-  q8_value: z.array(z.string()).max(3, "Selecciona como máximo 3 opciones."),
+  q8_value: z.array(z.string()).max(3, "Selecciona como máximo 3 opciones.").optional(),
   q8_other: z.string().optional(),
   
   // Section 9
-  q9_presence: z.array(z.string()),
+  q9_presence: z.array(z.string()).optional(),
   q9_other: z.string().optional(),
   
   // Section 10
-  q10_rating: z.number(),
-  q10_challenges: z.array(z.string()).max(3, "Selecciona como máximo 3 desafíos."),
+  q10_rating: z.number().optional().default(5),
+  q10_challenges: z.array(z.string()).max(3, "Selecciona como máximo 3 desafíos.").optional(),
   q10_other: z.string().optional(),
   
   // Section 11
