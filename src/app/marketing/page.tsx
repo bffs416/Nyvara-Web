@@ -137,11 +137,13 @@ const MarketingPage = () => {
                         </div>
                       </div>
                     <DialogFooter className="mt-6">
-                      <Button asChild className="w-full">
-                        <Link href="/#contact">
-                          Solicitar más información
-                        </Link>
-                      </Button>
+                      <DialogClose asChild>
+                         <Button asChild className="w-full">
+                           <Link href="/#contact">
+                              Solicitar más información
+                           </Link>
+                         </Button>
+                      </DialogClose>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
