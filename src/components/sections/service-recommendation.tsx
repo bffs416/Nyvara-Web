@@ -5,13 +5,15 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { handleServiceRecommendation } from '@/app/actions';
+import { ServiceRecommendationOutput } from '@/ai/flows/service-recommendation';
 
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Wand2, Loader2, Sparkles } from 'lucide-react';
+import { Wand2, Loader2, Sparkles, CheckCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { motion } from 'framer-motion';
 
 const formSchema = z.object({
   needs: z.string().min(50, { message: "Por favor, describe tus necesidades en al menos 50 caracteres." }),
@@ -20,7 +22,7 @@ const formSchema = z.object({
 const defaultNeeds = "Somos una empresa B2B con 5 años en el mercado de la consultoría de gestión. Queremos modernizar nuestra imagen, generar más leads cualificados y posicionarnos como líderes de opinión en nuestro sector. Nuestro objetivo es aumentar las ventas en un 30% en los próximos 12 meses. Necesitamos una estrategia de marketing digital integral, renovar nuestro sitio web para que sea más profesional y organizar un evento virtual para conectar con potenciales clientes de alto valor.";
 
 export default function ServiceRecommendation() {
-  const [recommendation, setRecommendation] = useState('');
+  const [recommendation, setRecommendation] = useState<ServiceRecommendationOutput | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
@@ -33,7 +35,7 @@ export default function ServiceRecommendation() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
-    setRecommendation('');
+    setRecommendation(null);
     
     try {
       const result = await handleServiceRecommendation(values);
@@ -123,15 +125,48 @@ export default function ServiceRecommendation() {
               </Form>
 
               {recommendation && (
-                <div className="mt-6 border-t border-border pt-6">
-                   <h3 className="text-lg font-semibold flex items-center gap-2 text-primary">
-                      <Sparkles className="h-5 w-5" />
-                      Nuestra Recomendación
-                   </h3>
-                   <div className="mt-4 text-foreground/90 whitespace-pre-wrap font-body">
-                      {recommendation}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="mt-8 border-t border-border pt-8 space-y-6"
+                >
+                   <div className="text-center">
+                    <h3 className="text-2xl font-bold flex items-center justify-center gap-2 text-primary font-headline">
+                        <Sparkles className="h-6 w-6" />
+                        {recommendation.title}
+                    </h3>
+                    <p className="mt-2 text-foreground/80">{recommendation.summary}</p>
                    </div>
-                </div>
+                   <div className="space-y-4">
+                     {recommendation.recommendedServices.map((service, index) => (
+                       <motion.div
+                         key={index}
+                         initial={{ opacity: 0, scale: 0.95 }}
+                         animate={{ opacity: 1, scale: 1 }}
+                         transition={{ duration: 0.5, delay: index * 0.1 }}
+                       >
+                         <Card className="bg-card/50">
+                           <CardHeader>
+                             <CardTitle className="text-lg text-primary">{service.serviceName}</CardTitle>
+                           </CardHeader>
+                           <CardContent>
+                             <p className="text-muted-foreground mb-4">{service.justification}</p>
+                             <h4 className="font-semibold text-foreground mb-2">Acciones Sugeridas:</h4>
+                             <ul className="space-y-2">
+                               {service.suggestedActions.map((action, i) => (
+                                 <li key={i} className="flex items-start gap-2">
+                                   <CheckCircle className="h-4 w-4 mt-1 text-primary/70 shrink-0"/>
+                                   <span className="text-foreground/90 text-sm">{action}</span>
+                                 </li>
+                               ))}
+                             </ul>
+                           </CardContent>
+                         </Card>
+                       </motion.div>
+                     ))}
+                   </div>
+                </motion.div>
               )}
             </CardContent>
           </Card>

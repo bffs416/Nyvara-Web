@@ -1,13 +1,13 @@
 'use server';
 
-import { recommendServices } from '@/ai/flows/service-recommendation';
+import { recommendServices, ServiceRecommendationOutput } from '@/ai/flows/service-recommendation';
 import { z } from 'zod';
 
 const serviceRecSchema = z.object({
   needs: z.string().min(50),
 });
 
-export async function handleServiceRecommendation(input: z.infer<typeof serviceRecSchema>) {
+export async function handleServiceRecommendation(input: z.infer<typeof serviceRecSchema>): Promise<{ recommendation?: ServiceRecommendationOutput; error?: string }> {
   const validatedInput = serviceRecSchema.safeParse(input);
 
   if (!validatedInput.success) {
@@ -16,7 +16,7 @@ export async function handleServiceRecommendation(input: z.infer<typeof serviceR
 
   try {
     const result = await recommendServices(validatedInput.data);
-    return result;
+    return { recommendation: result };
   } catch (error) {
     console.error('La recomendación de servicio falló:', error);
     return { error: 'No se pudo obtener la recomendación del servicio de IA.' };

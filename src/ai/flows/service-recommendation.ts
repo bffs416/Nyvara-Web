@@ -20,13 +20,18 @@ export type ServiceRecommendationInput = z.infer<
   typeof ServiceRecommendationInputSchema
 >;
 
-const ServiceRecommendationOutputSchema = z.object({
-  recommendation: z
-    .string()
-    .describe(
-      'Una recomendación detallada de qué servicios ofrecidos por Nyvara Group se adaptarían mejor a las necesidades del cliente, y por qué.'
-    ),
+const RecommendedServiceSchema = z.object({
+  serviceName: z.string().describe('El nombre del servicio recomendado (e.g., "Marketing que Convierte", "Eventos que Impactan", "Tecnología que Impulsa").'),
+  justification: z.string().describe('Una explicación detallada de por qué este servicio es una buena opción para el cliente.'),
+  suggestedActions: z.array(z.string()).describe('Una lista de acciones o pasos concretos a seguir dentro de este servicio.'),
 });
+
+const ServiceRecommendationOutputSchema = z.object({
+  title: z.string().describe('Un título atractivo y conciso para la recomendación.'),
+  summary: z.string().describe('Un resumen introductorio de la estrategia general recomendada.'),
+  recommendedServices: z.array(RecommendedServiceSchema).describe('Una lista de los servicios recomendados.'),
+});
+
 export type ServiceRecommendationOutput = z.infer<
   typeof ServiceRecommendationOutputSchema
 >;
@@ -43,7 +48,14 @@ const prompt = ai.definePrompt({
   output: {schema: ServiceRecommendationOutputSchema},
   prompt: `Eres un consultor experto en Nyvara Group, una empresa especializada en Desarrollo de Software, Eventos Corporativos y Formación.
 
-Un cliente potencial ha descrito sus necesidades y objetivos. Basado en su descripción, recomienda los servicios que mejor le ayudarían. Explica por qué cada servicio recomendado es una buena opción.
+Un cliente potencial ha descrito sus necesidades y objetivos. Basado en su descripción, recomienda los servicios que mejor le ayudarían.
+
+Para cada servicio que recomiendes, proporciona:
+1. El nombre del servicio.
+2. Una justificación clara y concisa de por qué es relevante para el cliente.
+3. Una lista de 3 a 4 acciones sugeridas específicas para ese servicio.
+
+Organiza la respuesta en el formato JSON solicitado, con un título general, un resumen, y una lista de servicios recomendados.
 
 Necesidades y Objetivos del Cliente: {{{needs}}}`,
 });
