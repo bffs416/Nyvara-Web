@@ -30,7 +30,7 @@ const Footer = () => {
   const servicesLinks = [
     { name: 'Marketing que Convierte', href: '/marketing' },
     { name: 'Eventos Corporativos', href: '/eventos' },
-    { name: 'Tecnología que Impulsa', href: '/#services' },
+    { name: 'Tecnología que Impulsa', href: '/desarrollo' },
   ];
 
   const companyLinks = [
