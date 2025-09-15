@@ -122,7 +122,8 @@ const MarketingPage = () => {
                    <DialogContent className="bg-background border-border text-foreground max-w-2xl">
                     <DialogHeader>
                       <DialogTitle className="text-3xl font-bold text-primary font-headline mb-4">{item.title}</DialogTitle>
-                      <DialogDescription as="div" className="text-muted-foreground space-y-6">
+                    </DialogHeader>
+                     <div className="text-muted-foreground space-y-6">
                         <div>
                           <div className="italic mb-4 text-base">{item.details.analogy}</div>
                           <h4 className="font-bold text-lg text-primary mb-2">¿Qué es exactamente?</h4>
@@ -132,8 +133,7 @@ const MarketingPage = () => {
                           <h4 className="font-bold text-lg text-primary mb-2">¿Cómo te apoyamos en Nyvara?</h4>
                           <p className="text-foreground/90">{item.details.howWeHelp}</p>
                         </div>
-                      </DialogDescription>
-                    </DialogHeader>
+                      </div>
                     <DialogFooter className="mt-6">
                       <DialogClose asChild>
                           <Button asChild className="w-full">
