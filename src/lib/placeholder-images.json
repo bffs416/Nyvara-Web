@@ -1,3 +1,58 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "portfolio-1",
+      "description": "A dashboard for a financial analytics platform.",
+      "imageUrl": "https://picsum.photos/seed/p1/600/400",
+      "imageHint": "dashboard analytics"
+    },
+    {
+      "id": "portfolio-2",
+      "description": "A mobile app for a healthcare startup.",
+      "imageUrl": "https://picsum.photos/seed/p2/600/400",
+      "imageHint": "mobile app"
+    },
+    {
+      "id": "portfolio-3",
+      "description": "An e-commerce website for a fashion brand.",
+      "imageUrl": "https://picsum.photos/seed/p3/600/400",
+      "imageHint": "ecommerce fashion"
+    },
+    {
+      "id": "event-1",
+      "description": "A corporate conference in a large hall.",
+      "imageUrl": "https://picsum.photos/seed/e1/600/400",
+      "imageHint": "conference hall"
+    },
+    {
+      "id": "event-2",
+      "description": "A team building event outdoors.",
+      "imageUrl": "https://picsum.photos/seed/e2/600/400",
+      "imageHint": "team building"
+    },
+    {
+      "id": "event-3",
+      "description": "An awards gala dinner.",
+      "imageUrl": "https://picsum.photos/seed/e3/600/400",
+      "imageHint": "gala dinner"
+    },
+    {
+      "id": "event-4",
+      "description": "A product launch event.",
+      "imageUrl": "https://picsum.photos/seed/e4/600/400",
+      "imageHint": "product launch"
+    },
+    {
+      "id": "testimonial-1",
+      "description": "Avatar for Jane Doe.",
+      "imageUrl": "https://picsum.photos/seed/t1/100/100",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "testimonial-2",
+      "description": "Avatar for John Smith.",
+      "imageUrl": "https://picsum.photos/seed/t2/100/100",
+      "imageHint": "person portrait"
+    }
+  ]
 }
