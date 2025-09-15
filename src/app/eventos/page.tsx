@@ -137,13 +137,11 @@ const EventosCorporativos = () => {
                         </div>
                       </div>
                     <DialogFooter className="mt-6">
-                      <DialogClose asChild>
-                         <Button asChild className="w-full">
-                           <Link href="/#contact">
-                            Solicitar más información
-                          </Link>
-                        </Button>
-                      </DialogClose>
+                      <Button asChild className="w-full">
+                         <Link href="/#contact">
+                          Solicitar más información
+                        </Link>
+                      </Button>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
