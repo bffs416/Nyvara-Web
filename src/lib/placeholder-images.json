@@ -53,6 +53,42 @@
       "description": "Avatar de Juan García.",
       "imageUrl": "https://picsum.photos/seed/t2/100/100",
       "imageHint": "person portrait"
+    },
+    {
+      "id": "testimonial-3",
+      "description": "Avatar de Emily Blanco.",
+      "imageUrl": "https://picsum.photos/seed/t3/100/100",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "testimonial-4",
+      "description": "Avatar de Carlos Rodríguez.",
+      "imageUrl": "https://picsum.photos/seed/t4/100/100",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "testimonial-5",
+      "description": "Avatar de Sofía Martínez.",
+      "imageUrl": "https://picsum.photos/seed/t5/100/100",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "testimonial-6",
+      "description": "Avatar de Luis Fernández.",
+      "imageUrl": "https://picsum.photos/seed/t6/100/100",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "testimonial-7",
+      "description": "Avatar de Ana Gómez.",
+      "imageUrl": "https://picsum.photos/seed/t7/100/100",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "testimonial-8",
+      "description": "Avatar de Miguel Hernández.",
+      "imageUrl": "https://picsum.photos/seed/t8/100/100",
+      "imageHint": "person portrait"
     }
   ]
 }
