@@ -40,13 +40,14 @@ const About = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-primary">
-              Nacimos para ser el Socio Estratégico que no encontrábamos
+              La fragmentación es el enemigo del crecimiento.
             </h2>
             <div className="text-muted-foreground space-y-6 leading-relaxed">
-                <p>En el mercado, veíamos una brecha: agencias de marketing que no entendían de tecnología, empresas de software que no hablaban el idioma de la marca y productoras de eventos que trabajaban de forma aislada.</p>
-                <p>Las empresas se veían forzadas a contratar a múltiples proveedores, creando silos de información y estrategias desconectadas. El resultado: un potencial de crecimiento desaprovechado.</p>
-                <p className="text-foreground font-semibold">Nyvara Group nació para romper esos silos.</p>
-                <p>Nuestra misión es ser el socio único y centralizado que tu negocio necesita para escalar, unificando el <span className="text-primary">marketing de vanguardia</span>, los <span className="text-primary">eventos de alto impacto</span> y la <span className="text-primary">tecnología a la medida</span> bajo una sola visión estratégica: la tuya.</p>
+                <p>En el mercado de hoy, la mayoría de las empresas se ven obligadas a contratar a un puñado de proveedores que no se comunican entre sí. El marketing, la tecnología y los eventos terminan trabajando en sus propios mundos, sin una visión estratégica compartida.</p>
+                <p className="text-foreground font-semibold">Nosotros lo cambiamos todo.</p>
+                <p>Nyvara Group nació para ser la solución integral que tu negocio necesita. Unificamos la creatividad del marketing de vanguardia, el poder de la tecnología a la medida y la emoción de los eventos de alto impacto bajo un mismo techo.</p>
+                <p>Somos tu socio estratégico, tu cerebro centralizado, diseñado para romper los silos y liberar el verdadero potencial de tu marca.</p>
+                <p className="text-primary font-bold">Una visión. Un equipo. Un crecimiento sin límites.</p>
             </div>
           </motion.div>
 
