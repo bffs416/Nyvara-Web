@@ -3,52 +3,45 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import SurveyForm from '@/components/sections/survey-form';
-import { handleSurveySubmission, handleRecommendationGeneration, summarizeSurveyDataForDownload } from '@/app/client-actions';
+import { handleSurveySubmission, summarizeSurveyDataForDownload } from '@/app/client-actions';
 import type { SurveyFormData } from '@/lib/types';
-import type { ServiceRecommendationOutput } from '@/ai/flows/service-recommendation';
-import { Loader2, ServerCrash, Lightbulb, Download, Send, Bot } from 'lucide-react';
+import { Loader2, ServerCrash, Download, Send, CheckCircle } from 'lucide-react';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
-const RecommendationResults = ({ recommendation }: { recommendation: ServiceRecommendationOutput }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.7 }}
-    className="bg-card border border-border/50 p-8 rounded-lg shadow-2xl space-y-12"
-  >
-    <div className="text-center">
-      <Lightbulb className="mx-auto h-12 w-12 text-primary mb-4" />
-      <h2 className="text-3xl font-bold font-headline text-primary">{recommendation.title}</h2>
-      <p className="text-muted-foreground mt-2 max-w-3xl mx-auto">{recommendation.summary}</p>
-    </div>
-
-    {/* Recommended Services Section */}
-    <div className="space-y-6">
-      {recommendation.recommendedServices.map((service, index) => (
-        <div key={index} className="bg-background/50 p-6 rounded-lg border border-border">
-          <h3 className="text-xl font-bold font-headline text-foreground mb-3">{service.serviceName}</h3>
-          <p className="text-muted-foreground mb-4 italic">"{service.justification}"</p>
-          <div>
-            <h4 className="font-semibold text-primary mb-2">Acciones Sugeridas:</h4>
-            <ul className="list-disc list-inside space-y-2 text-foreground/90">
-              {service.suggestedActions.map((action, actionIndex) => (
-                <li key={actionIndex}>{action}</li>
-              ))}
-            </ul>
-          </div>
+const SuccessMessage = () => (
+    <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        className="bg-card border border-border/50 p-8 rounded-lg shadow-2xl text-center space-y-6"
+    >
+        <CheckCircle className="mx-auto h-16 w-16 text-green-500 mb-4" />
+        <h2 className="text-3xl font-bold font-headline text-primary">¡Diagnóstico Enviado con Éxito!</h2>
+        <p className="text-muted-foreground max-w-2xl mx-auto">
+            Hemos recibido tus respuestas de forma segura. Nuestro equipo de expertos las revisará detenidamente y se pondrá en contacto contigo en breve para discutir los siguientes pasos.
+        </p>
+        <div className="flex justify-center gap-4 pt-4">
+            <Button asChild>
+                <Link href="/">
+                    Volver al Inicio
+                </Link>
+            </Button>
+            <Button variant="outline" asChild>
+                <Link href="/#contact">
+                    Contactar Ahora
+                </Link>
+            </Button>
         </div>
-      ))}
-    </div>
-  </motion.div>
+    </motion.div>
 );
+
 
 export default function DiagnosticoClient() {
   const [isLoading, setIsLoading] = useState(false);
-  const [recommendation, setRecommendation] = useState<ServiceRecommendationOutput | null>(null);
   const [error, setError] = useState<string | null>(null);
-
   const [formStep, setFormStep] = useState<'form' | 'summary' | 'sent'>('form');
   const [surveyData, setSurveyData] = useState<SurveyFormData | null>(null);
   const [summaryText, setSummaryText] = useState<string>('');
@@ -93,30 +86,12 @@ export default function DiagnosticoClient() {
     }
     setIsLoading(false);
   };
-
-  const handleGenerateRecommendation = async () => {
-      if (!surveyData) return;
-      setIsLoading(true);
-      setError(null);
-      setRecommendation(null);
-
-      const result = await handleRecommendationGeneration(surveyData);
-
-      if (result.recommendation) {
-        setRecommendation(result.recommendation);
-      } else {
-        setError(result.error || 'Ocurrió un error inesperado.');
-      }
-      
-      setIsLoading(false);
-  };
   
   const resetFlow = () => {
     setFormStep('form');
     setSurveyData(null);
     setSummaryText('');
     setError(null);
-    setRecommendation(null);
   }
 
   return (
@@ -133,8 +108,8 @@ export default function DiagnosticoClient() {
             >
               <h1 className="text-5xl md:text-7xl font-bold mb-4 text-primary font-headline">Diagnóstico Estratégico</h1>
               <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto">
-                {recommendation 
-                  ? "Aquí tienes tu recomendación personalizada." 
+                {formStep === 'sent' 
+                  ? "Gracias por tu confianza." 
                   : "Completa este formulario para descubrir el potencial oculto de tu marca."}
               </p>
             </motion.section>
@@ -167,36 +142,21 @@ export default function DiagnosticoClient() {
                     className="bg-card p-8 rounded-lg shadow-xl text-center"
                   >
                     <h2 className="text-2xl font-bold font-headline text-primary mb-4">Paso 2: Revisa y Guarda tu Resumen</h2>
-                    <p className="text-muted-foreground mb-6">Hemos generado un resumen de tus respuestas. Descárgalo para tus archivos antes de continuar.</p>
+                    <p className="text-muted-foreground mb-6">Hemos generado un resumen de tus respuestas. Descárgalo para tus archivos y luego envíalo para que nuestro equipo lo revise.</p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                       <Button onClick={handleDownloadSummary} size="lg">
                         <Download className="mr-2" />
                         Descargar Resumen
                       </Button>
-                      <Button onClick={handleSendToSupabase} size="lg" variant="outline">
+                      <Button onClick={handleSendToSupabase} size="lg" variant="default">
                         <Send className="mr-2" />
-                        Enviar a Supabase
+                        Enviar Diagnóstico
                       </Button>
                     </div>
                   </motion.div>
                 )}
 
-                {formStep === 'sent' && (
-                   <motion.div 
-                    initial={{ opacity: 0, y: 20 }} 
-                    animate={{ opacity: 1, y: 0 }} 
-                    className="bg-card p-8 rounded-lg shadow-xl text-center"
-                  >
-                    <h2 className="text-2xl font-bold font-headline text-primary mb-4">Paso 3: Genera tu Diagnóstico</h2>
-                    <p className="text-muted-foreground mb-6">Tus datos se han guardado de forma segura. Ahora, utiliza nuestra IA para obtener tu plan estratégico personalizado.</p>
-                    <Button onClick={handleGenerateRecommendation} size="lg">
-                      <Bot className="mr-2" />
-                      Generar Recomendación con IA
-                    </Button>
-                  </motion.div>
-                )}
-                
-                {recommendation && <RecommendationResults recommendation={recommendation} />}
+                {formStep === 'sent' && <SuccessMessage />}
               </>
             )}
           </div>

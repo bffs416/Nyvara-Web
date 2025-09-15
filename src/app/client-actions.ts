@@ -10,10 +10,8 @@
  */
 
 import { 
-    handleServiceRecommendation,
     handleContactSubmission,
     handleSurveySubmission,
-    handleRecommendationGeneration,
     summarizeSurveyDataForDownload
 } from './actions';
 
@@ -21,9 +19,7 @@ import {
 // instead of using `export * from './actions'` to comply with
 // the "use server" directive.
 export {
-    handleServiceRecommendation,
     handleContactSubmission,
     handleSurveySubmission,
-    handleRecommendationGeneration,
     summarizeSurveyDataForDownload
 };
