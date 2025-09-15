@@ -54,14 +54,14 @@ function summarizeSurveyData(data: SurveyFormData): string {
         summary += `Se diferencia con: ${data.q2_unique}. `;
     }
     summary += `Describe su marca como: "${data.q3_persona}". `;
-    summary += `Quiere que su marca sea percibida como: ${data.q4_perception.join(', ')}. `;
-    summary += `Busca evocar emociones de: ${data.q5_emotions.join(', ')}. `;
+    summary += `Quiere que su marca sea percibida como: ${data.q4_perception?.join(', ')}. `;
+    summary += `Busca evocar emociones de: ${data.q5_emotions?.join(', ')}. `;
     summary += `Su propósito es: "${data.q6_why}". `;
-    summary += `Se diferencia de la competencia por: ${data.q7_differentiation.join(', ')} (${data.q7_why}). `;
-    summary += `Su propuesta de valor es: ${data.q8_value.join(', ')}. `;
-    summary += `Actualmente usa los siguientes canales online: ${data.q9_presence.join(', ')}. `;
+    summary += `Se diferencia de la competencia por: ${data.q7_differentiation?.join(', ')} (${data.q7_why}). `;
+    summary += `Su propuesta de valor es: ${data.q8_value?.join(', ')}. `;
+    summary += `Actualmente usa los siguientes canales online: ${data.q9_presence?.join(', ')}. `;
     summary += `Califica su presencia digital con un ${data.q10_rating} de 10. `;
-    summary += `Sus mayores desafíos en marketing son: ${data.q10_challenges.join(', ')}. `;
+    summary += `Sus mayores desafíos en marketing son: ${data.q10_challenges?.join(', ')}. `;
     if (data.q11_training === "Sí") {
         summary += `Está interesado en capacitar a otros profesionales sobre: ${data.q12_details}.`;
     }
@@ -71,13 +71,19 @@ function summarizeSurveyData(data: SurveyFormData): string {
 export async function handleSurveyAndRecommend(
   data: SurveyFormData
 ): Promise<{ recommendation?: ServiceRecommendationOutput; error?: string }> {
+  console.log('Paso 1: Iniciando el proceso de encuesta y recomendación.');
+
   const validatedData = surveySchema.safeParse(data);
   if (!validatedData.success) {
-    console.error("Validation failed", validatedData.error.flatten());
-    return { error: "Los datos del formulario son inválidos." };
+    console.error("Error de validación:", validatedData.error.flatten());
+    return { error: "Los datos del formulario son inválidos. Revisa la consola para más detalles." };
   }
+  
+  console.log('Paso 2: Los datos del formulario han sido validados con éxito.');
 
   const supabase = createClient();
+  console.log('Paso 3: Intentando guardar los datos en Supabase...');
+  
   const { error: dbError } = await supabase
     .from('survey_responses')
     .insert([
@@ -85,14 +91,19 @@ export async function handleSurveyAndRecommend(
     ]);
 
   if (dbError) {
-    console.error('Error al guardar en Supabase:', dbError);
-    return { error: 'No se pudieron guardar tus respuestas. Inténtalo de nuevo.' };
+    console.error('Error al guardar en Supabase:', dbError.message);
+    return { error: `No se pudieron guardar tus respuestas. Causa: ${dbError.message}` };
   }
   
+  console.log('Paso 4: ¡Éxito! Los datos se guardaron correctamente en Supabase.');
+  
   const summary = summarizeSurveyData(validatedData.data);
+  console.log('Paso 5: Resumen generado para la IA:', summary);
 
   try {
+    console.log('Paso 6: Enviando el resumen al servicio de recomendación de IA...');
     const result = await recommendServices({ needs: summary });
+    console.log('Paso 7: ¡Recomendación de IA recibida con éxito!');
     return { recommendation: result };
   } catch (error) {
     console.error('La recomendación de servicio de IA falló:', error);
