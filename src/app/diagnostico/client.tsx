@@ -18,7 +18,7 @@ const SuccessMessage = () => (
         transition={{ duration: 0.7 }}
         className="bg-card border border-border/50 p-8 rounded-lg shadow-2xl text-center space-y-6"
     >
-        <CheckCircle className="mx-auto h-16 w-16 text-green-500 mb-4" />
+        <CheckCircle className="mx-auto h-16 w-16 text-primary mb-4" />
         <h2 className="text-3xl font-bold font-headline text-primary">¡Diagnóstico Enviado con Éxito!</h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
             Hemos recibido tus respuestas de forma segura. Nuestro equipo de expertos las revisará detenidamente y se pondrá en contacto contigo en breve para discutir los siguientes pasos.
