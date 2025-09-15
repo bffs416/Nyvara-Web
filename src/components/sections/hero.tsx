@@ -58,7 +58,7 @@ export default function Hero() {
         <div className="max-w-4xl mx-auto">
           
           <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 1, delay: 0.2 }} className="mb-6 flex justify-center">
-            <NyvaraLogo className="w-80 h-16 md:h-20 md:w-96" />
+            <NyvaraLogo className="w-96 h-24 md:h-32 md:w-[32rem]" />
           </motion.div>
           
           <motion.p 

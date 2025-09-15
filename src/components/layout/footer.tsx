@@ -120,7 +120,7 @@ const Footer = () => {
           viewport={{ once: true }}
           className="flex justify-center mt-20"
         >
-          <NyvaraLogo className="h-12 w-56" />
+          <NyvaraLogo className="h-24 w-80" />
         </motion.div>
 
         <motion.div
