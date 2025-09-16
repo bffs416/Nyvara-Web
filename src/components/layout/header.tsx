@@ -61,10 +61,9 @@ const Header = () => {
         } else {
             router.push(href);
         }
-    } else if (href === '/diagnostico' && pathname === '/diagnostico') {
-        router.push('/diagnostico', { scroll: false });
-        // Optional: Force a state reset if router.push isn't enough
-        // This can be handled inside the DiagnosticoClient component
+    } else if (href === '/diagnostico' && pathname.startsWith('/diagnostico')) {
+        // If we are already on a /diagnostico page (with or without params),
+        // force a reload to reset the component's state.
         window.location.href = '/diagnostico';
     } else {
         router.push(href);
