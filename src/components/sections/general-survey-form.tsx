@@ -15,7 +15,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { INTERESTED_SERVICES_OPTIONS } from "@/lib/constants";
 import { useToast } from "@/hooks/use-toast";
 import { SAMPLE_GENERAL_SURVEY_DATA } from "@/lib/sample-data";
-import { useRouter } from "next/navigation";
 
 interface GeneralSurveyFormProps {
   onSubmit: (data: GeneralSurveyFormData) => void;
@@ -23,7 +22,6 @@ interface GeneralSurveyFormProps {
 
 export default function GeneralSurveyForm({ onSubmit }: GeneralSurveyFormProps) {
   const { toast } = useToast();
-  const router = useRouter();
   
   const form = useForm<GeneralSurveyFormData>({
     resolver: zodResolver(generalSurveySchema),
@@ -53,24 +51,13 @@ export default function GeneralSurveyForm({ onSubmit }: GeneralSurveyFormProps) 
         description: "Se han cargado los datos de muestra para la encuesta general.",
       });
     }
-    if (watchedName === "cotizar") {
-        router.push('/cotizador');
-    }
-  }, [watchedName, form, toast, router]);
-
-  function handleFormSubmit(data: GeneralSurveyFormData) {
-    if (data.name === 'cotizar') {
-      router.push('/cotizador');
-      return;
-    }
-    onSubmit(data);
-  }
+  }, [watchedName, form, toast]);
 
   return (
       <Card className="shadow-2xl relative">
         <CardContent className="p-8">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleFormSubmit)} className="space-y-8">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <div>
                     <h2 className="font-headline text-3xl text-primary mb-6">Diagnóstico General</h2>
                     

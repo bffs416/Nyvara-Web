@@ -19,6 +19,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Q4_OPTIONS, Q5_OPTIONS, Q7_OPTIONS, Q8_OPTIONS, Q9_OPTIONS, Q10_CHALLENGES_OPTIONS, Q11_OPTIONS } from "@/lib/constants";
 import { PlusCircle, Trash2 } from "lucide-react";
 import { SAMPLE_SURVEY_DATA } from "@/lib/sample-data";
+import { useRouter } from "next/navigation";
 
 
 const TOTAL_STEPS = 14;
@@ -31,6 +32,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [showJumpButton, setShowJumpButton] = useState(false);
   const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm<SurveyFormData>({
     resolver: zodResolver(surveySchema),
@@ -66,10 +68,12 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
         title: "¡Formulario Autocompletado!",
         description: "Se han cargado los datos de muestra.",
       });
+    } else if (watchedName === "cotizar") {
+        router.push('/cotizador');
     } else {
         setShowJumpButton(false);
     }
-  }, [watchedName, form, toast]);
+  }, [watchedName, form, toast, router]);
 
 
   const handleNext = async () => {
