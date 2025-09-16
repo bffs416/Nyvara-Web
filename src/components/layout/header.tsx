@@ -51,16 +51,20 @@ const Header = () => {
   const handleNavClick = (href: string) => {
     closeMobileMenu();
     if (href.startsWith('/#')) {
+        // This is a hash link
         if (pathname === '/') {
+            // If we are on the home page, scroll smoothly
             const id = href.substring(2);
             const element = document.getElementById(id);
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth' });
             }
         } else {
+            // If we are on another page, navigate to home and let the page handle the scroll
             router.push(href);
         }
     } else {
+        // This is a direct page link
         router.push(href);
     }
   };
