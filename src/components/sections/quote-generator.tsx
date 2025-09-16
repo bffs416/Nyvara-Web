@@ -12,6 +12,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/componen
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { PlusCircle, Trash2, Copy } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { siteConfig } from '@/lib/config';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const quoteItemSchema = z.object({
   description: z.string().min(1, 'La descripción es requerida.'),
@@ -20,9 +22,20 @@ const quoteItemSchema = z.object({
 });
 
 const quoteFormSchema = z.object({
+  // Emisor
+  issuerName: z.string().min(1, 'Tu nombre o razón social es requerido.'),
+  issuerNit: z.string().min(1, 'Tu NIT o CC es requerido.'),
+  issuerAddress: z.string().optional(),
+  // Cliente
   clientName: z.string().min(1, 'El nombre del cliente es requerido.'),
+  clientNit: z.string().min(1, 'El NIT o CC del cliente es requerido.'),
+  // Cotización
+  quoteNumber: z.string().min(1, 'El número de cotización es requerido.'),
   projectName: z.string().min(1, 'El nombre del proyecto es requerido.'),
   items: z.array(quoteItemSchema).min(1, 'Debes agregar al menos un ítem.'),
+  // Condiciones
+  ivaPercentage: z.number().min(0),
+  paymentConditions: z.string().optional(),
   notes: z.string().optional(),
 });
 
@@ -35,10 +48,17 @@ export default function QuoteGenerator() {
   const form = useForm<QuoteFormData>({
     resolver: zodResolver(quoteFormSchema),
     defaultValues: {
+      issuerName: 'Nyvara Solutions Hub',
+      issuerNit: '123.456.789-0',
+      issuerAddress: 'Bogotá, Colombia',
       clientName: '',
+      clientNit: '',
+      quoteNumber: `COT-${new Date().getFullYear()}-001`,
       projectName: '',
       items: [{ description: '', quantity: 1, price: 0 }],
-      notes: '',
+      ivaPercentage: 0,
+      paymentConditions: '50% para iniciar el proyecto, 50% contra entrega final.',
+      notes: 'Esta cotización no incluye costos de licenciamiento de software de terceros, a menos que se especifique lo contrario. Cualquier cambio solicitado sobre el alcance definido en esta propuesta estará sujeto a una nueva cotización.',
     },
   });
 
@@ -48,42 +68,84 @@ export default function QuoteGenerator() {
   });
 
   const watchedItems = form.watch('items');
-  const total = watchedItems.reduce((acc, item) => acc + (item.quantity || 0) * (item.price || 0), 0);
+  const watchedIva = form.watch('ivaPercentage');
+  const subtotal = watchedItems.reduce((acc, item) => acc + (item.quantity || 0) * (item.price || 0), 0);
+  const ivaAmount = subtotal * (watchedIva / 100);
+  const total = subtotal + ivaAmount;
 
   const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(value);
+    return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(value);
   };
 
   const onSubmit = (data: QuoteFormData) => {
-    let summaryText = `COTIZACIÓN\n`;
-    summaryText += `========================================\n\n`;
-    summaryText += `Cliente: ${data.clientName}\n`;
-    summaryText += `Proyecto: ${data.projectName}\n`;
-    summaryText += `Fecha: ${new Date().toLocaleDateString('es-CO')}\n\n`;
-    summaryText += `--- ÍTEMS ---\n`;
+    const issueDate = new Date();
+    const validityDate = new Date();
+    validityDate.setDate(issueDate.getDate() + 15);
 
+    let summaryText = `**************************************************\n`;
+    summaryText += `** PROPUESTA COMERCIAL **\n`;
+    summaryText += `**************************************************\n\n`;
+
+    summaryText += `DE:\n`;
+    summaryText += `  - ${data.issuerName}\n`;
+    summaryText += `  - NIT/CC: ${data.issuerNit}\n`;
+    summaryText += `  - Dirección: ${data.issuerAddress}\n`;
+    summaryText += `  - Email: ${siteConfig.contact.email}\n`;
+    summaryText += `  - Teléfono: +${siteConfig.contact.phone}\n\n`;
+
+    summaryText += `PARA:\n`;
+    summaryText += `  - ${data.clientName}\n`;
+    summaryText += `  - NIT/CC: ${data.clientNit}\n\n`;
+    
+    summaryText += `--------------------------------------------------\n`;
+    summaryText += `DETALLES DE LA PROPUESTA\n`;
+    summaryText += `--------------------------------------------------\n`;
+    summaryText += `  - Propuesta N°: ${data.quoteNumber}\n`;
+    summaryText += `  - Proyecto: ${data.projectName}\n`;
+    summaryText += `  - Fecha de expedición: ${issueDate.toLocaleDateString('es-CO')}\n`;
+    summaryText += `  - Validez de la oferta: ${validityDate.toLocaleDateString('es-CO')} (15 días)\n\n`;
+
+    summaryText += `--------------------------------------------------\n`;
+    summaryText += `DESCRIPCIÓN DE SERVICIOS / PRODUCTOS\n`;
+    summaryText += `--------------------------------------------------\n`;
     data.items.forEach((item, index) => {
-      summaryText += `\n${index + 1}. ${item.description}\n`;
-      summaryText += `   Cantidad: ${item.quantity}\n`;
-      summaryText += `   Precio Unitario: ${formatCurrency(item.price)}\n`;
-      summaryText += `   Subtotal: ${formatCurrency(item.quantity * item.price)}\n`;
+      summaryText += `\nÍTEM ${index + 1}: ${item.description}\n`;
+      summaryText += `  - Cantidad: ${item.quantity}\n`;
+      summaryText += `  - Precio Unitario: ${formatCurrency(item.price)}\n`;
+      summaryText += `  - Subtotal Ítem: ${formatCurrency(item.quantity * item.price)}\n`;
     });
+    summaryText += `\n--------------------------------------------------\n\n`;
 
-    summaryText += `\n----------------------------------------\n`;
-    summaryText += `TOTAL: ${formatCurrency(total)}\n`;
-    summaryText += `----------------------------------------\n`;
+    summaryText += `--------------------------------------------------\n`;
+    summaryText += `RESUMEN DE LA INVERSIÓN\n`;
+    summaryText += `--------------------------------------------------\n`;
+    summaryText += `  - Subtotal: ${formatCurrency(subtotal)}\n`;
+    summaryText += `  - IVA (${data.ivaPercentage}%): ${formatCurrency(ivaAmount)}\n`;
+    summaryText += `  ------------------------------------------------\n`;
+    summaryText += `  - INVERSIÓN TOTAL: ${formatCurrency(total)}\n`;
+    summaryText += `--------------------------------------------------\n\n`;
+
+    if (data.paymentConditions) {
+      summaryText += `CONDICIONES DE PAGO:\n`;
+      summaryText += `${data.paymentConditions}\n\n`;
+    }
 
     if (data.notes) {
-      summaryText += `\n--- NOTAS ADICIONALES ---\n`;
-      summaryText += `${data.notes}\n`;
+      summaryText += `NOTAS Y CLÁUSULAS ADICIONALES:\n`;
+      summaryText += `${data.notes}\n\n`;
     }
-    
-    summaryText += `\nGracias por su interés.`;
+
+    summaryText += `PRÓXIMOS PASOS:\n`;
+    summaryText += `Para aprobar esta propuesta y dar inicio al proyecto, por favor, responde a este comunicado con tu confirmación.\n\n`;
+
+    summaryText += `**************************************************\n`;
+    summaryText += `Gracias por la oportunidad de presentar esta propuesta.\nAtentamente,\n\n${data.issuerName}\n`;
+    summaryText += `**************************************************\n`;
 
     setSummary(summaryText);
     toast({
-        title: "Resumen Generado",
-        description: "El resumen de la cotización está listo para ser copiado.",
+        title: "Propuesta Generada",
+        description: "El texto de la propuesta está listo para ser copiado.",
     })
   };
 
@@ -91,7 +153,7 @@ export default function QuoteGenerator() {
     navigator.clipboard.writeText(summary);
     toast({
       title: '¡Copiado!',
-      description: 'La cotización ha sido copiada al portapapeles.',
+      description: 'La propuesta ha sido copiada al portapapeles.',
     });
   };
 
@@ -99,20 +161,48 @@ export default function QuoteGenerator() {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <Card>
         <CardHeader>
-          <CardTitle>Detalles de la Cotización</CardTitle>
+          <CardTitle>Crear Propuesta Comercial</CardTitle>
         </CardHeader>
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <FormField name="clientName" control={form.control} render={({ field }) => (
-                <FormItem><FormLabel>Nombre del Cliente</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
-              )} />
-              <FormField name="projectName" control={form.control} render={({ field }) => (
-                <FormItem><FormLabel>Nombre del Proyecto</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
-              )} />
+              
+              <div className="space-y-2 p-4 border rounded-lg">
+                <h3 className="font-semibold text-primary">Tus Datos (Emisor)</h3>
+                <FormField name="issuerName" control={form.control} render={({ field }) => (
+                  <FormItem><FormLabel>Nombre / Razón Social</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                )} />
+                <FormField name="issuerNit" control={form.control} render={({ field }) => (
+                  <FormItem><FormLabel>NIT / CC</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                )} />
+                <FormField name="issuerAddress" control={form.control} render={({ field }) => (
+                  <FormItem><FormLabel>Dirección (Opcional)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                )} />
+              </div>
+              
+              <div className="space-y-2 p-4 border rounded-lg">
+                <h3 className="font-semibold text-primary">Datos del Cliente</h3>
+                <FormField name="clientName" control={form.control} render={({ field }) => (
+                  <FormItem><FormLabel>Nombre del Cliente</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                )} />
+                <FormField name="clientNit" control={form.control} render={({ field }) => (
+                  <FormItem><FormLabel>NIT / CC del Cliente</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                )} />
+              </div>
+
+              <div className="space-y-2 p-4 border rounded-lg">
+                <h3 className="font-semibold text-primary">Detalles de la Propuesta</h3>
+                <FormField name="quoteNumber" control={form.control} render={({ field }) => (
+                  <FormItem><FormLabel>Número de Cotización</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                )} />
+                <FormField name="projectName" control={form.control} render={({ field }) => (
+                  <FormItem><FormLabel>Nombre del Proyecto</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                )} />
+              </div>
+
 
               <div>
-                <FormLabel>Ítems de la Cotización</FormLabel>
+                <FormLabel className='text-primary font-semibold'>Ítems de la Cotización</FormLabel>
                 <div className="space-y-4 mt-2">
                   {fields.map((field, index) => (
                     <Card key={field.id} className="p-4 bg-secondary/50 relative">
@@ -124,7 +214,7 @@ export default function QuoteGenerator() {
                           <FormItem><FormLabel>Cantidad</FormLabel><FormControl><Input type="number" {...field} onChange={e => field.onChange(parseInt(e.target.value, 10) || 0)} /></FormControl><FormMessage /></FormItem>
                         )} />
                         <FormField control={form.control} name={`items.${index}.price`} render={({ field }) => (
-                          <FormItem className="md:col-span-2"><FormLabel>Precio Unitario (COP)</FormLabel><FormControl><Input type="number" {...field} onChange={e => field.onChange(parseFloat(e.target.value) || 0)} /></FormControl><FormMessage /></FormItem>
+                          <FormItem className="md:col-span-2"><FormLabel>Precio Unitario (COP)</FormLabel><FormControl><Input type="number" step="1000" {...field} onChange={e => field.onChange(parseFloat(e.target.value) || 0)} /></FormControl><FormMessage /></FormItem>
                         )} />
                       </div>
                       <Button type="button" variant="ghost" size="icon" className="absolute top-2 right-2" onClick={() => remove(index)} disabled={fields.length <= 1}>
@@ -138,11 +228,39 @@ export default function QuoteGenerator() {
                 </Button>
               </div>
 
-              <FormField name="notes" control={form.control} render={({ field }) => (
-                <FormItem><FormLabel>Notas Adicionales</FormLabel><FormControl><Textarea {...field} placeholder="Ej: Condiciones de pago, tiempo de entrega, etc." /></FormControl><FormMessage /></FormItem>
-              )} />
+               <div className="space-y-2 p-4 border rounded-lg">
+                <h3 className="font-semibold text-primary">Condiciones y Notas</h3>
+                <FormField
+                  control={form.control}
+                  name="ivaPercentage"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Porcentaje de IVA</FormLabel>
+                      <Select onValueChange={(value) => field.onChange(Number(value))} defaultValue={String(field.value)}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Selecciona el IVA" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="0">0% (No aplica)</SelectItem>
+                          <SelectItem value="19">19%</SelectItem>
+                          <SelectItem value="5">5%</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField name="paymentConditions" control={form.control} render={({ field }) => (
+                  <FormItem><FormLabel>Condiciones de Pago</FormLabel><FormControl><Textarea {...field} placeholder="Ej: 50% para iniciar, 50% contra entrega." rows={2} /></FormControl><FormMessage /></FormItem>
+                )} />
+                <FormField name="notes" control={form.control} render={({ field }) => (
+                  <FormItem><FormLabel>Notas y Cláusulas Adicionales</FormLabel><FormControl><Textarea {...field} placeholder="Ej: Tiempos de entrega, garantías, etc." rows={3} /></FormControl><FormMessage /></FormItem>
+                )} />
+              </div>
               
-              <Button type="submit" className="w-full">Generar Resumen</Button>
+              <Button type="submit" className="w-full">Generar Propuesta</Button>
             </form>
           </Form>
         </CardContent>
@@ -161,19 +279,27 @@ export default function QuoteGenerator() {
           {summary ? (
             <Textarea
               readOnly
-              className="min-h-[500px] bg-secondary/30 text-sm font-mono whitespace-pre-wrap"
+              className="min-h-[500px] bg-secondary/30 text-xs font-mono whitespace-pre-wrap"
               value={summary}
             />
           ) : (
             <div className="flex items-center justify-center min-h-[500px] bg-secondary/30 rounded-md">
-              <p className="text-muted-foreground">El resumen de la cotización aparecerá aquí.</p>
+              <p className="text-muted-foreground">El resumen de la propuesta aparecerá aquí.</p>
             </div>
           )}
         </CardContent>
-        <CardFooter className="justify-end">
-            <div className='text-right'>
+        <CardFooter className="grid grid-cols-3 gap-4 text-right">
+            <div className='col-start-2'>
+                <p className='text-muted-foreground'>Subtotal</p>
+                <p className='text-lg font-bold'>{formatCurrency(subtotal)}</p>
+            </div>
+            <div>
+                <p className='text-muted-foreground'>IVA ({watchedIva}%)</p>
+                <p className='text-lg font-bold'>{formatCurrency(ivaAmount)}</p>
+            </div>
+             <div className='col-span-3 text-right border-t pt-4 mt-4'>
                 <p className='text-muted-foreground'>Total</p>
-                <p className='text-2xl font-bold text-primary'>{formatCurrency(total)}</p>
+                <p className='text-3xl font-bold text-primary'>{formatCurrency(total)}</p>
             </div>
         </CardFooter>
       </Card>
