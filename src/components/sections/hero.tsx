@@ -24,13 +24,6 @@ const CallToAction = () => {
 
 export default function Hero() {
 
-  const handleGetStarted = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   const scrollToServices = () => {
     const element = document.getElementById('services');
     if (element) {
@@ -82,9 +75,11 @@ export default function Hero() {
           </motion.p>
           
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.8 }} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button onClick={handleGetStarted} size="lg" className="font-bold px-8 py-4 text-lg transition-all duration-300 hover:scale-105">
-              Comenzar Proyecto
-              <ArrowRight size={20} />
+            <Button asChild size="lg" className="font-bold px-8 py-4 text-lg transition-all duration-300 hover:scale-105">
+              <Link href="/diagnostico">
+                Haz tu diagnóstico
+                <ArrowRight size={20} />
+              </Link>
             </Button>
             <Button onClick={scrollToServices} variant="outline" size="lg" className="font-semibold px-8 py-4 text-lg transition-all duration-300 hover:scale-105">
               <Sparkles size={20} />
