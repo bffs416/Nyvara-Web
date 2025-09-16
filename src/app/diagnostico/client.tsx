@@ -109,6 +109,10 @@ export default function DiagnosticoClient() {
     if (sector === 'health' || sector === 'general') {
       setSelectedSector(sector);
       setFormStep('form');
+    } else {
+      // If no valid sector, reset to selection
+      setFormStep('sector');
+      setSelectedSector(null);
     }
   }, [searchParams]);
 
@@ -116,7 +120,6 @@ export default function DiagnosticoClient() {
   const handleSectorSelect = (sector: 'health' | 'general') => {
     setSelectedSector(sector);
     setFormStep('form');
-    // Update URL without reloading the page
     router.push(`/diagnostico?sector=${sector}`, { scroll: false });
   };
   
@@ -124,7 +127,6 @@ export default function DiagnosticoClient() {
     setIsLoading(true);
     setError(null);
 
-    // Secret command is now handled in GeneralSurveyForm
     setSurveyData(data);
     
     let result;
@@ -188,11 +190,12 @@ export default function DiagnosticoClient() {
   };
   
   const resetFlow = () => {
-    setFormStep('sector');
+    setIsLoading(false);
+    setError(null);
     setSurveyData(null);
     setSummaryText('');
-    setError(null);
     setSelectedSector(null);
+    setFormStep('sector');
     router.push(`/diagnostico`, { scroll: false });
   }
 

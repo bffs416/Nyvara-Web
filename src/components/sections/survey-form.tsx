@@ -30,7 +30,6 @@ interface SurveyFormProps {
 
 export default function SurveyForm({ onSubmit }: SurveyFormProps) {
   const [currentStep, setCurrentStep] = useState(0);
-  const [showJumpButton, setShowJumpButton] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
 
@@ -63,15 +62,12 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
   useEffect(() => {
     if (watchedName === "0520") {
       form.reset(SAMPLE_SURVEY_DATA);
-      setShowJumpButton(true);
       toast({
         title: "¡Formulario Autocompletado!",
         description: "Se han cargado los datos de muestra.",
       });
     } else if (watchedName === "cotizar") {
         router.push('/cotizador');
-    } else {
-        setShowJumpButton(false);
     }
   }, [watchedName, form, toast, router]);
 
@@ -131,11 +127,6 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                   <FormField name="q1_experience" control={form.control} render={({ field }) => <FormItem><FormLabel>Años de experiencia en medicina estética</FormLabel><FormControl><Input type="number" {...field} value={field.value ?? 0} onChange={e => field.onChange(e.target.value === '' ? null : +e.target.value)} /></FormControl><FormMessage /></FormItem>} />
                   <FormField name="q1_role" control={form.control} render={({ field }) => (<FormItem><FormLabel>¿Cuál es tu cargo o rol principal?</FormLabel><FormControl><Input {...field} placeholder="Ej: Director Médico, Dermatólogo, etc." /></FormControl><FormMessage /></FormItem>)} />
                 </div>
-                {showJumpButton && (
-                  <Button onClick={() => setCurrentStep(13)} className="mt-4">
-                    Saltar al paso 14
-                  </Button>
-                )}
               </div>
 
               <div className={currentStep === 1 ? 'block' : 'hidden'}>
