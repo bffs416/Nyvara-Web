@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -18,7 +19,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Q4_OPTIONS, Q5_OPTIONS, Q7_OPTIONS, Q8_OPTIONS, Q9_OPTIONS, Q10_CHALLENGES_OPTIONS, Q11_OPTIONS } from "@/lib/constants";
 import { COUNTRIES } from "@/lib/countries";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { ChevronsUpDown, Check, PlusCircle, Trash2, Bot } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SAMPLE_SURVEY_DATA } from "@/lib/sample-data";
@@ -155,33 +156,35 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                           <PopoverContent className="w-[300px] p-0">
                             <Command>
                               <CommandInput placeholder="Buscar país..." />
-                              <CommandEmpty>No se encontró el país.</CommandEmpty>
-                              <CommandGroup className="max-h-64 overflow-y-auto">
-                                {COUNTRIES.map((country) => (
-                                  <CommandItem
-                                    value={country.name}
-                                    key={country.code}
-                                    onSelect={() => {
-                                      form.setValue("q1_country", country.name);
-                                      const phoneValue = form.getValues("q1_phone");
-                                      if (!phoneValue || !phoneValue.startsWith("+")) {
-                                        form.setValue("q1_phone", country.dial_code);
-                                      }
-                                      setCountryPopoverOpen(false);
-                                    }}
-                                  >
-                                    <Check
-                                      className={cn(
-                                        "mr-2 h-4 w-4",
-                                        country.name === field.value
-                                          ? "opacity-100"
-                                          : "opacity-0"
-                                      )}
-                                    />
-                                    {country.name} ({country.dial_code})
-                                  </CommandItem>
-                                ))}
-                              </CommandGroup>
+                              <CommandList>
+                                <CommandEmpty>No se encontró el país.</CommandEmpty>
+                                <CommandGroup>
+                                  {COUNTRIES.map((country) => (
+                                    <CommandItem
+                                      value={country.name}
+                                      key={country.code}
+                                      onSelect={(currentValue) => {
+                                        form.setValue("q1_country", currentValue === field.value ? "" : country.name);
+                                        const phoneValue = form.getValues("q1_phone");
+                                        if (!phoneValue || !phoneValue.startsWith("+")) {
+                                          form.setValue("q1_phone", country.dial_code);
+                                        }
+                                        setCountryPopoverOpen(false);
+                                      }}
+                                    >
+                                      <Check
+                                        className={cn(
+                                          "mr-2 h-4 w-4",
+                                          country.name === field.value
+                                            ? "opacity-100"
+                                            : "opacity-0"
+                                        )}
+                                      />
+                                      {country.name} ({country.dial_code})
+                                    </CommandItem>
+                                  ))}
+                                </CommandGroup>
+                              </CommandList>
                             </Command>
                           </PopoverContent>
                         </Popover>
@@ -343,3 +346,5 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
     </>
   );
 }
+
+    
