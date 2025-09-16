@@ -1,4 +1,4 @@
-import { SurveyFormData } from "./types";
+import { SurveyFormData, GeneralSurveyFormData } from "./types";
 
 export const SAMPLE_SURVEY_DATA: SurveyFormData = {
   q1_name: "Clínica Estética Renacer",
@@ -34,4 +34,24 @@ export const SAMPLE_SURVEY_DATA: SurveyFormData = {
     { name: "Clínica Piel Joven" },
     { name: "Dr. Estética Avanzada" },
   ],
+};
+
+
+export const SAMPLE_GENERAL_SURVEY_DATA: GeneralSurveyFormData = {
+  name: "Tech Solutions Inc.",
+  company: "Tech Solutions Inc.",
+  role: "Gerente de Marketing",
+  phone: "+15551234567",
+  email: "marketing@techsolutions.com",
+  business_description: "Somos una empresa B2B que ofrece soluciones de software como servicio (SaaS) para la gestión de proyectos y la colaboración en equipo.",
+  main_services: "Nuestra plataforma principal 'ProjectFlow', un software de gestión de proyectos todo en uno. También ofrecemos consultoría para optimizar flujos de trabajo.",
+  target_audience: "Pequeñas y medianas empresas (PYMES) en el sector tecnológico y agencias creativas que necesitan mejorar su eficiencia operativa.",
+  goals: "Aumentar nuestra base de usuarios en un 30% en el próximo año, mejorar la tasa de retención de clientes y posicionarnos como líderes en el mercado de software de gestión.",
+  challenges: "La competencia es alta y nos cuesta diferenciarnos. Generar leads de alta calidad de forma constante es nuestro mayor desafío actual.",
+  interested_services: [
+    "Marketing Digital (SEO, Redes Sociales, Publicidad)",
+    "Desarrollo de Software a Medida o Soluciones Web",
+    "Estrategia de Marca y Posicionamiento"
+  ],
+  additional_info: "Estamos explorando la posibilidad de organizar un evento de lanzamiento para una nueva funcionalidad importante de nuestro software y nos gustaría saber más sobre cómo podrían ayudarnos.",
 };

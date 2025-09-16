@@ -1,6 +1,7 @@
 
 "use client";
 
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { generalSurveySchema } from "@/lib/schema";
@@ -12,12 +13,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Checkbox } from "@/components/ui/checkbox";
 import { INTERESTED_SERVICES_OPTIONS } from "@/lib/constants";
+import { useToast } from "@/hooks/use-toast";
+import { SAMPLE_GENERAL_SURVEY_DATA } from "@/lib/sample-data";
 
 interface GeneralSurveyFormProps {
   onSubmit: (data: GeneralSurveyFormData) => void;
 }
 
 export default function GeneralSurveyForm({ onSubmit }: GeneralSurveyFormProps) {
+  const { toast } = useToast();
   
   const form = useForm<GeneralSurveyFormData>({
     resolver: zodResolver(generalSurveySchema),
@@ -36,6 +40,19 @@ export default function GeneralSurveyForm({ onSubmit }: GeneralSurveyFormProps) 
       additional_info: "",
     },
   });
+
+  const watchedName = form.watch("name");
+
+  useEffect(() => {
+    if (watchedName === "0520") {
+      form.reset(SAMPLE_GENERAL_SURVEY_DATA);
+      toast({
+        title: "¡Formulario Autocompletado!",
+        description: "Se han cargado los datos de muestra para la encuesta general.",
+      });
+    }
+  }, [watchedName, form, toast]);
+
 
   return (
       <Card className="shadow-2xl relative">
