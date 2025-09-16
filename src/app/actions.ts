@@ -1,3 +1,4 @@
+
 'use server';
 
 import { surveySchema, generalSurveySchema } from '@/lib/schema';
@@ -189,22 +190,62 @@ export async function handleGeneralSurveySubmission(
     return { success: false, error: "Los datos del formulario son inválidos." };
   }
   
-  console.log('Paso 2: Datos generales validados.');
+  console.log('Paso 2: Datos generales validados. Mapeando a la tabla principal.');
+  
+  const { 
+    name, company, role, phone, email, 
+    business_description, main_services, target_audience, 
+    goals, challenges, interested_services, additional_info 
+  } = validatedData.data;
+
+  // Mapear datos del formulario general a la estructura de la encuesta de salud
+  const mappedData: Omit<SurveyFormData, 'competitors'> & { q1_email?: string; competitors?: string[] } = {
+    q1_name: `${name} (${company})`,
+    q1_location: 'N/A',
+    q1_country: 'N/A', 
+    q1_phone: phone,
+    q1_email: email,
+    q1_role: role,
+    q2_services: business_description,
+    q2_unique: `Servicios principales: ${main_services}`,
+    q3_persona: `Público objetivo: ${target_audience}`,
+    q6_why: `Metas principales: ${goals}`,
+    q7_why: `Desafíos principales: ${challenges}`,
+    q9_presence: interested_services,
+    q13_colors: "No aplica (Formulario General)",
+    q15_final: `Información adicional: ${additional_info || 'Ninguna'}`,
+    q1_experience: undefined,
+    q4_perception: undefined,
+    q4_other: undefined,
+    q5_emotions: undefined,
+    q5_other: undefined,
+    q7_differentiation: undefined,
+    q7_other: undefined,
+    q8_value: undefined,
+    q8_other: undefined,
+    q9_other: undefined,
+    q10_rating: undefined,
+    q10_challenges: undefined,
+    q10_other: undefined,
+    q11_training: undefined,
+    q12_details: undefined,
+    q14_hobby: undefined
+  };
 
   try {
     const supabase = createClient();
-    console.log('Paso 3: Intentando guardar los datos generales...');
+    console.log('Paso 3: Intentando guardar los datos generales mapeados...');
     
     const { error: dbError } = await supabase
-      .from('general_survey_responses')
-      .insert([validatedData.data]);
+      .from('survey_responses')
+      .insert([mappedData]);
 
     if (dbError) {
-      console.error('Error al guardar en Supabase (General):', dbError.message);
+      console.error('Error al guardar datos generales en Supabase:', dbError.message);
       return { success: false, error: `No se pudieron guardar tus respuestas. Causa: ${dbError.message}` };
     }
     
-    console.log('Paso 4: ¡Éxito! Datos generales guardados en Supabase.');
+    console.log('Paso 4: ¡Éxito! Datos generales guardados en la tabla principal.');
     return { success: true };
 
   } catch (error: any) {
