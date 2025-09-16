@@ -3,9 +3,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import SurveyForm from '@/components/sections/survey-form';
-import { handleSurveySubmission, summarizeSurveyDataForDownload } from '@/app/client-actions';
-import type { SurveyFormData } from '@/lib/types';
-import { Loader2, ServerCrash, Download, Send, CheckCircle } from 'lucide-react';
+import GeneralSurveyForm from '@/components/sections/general-survey-form';
+import { handleSurveySubmission, summarizeSurveyDataForDownload, handleGeneralSurveySubmission, summarizeGeneralSurveyDataForDownload } from '@/app/client-actions';
+import type { SurveyFormData, GeneralSurveyFormData } from '@/lib/types';
+import { Loader2, ServerCrash, Download, Send, CheckCircle, HeartPulse, Building } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
@@ -36,20 +37,58 @@ const SuccessMessage = () => (
     </motion.div>
 );
 
+const SectorSelection = ({ onSelect }: { onSelect: (sector: 'health' | 'general') => void }) => (
+  <motion.div 
+    initial={{ opacity: 0, y: 20 }} 
+    animate={{ opacity: 1, y: 0 }} 
+    className="bg-card p-8 rounded-lg shadow-xl text-center"
+  >
+    <h2 className="text-2xl font-bold font-headline text-primary mb-4">Paso 1: Elige tu sector</h2>
+    <p className="text-muted-foreground mb-8">Para ofrecerte el diagnóstico más preciso, por favor, selecciona el área que mejor describe tu negocio.</p>
+    <div className="flex flex-col sm:flex-row gap-6 justify-center">
+      <motion.div whileHover={{ y: -5 }} className="w-full">
+        <Button onClick={() => onSelect('health')} size="lg" className="w-full h-auto py-6 flex flex-col items-center justify-center" variant="outline">
+          <HeartPulse className="mb-2 h-8 w-8" />
+          <span className="font-bold text-lg">Sector Salud</span>
+          <span className="font-normal text-sm text-muted-foreground">(Medicina Estética)</span>
+        </Button>
+      </motion.div>
+      <motion.div whileHover={{ y: -5 }} className="w-full">
+        <Button onClick={() => onSelect('general')} size="lg" className="w-full h-auto py-6 flex flex-col items-center justify-center" variant="outline">
+          <Building className="mb-2 h-8 w-8" />
+          <span className="font-bold text-lg">Otro Sector</span>
+          <span className="font-normal text-sm text-muted-foreground">(Empresas y Profesionales)</span>
+        </Button>
+      </motion.div>
+    </div>
+  </motion.div>
+);
 
 export default function DiagnosticoClient() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [formStep, setFormStep] = useState<'form' | 'summary' | 'sent'>('form');
-  const [surveyData, setSurveyData] = useState<SurveyFormData | null>(null);
+  const [formStep, setFormStep] = useState<'sector' | 'form' | 'summary' | 'sent'>('sector');
+  const [surveyData, setSurveyData] = useState<SurveyFormData | GeneralSurveyFormData | null>(null);
   const [summaryText, setSummaryText] = useState<string>('');
+  const [selectedSector, setSelectedSector] = useState<'health' | 'general' | null>(null);
   
-  const handleFormSubmit = async (data: SurveyFormData) => {
+  const handleSectorSelect = (sector: 'health' | 'general') => {
+    setSelectedSector(sector);
+    setFormStep('form');
+  };
+  
+  const handleFormSubmit = async (data: SurveyFormData | GeneralSurveyFormData) => {
     setIsLoading(true);
     setError(null);
     setSurveyData(data);
+    
+    let result;
+    if (selectedSector === 'health') {
+        result = await summarizeSurveyDataForDownload(data as SurveyFormData);
+    } else {
+        result = await summarizeGeneralSurveyDataForDownload(data as GeneralSurveyFormData);
+    }
 
-    const result = await summarizeSurveyDataForDownload(data);
     if (result.summary) {
         setSummaryText(result.summary);
         setFormStep('summary');
@@ -60,11 +99,18 @@ export default function DiagnosticoClient() {
   };
 
   const handleDownloadSummary = () => {
+    let fileName = 'resumen-diagnostico.txt';
+    if(surveyData && 'q1_name' in surveyData && surveyData.q1_name) {
+        fileName = `resumen-diagnostico-${surveyData.q1_name}.txt`;
+    } else if (surveyData && 'name' in surveyData && surveyData.name) {
+        fileName = `resumen-diagnostico-${surveyData.name}.txt`;
+    }
+
     const blob = new Blob([summaryText], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `resumen-diagnostico-${surveyData?.q1_name || 'cliente'}.txt`;
+    link.download = fileName;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -76,7 +122,13 @@ export default function DiagnosticoClient() {
     setIsLoading(true);
     setError(null);
     
-    const result = await handleSurveySubmission(surveyData);
+    let result;
+    if (selectedSector === 'health') {
+        result = await handleSurveySubmission(surveyData as SurveyFormData);
+    } else {
+        result = await handleGeneralSurveySubmission(surveyData as GeneralSurveyFormData);
+    }
+
     if (result.success) {
         setFormStep('sent');
     } else {
@@ -86,10 +138,17 @@ export default function DiagnosticoClient() {
   };
   
   const resetFlow = () => {
-    setFormStep('form');
+    setFormStep('sector');
     setSurveyData(null);
     setSummaryText('');
     setError(null);
+    setSelectedSector(null);
+  }
+
+  const getTitle = () => {
+      if (formStep === 'sent') return "Gracias por tu confianza.";
+      if (formStep === 'sector') return "Comencemos por conocer tu negocio.";
+      return "Completa este formulario para descubrir el potencial oculto de tu marca.";
   }
 
   return (
@@ -103,9 +162,7 @@ export default function DiagnosticoClient() {
         >
           <h1 className="text-5xl md:text-7xl font-bold mb-4 text-primary font-headline">Diagnóstico Estratégico</h1>
           <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto">
-            {formStep === 'sent' 
-              ? "Gracias por tu confianza." 
-              : "Completa este formulario para descubrir el potencial oculto de tu marca."}
+            {getTitle()}
           </p>
         </motion.section>
         
@@ -128,7 +185,10 @@ export default function DiagnosticoClient() {
 
         {!isLoading && !error && (
           <>
-            {formStep === 'form' && <SurveyForm onSubmit={handleFormSubmit} />}
+            {formStep === 'sector' && <SectorSelection onSelect={handleSectorSelect} />}
+            
+            {formStep === 'form' && selectedSector === 'health' && <SurveyForm onSubmit={handleFormSubmit as (data: SurveyFormData) => void} />}
+            {formStep === 'form' && selectedSector === 'general' && <GeneralSurveyForm onSubmit={handleFormSubmit as (data: GeneralSurveyFormData) => void} />}
 
             {formStep === 'summary' && (
               <motion.div 
@@ -136,7 +196,7 @@ export default function DiagnosticoClient() {
                 animate={{ opacity: 1, y: 0 }} 
                 className="bg-card p-8 rounded-lg shadow-xl text-center"
               >
-                <h2 className="text-2xl font-bold font-headline text-primary mb-4">Paso 2: Revisa y Guarda tu Resumen</h2>
+                <h2 className="text-2xl font-bold font-headline text-primary mb-4">Paso Final: Revisa y Guarda tu Resumen</h2>
                 <p className="text-muted-foreground mb-6">Hemos generado un resumen de tus respuestas. Descárgalo para tus archivos y luego envíalo para que nuestro equipo lo revise.</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button onClick={handleDownloadSummary} size="lg">
@@ -148,6 +208,7 @@ export default function DiagnosticoClient() {
                     Enviar Diagnóstico
                   </Button>
                 </div>
+                <Button variant="link" onClick={resetFlow} className="mt-4 text-muted-foreground">Volver al inicio</Button>
               </motion.div>
             )}
 

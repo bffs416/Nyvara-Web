@@ -43,7 +43,7 @@ export const surveySchema = z.object({
   // Section 10
   q10_rating: z.number().optional().default(5),
   q10_challenges: z.array(z.string()).max(3, "Selecciona como máximo 3 desafíos.").optional(),
-  q10_other: z.string().optional(),
+  q10_other: zstring().optional(),
   
   // Section 11
   q11_training: z.string().optional(),
@@ -58,4 +58,29 @@ export const surveySchema = z.object({
 
   // Competitors
   competitors: z.array(z.object({ name: z.string().optional() })).optional(),
+});
+
+
+export const generalSurveySchema = z.object({
+  // Contact Info
+  name: z.string().min(1, "El nombre es requerido."),
+  company: z.string().min(1, "El nombre de la empresa es requerido."),
+  role: z.string().min(1, "Tu cargo es requerido."),
+  phone: z.string().min(1, "El teléfono es requerido."),
+  email: z.string().email("Por favor, introduce un email válido."),
+
+  // About the business
+  business_description: z.string().min(10, "Por favor, describe tu negocio en al menos 10 caracteres."),
+  main_services: z.string().min(10, "Describe tus servicios o productos principales."),
+  target_audience: z.string().min(10, "Describe tu público objetivo."),
+
+  // Goals and Challenges
+  goals: z.string().min(10, "Describe tus principales objetivos."),
+  challenges: z.string().min(10, "Describe tus mayores desafíos."),
+
+  // Needs
+  interested_services: z.array(z.string()).min(1, "Selecciona al menos un servicio de interés."),
+
+  // Final thoughts
+  additional_info: z.string().optional(),
 });

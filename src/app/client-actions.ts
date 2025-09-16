@@ -12,7 +12,9 @@
 import { 
     handleContactSubmission,
     handleSurveySubmission,
-    summarizeSurveyDataForDownload
+    summarizeSurveyDataForDownload,
+    handleGeneralSurveySubmission,
+    summarizeGeneralSurveyDataForDownload
 } from './actions';
 
 // We need to re-export the server actions individually
@@ -21,5 +23,7 @@ import {
 export {
     handleContactSubmission,
     handleSurveySubmission,
-    summarizeSurveyDataForDownload
+    summarizeSurveyDataForDownload,
+    handleGeneralSurveySubmission,
+    summarizeGeneralSurveyDataForDownload
 };

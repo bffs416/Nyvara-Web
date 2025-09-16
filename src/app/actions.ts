@@ -1,7 +1,7 @@
 'use server';
 
-import { surveySchema } from '@/lib/schema';
-import { SurveyFormData } from '@/lib/types';
+import { surveySchema, generalSurveySchema } from '@/lib/schema';
+import { SurveyFormData, GeneralSurveyFormData } from '@/lib/types';
 import { createClient } from '@/lib/supabase/server';
 import { z } from 'zod';
 
@@ -39,8 +39,8 @@ export async function summarizeSurveyDataForDownload(data: SurveyFormData): Prom
         q11_training, q12_details, q13_colors, q14_hobby, q15_final, competitors
     } = validatedData.data;
 
-    let summary = `RESUMEN DE DIAGNÓSTICO ESTRATÉGICO\n`;
-    summary += `=====================================\n\n`;
+    let summary = `RESUMEN DE DIAGNÓSTICO ESTRATÉGICO - SECTOR SALUD\n`;
+    summary += `====================================================\n\n`;
     summary += `--- SECCIÓN 1: INFORMACIÓN BÁSICA ---\n`;
     summary += `Nombre: ${q1_name}\n`;
     summary += `Ubicación: ${q1_location}, ${q1_country}\n`;
@@ -88,11 +88,53 @@ export async function summarizeSurveyDataForDownload(data: SurveyFormData): Prom
     return { summary };
 }
 
+export async function summarizeGeneralSurveyDataForDownload(data: GeneralSurveyFormData): Promise<{ summary?: string; error?: string }> {
+    const validatedData = generalSurveySchema.safeParse(data);
+    if (!validatedData.success) {
+        return { error: "Los datos del formulario son inválidos." };
+    }
+
+    const {
+        name, company, role, phone, email,
+        business_description, main_services, target_audience,
+        goals, challenges, interested_services,
+        additional_info,
+    } = validatedData.data;
+
+    let summary = `RESUMEN DE DIAGNÓSTICO ESTRATÉGICO - GENERAL\n`;
+    summary += `=============================================\n\n`;
+    summary += `--- INFORMACIÓN DE CONTACTO ---\n`;
+    summary += `Nombre: ${name}\n`;
+    summary += `Empresa: ${company}\n`;
+    summary += `Rol: ${role}\n`;
+    summary += `Teléfono: ${phone}\n`;
+    summary += `Email: ${email}\n\n`;
+
+    summary += `--- SOBRE EL NEGOCIO ---\n`;
+    summary += `Descripción del Negocio: ${business_description}\n`;
+    summary += `Servicios/Productos Principales: ${main_services}\n`;
+    summary += `Público Objetivo: ${target_audience}\n\n`;
+    
+    summary += `--- OBJETIVOS Y DESAFÍOS ---\n`;
+    summary += `Principales Objetivos: ${goals}\n`;
+    summary += `Mayores Desafíos: ${challenges}\n\n`;
+
+    summary += `--- NECESIDADES ---\n`;
+    if (interested_services?.length) summary += `Servicios de Interés: ${interested_services.join(', ')}\n`;
+    
+    if (additional_info) {
+        summary += `\n--- INFORMACIÓN ADICIONAL ---\n`;
+        summary += `${additional_info}\n`;
+    }
+
+    return { summary };
+}
+
 
 export async function handleSurveySubmission(
   data: SurveyFormData
 ): Promise<{ success: boolean; error?: string }> {
-  console.log('Paso 1: Iniciando el guardado en Supabase.');
+  console.log('Paso 1: Iniciando el guardado en Supabase (Salud).');
   
   const validatedData = surveySchema.safeParse(data);
   if (!validatedData.success) {
@@ -102,7 +144,6 @@ export async function handleSurveySubmission(
   
   console.log('Paso 2: Datos validados.');
 
-  // Prepara los datos para la inserción, asegurando que los arrays vacíos se manejen correctamente.
   const { competitors, ...restOfData } = validatedData.data;
   const submissionData = {
     ...restOfData,
@@ -133,6 +174,41 @@ export async function handleSurveySubmission(
 
   } catch (error: any) {
     console.error('Error en handleSurveySubmission:', error);
+    return { success: false, error: 'Ocurrió un error inesperado en el servidor. ' + (error.message || '') };
+  }
+}
+
+export async function handleGeneralSurveySubmission(
+  data: GeneralSurveyFormData
+): Promise<{ success: boolean; error?: string }> {
+  console.log('Paso 1: Iniciando el guardado en Supabase (General).');
+  
+  const validatedData = generalSurveySchema.safeParse(data);
+  if (!validatedData.success) {
+    console.error("Error de validación (General):", validatedData.error.flatten());
+    return { success: false, error: "Los datos del formulario son inválidos." };
+  }
+  
+  console.log('Paso 2: Datos generales validados.');
+
+  try {
+    const supabase = createClient();
+    console.log('Paso 3: Intentando guardar los datos generales...');
+    
+    const { error: dbError } = await supabase
+      .from('general_survey_responses')
+      .insert([validatedData.data]);
+
+    if (dbError) {
+      console.error('Error al guardar en Supabase (General):', dbError.message);
+      return { success: false, error: `No se pudieron guardar tus respuestas. Causa: ${dbError.message}` };
+    }
+    
+    console.log('Paso 4: ¡Éxito! Datos generales guardados en Supabase.');
+    return { success: true };
+
+  } catch (error: any) {
+    console.error('Error en handleGeneralSurveySubmission:', error);
     return { success: false, error: 'Ocurrió un error inesperado en el servidor. ' + (error.message || '') };
   }
 }

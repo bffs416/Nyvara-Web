@@ -68,4 +68,10 @@ export const Q11_OPTIONS = [
     { value: "maybe", label: "No lo había pensado, pero me gustaría saber más" },
 ];
 
-    
+export const INTERESTED_SERVICES_OPTIONS = [
+  "Marketing Digital (SEO, Redes Sociales, Publicidad)",
+  "Diseño y Producción de Eventos Corporativos",
+  "Desarrollo de Software a Medida o Soluciones Web",
+  "Estrategia de Marca y Posicionamiento",
+  "Otro",
+];
