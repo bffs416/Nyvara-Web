@@ -64,7 +64,7 @@ export default function GeneralSurveyForm({ onSubmit }: GeneralSurveyFormProps) 
                     <div className="space-y-4 border-b border-border pb-6 mb-6">
                         <h3 className="font-headline text-xl text-primary">Objetivos y Desafíos</h3>
                         <FormField name="goals" control={form.control} render={({ field }) => <FormItem><FormLabel>¿Cuáles son los principales objetivos que quieres alcanzar con tu negocio en los próximos 6-12 meses?</FormLabel><FormControl><Textarea rows={3} {...field} /></FormControl><FormMessage /></FormItem>} />
-                        <FormField name="challenges" control={form.control} render={({ field }) => <FormItem><FormLabel>¿Cuáles son los mayores desafíos o frustraciones que enfrentas actualmente?</FormLabel><FormControl><Textarea rows={3} {...field} /></FormControl><FormMessage /></FormMessage /></FormItem>} />
+                        <FormField name="challenges" control={form.control} render={({ field }) => <FormItem><FormLabel>¿Cuáles son los mayores desafíos o frustraciones que enfrentas actualmente?</FormLabel><FormControl><Textarea rows={3} {...field} /></FormControl><FormMessage /></FormItem>} />
                     </div>
 
                     <div className="space-y-4 pb-6 mb-6">
