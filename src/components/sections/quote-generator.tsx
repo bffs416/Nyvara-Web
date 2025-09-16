@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -10,30 +10,29 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { PlusCircle, Trash2, Copy } from 'lucide-react';
+import { PlusCircle, Trash2, Copy, FileText } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { siteConfig } from '@/lib/config';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { quoteTemplates } from '@/lib/quote-templates';
 
 const quoteItemSchema = z.object({
+  id: z.string().optional(),
   description: z.string().min(1, 'La descripción es requerida.'),
   quantity: z.number().min(1, 'La cantidad debe ser al menos 1.'),
   price: z.number().min(0, 'El precio no puede ser negativo.'),
+  section: z.string().optional(),
 });
 
 const quoteFormSchema = z.object({
-  // Emisor
   issuerName: z.string().min(1, 'Tu nombre o razón social es requerido.'),
   issuerNit: z.string().min(1, 'Tu NIT o CC es requerido.'),
   issuerAddress: z.string().optional(),
-  // Cliente
   clientName: z.string().min(1, 'El nombre del cliente es requerido.'),
   clientNit: z.string().min(1, 'El NIT o CC del cliente es requerido.'),
-  // Cotización
   quoteNumber: z.string().min(1, 'El número de cotización es requerido.'),
   projectName: z.string().min(1, 'El nombre del proyecto es requerido.'),
   items: z.array(quoteItemSchema).min(1, 'Debes agregar al menos un ítem.'),
-  // Condiciones
   ivaPercentage: z.number().min(0),
   paymentConditions: z.string().optional(),
   notes: z.string().optional(),
@@ -43,6 +42,7 @@ type QuoteFormData = z.infer<typeof quoteFormSchema>;
 
 export default function QuoteGenerator() {
   const [summary, setSummary] = useState('');
+  const [activeTemplate, setActiveTemplate] = useState<string | null>(null);
   const { toast } = useToast();
 
   const form = useForm<QuoteFormData>({
@@ -55,14 +55,14 @@ export default function QuoteGenerator() {
       clientNit: '',
       quoteNumber: `COT-${new Date().getFullYear()}-001`,
       projectName: '',
-      items: [{ description: '', quantity: 1, price: 0 }],
+      items: [{ description: '', quantity: 1, price: 0, section: 'Servicios Generales' }],
       ivaPercentage: 0,
       paymentConditions: '50% para iniciar el proyecto, 50% contra entrega final.',
       notes: 'Esta cotización no incluye costos de licenciamiento de software de terceros, a menos que se especifique lo contrario. Cualquier cambio solicitado sobre el alcance definido en esta propuesta estará sujeto a una nueva cotización.',
     },
   });
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, remove, replace } = useFieldArray({
     control: form.control,
     name: 'items',
   });
@@ -75,6 +75,23 @@ export default function QuoteGenerator() {
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(value);
+  };
+  
+  const handleTemplateChange = (templateKey: string) => {
+    const template = quoteTemplates[templateKey as keyof typeof quoteTemplates];
+    if (!template) return;
+
+    setActiveTemplate(template.nombre_paquete);
+    form.setValue('projectName', template.nombre_paquete);
+
+    const newItems = template.secciones.flatMap(section => 
+        section.items.map(item => ({
+            ...item,
+            section: section.nombre_seccion,
+        }))
+    );
+
+    replace(newItems);
   };
 
   const onSubmit = (data: QuoteFormData) => {
@@ -104,15 +121,28 @@ export default function QuoteGenerator() {
     summaryText += `  - Proyecto: ${data.projectName}\n`;
     summaryText += `  - Fecha de expedición: ${issueDate.toLocaleDateString('es-CO')}\n`;
     summaryText += `  - Validez de la oferta: ${validityDate.toLocaleDateString('es-CO')} (15 días)\n\n`;
+    
+    const itemsBySection: { [key: string]: typeof data.items } = data.items.reduce((acc, item) => {
+        const section = item.section || 'Servicios Generales';
+        if (!acc[section]) {
+            acc[section] = [];
+        }
+        acc[section].push(item);
+        return acc;
+    }, {} as { [key: string]: typeof data.items });
 
     summaryText += `--------------------------------------------------\n`;
     summaryText += `DESCRIPCIÓN DE SERVICIOS / PRODUCTOS\n`;
     summaryText += `--------------------------------------------------\n`;
-    data.items.forEach((item, index) => {
-      summaryText += `\nÍTEM ${index + 1}: ${item.description}\n`;
-      summaryText += `  - Cantidad: ${item.quantity}\n`;
-      summaryText += `  - Precio Unitario: ${formatCurrency(item.price)}\n`;
-      summaryText += `  - Subtotal Ítem: ${formatCurrency(item.quantity * item.price)}\n`;
+    
+    Object.entries(itemsBySection).forEach(([section, items]) => {
+        summaryText += `\n**${section.toUpperCase()}**\n`;
+        items.forEach((item, index) => {
+            summaryText += `\n  ÍTEM: ${item.description}\n`;
+            summaryText += `    - Cantidad: ${item.quantity}\n`;
+            summaryText += `    - Precio Unitario: ${formatCurrency(item.price)}\n`;
+            summaryText += `    - Subtotal Ítem: ${formatCurrency(item.quantity * item.price)}\n`;
+        });
     });
     summaryText += `\n--------------------------------------------------\n\n`;
 
@@ -166,6 +196,21 @@ export default function QuoteGenerator() {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+
+              <div className="space-y-4 p-4 border rounded-lg bg-card-foreground/5">
+                <h3 className="font-semibold text-primary">Plantillas Rápidas</h3>
+                 <Select onValueChange={handleTemplateChange}>
+                    <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Cargar una plantilla de servicios" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        {Object.entries(quoteTemplates).map(([key, template]) => (
+                            <SelectItem key={key} value={key}>{template.nombre_paquete}</SelectItem>
+                        ))}
+                    </SelectContent>
+                </Select>
+                {activeTemplate && <p className="text-sm text-muted-foreground">Plantilla cargada: <span className="font-bold text-primary">{activeTemplate}</span></p>}
+              </div>
               
               <div className="space-y-2 p-4 border rounded-lg">
                 <h3 className="font-semibold text-primary">Tus Datos (Emisor)</h3>
@@ -200,12 +245,12 @@ export default function QuoteGenerator() {
                 )} />
               </div>
 
-
               <div>
                 <FormLabel className='text-primary font-semibold'>Ítems de la Cotización</FormLabel>
                 <div className="space-y-4 mt-2">
                   {fields.map((field, index) => (
                     <Card key={field.id} className="p-4 bg-secondary/50 relative">
+                       {field.section && <p className="text-xs font-bold text-primary mb-2">{field.section}</p>}
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <FormField control={form.control} name={`items.${index}.description`} render={({ field }) => (
                           <FormItem className="md:col-span-3"><FormLabel>Descripción</FormLabel><FormControl><Textarea {...field} rows={2}/></FormControl><FormMessage /></FormItem>
@@ -223,7 +268,7 @@ export default function QuoteGenerator() {
                     </Card>
                   ))}
                 </div>
-                <Button type="button" variant="outline" size="sm" className="mt-4" onClick={() => append({ description: '', quantity: 1, price: 0 })}>
+                <Button type="button" variant="outline" size="sm" className="mt-4" onClick={() => append({ description: '', quantity: 1, price: 0, section: 'Ítem Adicional' })}>
                   <PlusCircle className="mr-2 h-4 w-4" />Añadir Ítem
                 </Button>
               </div>
@@ -260,7 +305,10 @@ export default function QuoteGenerator() {
                 )} />
               </div>
               
-              <Button type="submit" className="w-full">Generar Propuesta</Button>
+              <Button type="submit" className="w-full">
+                <FileText className="mr-2" />
+                Generar Propuesta
+              </Button>
             </form>
           </Form>
         </CardContent>
@@ -306,3 +354,4 @@ export default function QuoteGenerator() {
     </div>
   );
 }
+
