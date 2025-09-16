@@ -43,7 +43,7 @@ export const surveySchema = z.object({
   // Section 10
   q10_rating: z.number().optional().default(5),
   q10_challenges: z.array(z.string()).max(3, "Selecciona como máximo 3 desafíos.").optional(),
-  q10_other: zstring().optional(),
+  q10_other: z.string().optional(),
   
   // Section 11
   q11_training: z.string().optional(),
