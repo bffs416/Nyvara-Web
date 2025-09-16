@@ -1,6 +1,8 @@
 import React, { Suspense } from 'react';
 import DiagnosticoClient from './client';
 import { Loader2 } from 'lucide-react';
+import Header from '@/components/layout/header';
+import Footer from '@/components/layout/footer';
 
 const LoadingFallback = () => (
   <div className="flex flex-col items-center justify-center text-center p-8 bg-card rounded-lg min-h-[500px]">
@@ -12,9 +14,15 @@ const LoadingFallback = () => (
 
 const DiagnosticoPage = () => {
   return (
-    <Suspense fallback={<LoadingFallback />}>
-      <DiagnosticoClient />
-    </Suspense>
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <main className="flex-1">
+        <Suspense fallback={<LoadingFallback />}>
+          <DiagnosticoClient />
+        </Suspense>
+      </main>
+      <Footer />
+    </div>
   );
 };
 
