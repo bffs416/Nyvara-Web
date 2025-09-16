@@ -11,6 +11,8 @@ import { Loader2, ServerCrash, Download, Send, CheckCircle, HeartPulse, Building
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { siteConfig } from '@/lib/config';
+import { useRouter } from 'next/navigation';
+
 
 const SuccessMessage = () => (
     <motion.div
@@ -99,15 +101,28 @@ export default function DiagnosticoClient() {
   const [surveyData, setSurveyData] = useState<SurveyFormData | GeneralSurveyFormData | null>(null);
   const [summaryText, setSummaryText] = useState<string>('');
   const [selectedSector, setSelectedSector] = useState<'health' | 'general' | null>(null);
-  
+  const router = useRouter();
+
   const handleSectorSelect = (sector: 'health' | 'general') => {
     setSelectedSector(sector);
+    if (sector === 'general' && (document.getElementById('name') as HTMLInputElement)?.value === 'cotizar') {
+      router.push('/cotizador');
+      return;
+    }
     setFormStep('form');
   };
   
   const handleFormSubmit = async (data: SurveyFormData | GeneralSurveyFormData) => {
     setIsLoading(true);
     setError(null);
+
+    // Secret command to go to quote generator
+    if (selectedSector === 'general' && 'name' in data && data.name === 'cotizar') {
+        router.push('/cotizador');
+        setIsLoading(false);
+        return;
+    }
+
     setSurveyData(data);
     
     let result;

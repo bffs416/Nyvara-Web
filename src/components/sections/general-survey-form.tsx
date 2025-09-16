@@ -15,6 +15,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { INTERESTED_SERVICES_OPTIONS } from "@/lib/constants";
 import { useToast } from "@/hooks/use-toast";
 import { SAMPLE_GENERAL_SURVEY_DATA } from "@/lib/sample-data";
+import { useRouter } from "next/navigation";
 
 interface GeneralSurveyFormProps {
   onSubmit: (data: GeneralSurveyFormData) => void;
@@ -22,6 +23,7 @@ interface GeneralSurveyFormProps {
 
 export default function GeneralSurveyForm({ onSubmit }: GeneralSurveyFormProps) {
   const { toast } = useToast();
+  const router = useRouter();
   
   const form = useForm<GeneralSurveyFormData>({
     resolver: zodResolver(generalSurveySchema),
@@ -51,7 +53,10 @@ export default function GeneralSurveyForm({ onSubmit }: GeneralSurveyFormProps) 
         description: "Se han cargado los datos de muestra para la encuesta general.",
       });
     }
-  }, [watchedName, form, toast]);
+    if (watchedName === "cotizar") {
+        router.push('/cotizador');
+    }
+  }, [watchedName, form, toast, router]);
 
 
   return (
@@ -64,7 +69,7 @@ export default function GeneralSurveyForm({ onSubmit }: GeneralSurveyFormProps) 
                     
                     <div className="space-y-4 border-b border-border pb-6 mb-6">
                         <h3 className="font-headline text-xl text-primary">Información de Contacto</h3>
-                        <FormField name="name" control={form.control} render={({ field }) => <FormItem><FormLabel>Nombre Completo</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>} />
+                        <FormField name="name" control={form.control} render={({ field }) => <FormItem><FormLabel>Nombre Completo</FormLabel><FormControl><Input id="name" {...field} /></FormControl><FormMessage /></FormItem>} />
                         <FormField name="company" control={form.control} render={({ field }) => <FormItem><FormLabel>Nombre de la Empresa</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>} />
                         <FormField name="role" control={form.control} render={({ field }) => <FormItem><FormLabel>Tu Cargo o Rol</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>} />
                         <FormField name="phone" control={form.control} render={({ field }) => <FormItem><FormLabel>Número de Teléfono</FormLabel><FormControl><Input type="tel" {...field} /></FormControl><FormMessage /></FormItem>} />
