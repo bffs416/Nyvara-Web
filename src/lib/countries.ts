@@ -97,7 +97,7 @@ export const COUNTRIES = [
     { name: "Guinea", dial_code: "+224", code: "GN" },
     { name: "Guinea Ecuatorial", dial_code: "+240", code: "GQ" },
     { name: "Guinea-Bissau", dial_code: "+245", code: "GW" },
-    { name: "Guyana", dial_code: "+595", code: "GY" },
+    { name: "Guyana", dial_code: "+592", code: "GY" },
     { name: "Haití", dial_code: "+509", code: "HT" },
     { name: "Hong Kong", dial_code: "+852", code: "HK" },
     { name: "Hungría", dial_code: "+36", code: "HU" },
