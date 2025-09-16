@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { PlusCircle, Trash2, Copy, FileText, Calculator } from 'lucide-react';
+import { PlusCircle, Trash2, Copy, FileText, Calculator, Printer } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { siteConfig } from '@/lib/config';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -47,7 +47,7 @@ const quoteFormSchema = z.object({
   notes: z.string().optional(),
 });
 
-type QuoteFormData = z.infer<typeof quoteFormSchema>;
+export type QuoteFormData = z.infer<typeof quoteFormSchema>;
 
 const PriceCalculator = ({ onItemIndex, onPriceCalculated }: { onItemIndex: number; onPriceCalculated: (index: number, price: number) => void; }) => {
     const [directCost, setDirectCost] = useState<number | ''>('');
@@ -177,6 +177,10 @@ export default function QuoteGenerator() {
     validityDate.setDate(issueDate.getDate() + 15);
     const finalQuoteNumber = generateQuoteNumber(data.quoteNumber);
 
+    // Save data to localStorage for the print view
+    const printData = { ...data, finalQuoteNumber, issueDate: issueDate.toISOString(), validityDate: validityDate.toISOString() };
+    localStorage.setItem('quotePrintData', JSON.stringify(printData));
+
     let summaryText = `**************************************************\n`;
     summaryText += `** PROPUESTA COMERCIAL **\n`;
     summaryText += `**************************************************\n\n`;
@@ -253,7 +257,7 @@ export default function QuoteGenerator() {
     setSummary(summaryText);
     toast({
         title: "Propuesta Generada",
-        description: "El texto de la propuesta está listo para ser copiado.",
+        description: "El texto y la vista para imprimir están listos.",
     })
   };
 
@@ -264,6 +268,19 @@ export default function QuoteGenerator() {
       description: 'La propuesta ha sido copiada al portapapeles.',
     });
   };
+
+  const openPrintView = () => {
+    const isDataSaved = localStorage.getItem('quotePrintData');
+    if(isDataSaved) {
+        window.open('/cotizador/imprimir', '_blank');
+    } else {
+        toast({
+            title: 'Genera una propuesta primero',
+            description: 'Debes hacer clic en "Generar Propuesta" antes de poder imprimir.',
+            variant: 'destructive',
+        })
+    }
+  }
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -416,9 +433,14 @@ export default function QuoteGenerator() {
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Resumen para Copiar</CardTitle>
           {summary && (
-            <Button variant="ghost" size="icon" onClick={copyToClipboard}>
-              <Copy className="h-5 w-5" />
-            </Button>
+            <div className="flex gap-2">
+                <Button variant="outline" size="icon" onClick={openPrintView}>
+                    <Printer className="h-5 w-5" />
+                </Button>
+                <Button variant="ghost" size="icon" onClick={copyToClipboard}>
+                    <Copy className="h-5 w-5" />
+                </Button>
+            </div>
           )}
         </CardHeader>
         <CardContent>
@@ -453,5 +475,4 @@ export default function QuoteGenerator() {
   );
 }
 
-    
     
