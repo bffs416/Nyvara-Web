@@ -199,12 +199,11 @@ export async function handleGeneralSurveySubmission(
   } = validatedData.data;
 
   // Mapear datos del formulario general a la estructura de la encuesta de salud
-  const mappedData: Omit<SurveyFormData, 'competitors'> & { q1_email?: string; competitors?: string[] } = {
+  const mappedData: Omit<SurveyFormData, 'competitors'> & { competitors?: string[] } = {
     q1_name: `${name} (${company})`,
     q1_location: 'N/A',
     q1_country: 'N/A', 
     q1_phone: phone,
-    q1_email: email,
     q1_role: role,
     q2_services: business_description,
     q2_unique: `Servicios principales: ${main_services}`,
@@ -213,7 +212,7 @@ export async function handleGeneralSurveySubmission(
     q7_why: `Desafíos principales: ${challenges}`,
     q9_presence: interested_services,
     q13_colors: "No aplica (Formulario General)",
-    q15_final: `Información adicional: ${additional_info || 'Ninguna'}`,
+    q15_final: `Email: ${email} | Información adicional: ${additional_info || 'Ninguna'}`,
     q1_experience: undefined,
     q4_perception: undefined,
     q4_other: undefined,
