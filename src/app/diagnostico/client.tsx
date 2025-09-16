@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SurveyForm from '@/components/sections/survey-form';
 import GeneralSurveyForm from '@/components/sections/general-survey-form';
@@ -11,7 +11,7 @@ import { Loader2, ServerCrash, Download, Send, CheckCircle, HeartPulse, Building
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { siteConfig } from '@/lib/config';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 
 const SuccessMessage = () => (
@@ -102,27 +102,29 @@ export default function DiagnosticoClient() {
   const [summaryText, setSummaryText] = useState<string>('');
   const [selectedSector, setSelectedSector] = useState<'health' | 'general' | null>(null);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
+  useEffect(() => {
+    const sector = searchParams.get('sector');
+    if (sector === 'health' || sector === 'general') {
+      setSelectedSector(sector);
+      setFormStep('form');
+    }
+  }, [searchParams]);
+
+  
   const handleSectorSelect = (sector: 'health' | 'general') => {
     setSelectedSector(sector);
-    if (sector === 'general' && (document.getElementById('name') as HTMLInputElement)?.value === 'cotizar') {
-      router.push('/cotizador');
-      return;
-    }
     setFormStep('form');
+    // Update URL without reloading the page
+    router.push(`/diagnostico?sector=${sector}`, { scroll: false });
   };
   
   const handleFormSubmit = async (data: SurveyFormData | GeneralSurveyFormData) => {
     setIsLoading(true);
     setError(null);
 
-    // Secret command to go to quote generator
-    if (selectedSector === 'general' && 'name' in data && data.name === 'cotizar') {
-        router.push('/cotizador');
-        setIsLoading(false);
-        return;
-    }
-
+    // Secret command is now handled in GeneralSurveyForm
     setSurveyData(data);
     
     let result;
@@ -191,6 +193,7 @@ export default function DiagnosticoClient() {
     setSummaryText('');
     setError(null);
     setSelectedSector(null);
+    router.push(`/diagnostico`, { scroll: false });
   }
 
   const getTitle = () => {

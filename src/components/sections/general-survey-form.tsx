@@ -58,12 +58,19 @@ export default function GeneralSurveyForm({ onSubmit }: GeneralSurveyFormProps) 
     }
   }, [watchedName, form, toast, router]);
 
+  function handleFormSubmit(data: GeneralSurveyFormData) {
+    if (data.name === 'cotizar') {
+      router.push('/cotizador');
+      return;
+    }
+    onSubmit(data);
+  }
 
   return (
       <Card className="shadow-2xl relative">
         <CardContent className="p-8">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={form.handleSubmit(handleFormSubmit)} className="space-y-8">
                 <div>
                     <h2 className="font-headline text-3xl text-primary mb-6">Diagnóstico General</h2>
                     
