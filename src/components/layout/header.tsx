@@ -48,15 +48,20 @@ const Header = () => {
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
-  const handleContactClick = () => {
+  const handleNavClick = (href: string) => {
     closeMobileMenu();
-    if (pathname === '/') {
-        const contactSection = document.getElementById('contact');
-        if (contactSection) {
-            contactSection.scrollIntoView({ behavior: 'smooth' });
+    if (href.startsWith('/#')) {
+        if (pathname === '/') {
+            const id = href.substring(2);
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        } else {
+            router.push(href);
         }
     } else {
-        router.push('/#contact');
+        router.push(href);
     }
   };
 
@@ -81,14 +86,14 @@ const Header = () => {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8 text-sm font-medium">
             {navItems.map((item) => (
-              <Link key={item.name} href={item.href} className="transition-colors hover:text-primary">
+              <button key={item.name} onClick={() => handleNavClick(item.href)} className="transition-colors hover:text-primary">
                 {item.name}
-              </Link>
+              </button>
             ))}
         </div>
         
         <div className="flex flex-1 items-center justify-end space-x-4">
-            <Button onClick={handleContactClick} className="hidden md:inline-flex">
+            <Button onClick={() => handleNavClick('/#contact')} className="hidden md:inline-flex">
               Contacto
             </Button>
 
@@ -110,11 +115,11 @@ const Header = () => {
           >
             <div className="container flex flex-col space-y-4 p-4 mt-4">
               {navItems.map((item) => (
-                  <Link key={item.name} href={item.href} onClick={closeMobileMenu} className="text-foreground text-lg hover:text-primary transition-colors duration-300 text-left py-2">
+                  <button key={item.name} onClick={() => handleNavClick(item.href)} className="text-foreground text-lg hover:text-primary transition-colors duration-300 text-left py-2">
                     {item.name}
-                  </Link>
+                  </button>
               ))}
-              <Button onClick={handleContactClick} className="w-full mt-4">
+              <Button onClick={() => handleNavClick('/#contact')} className="w-full mt-4">
                 Contacto
               </Button>
             </div>

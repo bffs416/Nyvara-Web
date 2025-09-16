@@ -16,6 +16,8 @@ export default function Home() {
     const handleHashScroll = () => {
       const hash = window.location.hash;
       if (hash) {
+        // We need to use querySelector with the hash.
+        // The hash includes '#', so we don't need to add it.
         const element = document.querySelector(hash);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
@@ -23,7 +25,8 @@ export default function Home() {
       }
     };
 
-    // We use a small timeout to ensure the DOM is fully painted before scrolling.
+    // We use a small timeout to ensure the DOM is fully painted before scrolling,
+    // especially after a page navigation.
     const timer = setTimeout(handleHashScroll, 100);
 
     return () => clearTimeout(timer);
