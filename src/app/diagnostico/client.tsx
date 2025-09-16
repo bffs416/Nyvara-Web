@@ -39,6 +39,32 @@ const SuccessMessage = () => (
     </motion.div>
 );
 
+const GeneralSuccessMessage = () => {
+    const whatsappUrl = `https://wa.me/${siteConfig.contact.phone}?text=${encodeURIComponent(siteConfig.contact.whatsappMessage)}`;
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="bg-card border border-border/50 p-8 rounded-lg shadow-2xl text-center space-y-6"
+        >
+            <CheckCircle className="mx-auto h-16 w-16 text-primary mb-4" />
+            <h2 className="text-3xl font-bold font-headline text-primary">¡Respuestas Guardadas!</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+                Hemos recibido tu información. El siguiente paso es contactarnos directamente para una asesoría personalizada. ¡Haz clic en el botón para iniciar una conversación!
+            </p>
+            <div className="flex justify-center gap-4 pt-4">
+                 <Button asChild size="lg">
+                   <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                      Contactar por WhatsApp <Send className="ml-2" />
+                   </a>
+                 </Button>
+            </div>
+        </motion.div>
+    );
+};
+
+
 const SectorSelection = ({ onSelect }: { onSelect: (sector: 'health' | 'general') => void }) => (
   <motion.div 
     initial={{ opacity: 0, y: 20 }} 
@@ -69,7 +95,7 @@ const SectorSelection = ({ onSelect }: { onSelect: (sector: 'health' | 'general'
 export default function DiagnosticoClient() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [formStep, setFormStep] = useState<'sector' | 'form' | 'summary' | 'sent'>('sector');
+  const [formStep, setFormStep] = useState<'sector' | 'form' | 'summary' | 'sent' | 'general_sent'>('sector');
   const [surveyData, setSurveyData] = useState<SurveyFormData | GeneralSurveyFormData | null>(null);
   const [summaryText, setSummaryText] = useState<string>('');
   const [selectedSector, setSelectedSector] = useState<'health' | 'general' | null>(null);
@@ -135,8 +161,7 @@ export default function DiagnosticoClient() {
     } else {
         result = await handleGeneralSurveySubmission(surveyData as GeneralSurveyFormData);
         if (result.success) {
-            const whatsappUrl = `https://wa.me/${siteConfig.contact.phone}?text=${encodeURIComponent(siteConfig.contact.whatsappMessage)}`;
-            window.location.href = whatsappUrl;
+            setFormStep('general_sent');
         } else {
             setError(result.error || 'No se pudieron guardar los datos.');
         }
@@ -154,7 +179,7 @@ export default function DiagnosticoClient() {
   }
 
   const getTitle = () => {
-      if (formStep === 'sent') return "Gracias por tu confianza.";
+      if (formStep === 'sent' || formStep === 'general_sent') return "Gracias por tu confianza.";
       if (formStep === 'sector') return "Comencemos por conocer tu negocio.";
       return "Completa este formulario para descubrir el potencial oculto de tu marca.";
   }
@@ -221,6 +246,7 @@ export default function DiagnosticoClient() {
             )}
 
             {formStep === 'sent' && <SuccessMessage />}
+            {formStep === 'general_sent' && <GeneralSuccessMessage />}
           </>
         )}
       </div>
