@@ -1,15 +1,4 @@
 
-export const Q1_ROLES = [
-  "Director/Gerente de Clínica",
-  "Médico Estético",
-  "Cirujano Plástico",
-  "Dermatólogo",
-  "Fisioterapeuta Dermatofuncional",
-  "Cosmetólogo/Esteticista",
-  "Enfermero/a Estético",
-  "Otro",
-];
-
 export const Q4_OPTIONS = [
   "Líder en innovación y tecnología",
   "Enfoque en resultados naturales y armoniosos",
@@ -78,3 +67,5 @@ export const Q11_OPTIONS = [
     { value: "no", label: "No" },
     { value: "maybe", label: "No lo había pensado, pero me gustaría saber más" },
 ];
+
+    
