@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState } from 'react';
@@ -9,6 +10,7 @@ import type { SurveyFormData, GeneralSurveyFormData } from '@/lib/types';
 import { Loader2, ServerCrash, Download, Send, CheckCircle, HeartPulse, Building } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { siteConfig } from '@/lib/config';
 
 const SuccessMessage = () => (
     <motion.div
@@ -125,15 +127,21 @@ export default function DiagnosticoClient() {
     let result;
     if (selectedSector === 'health') {
         result = await handleSurveySubmission(surveyData as SurveyFormData);
+        if (result.success) {
+            setFormStep('sent');
+        } else {
+            setError(result.error || 'No se pudieron guardar los datos.');
+        }
     } else {
         result = await handleGeneralSurveySubmission(surveyData as GeneralSurveyFormData);
+        if (result.success) {
+            const whatsappUrl = `https://wa.me/${siteConfig.contact.phone}?text=${encodeURIComponent(siteConfig.contact.whatsappMessage)}`;
+            window.location.href = whatsappUrl;
+        } else {
+            setError(result.error || 'No se pudieron guardar los datos.');
+        }
     }
 
-    if (result.success) {
-        setFormStep('sent');
-    } else {
-        setError(result.error || 'No se pudieron guardar los datos.');
-    }
     setIsLoading(false);
   };
   
