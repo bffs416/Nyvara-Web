@@ -33,6 +33,7 @@ interface SurveyFormProps {
 export default function SurveyForm({ onSubmit }: SurveyFormProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [showJumpButton, setShowJumpButton] = useState(false);
+  const [countryPopoverOpen, setCountryPopoverOpen] = useState(false);
   const { toast } = useToast();
 
   const form = useForm<SurveyFormData>({
@@ -131,7 +132,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                     render={({ field }) => (
                       <FormItem className="flex flex-col">
                         <FormLabel>País</FormLabel>
-                        <Popover>
+                        <Popover open={countryPopoverOpen} onOpenChange={setCountryPopoverOpen}>
                           <PopoverTrigger asChild>
                             <FormControl>
                               <Button
@@ -166,6 +167,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                                       if (!phoneValue || !phoneValue.startsWith("+")) {
                                         form.setValue("q1_phone", country.dial_code);
                                       }
+                                      setCountryPopoverOpen(false);
                                     }}
                                   >
                                     <Check
