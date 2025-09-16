@@ -10,11 +10,20 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { PlusCircle, Trash2, Copy, FileText } from 'lucide-react';
+import { PlusCircle, Trash2, Copy, FileText, Calculator } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { siteConfig } from '@/lib/config';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { quoteTemplates } from '@/lib/quote-templates';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
 
 const quoteItemSchema = z.object({
   id: z.string().optional(),
@@ -40,6 +49,58 @@ const quoteFormSchema = z.object({
 
 type QuoteFormData = z.infer<typeof quoteFormSchema>;
 
+const PriceCalculator = ({ onItemIndex, onPriceCalculated }: { onItemIndex: number; onPriceCalculated: (index: number, price: number) => void; }) => {
+    const [directCost, setDirectCost] = useState(0);
+    const [indirectCost, setIndirectCost] = useState(0);
+    const [margin, setMargin] = useState(30);
+    const [calculatedPrice, setCalculatedPrice] = useState(0);
+    
+    useEffect(() => {
+        const totalCost = (directCost || 0) + (indirectCost || 0);
+        const finalPrice = totalCost * (1 + (margin || 0) / 100);
+        setCalculatedPrice(finalPrice);
+    }, [directCost, indirectCost, margin]);
+
+    const handleApply = () => {
+        onPriceCalculated(onItemIndex, calculatedPrice);
+    };
+
+    const formatCurrency = (value: number) => {
+        return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(value);
+    };
+
+    return (
+        <DialogContent>
+            <DialogHeader>
+                <DialogTitle>Calculadora de Precio</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4">
+                <FormItem>
+                    <FormLabel>Costos Directos (Mano de obra, materiales, etc.)</FormLabel>
+                    <Input type="number" value={directCost} onChange={(e) => setDirectCost(parseFloat(e.target.value) || 0)} placeholder="Suma de costos directos" />
+                </FormItem>
+                <FormItem>
+                    <FormLabel>Costos Indirectos (Proporcional)</FormLabel>
+                    <Input type="number" value={indirectCost} onChange={(e) => setIndirectCost(parseFloat(e.target.value) || 0)} placeholder="Costos operativos del proyecto" />
+                </FormItem>
+                 <FormItem>
+                    <FormLabel>Margen de Ganancia (%)</FormLabel>
+                    <Input type="number" value={margin} onChange={(e) => setMargin(parseFloat(e.target.value) || 0)} placeholder="Ej: 30" />
+                </FormItem>
+                <div className="border-t pt-4 mt-4">
+                    <p className="text-right">Precio Final Calculado: <strong className="text-primary text-lg">{formatCurrency(calculatedPrice)}</strong></p>
+                </div>
+            </div>
+            <DialogFooter>
+                 <DialogClose asChild>
+                    <Button type="button" onClick={handleApply}>Calcular y Aplicar</Button>
+                </DialogClose>
+            </DialogFooter>
+        </DialogContent>
+    );
+};
+
+
 export default function QuoteGenerator() {
   const [summary, setSummary] = useState('');
   const [activeTemplate, setActiveTemplate] = useState<string | null>(null);
@@ -53,7 +114,7 @@ export default function QuoteGenerator() {
       issuerAddress: 'Bogotá, Colombia',
       clientName: '',
       clientNit: '',
-      quoteNumber: `COT-${new Date().getFullYear()}-001`,
+      quoteNumber: `1`,
       projectName: '',
       items: [{ description: '', quantity: 1, price: 0, section: 'Servicios Generales' }],
       ivaPercentage: 0,
@@ -87,17 +148,31 @@ export default function QuoteGenerator() {
     const newItems = template.secciones.flatMap(section => 
         section.items.map(item => ({
             ...item,
+            quantity: 1,
+            price: item.price || 0,
             section: section.nombre_seccion,
         }))
     );
 
     replace(newItems);
   };
+  
+  const onPriceCalculated = (index: number, price: number) => {
+      form.setValue(`items.${index}.price`, price);
+  };
+
+  const generateQuoteNumber = (num: string) => {
+      const year = new Date().getFullYear();
+      const month = (new Date().getMonth() + 1).toString().padStart(2, '0');
+      const formattedNum = num.padStart(3, '0');
+      return `COT-${year}-${formattedNum}`;
+  }
 
   const onSubmit = (data: QuoteFormData) => {
     const issueDate = new Date();
     const validityDate = new Date();
     validityDate.setDate(issueDate.getDate() + 15);
+    const finalQuoteNumber = generateQuoteNumber(data.quoteNumber);
 
     let summaryText = `**************************************************\n`;
     summaryText += `** PROPUESTA COMERCIAL **\n`;
@@ -117,7 +192,7 @@ export default function QuoteGenerator() {
     summaryText += `--------------------------------------------------\n`;
     summaryText += `DETALLES DE LA PROPUESTA\n`;
     summaryText += `--------------------------------------------------\n`;
-    summaryText += `  - Propuesta N°: ${data.quoteNumber}\n`;
+    summaryText += `  - Propuesta N°: ${finalQuoteNumber}\n`;
     summaryText += `  - Proyecto: ${data.projectName}\n`;
     summaryText += `  - Fecha de expedición: ${issueDate.toLocaleDateString('es-CO')}\n`;
     summaryText += `  - Validez de la oferta: ${validityDate.toLocaleDateString('es-CO')} (15 días)\n\n`;
@@ -238,7 +313,11 @@ export default function QuoteGenerator() {
               <div className="space-y-2 p-4 border rounded-lg">
                 <h3 className="font-semibold text-primary">Detalles de la Propuesta</h3>
                 <FormField name="quoteNumber" control={form.control} render={({ field }) => (
-                  <FormItem><FormLabel>Número de Cotización</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                    <FormItem>
+                        <FormLabel>Número Consecutivo</FormLabel>
+                        <FormControl><Input {...field} type="number" placeholder="Ej: 1" /></FormControl>
+                        <FormMessage />
+                    </FormItem>
                 )} />
                 <FormField name="projectName" control={form.control} render={({ field }) => (
                   <FormItem><FormLabel>Nombre del Proyecto</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
@@ -249,23 +328,39 @@ export default function QuoteGenerator() {
                 <FormLabel className='text-primary font-semibold'>Ítems de la Cotización</FormLabel>
                 <div className="space-y-4 mt-2">
                   {fields.map((field, index) => (
-                    <Card key={field.id} className="p-4 bg-secondary/50 relative">
-                       {field.section && <p className="text-xs font-bold text-primary mb-2">{field.section}</p>}
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <FormField control={form.control} name={`items.${index}.description`} render={({ field }) => (
-                          <FormItem className="md:col-span-3"><FormLabel>Descripción</FormLabel><FormControl><Textarea {...field} rows={2}/></FormControl><FormMessage /></FormItem>
-                        )} />
-                        <FormField control={form.control} name={`items.${index}.quantity`} render={({ field }) => (
-                          <FormItem><FormLabel>Cantidad</FormLabel><FormControl><Input type="number" {...field} onChange={e => field.onChange(parseInt(e.target.value, 10) || 0)} /></FormControl><FormMessage /></FormItem>
-                        )} />
-                        <FormField control={form.control} name={`items.${index}.price`} render={({ field }) => (
-                          <FormItem className="md:col-span-2"><FormLabel>Precio Unitario (COP)</FormLabel><FormControl><Input type="number" step="1000" {...field} onChange={e => field.onChange(parseFloat(e.target.value) || 0)} /></FormControl><FormMessage /></FormItem>
-                        )} />
-                      </div>
-                      <Button type="button" variant="ghost" size="icon" className="absolute top-2 right-2" onClick={() => remove(index)} disabled={fields.length <= 1}>
-                        <Trash2 className="h-4 w-4 text-destructive" />
-                      </Button>
-                    </Card>
+                    <Dialog key={field.id}>
+                        <Card className="p-4 bg-secondary/50 relative">
+                        {field.section && <p className="text-xs font-bold text-primary mb-2">{field.section}</p>}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <FormField control={form.control} name={`items.${index}.description`} render={({ field }) => (
+                            <FormItem className="md:col-span-3"><FormLabel>Descripción</FormLabel><FormControl><Textarea {...field} rows={2}/></FormControl><FormMessage /></FormItem>
+                            )} />
+                            <FormField control={form.control} name={`items.${index}.quantity`} render={({ field }) => (
+                            <FormItem><FormLabel>Cantidad</FormLabel><FormControl><Input type="number" {...field} onChange={e => field.onChange(parseInt(e.target.value, 10) || 0)} /></FormControl><FormMessage /></FormItem>
+                            )} />
+                            <FormField control={form.control} name={`items.${index}.price`} render={({ field }) => (
+                                <FormItem className="md:col-span-2">
+                                    <FormLabel>Precio Unitario (COP)</FormLabel>
+                                    <div className="flex items-center gap-2">
+                                        <FormControl>
+                                            <Input type="number" step="1000" {...field} onChange={e => field.onChange(parseFloat(e.target.value) || 0)} />
+                                        </FormControl>
+                                         <DialogTrigger asChild>
+                                            <Button type="button" variant="outline" size="icon">
+                                                <Calculator className="h-4 w-4" />
+                                            </Button>
+                                        </DialogTrigger>
+                                    </div>
+                                    <FormMessage />
+                                </FormItem>
+                            )} />
+                        </div>
+                        <Button type="button" variant="ghost" size="icon" className="absolute top-2 right-2" onClick={() => remove(index)} disabled={fields.length <= 1}>
+                            <Trash2 className="h-4 w-4 text-destructive" />
+                        </Button>
+                        </Card>
+                        <PriceCalculator onItemIndex={index} onPriceCalculated={onPriceCalculated} />
+                    </Dialog>
                   ))}
                 </div>
                 <Button type="button" variant="outline" size="sm" className="mt-4" onClick={() => append({ description: '', quantity: 1, price: 0, section: 'Ítem Adicional' })}>
@@ -355,3 +450,4 @@ export default function QuoteGenerator() {
   );
 }
 
+    
