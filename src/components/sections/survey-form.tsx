@@ -16,9 +16,10 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
 import { useToast } from "@/hooks/use-toast";
-import { Q4_OPTIONS, Q5_OPTIONS, Q7_OPTIONS, Q8_OPTIONS, Q9_OPTIONS, Q10_CHALLENGES_OPTIONS, Q11_OPTIONS } from "@/lib/constants";
+import { Q1_ROLES, Q4_OPTIONS, Q5_OPTIONS, Q7_OPTIONS, Q8_OPTIONS, Q9_OPTIONS, Q10_CHALLENGES_OPTIONS, Q11_OPTIONS } from "@/lib/constants";
 import { PlusCircle, Trash2 } from "lucide-react";
 import { SAMPLE_SURVEY_DATA } from "@/lib/sample-data";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 
 const TOTAL_STEPS = 14;
@@ -125,7 +126,30 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                   <FormField name="q1_country" control={form.control} render={({ field }) => <FormItem><FormLabel>País</FormLabel><FormControl><Input {...field} value={field.value ?? ""} placeholder="Escribe tu país" /></FormControl><FormMessage /></FormItem>} />
                   <FormField name="q1_phone" control={form.control} render={({ field }) => <FormItem><FormLabel>Número de contacto</FormLabel><FormControl><Input type="tel" {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                   <FormField name="q1_experience" control={form.control} render={({ field }) => <FormItem><FormLabel>Años de experiencia en medicina estética</FormLabel><FormControl><Input type="number" {...field} value={field.value ?? 0} onChange={e => field.onChange(e.target.value === '' ? null : +e.target.value)} /></FormControl><FormMessage /></FormItem>} />
-                  <FormField name="q1_role" control={form.control} render={({ field }) => <FormItem><FormLabel>¿Cuál es tu cargo o rol principal?</FormLabel><FormControl><Input placeholder="Ej. Director, médico estético, cirujano plástico, dermatólogo..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
+                  <FormField
+                    control={form.control}
+                    name="q1_role"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>¿Cuál es tu cargo o rol principal?</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Selecciona tu rol" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {Q1_ROLES.map((role) => (
+                              <SelectItem key={role} value={role}>
+                                {role}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
                 {showJumpButton && (
                   <Button onClick={() => setCurrentStep(13)} className="mt-4">
@@ -277,5 +301,3 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
     </>
   );
 }
-
-    
