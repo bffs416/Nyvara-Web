@@ -17,11 +17,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
 import { useToast } from "@/hooks/use-toast";
 import { Q4_OPTIONS, Q5_OPTIONS, Q7_OPTIONS, Q8_OPTIONS, Q9_OPTIONS, Q10_CHALLENGES_OPTIONS, Q11_OPTIONS } from "@/lib/constants";
-import { COUNTRIES } from "@/lib/countries";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
-import { ChevronsUpDown, Check, PlusCircle, Trash2, Bot } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { PlusCircle, Trash2 } from "lucide-react";
 import { SAMPLE_SURVEY_DATA } from "@/lib/sample-data";
 
 
@@ -34,7 +30,6 @@ interface SurveyFormProps {
 export default function SurveyForm({ onSubmit }: SurveyFormProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [showJumpButton, setShowJumpButton] = useState(false);
-  const [countryPopoverOpen, setCountryPopoverOpen] = useState(false);
   const { toast } = useToast();
 
   const form = useForm<SurveyFormData>({
@@ -127,71 +122,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                 <div className="space-y-4">
                   <FormField name="q1_name" control={form.control} render={({ field }) => <FormItem><FormLabel>Nombre del profesional o la clínica</FormLabel><FormControl><Input {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                   <FormField name="q1_location" control={form.control} render={({ field }) => <FormItem><FormLabel>Ubicación de la clínica o consultorio</FormLabel><FormControl><Input {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
-                  <FormField
-                    name="q1_country"
-                    control={form.control}
-                    render={({ field }) => (
-                      <FormItem className="flex flex-col">
-                        <FormLabel>País</FormLabel>
-                        <Popover open={countryPopoverOpen} onOpenChange={setCountryPopoverOpen}>
-                          <PopoverTrigger asChild>
-                            <FormControl>
-                              <Button
-                                variant="outline"
-                                role="combobox"
-                                className={cn(
-                                  "w-full justify-between",
-                                  !field.value && "text-muted-foreground"
-                                )}
-                              >
-                                {field.value
-                                  ? COUNTRIES.find(
-                                      (country) => country.name === field.value
-                                    )?.name
-                                  : "Selecciona un país"}
-                                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                              </Button>
-                            </FormControl>
-                          </PopoverTrigger>
-                          <PopoverContent className="w-[300px] p-0">
-                            <Command>
-                              <CommandInput placeholder="Buscar país..." />
-                              <CommandList>
-                                <CommandEmpty>No se encontró el país.</CommandEmpty>
-                                <CommandGroup>
-                                  {COUNTRIES.map((country) => (
-                                    <CommandItem
-                                      value={country.name}
-                                      key={country.code}
-                                      onSelect={(currentValue) => {
-                                        form.setValue("q1_country", currentValue === field.value ? "" : country.name);
-                                        const phoneValue = form.getValues("q1_phone");
-                                        if (!phoneValue || !phoneValue.startsWith("+")) {
-                                          form.setValue("q1_phone", country.dial_code);
-                                        }
-                                        setCountryPopoverOpen(false);
-                                      }}
-                                    >
-                                      <Check
-                                        className={cn(
-                                          "mr-2 h-4 w-4",
-                                          country.name === field.value
-                                            ? "opacity-100"
-                                            : "opacity-0"
-                                        )}
-                                      />
-                                      {country.name} ({country.dial_code})
-                                    </CommandItem>
-                                  ))}
-                                </CommandGroup>
-                              </CommandList>
-                            </Command>
-                          </PopoverContent>
-                        </Popover>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                  <FormField name="q1_country" control={form.control} render={({ field }) => <FormItem><FormLabel>País</FormLabel><FormControl><Input {...field} value={field.value ?? ""} placeholder="Escribe tu país" /></FormControl><FormMessage /></FormItem>} />
                   <FormField name="q1_phone" control={form.control} render={({ field }) => <FormItem><FormLabel>Número de contacto</FormLabel><FormControl><Input type="tel" {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                   <FormField name="q1_experience" control={form.control} render={({ field }) => <FormItem><FormLabel>Años de experiencia en medicina estética</FormLabel><FormControl><Input type="number" {...field} value={field.value ?? 0} onChange={e => field.onChange(e.target.value === '' ? null : +e.target.value)} /></FormControl><FormMessage /></FormItem>} />
                   <FormField name="q1_role" control={form.control} render={({ field }) => <FormItem><FormLabel>¿Cuál es tu cargo o rol principal?</FormLabel><FormControl><Input placeholder="Ej. Director, médico estético, cirujano plástico, dermatólogo..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
