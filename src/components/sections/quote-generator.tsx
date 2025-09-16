@@ -50,14 +50,18 @@ const quoteFormSchema = z.object({
 type QuoteFormData = z.infer<typeof quoteFormSchema>;
 
 const PriceCalculator = ({ onItemIndex, onPriceCalculated }: { onItemIndex: number; onPriceCalculated: (index: number, price: number) => void; }) => {
-    const [directCost, setDirectCost] = useState(0);
-    const [indirectCost, setIndirectCost] = useState(0);
-    const [margin, setMargin] = useState(30);
+    const [directCost, setDirectCost] = useState<number | ''>('');
+    const [indirectCost, setIndirectCost] = useState<number | ''>('');
+    const [margin, setMargin] = useState<number | ''>('');
     const [calculatedPrice, setCalculatedPrice] = useState(0);
     
     useEffect(() => {
-        const totalCost = (directCost || 0) + (indirectCost || 0);
-        const finalPrice = totalCost * (1 + (margin || 0) / 100);
+        const dc = typeof directCost === 'number' ? directCost : 0;
+        const ic = typeof indirectCost === 'number' ? indirectCost : 0;
+        const m = typeof margin === 'number' ? margin : 0;
+        
+        const totalCost = dc + ic;
+        const finalPrice = totalCost * (1 + m / 100);
         setCalculatedPrice(finalPrice);
     }, [directCost, indirectCost, margin]);
 
@@ -77,15 +81,15 @@ const PriceCalculator = ({ onItemIndex, onPriceCalculated }: { onItemIndex: numb
             <div className="space-y-4">
                 <FormItem>
                     <FormLabel>Costos Directos (Mano de obra, materiales, etc.)</FormLabel>
-                    <Input type="number" value={directCost} onChange={(e) => setDirectCost(parseFloat(e.target.value) || 0)} placeholder="Suma de costos directos" />
+                    <Input type="number" value={directCost} onChange={(e) => setDirectCost(e.target.value === '' ? '' : parseFloat(e.target.value))} placeholder="Suma de costos directos" />
                 </FormItem>
                 <FormItem>
                     <FormLabel>Costos Indirectos (Proporcional)</FormLabel>
-                    <Input type="number" value={indirectCost} onChange={(e) => setIndirectCost(parseFloat(e.target.value) || 0)} placeholder="Costos operativos del proyecto" />
+                    <Input type="number" value={indirectCost} onChange={(e) => setIndirectCost(e.target.value === '' ? '' : parseFloat(e.target.value))} placeholder="Costos operativos del proyecto" />
                 </FormItem>
                  <FormItem>
                     <FormLabel>Margen de Ganancia (%)</FormLabel>
-                    <Input type="number" value={margin} onChange={(e) => setMargin(parseFloat(e.target.value) || 0)} placeholder="Ej: 30" />
+                    <Input type="number" value={margin} onChange={(e) => setMargin(e.target.value === '' ? '' : parseFloat(e.target.value))} placeholder="Ej: 30" />
                 </FormItem>
                 <div className="border-t pt-4 mt-4">
                     <p className="text-right">Precio Final Calculado: <strong className="text-primary text-lg">{formatCurrency(calculatedPrice)}</strong></p>
@@ -163,7 +167,6 @@ export default function QuoteGenerator() {
 
   const generateQuoteNumber = (num: string) => {
       const year = new Date().getFullYear();
-      const month = (new Date().getMonth() + 1).toString().padStart(2, '0');
       const formattedNum = num.padStart(3, '0');
       return `COT-${year}-${formattedNum}`;
   }
@@ -450,4 +453,5 @@ export default function QuoteGenerator() {
   );
 }
 
+    
     
