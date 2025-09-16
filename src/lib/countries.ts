@@ -1,5 +1,6 @@
 
 export const COUNTRIES = [
+    // Países de habla hispana prioritarios
     { name: "Colombia", dial_code: "+57", code: "CO" },
     { name: "España", dial_code: "+34", code: "ES" },
     { name: "Argentina", dial_code: "+54", code: "AR" },
@@ -21,6 +22,8 @@ export const COUNTRIES = [
     { name: "Uruguay", dial_code: "+598", code: "UY" },
     { name: "Puerto Rico", dial_code: "+1939", code: "PR" },
     { name: "Cuba", dial_code: "+53", code: "CU" },
+    
+    // Resto de países en orden alfabético
     { name: "Afganistán", dial_code: "+93", code: "AF" },
     { name: "Albania", dial_code: "+355", code: "AL" },
     { name: "Alemania", dial_code: "+49", code: "DE" },
@@ -71,7 +74,7 @@ export const COUNTRIES = [
     { name: "Dominica", dial_code: "+1767", code: "DM" },
     { name: "Egipto", dial_code: "+20", code: "EG" },
     { name: "Emiratos Árabes Unidos", dial_code: "+971", code: "AE" },
-    { name: "Eritrea", dial_code: "+291", code_re: "ER" },
+    { name: "Eritrea", dial_code: "+291", code: "ER" },
     { name: "Eslovaquia", dial_code: "+421", code: "SK" },
     { name: "Eslovenia", dial_code: "+386", code: "SI" },
     { name: "Estonia", dial_code: "+372", code: "EE" },
@@ -96,7 +99,7 @@ export const COUNTRIES = [
     { name: "Guinea-Bissau", dial_code: "+245", code: "GW" },
     { name: "Guyana", dial_code: "+595", code: "GY" },
     { name: "Haití", dial_code: "+509", code: "HT" },
-    { name_code: "Hong Kong", dial_code: "+852", code: "HK" },
+    { name: "Hong Kong", dial_code: "+852", code: "HK" },
     { name: "Hungría", dial_code: "+36", code: "HU" },
     { name: "India", dial_code: "+91", code: "IN" },
     { name: "Indonesia", dial_code: "+62", code: "ID" },
@@ -204,7 +207,7 @@ export const COUNTRIES = [
     { name: "Tailandia", dial_code: "+66", code: "TH" },
     { name: "Taiwán", dial_code: "+886", code: "TW" },
     { name: "Tanzania", dial_code: "+255", code: "TZ" },
-s    { name: "Tayikistán", dial_code: "+992", code: "TJ" },
+    { name: "Tayikistán", dial_code: "+992", code: "TJ" },
     { name: "Timor Oriental", dial_code: "+670", code: "TL" },
     { name: "Togo", dial_code: "+228", code: "TG" },
     { name: "Tokelau", dial_code: "+690", code: "TK" },
