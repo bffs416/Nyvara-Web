@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -12,7 +13,13 @@ const CustomCursor = () => {
       setPosition({ x: e.clientX, y: e.clientY });
 
       const target = e.target as HTMLElement;
-      if (target.tagName === 'A' || target.tagName === 'BUTTON' || window.getComputedStyle(target).cursor === 'pointer') {
+      const computedStyle = window.getComputedStyle(target);
+      if (
+        target.tagName === 'A' ||
+        target.tagName === 'BUTTON' ||
+        (target.parentElement && target.parentElement.tagName === 'BUTTON') ||
+        computedStyle.cursor === 'pointer'
+      ) {
         setIsHovering(true);
       } else {
         setIsHovering(false);
@@ -39,7 +46,12 @@ const CustomCursor = () => {
     <>
       <motion.div
         className="custom-cursor-blur"
-        style={{ x: blurX, y: blurY, translateX: '-50%', translateY: '-50%' }}
+        style={{
+          x: blurX,
+          y: blurY,
+          translateX: '-50%',
+          translateY: '-50%',
+        }}
         animate={{ 
           width: blurSize, 
           height: blurSize 
@@ -48,11 +60,16 @@ const CustomCursor = () => {
       />
       <motion.div
         className="custom-cursor-dot"
-        style={{ x: dotX, y: dotY, translateX: '-50%', translateY: '-50%' }}
-        animate={{ 
-          width: cursorSize, 
+        style={{
+          x: dotX,
+          y: dotY,
+          translateX: '-50%',
+          translateY: '-50%',
+          backgroundColor: isHovering ? 'hsl(var(--primary))' : '#FFFFFF',
+        }}
+        animate={{
+          width: cursorSize,
           height: cursorSize,
-          backgroundColor: isHovering ? 'hsl(var(--primary))' : '#FFFFFF'
         }}
         transition={{ type: 'spring', stiffness: 700, damping: 30 }}
       />
