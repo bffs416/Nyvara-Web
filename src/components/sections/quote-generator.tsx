@@ -48,8 +48,8 @@ export default function QuoteGenerator() {
   const form = useForm<QuoteFormData>({
     resolver: zodResolver(quoteFormSchema),
     defaultValues: {
-      issuerName: 'Nyvara Solutions Hub',
-      issuerNit: '123.456.789-0',
+      issuerName: 'Nyvara Group',
+      issuerNit: '46.371.609',
       issuerAddress: 'Bogotá, Colombia',
       clientName: '',
       clientNit: '',
