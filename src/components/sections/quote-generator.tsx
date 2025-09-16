@@ -433,14 +433,9 @@ export default function QuoteGenerator() {
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Resumen para Copiar</CardTitle>
           {summary && (
-            <div className="flex gap-2">
-                <Button variant="outline" size="icon" onClick={openPrintView}>
-                    <Printer className="h-5 w-5" />
-                </Button>
-                <Button variant="ghost" size="icon" onClick={copyToClipboard}>
-                    <Copy className="h-5 w-5" />
-                </Button>
-            </div>
+            <Button variant="ghost" size="icon" onClick={copyToClipboard}>
+                <Copy className="h-5 w-5" />
+            </Button>
           )}
         </CardHeader>
         <CardContent>
@@ -456,23 +451,33 @@ export default function QuoteGenerator() {
             </div>
           )}
         </CardContent>
-        <CardFooter className="grid grid-cols-3 gap-4 text-right">
-            <div className='col-start-2'>
-                <p className='text-muted-foreground'>Subtotal</p>
-                <p className='text-lg font-bold'>{formatCurrency(subtotal)}</p>
+        <CardFooter className="flex flex-col items-end gap-4 text-right">
+            <div className="w-full grid grid-cols-2 gap-4">
+                 <div className='col-start-2 grid grid-cols-2 gap-4'>
+                    <div>
+                        <p className='text-muted-foreground'>Subtotal</p>
+                        <p className='text-lg font-bold'>{formatCurrency(subtotal)}</p>
+                    </div>
+                    <div>
+                        <p className='text-muted-foreground'>IVA ({watchedIva}%)</p>
+                        <p className='text-lg font-bold'>{formatCurrency(ivaAmount)}</p>
+                    </div>
+                </div>
             </div>
-            <div>
-                <p className='text-muted-foreground'>IVA ({watchedIva}%)</p>
-                <p className='text-lg font-bold'>{formatCurrency(ivaAmount)}</p>
-            </div>
-             <div className='col-span-3 text-right border-t pt-4 mt-4'>
+             <div className='w-full border-t pt-4 mt-4'>
                 <p className='text-muted-foreground'>Total</p>
                 <p className='text-3xl font-bold text-primary'>{formatCurrency(total)}</p>
             </div>
+            {summary && (
+                <div className="w-full pt-4 mt-4 border-t">
+                    <Button className="w-full" variant="outline" onClick={openPrintView}>
+                        <Printer className="mr-2" />
+                        Vista para Imprimir / PDF
+                    </Button>
+                </div>
+            )}
         </CardFooter>
       </Card>
     </div>
   );
 }
-
-    
