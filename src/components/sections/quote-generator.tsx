@@ -470,7 +470,7 @@ export default function QuoteGenerator() {
             </div>
             {summary && (
                 <div className="w-full pt-4 mt-4 border-t">
-                    <Button className="w-full" variant="outline" onClick={openPrintView}>
+                    <Button className="w-full" variant="default" onClick={openPrintView}>
                         <Printer className="mr-2" />
                         Vista para Imprimir / PDF
                     </Button>
@@ -481,3 +481,5 @@ export default function QuoteGenerator() {
     </div>
   );
 }
+
+    
