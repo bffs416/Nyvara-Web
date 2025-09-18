@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { PlusCircle, Trash2, Copy, FileText, Calculator, Printer } from 'lucide-react';
+import { PlusCircle, Trash2, Copy, FileText, Calculator, Printer, ShieldCheck } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { siteConfig } from '@/lib/config';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -23,6 +23,7 @@ import {
   DialogTrigger,
   DialogFooter,
   DialogClose,
+  DialogDescription,
 } from "@/components/ui/dialog";
 
 const quoteItemSchema = z.object({
@@ -49,6 +50,10 @@ const quoteFormSchema = z.object({
 
 export type QuoteFormData = z.infer<typeof quoteFormSchema>;
 
+const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(value);
+};
+
 const PriceCalculator = ({ onItemIndex, onPriceCalculated }: { onItemIndex: number; onPriceCalculated: (index: number, price: number) => void; }) => {
     const [directCost, setDirectCost] = useState<number | ''>('');
     const [indirectCost, setIndirectCost] = useState<number | ''>('');
@@ -67,10 +72,6 @@ const PriceCalculator = ({ onItemIndex, onPriceCalculated }: { onItemIndex: numb
 
     const handleApply = () => {
         onPriceCalculated(onItemIndex, calculatedPrice);
-    };
-
-    const formatCurrency = (value: number) => {
-        return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(value);
     };
 
     return (
@@ -103,6 +104,70 @@ const PriceCalculator = ({ onItemIndex, onPriceCalculated }: { onItemIndex: numb
         </DialogContent>
     );
 };
+
+const NetSimulator = ({ grossAmount }: { grossAmount: number }) => {
+    const [icaRate, setIcaRate] = useState(9.66); // Default 9.66 x mil
+
+    const ibc = grossAmount * 0.4;
+    const health = ibc * 0.125;
+    const pension = ibc * 0.16;
+    const arl = ibc * 0.00522;
+    const totalSocialSecurity = health + pension + arl;
+
+    const retefuente = grossAmount * 0.10;
+    const reteica = grossAmount * (icaRate / 1000);
+    const totalWithholdings = retefuente + reteica;
+
+    const netIncome = grossAmount - totalSocialSecurity - totalWithholdings;
+
+    return (
+        <DialogContent>
+            <DialogHeader>
+                <DialogTitle>Simulador de Ingreso Neto</DialogTitle>
+                <DialogDescription>
+                    Calcula el valor aproximado que recibirás después de aportes y retenciones.
+                </DialogDescription>
+            </DialogHeader>
+            <div className="space-y-4 text-sm">
+                <div className="p-4 rounded-lg bg-secondary/50">
+                    <p className="flex justify-between font-bold"><span>Valor Bruto (Total Cotización)</span> <span>{formatCurrency(grossAmount)}</span></p>
+                </div>
+
+                <div className="space-y-2">
+                    <h4 className="font-semibold text-primary">Aportes a Seguridad Social</h4>
+                    <p className="text-xs text-muted-foreground">Calculado sobre el 40% del valor bruto (IBC: {formatCurrency(ibc)})</p>
+                    <p className="flex justify-between"><span>Salud (12.5%)</span> <span>- {formatCurrency(health)}</span></p>
+                    <p className="flex justify-between"><span>Pensión (16%)</span> <span>- {formatCurrency(pension)}</span></p>
+                    <p className="flex justify-between"><span>ARL (0.522%)</span> <span>- {formatCurrency(arl)}</span></p>
+                    <p className="flex justify-between font-semibold border-t pt-2 mt-2"><span>Total Aportes</span> <span>- {formatCurrency(totalSocialSecurity)}</span></p>
+                </div>
+
+                <div className="space-y-2">
+                    <h4 className="font-semibold text-primary">Retenciones</h4>
+                     <p className="flex justify-between"><span>Retención en la Fuente (10%)</span> <span>- {formatCurrency(retefuente)}</span></p>
+                    <div className="flex justify-between items-center">
+                        <span>ReteICA (por mil)</span>
+                        <div className="flex items-center gap-2">
+                            <Input 
+                                type="number" 
+                                value={icaRate} 
+                                onChange={e => setIcaRate(parseFloat(e.target.value) || 0)} 
+                                className="w-20 h-8 text-right"
+                            />
+                            <span>‰</span>
+                            <span>- {formatCurrency(reteica)}</span>
+                        </div>
+                    </div>
+                    <p className="flex justify-between font-semibold border-t pt-2 mt-2"><span>Total Retenciones</span> <span>- {formatCurrency(totalWithholdings)}</span></p>
+                </div>
+
+                <div className="border-t-2 border-primary mt-4 pt-4">
+                     <p className="flex justify-between font-bold text-lg text-primary"><span>VALOR NETO A RECIBIR</span> <span>{formatCurrency(netIncome)}</span></p>
+                </div>
+            </div>
+        </DialogContent>
+    )
+}
 
 
 export default function QuoteGenerator() {
@@ -137,10 +202,6 @@ export default function QuoteGenerator() {
   const subtotal = watchedItems.reduce((acc, item) => acc + (item.quantity || 0) * (item.price || 0), 0);
   const ivaAmount = subtotal * (watchedIva / 100);
   const total = subtotal + ivaAmount;
-
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(value);
-  };
   
   const handleTemplateChange = (templateKey: string) => {
     const template = quoteTemplates[templateKey as keyof typeof quoteTemplates];
@@ -152,6 +213,7 @@ export default function QuoteGenerator() {
     const newItems = template.secciones.flatMap(section => 
         section.items.map(item => ({
             ...item,
+            quantity: 1,
             price: item.price || 0,
             section: section.nombre_seccion,
         }))
@@ -166,8 +228,9 @@ export default function QuoteGenerator() {
 
   const generateQuoteNumber = (num: string) => {
       const year = new Date().getFullYear();
+      const month = (new Date().getMonth() + 1).toString().padStart(2, '0');
       const formattedNum = num.padStart(3, '0');
-      return `COT-${year}-${formattedNum}`;
+      return `COT-${year}${month}-${formattedNum}`;
   }
 
   const onSubmit = (data: QuoteFormData) => {
@@ -427,56 +490,71 @@ export default function QuoteGenerator() {
           </Form>
         </CardContent>
       </Card>
+      
+      <Dialog>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between">
+              <CardTitle>Resumen para Copiar</CardTitle>
+              {summary && (
+                <Button variant="ghost" size="icon" onClick={copyToClipboard}>
+                    <Copy className="h-5 w-5" />
+                </Button>
+              )}
+            </CardHeader>
+            <CardContent>
+              {summary ? (
+                <Textarea
+                  readOnly
+                  className="min-h-[500px] bg-secondary/30 text-xs font-mono whitespace-pre-wrap"
+                  value={summary}
+                />
+              ) : (
+                <div className="flex items-center justify-center min-h-[500px] bg-secondary/30 rounded-md">
+                  <p className="text-muted-foreground">El resumen de la propuesta aparecerá aquí.</p>
+                </div>
+              )}
+            </CardContent>
+            <CardFooter className="flex flex-col items-end gap-4 text-right">
+                <div className="w-full grid grid-cols-2 gap-4">
+                    <div className='col-start-2 grid grid-cols-2 gap-4'>
+                        <div>
+                            <p className='text-muted-foreground'>Subtotal</p>
+                            <p className='text-lg font-bold'>{formatCurrency(subtotal)}</p>
+                        </div>
+                        <div>
+                            <p className='text-muted-foreground'>IVA ({watchedIva}%)</p>
+                            <p className='text-lg font-bold'>{formatCurrency(ivaAmount)}</p>
+                        </div>
+                    </div>
+                </div>
+                <div className='w-full border-t pt-4 mt-4'>
+                    <div className="flex justify-end items-center gap-4">
+                         <div>
+                            <p className='text-muted-foreground'>Total</p>
+                            <p className='text-3xl font-bold text-primary'>{formatCurrency(total)}</p>
+                        </div>
+                         {summary && (
+                             <DialogTrigger asChild>
+                                 <Button variant="outline" size="icon">
+                                     <ShieldCheck className="h-5 w-5" />
+                                 </Button>
+                            </DialogTrigger>
+                         )}
+                    </div>
+                </div>
+                {summary && (
+                    <div className="w-full pt-4 mt-4 border-t">
+                        <Button className="w-full" variant="default" onClick={openPrintView}>
+                            <Printer className="mr-2" />
+                            Vista para Imprimir / PDF
+                        </Button>
+                    </div>
+                )}
+            </CardFooter>
+          </Card>
+          <NetSimulator grossAmount={total} />
+      </Dialog>
 
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>Resumen para Copiar</CardTitle>
-          {summary && (
-            <Button variant="ghost" size="icon" onClick={copyToClipboard}>
-                <Copy className="h-5 w-5" />
-            </Button>
-          )}
-        </CardHeader>
-        <CardContent>
-          {summary ? (
-            <Textarea
-              readOnly
-              className="min-h-[500px] bg-secondary/30 text-xs font-mono whitespace-pre-wrap"
-              value={summary}
-            />
-          ) : (
-            <div className="flex items-center justify-center min-h-[500px] bg-secondary/30 rounded-md">
-              <p className="text-muted-foreground">El resumen de la propuesta aparecerá aquí.</p>
-            </div>
-          )}
-        </CardContent>
-        <CardFooter className="flex flex-col items-end gap-4 text-right">
-            <div className="w-full grid grid-cols-2 gap-4">
-                 <div className='col-start-2 grid grid-cols-2 gap-4'>
-                    <div>
-                        <p className='text-muted-foreground'>Subtotal</p>
-                        <p className='text-lg font-bold'>{formatCurrency(subtotal)}</p>
-                    </div>
-                    <div>
-                        <p className='text-muted-foreground'>IVA ({watchedIva}%)</p>
-                        <p className='text-lg font-bold'>{formatCurrency(ivaAmount)}</p>
-                    </div>
-                </div>
-            </div>
-             <div className='w-full border-t pt-4 mt-4'>
-                <p className='text-muted-foreground'>Total</p>
-                <p className='text-3xl font-bold text-primary'>{formatCurrency(total)}</p>
-            </div>
-             {summary && (
-                <div className="w-full pt-4 mt-4 border-t">
-                    <Button className="w-full" variant="default" onClick={openPrintView}>
-                        <Printer className="mr-2" />
-                        Vista para Imprimir / PDF
-                    </Button>
-                </div>
-            )}
-        </CardFooter>
-      </Card>
     </div>
   );
 }
