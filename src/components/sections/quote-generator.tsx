@@ -138,7 +138,7 @@ const NetSimulator = ({ grossAmount }: { grossAmount: number }) => {
                     <p className="text-xs text-muted-foreground">Calculado sobre el 40% del valor bruto (IBC: {formatCurrency(ibc)})</p>
                     <p className="flex justify-between"><span>Salud (12.5%)</span> <span>- {formatCurrency(health)}</span></p>
                     <p className="flex justify-between"><span>Pensión (16%)</span> <span>- {formatCurrency(pension)}</span></p>
-                    <p className="flex justify-between"><span>ARL (0.522%)</span> <span>- {formatCurrency(arl)}</span></p>
+                    <p className="flex justify-between"><span>ARL (Riesgo I - 0.522%)</span> <span>- {formatCurrency(arl)}</span></p>
                     <p className="flex justify-between font-semibold border-t pt-2 mt-2"><span>Total Aportes</span> <span>- {formatCurrency(totalSocialSecurity)}</span></p>
                 </div>
 
@@ -146,13 +146,14 @@ const NetSimulator = ({ grossAmount }: { grossAmount: number }) => {
                     <h4 className="font-semibold text-primary">Retenciones</h4>
                      <p className="flex justify-between"><span>Retención en la Fuente (10%)</span> <span>- {formatCurrency(retefuente)}</span></p>
                     <div className="flex justify-between items-center">
-                        <span>ReteICA (por mil)</span>
+                        <span>ReteICA ({icaRate} x mil)</span>
                         <div className="flex items-center gap-2">
                             <Input 
                                 type="number" 
                                 value={icaRate} 
                                 onChange={e => setIcaRate(parseFloat(e.target.value) || 0)} 
                                 className="w-20 h-8 text-right"
+                                step="0.1"
                             />
                             <span>‰</span>
                             <span>- {formatCurrency(reteica)}</span>
@@ -162,7 +163,7 @@ const NetSimulator = ({ grossAmount }: { grossAmount: number }) => {
                 </div>
 
                 <div className="border-t-2 border-primary mt-4 pt-4">
-                     <p className="flex justify-between font-bold text-lg text-primary"><span>VALOR NETO A RECIBIR</span> <span>{formatCurrency(netIncome)}</span></p>
+                     <p className="flex justify-between font-bold text-lg text-primary"><span>VALOR NETO A RECIBIR (Aprox.)</span> <span>{formatCurrency(netIncome)}</span></p>
                 </div>
             </div>
         </DialogContent>
@@ -183,7 +184,7 @@ export default function QuoteGenerator() {
       issuerAddress: 'Bogotá, Colombia',
       clientName: '',
       clientNit: '',
-      quoteNumber: `1`,
+      quoteNumber: '1',
       projectName: '',
       items: [{ description: '', quantity: 1, price: 0, section: 'Servicios Generales' }],
       ivaPercentage: 19,
@@ -214,7 +215,7 @@ export default function QuoteGenerator() {
         section.items.map(item => ({
             ...item,
             quantity: 1,
-            price: item.price || 0,
+            price: 0,
             section: section.nombre_seccion,
         }))
     );
@@ -223,7 +224,7 @@ export default function QuoteGenerator() {
   };
   
   const onPriceCalculated = (index: number, price: number) => {
-      form.setValue(`items.${index}.price`, price);
+      form.setValue(`items.${index}.price`, price, { shouldValidate: true });
   };
 
   const generateQuoteNumber = (num: string) => {
@@ -514,7 +515,7 @@ export default function QuoteGenerator() {
                 </div>
               )}
             </CardContent>
-            <CardFooter className="flex flex-col items-end gap-4 text-right">
+            <CardFooter className="flex flex-col items-stretch gap-4 text-right">
                 <div className="w-full grid grid-cols-2 gap-4">
                     <div className='col-start-2 grid grid-cols-2 gap-4'>
                         <div>
@@ -542,7 +543,7 @@ export default function QuoteGenerator() {
                          )}
                     </div>
                 </div>
-                {summary && (
+                 {summary && (
                     <div className="w-full pt-4 mt-4 border-t">
                         <Button className="w-full" variant="default" onClick={openPrintView}>
                             <Printer className="mr-2" />
@@ -558,3 +559,5 @@ export default function QuoteGenerator() {
     </div>
   );
 }
+
+    
