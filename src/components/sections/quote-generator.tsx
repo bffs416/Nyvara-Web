@@ -426,7 +426,14 @@ export default function QuoteGenerator() {
                                     <FormLabel>Precio Unitario (COP)</FormLabel>
                                     <div className="flex items-center gap-2">
                                         <FormControl>
-                                            <Input type="number" step="1000" {...field} onChange={e => field.onChange(parseFloat(e.target.value) || 0)} />
+                                            <Input 
+                                                type="number" 
+                                                step="1000" 
+                                                {...field} 
+                                                value={field.value || ''}
+                                                onChange={e => field.onChange(e.target.value === '' ? 0 : parseFloat(e.target.value))}
+                                                placeholder="0"
+                                            />
                                         </FormControl>
                                          <DialogTrigger asChild>
                                             <Button type="button" variant="outline" size="icon">
