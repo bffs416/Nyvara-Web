@@ -15,6 +15,8 @@ import { useToast } from '@/hooks/use-toast';
 import { siteConfig } from '@/lib/config';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { quoteTemplates } from '@/lib/quote-templates';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 import {
   Dialog,
   DialogContent,
@@ -52,6 +54,16 @@ export type QuoteFormData = z.infer<typeof quoteFormSchema>;
 
 const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(value);
+};
+
+const SMMLV_2025 = 1423500;
+
+const ARL_RISKS = {
+    "1": { rate: 0.00522, description: "Riesgo I: Oficina, consultoría, financiero." },
+    "2": { rate: 0.01044, description: "Riesgo II: Labores de manufactura o agrícolas." },
+    "3": { rate: 0.02436, description: "Riesgo III: Labores con máquinas o herramientas." },
+    "4": { rate: 0.04350, description: "Riesgo IV: Transporte, vigilancia con armas." },
+    "5": { rate: 0.06960, description: "Riesgo V: Construcción, alturas, explosivos." },
 };
 
 const PriceCalculator = ({ onItemIndex, onPriceCalculated }: { onItemIndex: number; onPriceCalculated: (index: number, price: number) => void; }) => {
@@ -175,6 +187,9 @@ export default function QuoteGenerator() {
   const [summary, setSummary] = useState('');
   const [activeTemplate, setActiveTemplate] = useState<string | null>(null);
   const { toast } = useToast();
+  const [includeContractorCosts, setIncludeContractorCosts] = useState(false);
+  const [arlRiskLevel, setArlRiskLevel] = useState<keyof typeof ARL_RISKS>("1");
+  const [contractorCosts, setContractorCosts] = useState({ socialSecurity: 0, withholdings: 0 });
 
   const form = useForm<QuoteFormData>({
     resolver: zodResolver(quoteFormSchema),
@@ -201,8 +216,33 @@ export default function QuoteGenerator() {
   const watchedItems = form.watch('items');
   const watchedIva = form.watch('ivaPercentage');
   const subtotal = watchedItems.reduce((acc, item) => acc + (item.quantity || 0) * (item.price || 0), 0);
-  const ivaAmount = subtotal * (watchedIva / 100);
-  const total = subtotal + ivaAmount;
+  
+  useEffect(() => {
+    if (includeContractorCosts) {
+        let calculatedIbc = subtotal * 0.4;
+        if (calculatedIbc < SMMLV_2025) {
+            calculatedIbc = SMMLV_2025;
+        }
+
+        const health = calculatedIbc * 0.125;
+        const pension = calculatedIbc * 0.16;
+        const arl = calculatedIbc * ARL_RISKS[arlRiskLevel].rate;
+        const totalSocialSecurity = health + pension + arl;
+        
+        const retefuente = subtotal * 0.10; // Asumiendo que es sobre el subtotal
+        const reteica = subtotal * (9.66 / 1000);
+        const totalWithholdings = retefuente + reteica;
+
+        setContractorCosts({ socialSecurity: totalSocialSecurity, withholdings: totalWithholdings });
+    } else {
+        setContractorCosts({ socialSecurity: 0, withholdings: 0 });
+    }
+  }, [subtotal, includeContractorCosts, arlRiskLevel]);
+
+  const totalContractorCosts = contractorCosts.socialSecurity + contractorCosts.withholdings;
+  const finalSubtotal = subtotal + totalContractorCosts;
+  const ivaAmount = finalSubtotal * (watchedIva / 100);
+  const total = finalSubtotal + ivaAmount;
   
   const handleTemplateChange = (templateKey: string) => {
     const template = quoteTemplates[templateKey as keyof typeof quoteTemplates];
@@ -240,8 +280,19 @@ export default function QuoteGenerator() {
     validityDate.setDate(issueDate.getDate() + 15);
     const finalQuoteNumber = generateQuoteNumber(data.quoteNumber);
 
+    const itemsForPrint = [...data.items];
+    if (includeContractorCosts && totalContractorCosts > 0) {
+        itemsForPrint.push({
+            id: 'contractor-costs',
+            description: 'Costos Administrativos y de Gestión (Seguridad Social y Retenciones)',
+            quantity: 1,
+            price: totalContractorCosts,
+            section: 'Costos Administrativos'
+        });
+    }
+
     // Save data to localStorage for the print view
-    const printData = { ...data, finalQuoteNumber, issueDate: issueDate.toISOString(), validityDate: validityDate.toISOString() };
+    const printData = { ...data, items: itemsForPrint, finalQuoteNumber, issueDate: issueDate.toISOString(), validityDate: validityDate.toISOString() };
     localStorage.setItem('quotePrintData', JSON.stringify(printData));
 
     let summaryText = `**************************************************\n`;
@@ -267,14 +318,14 @@ export default function QuoteGenerator() {
     summaryText += `  - Fecha de expedición: ${issueDate.toLocaleDateString('es-CO')}\n`;
     summaryText += `  - Validez de la oferta: ${validityDate.toLocaleDateString('es-CO')} (15 días)\n\n`;
     
-    const itemsBySection: { [key: string]: typeof data.items } = data.items.reduce((acc, item) => {
+    const itemsBySection: { [key: string]: typeof itemsForPrint } = itemsForPrint.reduce((acc, item) => {
         const section = item.section || 'Servicios Generales';
         if (!acc[section]) {
             acc[section] = [];
         }
         acc[section].push(item);
         return acc;
-    }, {} as { [key: string]: typeof data.items });
+    }, {} as { [key: string]: typeof itemsForPrint });
 
     summaryText += `--------------------------------------------------\n`;
     summaryText += `DESCRIPCIÓN DE SERVICIOS / PRODUCTOS\n`;
@@ -282,7 +333,7 @@ export default function QuoteGenerator() {
     
     Object.entries(itemsBySection).forEach(([section, items]) => {
         summaryText += `\n**${section.toUpperCase()}**\n`;
-        items.forEach((item, index) => {
+        items.forEach((item) => {
             summaryText += `\n  ÍTEM: ${item.description}\n`;
             summaryText += `    - Cantidad: ${item.quantity}\n`;
             summaryText += `    - Precio Unitario: ${formatCurrency(item.price)}\n`;
@@ -294,7 +345,7 @@ export default function QuoteGenerator() {
     summaryText += `--------------------------------------------------\n`;
     summaryText += `RESUMEN DE LA INVERSIÓN\n`;
     summaryText += `--------------------------------------------------\n`;
-    summaryText += `  - Subtotal: ${formatCurrency(subtotal)}\n`;
+    summaryText += `  - Subtotal: ${formatCurrency(finalSubtotal)}\n`;
     summaryText += `  - IVA (${data.ivaPercentage}%): ${formatCurrency(ivaAmount)}\n`;
     summaryText += `  ------------------------------------------------\n`;
     summaryText += `  - INVERSIÓN TOTAL: ${formatCurrency(total)}\n`;
@@ -428,11 +479,11 @@ export default function QuoteGenerator() {
                                         <FormControl>
                                             <Input 
                                                 type="number" 
-                                                step="1000" 
-                                                {...field} 
+                                                step="1000"
+                                                placeholder="0"
+                                                {...field}
                                                 value={field.value || ''}
                                                 onChange={e => field.onChange(e.target.value === '' ? 0 : parseFloat(e.target.value))}
-                                                placeholder="0"
                                             />
                                         </FormControl>
                                          <DialogTrigger asChild>
@@ -526,7 +577,7 @@ export default function QuoteGenerator() {
                 <div className="w-full grid grid-cols-2 gap-4">
                     <div className='col-start-2 grid grid-cols-2 gap-4'>
                         <div>
-                            <p className='text-muted-foreground'>Subtotal</p>
+                            <p className='text-muted-foreground'>Subtotal Ítems</p>
                             <p className='text-lg font-bold'>{formatCurrency(subtotal)}</p>
                         </div>
                         <div>
@@ -535,10 +586,36 @@ export default function QuoteGenerator() {
                         </div>
                     </div>
                 </div>
+
+                <div className="w-full border-t pt-4 mt-4 space-y-4">
+                    <div className="flex items-center space-x-2 justify-end">
+                        <Label htmlFor="contractor-costs-switch" className="text-muted-foreground">Incluir Costos de Contratista</Label>
+                        <Switch id="contractor-costs-switch" checked={includeContractorCosts} onCheckedChange={setIncludeContractorCosts} />
+                    </div>
+                    {includeContractorCosts && (
+                        <div className="p-4 rounded-md bg-secondary/50 text-left space-y-4">
+                            <h4 className="font-semibold text-primary">Cálculo de Costos del Contratista</h4>
+                             <Select onValueChange={(value) => setArlRiskLevel(value as keyof typeof ARL_RISKS)} defaultValue={arlRiskLevel}>
+                                <SelectTrigger><SelectValue placeholder="Seleccionar Nivel de Riesgo ARL" /></SelectTrigger>
+                                <SelectContent>
+                                    {Object.entries(ARL_RISKS).map(([level, {description}]) => (
+                                        <SelectItem key={level} value={level}>{description}</SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                            <div className="text-xs space-y-1 text-muted-foreground">
+                                <p className="flex justify-between"><span>+ Seguridad Social (PILA):</span> <span>{formatCurrency(contractorCosts.socialSecurity)}</span></p>
+                                <p className="flex justify-between"><span>+ Retenciones (Fuente, ICA):</span> <span>{formatCurrency(contractorCosts.withholdings)}</span></p>
+                            </div>
+                             <p className="flex justify-between font-bold text-sm border-t border-border pt-2"><span>Total Costos Adicionales:</span> <span>{formatCurrency(totalContractorCosts)}</span></p>
+                        </div>
+                    )}
+                </div>
+
                 <div className='w-full border-t pt-4 mt-4'>
                     <div className="flex justify-end items-center gap-4">
                          <div>
-                            <p className='text-muted-foreground'>Total</p>
+                            <p className='text-muted-foreground'>Total a Cobrar</p>
                             <p className='text-3xl font-bold text-primary'>{formatCurrency(total)}</p>
                         </div>
                          {summary && (
@@ -566,3 +643,5 @@ export default function QuoteGenerator() {
     </div>
   );
 }
+
+    
