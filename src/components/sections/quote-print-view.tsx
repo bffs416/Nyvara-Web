@@ -18,24 +18,19 @@ const QuotePrintView = () => {
     useEffect(() => {
         const savedData = localStorage.getItem('quotePrintData');
         if (savedData) {
-            setData(JSON.parse(savedData));
+            const parsedData = JSON.parse(savedData);
+            setData(parsedData);
+            // Trigger print dialog once data is set
+            setTimeout(() => window.print(), 500);
         }
     }, []);
-
-    useEffect(() => {
-        if (data) {
-            setTimeout(() => {
-                window.print();
-            }, 500); // Small delay to ensure content is rendered
-        }
-    }, [data]);
 
     const formatCurrency = (value: number) => {
         return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(value);
     };
 
     if (!data) {
-        return <div className="p-10">Cargando datos de la propuesta...</div>;
+        return null; // Render nothing until data is loaded
     }
     
     const subtotal = data.items.reduce((acc, item) => acc + (item.quantity || 0) * (item.price || 0), 0);
@@ -60,33 +55,30 @@ const QuotePrintView = () => {
     }
 
     return (
-        <div className="bg-white text-black font-body p-12 max-w-4xl mx-auto">
+        <div className="bg-white text-black font-body p-12 max-w-4xl mx-auto print-container">
              <style jsx global>{`
                 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Lato:wght@400;700&display=swap');
                 
-                body {
-                    -webkit-print-color-adjust: exact;
-                    print-color-adjust: exact;
-                }
-
                 @media print {
                     body, html {
                         margin: 0;
                         padding: 0;
-                        width: 210mm;
-                        height: 297mm;
+                        -webkit-print-color-adjust: exact;
+                        print-color-adjust: exact;
+                    }
+                    .print-container {
+                        max-width: 100%;
+                        margin: 0;
+                        padding: 2.5cm; /* Margenes estándar de A4 */
+                        box-shadow: none;
+                        border: none;
                     }
                     .no-print {
                         display: none;
                     }
                 }
-
-                .font-headline {
-                    font-family: 'Cormorant Garamond', serif;
-                }
-                .font-body {
-                    font-family: 'Lato', sans-serif;
-                }
+                .font-headline { font-family: 'Cormorant Garamond', serif; }
+                .font-body { font-family: 'Lato', sans-serif; }
             `}</style>
             
             <header className="flex justify-between items-start pb-8 border-b-2 border-gray-900">
@@ -199,5 +191,3 @@ const QuotePrintView = () => {
 };
 
 export default QuotePrintView;
-
-    

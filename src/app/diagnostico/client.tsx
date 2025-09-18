@@ -233,7 +233,7 @@ export default function DiagnosticoClient() {
             <ServerCrash className="h-12 w-12 text-destructive mb-4" />
             <h2 className="text-2xl font-semibold text-destructive">¡Oops! Algo salió mal.</h2>
             <p className="text-destructive/80 mt-2">{error}</p>
-              <button onClick={resetFlow} className="mt-4 bg-destructive text-destructive-foreground px-4 py-2 rounded">Intentar de Nuevo</button>
+              <Button onClick={resetFlow} className="mt-4 bg-destructive text-destructive-foreground px-4 py-2 rounded">Intentar de Nuevo</Button>
           </div>
         )}
 

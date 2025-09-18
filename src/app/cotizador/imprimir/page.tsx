@@ -1,23 +1,23 @@
 
 import React from 'react';
 import QuotePrintView from '@/components/sections/quote-print-view';
+import { Suspense } from 'react';
+import { Loader2 } from 'lucide-react';
+
+const LoadingFallback = () => (
+    <div className="flex items-center justify-center h-screen">
+        <Loader2 className="h-12 w-12 animate-spin text-primary" />
+        <p className="ml-4 text-lg">Cargando propuesta...</p>
+    </div>
+);
+
 
 const PrintQuotePage = () => {
     return (
-        <html>
-            <head>
-                <title>Propuesta Comercial</title>
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-                <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
-            </head>
-            <body>
-                <QuotePrintView />
-            </body>
-        </html>
+        <Suspense fallback={<LoadingFallback />}>
+            <QuotePrintView />
+        </Suspense>
     );
 };
 
 export default PrintQuotePage;
-
-    

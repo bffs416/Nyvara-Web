@@ -28,7 +28,7 @@ import {
 const quoteItemSchema = z.object({
   id: z.string().optional(),
   description: z.string().min(1, 'La descripción es requerida.'),
-  quantity: z.number().min(1, 'La cantidad debe ser al menos 1.'),
+  quantity: z.number().min(0, 'La cantidad no puede ser negativa.'),
   price: z.number().min(0, 'El precio no puede ser negativo.'),
   section: z.string().optional(),
 });
@@ -121,7 +121,7 @@ export default function QuoteGenerator() {
       quoteNumber: `1`,
       projectName: '',
       items: [{ description: '', quantity: 1, price: 0, section: 'Servicios Generales' }],
-      ivaPercentage: 0,
+      ivaPercentage: 19,
       paymentConditions: '50% para iniciar el proyecto, 50% contra entrega final.',
       notes: 'Esta cotización no incluye costos de licenciamiento de software de terceros, a menos que se especifique lo contrario. Cualquier cambio solicitado sobre el alcance definido en esta propuesta estará sujeto a una nueva cotización.',
     },
@@ -152,7 +152,6 @@ export default function QuoteGenerator() {
     const newItems = template.secciones.flatMap(section => 
         section.items.map(item => ({
             ...item,
-            quantity: 1,
             price: item.price || 0,
             section: section.nombre_seccion,
         }))
@@ -468,7 +467,7 @@ export default function QuoteGenerator() {
                 <p className='text-muted-foreground'>Total</p>
                 <p className='text-3xl font-bold text-primary'>{formatCurrency(total)}</p>
             </div>
-            {summary && (
+             {summary && (
                 <div className="w-full pt-4 mt-4 border-t">
                     <Button className="w-full" variant="default" onClick={openPrintView}>
                         <Printer className="mr-2" />
@@ -481,5 +480,3 @@ export default function QuoteGenerator() {
     </div>
   );
 }
-
-    
