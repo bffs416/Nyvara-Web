@@ -397,8 +397,8 @@ export default function QuoteGenerator() {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <Card>
+    <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+      <Card className="lg:col-span-3">
         <CardHeader>
           <CardTitle>Crear Propuesta Comercial</CardTitle>
         </CardHeader>
@@ -481,7 +481,6 @@ export default function QuoteGenerator() {
                                                 type="number" 
                                                 step="1000"
                                                 placeholder="0"
-                                                {...field}
                                                 value={field.value || ''}
                                                 onChange={e => field.onChange(e.target.value === '' ? 0 : parseFloat(e.target.value))}
                                             />
@@ -551,7 +550,7 @@ export default function QuoteGenerator() {
       </Card>
       
       <Dialog>
-          <Card>
+          <Card className="lg:col-span-2">
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle>Resumen para Copiar</CardTitle>
               {summary && (
@@ -643,5 +642,3 @@ export default function QuoteGenerator() {
     </div>
   );
 }
-
-    

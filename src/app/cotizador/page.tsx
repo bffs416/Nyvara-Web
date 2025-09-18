@@ -16,7 +16,7 @@ const CotizadorPage = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-1 py-32">
+      <main className="flex-1 py-20 md:py-32">
         <div className="container mx-auto px-6">
             <div className="text-center mb-12">
                 <h1 className="text-5xl md:text-7xl font-bold mb-4 text-primary font-headline">Generador de Cotizaciones</h1>
@@ -25,7 +25,9 @@ const CotizadorPage = () => {
                 </p>
             </div>
             <Suspense fallback={<LoadingFallback />}>
-                <QuoteGenerator />
+                <div className="max-w-7xl mx-auto">
+                  <QuoteGenerator />
+                </div>
             </Suspense>
         </div>
       </main>
