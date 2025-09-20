@@ -5,7 +5,7 @@ export const Q1_ROLE_OPTIONS = [
     "Dermatólogo/a",
     "Cirujano/a Plástico/a",
     "Gerente de la Clínica",
-    "Otro Rol Administrativo",
+    "Otra especialidad",
 ];
 
 export const Q2_SERVICES_OPTIONS = [

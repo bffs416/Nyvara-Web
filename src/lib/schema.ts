@@ -8,6 +8,7 @@ export const surveySchema = z.object({
   q1_phone: z.string().min(1, "El número de contacto es requerido."),
   q1_experience: z.number().nullable().optional(),
   q1_role: z.array(z.string()).optional(),
+  q1_role_other: z.string().optional(),
   
   // Section 2
   q2_services: z.array(z.string()).optional(),
@@ -22,7 +23,7 @@ export const surveySchema = z.object({
 
   // Section 5
   q5_emotions: z.array(z.string()).max(3, "Selecciona como máximo 3 opciones.").optional(),
-  q5_other: z.string().optional(),
+  q5_other: z-string().optional(),
   
   // Section 6
   q6_why: z.string().min(1, "Describe el impacto que buscas."),

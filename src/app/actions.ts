@@ -33,7 +33,7 @@ export async function summarizeSurveyDataForDownload(data: SurveyFormData): Prom
     }
 
     const {
-        q1_name, q1_location, q1_country, q1_phone, q1_experience, q1_role,
+        q1_name, q1_location, q1_country, q1_phone, q1_experience, q1_role, q1_role_other,
         q2_services, q2_unique, q3_persona, q4_perception, q4_other,
         q5_emotions, q5_other, q6_why, q7_differentiation, q7_why, q7_other,
         q8_value, q8_other, q9_presence, q9_other, q10_rating, q10_challenges, q10_other,
@@ -47,7 +47,7 @@ export async function summarizeSurveyDataForDownload(data: SurveyFormData): Prom
     summary += `Ubicación: ${q1_location}, ${q1_country}\n`;
     summary += `Teléfono: ${q1_phone}\n`;
     if(q1_experience) summary += `Años de Experiencia: ${q1_experience}\n`;
-    if (q1_role?.length) summary += `Rol Principal: ${q1_role.join(', ')}\n`;
+    if (q1_role?.length) summary += `Rol Principal: ${q1_role.join(', ')}${q1_role_other ? ` (${q1_role_other})` : ''}\n`;
     summary += `\n`;
 
     summary += `--- SECCIÓN 2: OFERTA DE SERVICIOS ---\n`;
@@ -209,6 +209,7 @@ export async function handleGeneralSurveySubmission(
     q1_country: 'N/A', 
     q1_phone: phone,
     q1_role: [role],
+    q1_role_other: undefined,
     q2_services: [business_description],
     q2_unique: `Servicios principales: ${main_services}`,
     q3_persona: `Público objetivo: ${target_audience}`,

@@ -39,7 +39,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
   const form = useForm<SurveyFormData>({
     resolver: zodResolver(surveySchema),
     defaultValues: {
-      q1_name: "", q1_location: "", q1_country: "", q1_phone: "", q1_experience: undefined, q1_role: [],
+      q1_name: "", q1_location: "", q1_country: "", q1_phone: "", q1_experience: undefined, q1_role: [], q1_role_other: "",
       q2_services: [], q2_unique: "",
       q3_persona: "",
       q4_perception: [], q4_other: "", 
@@ -138,6 +138,9 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                         <FormMessage />
                     </FormItem>
                   )} />
+                  {watchedRole?.includes("Otra especialidad") && (
+                    <FormField name="q1_role_other" control={form.control} render={({ field }) => <FormItem><FormLabel>Por favor, especifica tu otra especialidad</FormLabel><FormControl><Input placeholder="Escribe aquí..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
+                  )}
                 </div>
               </div>
 
