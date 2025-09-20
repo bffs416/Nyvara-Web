@@ -34,10 +34,10 @@ export async function summarizeSurveyDataForDownload(data: SurveyFormData): Prom
 
     const {
         q1_name, q1_location, q1_country, q1_phone, q1_experience, q1_role, q1_role_other,
-        q2_services, q2_unique, q3_persona, q4_perception, q4_other,
+        q2_services, q2_unique, q2_other, q3_persona, q4_perception, q4_other,
         q5_emotions, q5_other, q6_why, q7_differentiation, q7_why, q7_other,
         q8_value, q8_other, q9_presence, q9_other, q10_rating, q10_challenges, q10_other,
-        q11_training, q12_details, q13_colors, q14_hobby, q15_final, competitors
+        q11_training, q12_details, q13_colors, q13_other, q14_hobby, q15_final, competitors
     } = validatedData.data;
 
     let summary = `RESUMEN DE DIAGNÓSTICO ESTRATÉGICO - SECTOR SALUD\n`;
@@ -51,7 +51,7 @@ export async function summarizeSurveyDataForDownload(data: SurveyFormData): Prom
     summary += `\n`;
 
     summary += `--- SECCIÓN 2: OFERTA DE SERVICIOS ---\n`;
-    if (q2_services?.length) summary += `Servicios Principales: ${q2_services.join(', ')}\n`;
+    if (q2_services?.length) summary += `Servicios Principales: ${q2_services.join(', ')}${q2_other ? ` (${q2_other})` : ''}\n`;
     if (q2_unique) summary += `Servicios Únicos: ${q2_unique}\n`;
     summary += `\n`;
 
@@ -74,7 +74,7 @@ export async function summarizeSurveyDataForDownload(data: SurveyFormData): Prom
     summary += `--- SECCIÓN 6: VISIÓN A FUTURO Y PREFERENCIAS ---\n`;
     summary += `Interés en Capacitar a Otros: ${q11_training}\n`;
     if (q12_details) summary += `Temas de Capacitación: ${q12_details}\n`;
-    if (q13_colors?.length) summary += `Paleta de Colores de la Marca: ${q13_colors.join(', ')}\n`;
+    if (q13_colors?.length) summary += `Paleta de Colores de la Marca: ${q13_colors.join(', ')}${q13_other ? ` (${q13_other})` : ''}\n`;
     if (q14_hobby) summary += `Hobbies/Intereses: ${q14_hobby}\n\n`;
 
     if (q15_final) {
@@ -219,6 +219,7 @@ export async function handleGeneralSurveySubmission(
     q13_colors: ["No aplica (Formulario General)"],
     q15_final: `Email: ${email} | Información adicional: ${additional_info || 'Ninguna'}`,
     q1_experience: undefined,
+    q2_other: undefined,
     q4_perception: undefined,
     q4_other: undefined,
     q5_emotions: undefined,
@@ -233,6 +234,7 @@ export async function handleGeneralSurveySubmission(
     q10_other: undefined,
     q11_training: undefined,
     q12_details: undefined,
+    q13_other: undefined,
     q14_hobby: undefined
   };
 

@@ -40,7 +40,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
     resolver: zodResolver(surveySchema),
     defaultValues: {
       q1_name: "", q1_location: "", q1_country: "", q1_phone: "", q1_experience: undefined, q1_role: [], q1_role_other: "",
-      q2_services: [], q2_unique: "",
+      q2_services: [], q2_unique: "", q2_other: "",
       q3_persona: "",
       q4_perception: [], q4_other: "", 
       q5_emotions: [], q5_other: "",
@@ -50,7 +50,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
       q9_presence: [], q9_other: "",
       q10_rating: 5, q10_challenges: [], q10_other: "",
       q11_training: undefined, q12_details: "",
-      q13_colors: [], q14_hobby: "", q15_final: "",
+      q13_colors: [], q13_other: "", q14_hobby: "", q15_final: "",
       competitors: [{ name: "" }],
     },
   });
@@ -102,16 +102,18 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
     }
   };
   
-  const watchedTraining = form.watch("q11_training");
-  const watchedRating = form.watch("q10_rating");
+  const watchedRole = form.watch("q1_role");
+  const watchedServices = form.watch("q2_services");
+  const watchedPerception = form.watch("q4_perception");
+  const watchedEmotions = form.watch("q5_emotions");
   const watchedDifferentiation = form.watch("q7_differentiation");
   const watchedValue = form.watch("q8_value");
   const watchedPresence = form.watch("q9_presence");
   const watchedChallenges = form.watch("q10_challenges");
-  const watchedPerception = form.watch("q4_perception");
-  const watchedEmotions = form.watch("q5_emotions");
-  const watchedServices = form.watch("q2_services");
-  const watchedRole = form.watch("q1_role");
+  const watchedTraining = form.watch("q11_training");
+  const watchedColors = form.watch("q13_colors");
+  const watchedRating = form.watch("q10_rating");
+
 
   return (
     <>
@@ -155,6 +157,9 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                         <FormMessage />
                     </FormItem>
                  )} />
+                  {watchedServices?.includes("Otro") && (
+                    <FormField name="q2_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica otro servicio</FormLabel><FormControl><Input placeholder="Escribe aquí..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
+                  )}
                 
                 <FormField name="q2_unique" control={form.control} render={({ field }) => <FormItem className="mt-6"><FormLabel>¿Existen servicios o especialidades únicas que los diferencien?</FormLabel><FormControl><Textarea rows={4} placeholder="Ej: Nuestra técnica 'Renacer Lift' combina hilos tensores con bioestimuladores para un resultado natural sin cirugía." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
               </div>
@@ -251,6 +256,9 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                         <FormMessage />
                     </FormItem>
                  )} />
+                {watchedColors?.includes("Otro") && (
+                    <FormField name="q13_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica otro color</FormLabel><FormControl><Input placeholder="Escribe aquí..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
+                )}
 
                 <FormField name="q14_hobby" control={form.control} render={({ field }) => <FormItem className="mt-6"><FormLabel>¿Qué te gusta hacer en tu tiempo libre? (Opcional)</FormLabel><FormControl><Textarea rows={3} placeholder="¿Algún hobby o interés que te apasione?" {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
               </div>

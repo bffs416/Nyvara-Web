@@ -13,6 +13,7 @@ export const surveySchema = z.object({
   // Section 2
   q2_services: z.array(z.string()).optional(),
   q2_unique: z.string().optional(),
+  q2_other: z.string().optional(),
   
   // Section 3
   q3_persona: z.string().min(1, "Describe la personalidad de tu marca."),
@@ -52,6 +53,7 @@ export const surveySchema = z.object({
   
   // Section 12
   q13_colors: z.array(z.string()).optional(),
+  q13_other: z.string().optional(),
   q14_hobby: z.string().optional(),
 
   // Section 13
