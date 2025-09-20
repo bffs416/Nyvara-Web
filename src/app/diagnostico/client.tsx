@@ -30,19 +30,16 @@ const SuccessMessage = () => (
         className="bg-card border border-border/50 p-8 rounded-lg shadow-2xl text-center space-y-6"
     >
         <CheckCircle className="mx-auto h-16 w-16 text-primary mb-4" />
-        <h2 className="text-3xl font-bold font-headline text-primary">¡Diagnóstico Enviado con Éxito!</h2>
+        <h2 className="text-3xl font-bold font-headline text-primary">¡Diagnóstico Enviado! Gracias por tu tiempo.</h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-            Hemos recibido tus respuestas de forma segura. Nuestro equipo de expertos las revisará detenidamente y se pondrá en contacto contigo en breve para discutir los siguientes pasos.
+            Has dado un paso fundamental. He recibido tus respuestas y, gracias a los minutos que has invertido, ahora puedo dedicar todo mi esfuerzo y conocimiento en analizar tu visión para construir juntos el camino hacia tu objetivo.
+            <br/><br/>
+            <strong className="text-foreground">Revisaré personalmente cada detalle y me pondré en contacto contigo muy pronto.</strong>
         </p>
         <div className="flex justify-center gap-4 pt-4">
             <Button asChild>
                 <Link href="/">
                     Volver al Inicio
-                </Link>
-            </Button>
-            <Button variant="outline" asChild>
-                <Link href="/#contact">
-                    Contactar Ahora
                 </Link>
             </Button>
         </div>

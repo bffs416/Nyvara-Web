@@ -46,11 +46,12 @@ export async function summarizeSurveyDataForDownload(data: SurveyFormData): Prom
     summary += `Nombre: ${q1_name}\n`;
     summary += `Ubicación: ${q1_location}, ${q1_country}\n`;
     summary += `Teléfono: ${q1_phone}\n`;
-    summary += `Años de Experiencia: ${q1_experience}\n`;
-    summary += `Rol Principal: ${q1_role}\n\n`;
+    if(q1_experience) summary += `Años de Experiencia: ${q1_experience}\n`;
+    if (q1_role?.length) summary += `Rol Principal: ${q1_role.join(', ')}\n`;
+    summary += `\n`;
 
     summary += `--- SECCIÓN 2: OFERTA DE SERVICIOS ---\n`;
-    summary += `Servicios Principales: ${q2_services}\n`;
+    if (q2_services?.length) summary += `Servicios Principales: ${q2_services.join(', ')}\n`;
     if (q2_unique) summary += `Servicios Únicos: ${q2_unique}\n`;
     summary += `\n`;
 
@@ -73,7 +74,7 @@ export async function summarizeSurveyDataForDownload(data: SurveyFormData): Prom
     summary += `--- SECCIÓN 6: VISIÓN A FUTURO Y PREFERENCIAS ---\n`;
     summary += `Interés en Capacitar a Otros: ${q11_training}\n`;
     if (q12_details) summary += `Temas de Capacitación: ${q12_details}\n`;
-    summary += `Paleta de Colores de la Marca: ${q13_colors}\n`;
+    if (q13_colors?.length) summary += `Paleta de Colores de la Marca: ${q13_colors.join(', ')}\n`;
     if (q14_hobby) summary += `Hobbies/Intereses: ${q14_hobby}\n\n`;
 
     if (q15_final) {
@@ -149,12 +150,15 @@ export async function handleSurveySubmission(
   const submissionData = {
     ...restOfData,
     competitors: competitors?.map(c => c.name).filter(Boolean) as string[] | undefined,
+    q1_role: restOfData.q1_role || [],
+    q2_services: restOfData.q2_services || [],
     q4_perception: restOfData.q4_perception || [],
     q5_emotions: restOfData.q5_emotions || [],
     q7_differentiation: restOfData.q7_differentiation || [],
     q8_value: restOfData.q8_value || [],
     q9_presence: restOfData.q9_presence || [],
     q10_challenges: restOfData.q10_challenges || [],
+    q13_colors: restOfData.q13_colors || [],
   };
 
   try {
@@ -199,19 +203,19 @@ export async function handleGeneralSurveySubmission(
   } = validatedData.data;
 
   // Mapear datos del formulario general a la estructura de la encuesta de salud
-  const mappedData: Omit<SurveyFormData, 'competitors'> & { competitors?: string[] } = {
+  const mappedData: Omit<SurveyFormData, 'competitors' | 'q1_role' | 'q2_services' | 'q13_colors'> & { competitors?: string[], q1_role?: string[], q2_services?: string[], q13_colors?: string[] } = {
     q1_name: `${name} (${company})`,
     q1_location: 'N/A',
     q1_country: 'N/A', 
     q1_phone: phone,
-    q1_role: role,
-    q2_services: business_description,
+    q1_role: [role],
+    q2_services: [business_description],
     q2_unique: `Servicios principales: ${main_services}`,
     q3_persona: `Público objetivo: ${target_audience}`,
     q6_why: `Metas principales: ${goals}`,
     q7_why: `Desafíos principales: ${challenges}`,
     q9_presence: interested_services,
-    q13_colors: "No aplica (Formulario General)",
+    q13_colors: ["No aplica (Formulario General)"],
     q15_final: `Email: ${email} | Información adicional: ${additional_info || 'Ninguna'}`,
     q1_experience: undefined,
     q4_perception: undefined,

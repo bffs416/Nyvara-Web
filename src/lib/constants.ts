@@ -1,4 +1,29 @@
 
+export const Q1_ROLE_OPTIONS = [
+    "Director/a Médico/a",
+    "Médico/a Estético/a",
+    "Dermatólogo/a",
+    "Cirujano/a Plástico/a",
+    "Gerente de la Clínica",
+    "Otro Rol Administrativo",
+];
+
+export const Q2_SERVICES_OPTIONS = [
+    "Rellenos con Ácido Hialurónico",
+    "Bioestimuladores de Colágeno",
+    "Toxina Botulínica (Botox)",
+    "Hilos Tensores",
+    "Microneedling / Dermapen",
+    "Morpheus8 / Radiofrecuencia Fraccionada",
+    "Peelings Químicos",
+    "Tratamientos Láser (Rejuvenecimiento, Manchas)",
+    "Armonización Facial",
+    "Masculinización Facial",
+    "Tratamientos Corporales (Reducción, Celulitis)",
+    "Otro",
+];
+
+
 export const Q4_OPTIONS = [
   "Líder en innovación y tecnología",
   "Enfoque en resultados naturales y armoniosos",
@@ -66,6 +91,12 @@ export const Q11_OPTIONS = [
     { value: "yes", label: "Sí" },
     { value: "no", label: "No" },
     { value: "maybe", label: "No lo había pensado, pero me gustaría saber más" },
+];
+
+export const Q13_COLORS_OPTIONS = [
+    "Blanco", "Negro", "Gris", "Beige", "Dorado", "Plateado", "Azul Marino",
+    "Azul Cielo", "Verde Esmeralda", "Verde Menta", "Rosa Pálido", "Borgoña",
+    "Lila", "Naranja Terracota", "Otro"
 ];
 
 export const INTERESTED_SERVICES_OPTIONS = [

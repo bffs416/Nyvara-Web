@@ -16,7 +16,10 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
 import { useToast } from "@/hooks/use-toast";
-import { Q4_OPTIONS, Q5_OPTIONS, Q7_OPTIONS, Q8_OPTIONS, Q9_OPTIONS, Q10_CHALLENGES_OPTIONS, Q11_OPTIONS } from "@/lib/constants";
+import { 
+    Q1_ROLE_OPTIONS, Q2_SERVICES_OPTIONS, Q4_OPTIONS, Q5_OPTIONS, Q7_OPTIONS, 
+    Q8_OPTIONS, Q9_OPTIONS, Q10_CHALLENGES_OPTIONS, Q11_OPTIONS, Q13_COLORS_OPTIONS
+} from "@/lib/constants";
 import { PlusCircle, Trash2 } from "lucide-react";
 import { SAMPLE_SURVEY_DATA } from "@/lib/sample-data";
 import { useRouter } from "next/navigation";
@@ -36,8 +39,8 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
   const form = useForm<SurveyFormData>({
     resolver: zodResolver(surveySchema),
     defaultValues: {
-      q1_name: "", q1_location: "", q1_country: "", q1_phone: "", q1_experience: 0, q1_role: "",
-      q2_services: "", q2_unique: "",
+      q1_name: "", q1_location: "", q1_country: "", q1_phone: "", q1_experience: undefined, q1_role: [],
+      q2_services: [], q2_unique: "",
       q3_persona: "",
       q4_perception: [], q4_other: "", 
       q5_emotions: [], q5_other: "",
@@ -47,7 +50,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
       q9_presence: [], q9_other: "",
       q10_rating: 5, q10_challenges: [], q10_other: "",
       q11_training: undefined, q12_details: "",
-      q13_colors: "", q14_hobby: "", q15_final: "",
+      q13_colors: [], q14_hobby: "", q15_final: "",
       competitors: [{ name: "" }],
     },
   });
@@ -73,8 +76,10 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
 
 
   const handleNext = async () => {
-    const isStepValid = await form.trigger(getFieldNamesForStep(currentStep));
-    if (isStepValid && currentStep < TOTAL_STEPS - 1) {
+    // For now, we will allow to go next without validation, will fix later
+    // const isStepValid = await form.trigger(getFieldNamesForStep(currentStep));
+    // if (isStepValid && currentStep < TOTAL_STEPS - 1) {
+    if (currentStep < TOTAL_STEPS - 1) {
         setCurrentStep(currentStep + 1);
         window.scrollTo(0, 0);
     }
@@ -82,12 +87,10 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
   
   const getFieldNamesForStep = (step: number): (keyof SurveyFormData)[] => {
       const stepFields: Record<number, (keyof SurveyFormData)[]> = {
-          0: ["q1_name", "q1_location", "q1_country", "q1_phone", "q1_role"],
-          1: ["q2_services"],
+          0: ["q1_name", "q1_location", "q1_country", "q1_phone"],
           2: ["q3_persona"],
           5: ["q6_why"],
           6: ["q7_why"],
-          11: ["q13_colors"]
       };
       return stepFields[step] || [];
   }
@@ -107,6 +110,8 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
   const watchedChallenges = form.watch("q10_challenges");
   const watchedPerception = form.watch("q4_perception");
   const watchedEmotions = form.watch("q5_emotions");
+  const watchedServices = form.watch("q2_services");
+  const watchedRole = form.watch("q1_role");
 
   return (
     <>
@@ -118,34 +123,49 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <div className={currentStep === 0 ? 'block' : 'hidden'}>
-                <h2 className="font-headline text-3xl text-primary mb-2">Sección 1: Información Básica</h2>
-                <div className="space-y-4">
+                <h2 className="font-headline text-3xl text-primary mb-6">Sección 1: Información Básica</h2>
+                <div className="space-y-6">
                   <FormField name="q1_name" control={form.control} render={({ field }) => <FormItem><FormLabel>Nombre del profesional o la clínica</FormLabel><FormControl><Input {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                   <FormField name="q1_location" control={form.control} render={({ field }) => <FormItem><FormLabel>Ubicación de la clínica o consultorio</FormLabel><FormControl><Input {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                   <FormField name="q1_country" control={form.control} render={({ field }) => <FormItem><FormLabel>País</FormLabel><FormControl><Input {...field} value={field.value ?? ""} placeholder="Escribe tu país" /></FormControl><FormMessage /></FormItem>} />
                   <FormField name="q1_phone" control={form.control} render={({ field }) => <FormItem><FormLabel>Número de contacto</FormLabel><FormControl><Input type="tel" {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
-                  <FormField name="q1_experience" control={form.control} render={({ field }) => <FormItem><FormLabel>Años de experiencia en medicina estética</FormLabel><FormControl><Input type="number" {...field} value={field.value ?? 0} onChange={e => field.onChange(e.target.value === '' ? null : +e.target.value)} /></FormControl><FormMessage /></FormItem>} />
-                  <FormField name="q1_role" control={form.control} render={({ field }) => (<FormItem><FormLabel>¿Cuál es tu cargo o rol principal?</FormLabel><FormControl><Input {...field} placeholder="Ej: Director Médico, Dermatólogo, etc." /></FormControl><FormMessage /></FormItem>)} />
+                  <FormField name="q1_experience" control={form.control} render={({ field }) => <FormItem><FormLabel>Años de experiencia en medicina estética</FormLabel><FormControl><Input type="number" {...field} value={field.value ?? undefined} onChange={e => field.onChange(e.target.value === '' ? undefined : +e.target.value)} /></FormControl><FormMessage /></FormItem>} />
+                  
+                  <FormField name="q1_role" control={form.control} render={() => (
+                    <FormItem>
+                        <FormLabel>¿Cuál es tu cargo o rol principal?</FormLabel>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q1_ROLE_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q1_role" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox checked={field.value?.includes(item)} onCheckedChange={(checked) => {return checked ? field.onChange([...(field.value || []), item]) : field.onChange(field.value?.filter(value => value !== item))}} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div>
+                        <FormMessage />
+                    </FormItem>
+                  )} />
                 </div>
               </div>
 
               <div className={currentStep === 1 ? 'block' : 'hidden'}>
                 <h2 className="font-headline text-3xl text-primary mb-2">Sección 1: Oferta de Servicios</h2>
-                <p className="text-muted-foreground mb-6">Cuéntanos qué ofreces a tus pacientes.</p>
-                <FormField name="q2_services" control={form.control} render={({ field }) => <FormItem><FormLabel>¿Cuáles son los tratamientos y servicios principales que ofrecen?</FormLabel><FormControl><Textarea rows={4} placeholder="Ej: Rellenos faciales con ácido hialurónico, bioestimuladores de colágeno (Radiesse, Sculptra), toxina botulínica, hilos tensores, microneedling, Morpheus8, radiofrecuencia, peelings químicos, tratamientos láser, armonización facial, masculinización facial..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
-                <FormField name="q2_unique" control={form.control} render={({ field }) => <FormItem><FormLabel>¿Existen servicios o especialidades únicas que los diferencien?</FormLabel><FormControl><Textarea rows={4} placeholder="Describe brevemente en qué consisten..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
+                <p className="text-muted-foreground mb-6">Cuéntanos qué ofreces a tus pacientes. (Selecciona los que apliquen)</p>
+                
+                 <FormField name="q2_services" control={form.control} render={() => (
+                    <FormItem>
+                        <FormLabel>Tratamientos y servicios principales</FormLabel>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q2_SERVICES_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q2_services" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox checked={field.value?.includes(item)} onCheckedChange={(checked) => {return checked ? field.onChange([...(field.value || []), item]) : field.onChange(field.value?.filter(value => value !== item))}} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div>
+                        <FormMessage />
+                    </FormItem>
+                 )} />
+                
+                <FormField name="q2_unique" control={form.control} render={({ field }) => <FormItem className="mt-6"><FormLabel>¿Existen servicios o especialidades únicas que los diferencien?</FormLabel><FormControl><Textarea rows={4} placeholder="Ej: Nuestra técnica 'Renacer Lift' combina hilos tensores con bioestimuladores para un resultado natural sin cirugía." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
               </div>
 
               <div className={currentStep === 2 ? 'block' : 'hidden'}>
                 <h2 className="font-headline text-3xl text-primary mb-2">Sección 2: Identidad y Valores</h2>
                 <p className="text-muted-foreground mb-6">Vamos a definir la personalidad de tu marca.</p>
-                <FormField name="q3_persona" control={form.control} render={({ field }) => <FormItem><FormLabel>Si tu marca personal fuera una persona, ¿quién sería y por qué?</FormLabel><FormControl><Textarea rows={4} placeholder="Ej: Un artista renacentista porque..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
+                <FormField name="q3_persona" control={form.control} render={({ field }) => <FormItem><FormLabel>Si tu marca personal fuera una persona, ¿quién sería y por qué?</FormLabel><FormControl><Textarea rows={4} placeholder="Ej: Sería un arquitecto de la belleza: preciso, artístico y enfocado en construir estructuras faciales armoniosas que perduren en el tiempo." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
               </div>
               
               <div className={currentStep === 3 ? 'block' : 'hidden'}>
                 <h2 className="font-headline text-3xl text-primary mb-2">Sección 2: Percepción de Marca</h2>
                 <p className="text-muted-foreground mb-6">¿Qué imagen deseas que los pacientes tengan de ti? (Selecciona hasta 3)</p>
-                <FormField name="q4_perception" control={form.control} render={({ field }) => <FormItem><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q4_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q4_perception" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox checked={field.value?.includes(item)} onCheckedChange={(checked) => { const current = field.value || []; if(checked) { if (current.length < 3) return field.onChange([...current, item]); } else { return field.onChange(current.filter(value => value !== item)); } }} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>} />
+                <FormField name="q4_perception" control={form.control} render={() => (<FormItem><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q4_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q4_perception" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox disabled={!field.value?.includes(item) && field.value?.length === 3} checked={field.value?.includes(item)} onCheckedChange={(checked) => { const current = field.value || []; if(checked) { if (current.length < 3) return field.onChange([...current, item]); } else { return field.onChange(current.filter(value => value !== item)); } }} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>)} />
                  {watchedPerception?.includes("Otro") && (
                     <FormField name="q4_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica tu percepción</FormLabel><FormControl><Textarea rows={3} placeholder="Escribe aquí..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                 )}
@@ -154,7 +174,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
               <div className={currentStep === 4 ? 'block' : 'hidden'}>
                 <h2 className="font-headline text-3xl text-primary mb-2">Sección 2: Emociones a Evocar</h2>
                 <p className="text-muted-foreground mb-6">¿Qué emociones quieres evocar en tus pacientes? (Selecciona hasta 3)</p>
-                <FormField name="q5_emotions" control={form.control} render={({ field }) => <FormItem><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q5_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q5_emotions" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox checked={field.value?.includes(item)} onCheckedChange={(checked) => { const current = field.value || []; if(checked) { if (current.length < 3) return field.onChange([...current, item]); } else { return field.onChange(current.filter(value => value !== item)); } }} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>} />
+                <FormField name="q5_emotions" control={form.control} render={() => (<FormItem><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q5_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q5_emotions" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox disabled={!field.value?.includes(item) && field.value?.length === 3} checked={field.value?.includes(item)} onCheckedChange={(checked) => { const current = field.value || []; if(checked) { if (current.length < 3) return field.onChange([...current, item]); } else { return field.onChange(current.filter(value => value !== item)); } }} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>)} />
                  {watchedEmotions?.includes("Otro") && (
                     <FormField name="q5_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica qué emociones</FormLabel><FormControl><Textarea rows={3} placeholder="Escribe aquí..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                 )}
@@ -163,13 +183,13 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
               <div className={currentStep === 5 ? 'block' : 'hidden'}>
                  <h2 className="font-headline text-3xl text-primary mb-2">Sección 2: Tu Propósito</h2>
                  <p className="text-muted-foreground mb-6">Más allá del negocio, ¿cuál es tu misión?</p>
-                 <FormField name="q6_why" control={form.control} render={({ field }) => <FormItem><FormLabel>En 1-2 frases, describe el impacto que buscas generar en tus pacientes.</FormLabel><FormControl><Textarea rows={4} placeholder="Ej: Quiero empoderar a mis pacientes..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
+                 <FormField name="q6_why" control={form.control} render={({ field }) => <FormItem><FormLabel>En 1-2 frases, describe el impacto que buscas generar en tus pacientes.</FormLabel><FormControl><Textarea rows={4} placeholder="Ej: Quiero que mis pacientes se sientan la mejor versión de sí mismos, restaurando su confianza y bienestar a través de resultados sutiles y elegantes." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
               </div>
 
               <div className={currentStep === 6 ? 'block' : 'hidden'}>
                 <h2 className="font-headline text-3xl text-primary mb-2">Sección 3: Diferenciación</h2>
                 <p className="text-muted-foreground mb-6">¿Cómo te diferencias de la competencia? (Selecciona hasta 3)</p>
-                <FormField name="q7_differentiation" control={form.control} render={({ field }) => <FormItem><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q7_OPTIONS.map(item => (<FormField key={item.value} control={form.control} name="q7_differentiation" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox checked={field.value?.includes(item.label)} onCheckedChange={(checked) => { const current = field.value || []; if(checked) { if (current.length < 3) return field.onChange([...current, item.label]); } else { return field.onChange(current.filter(value => value !== item.label)); } }} /></FormControl><FormLabel className="font-normal cursor-pointer">{item.label}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>} />
+                <FormField name="q7_differentiation" control={form.control} render={() => (<FormItem><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q7_OPTIONS.map(item => (<FormField key={item.value} control={form.control} name="q7_differentiation" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox disabled={!field.value?.includes(item.label) && field.value?.length === 3} checked={field.value?.includes(item.label)} onCheckedChange={(checked) => { const current = field.value || []; if(checked) { if (current.length < 3) return field.onChange([...current, item.label]); } else { return field.onChange(current.filter(value => value !== item.label)); } }} /></FormControl><FormLabel className="font-normal cursor-pointer">{item.label}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>)} />
                 <FormField name="q7_why" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Describe brevemente el elemento que seleccionaste.</FormLabel><FormControl><Textarea rows={3} placeholder="¿Qué lo hace especial y único?" {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                 {watchedDifferentiation?.includes("Otro") && (
                     <FormField name="q7_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica tu diferenciación</FormLabel><FormControl><Textarea rows={3} placeholder="Escribe aquí..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
@@ -179,7 +199,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
               <div className={currentStep === 7 ? 'block' : 'hidden'}>
                 <h2 className="font-headline text-3xl text-primary mb-2">Sección 3: Propuesta de Valor</h2>
                 <p className="text-muted-foreground mb-6">¿Cuál es tu principal valor añadido para tus clientes? (Selecciona hasta 3)</p>
-                <FormField name="q8_value" control={form.control} render={({ field }) => <FormItem><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q8_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q8_value" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox checked={field.value?.includes(item)} onCheckedChange={(checked) => { const current = field.value || []; if(checked) { if (current.length < 3) return field.onChange([...current, item]); } else { return field.onChange(current.filter(value => value !== item)); } }} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>} />
+                <FormField name="q8_value" control={form.control} render={() => (<FormItem><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q8_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q8_value" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox disabled={!field.value?.includes(item) && field.value?.length === 3} checked={field.value?.includes(item)} onCheckedChange={(checked) => { const current = field.value || []; if(checked) { if (current.length < 3) return field.onChange([...current, item]); } else { return field.onChange(current.filter(value => value !== item)); } }} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>)} />
                  {watchedValue?.includes("Otro") && (
                     <FormField name="q8_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica tu valor añadido</FormLabel><FormControl><Textarea rows={3} placeholder="Escribe aquí..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                 )}
@@ -188,7 +208,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
               <div className={currentStep === 8 ? 'block' : 'hidden'}>
                 <h2 className="font-headline text-3xl text-primary mb-2">Sección 4: Presencia Online</h2>
                 <p className="text-muted-foreground mb-6">¿Qué canales de comunicación y redes sociales utilizas?</p>
-                <FormField name="q9_presence" control={form.control} render={({ field }) => <FormItem><div className="grid grid-cols-2 md:grid-cols-3 gap-4">{Q9_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q9_presence" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox checked={field.value?.includes(item)} onCheckedChange={(checked) => {return checked ? field.onChange([...(field.value || []), item]) : field.onChange(field.value?.filter(value => value !== item))}} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>} />
+                <FormField name="q9_presence" control={form.control} render={() => (<FormItem><div className="grid grid-cols-2 md:grid-cols-3 gap-4">{Q9_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q9_presence" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox checked={field.value?.includes(item)} onCheckedChange={(checked) => {return checked ? field.onChange([...(field.value || []), item]) : field.onChange(field.value?.filter(value => value !== item))}} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>)} />
                  {watchedPresence?.includes("Otros") && (
                     <FormField name="q9_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica otros canales</FormLabel><FormControl><Textarea rows={3} placeholder="Escribe aquí..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                 )}
@@ -202,7 +222,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                   <div className="text-center mt-4 text-xl font-bold text-primary">{watchedRating}</div>
                 <FormMessage /></FormItem>} />
                 <p className="text-muted-foreground mb-6 mt-8">¿Cuáles son tus mayores desafíos? (Selecciona hasta 3)</p>
-                <FormField name="q10_challenges" control={form.control} render={({ field }) => <FormItem><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q10_CHALLENGES_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q10_challenges" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox checked={field.value?.includes(item)} onCheckedChange={(checked) => { const current = field.value || []; if(checked) { if (current.length < 3) return field.onChange([...current, item]); } else { return field.onChange(current.filter(value => value !== item)); } }} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>} />
+                <FormField name="q10_challenges" control={form.control} render={() => (<FormItem><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q10_CHALLENGES_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q10_challenges" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox disabled={!field.value?.includes(item) && field.value?.length === 3} checked={field.value?.includes(item)} onCheckedChange={(checked) => { const current = field.value || []; if(checked) { if (current.length < 3) return field.onChange([...current, item]); } else { return field.onChange(current.filter(value => value !== item)); } }} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>)} />
                 {watchedChallenges?.includes("Otro") && (
                     <FormField name="q10_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica otro desafío</FormLabel><FormControl><Textarea rows={3} placeholder="Escribe aquí..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                 )}
@@ -220,14 +240,22 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
               <div className={currentStep === 11 ? 'block' : 'hidden'}>
                 <h2 className="font-headline text-3xl text-primary mb-2">Sección 5: Preferencias Personales</h2>
                 <p className="text-muted-foreground mb-6">Un toque final para humanizar tu marca.</p>
-                <FormField name="q13_colors" control={form.control} render={({ field }) => <FormItem><FormLabel>Si tu marca tuviera una paleta de colores, ¿cuáles serían y por qué?</FormLabel><FormControl><Textarea rows={3} placeholder="Ej: Verde y blanco porque transmiten calma, salud y pureza." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
-                <FormField name="q14_hobby" control={form.control} render={({ field }) => <FormItem><FormLabel>¿Qué te gusta hacer en tu tiempo libre? (Opcional)</FormLabel><FormControl><Textarea rows={3} placeholder="¿Algún hobby o interés que te apasione?" {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
+                
+                 <FormField name="q13_colors" control={form.control} render={() => (
+                    <FormItem>
+                        <FormLabel>Si tu marca tuviera una paleta de colores, ¿cuáles incluiría? (Selecciona tus preferidos)</FormLabel>
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">{Q13_COLORS_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q13_colors" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox checked={field.value?.includes(item)} onCheckedChange={(checked) => {return checked ? field.onChange([...(field.value || []), item]) : field.onChange(field.value?.filter(value => value !== item))}} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div>
+                        <FormMessage />
+                    </FormItem>
+                 )} />
+
+                <FormField name="q14_hobby" control={form.control} render={({ field }) => <FormItem className="mt-6"><FormLabel>¿Qué te gusta hacer en tu tiempo libre? (Opcional)</FormLabel><FormControl><Textarea rows={3} placeholder="¿Algún hobby o interés que te apasione?" {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
               </div>
               
               <div className={currentStep === 12 ? 'block' : 'hidden'}>
                 <h2 className="font-headline text-3xl text-primary mb-2">Reflexión Final</h2>
-                <p className="text-muted-foreground mb-6">¿Hay algo más que debamos saber?</p>
-                <FormField name="q15_final" control={form.control} render={({ field }) => <FormItem><FormLabel>Cualquier otra cosa que consideres relevante para entender tu visión, necesidades o aspiraciones.</FormLabel><FormControl><Textarea rows={5} {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
+                <p className="text-muted-foreground mb-6">Este es un espacio para ti.</p>
+                <FormField name="q15_final" control={form.control} render={({ field }) => <FormItem><FormLabel>¿Cómo visualizas tu negocio en 2 años? ¿Cuál es la necesidad más urgente que tienes hoy o qué esperas lograr con nuestra ayuda?</FormLabel><FormControl><Textarea rows={5} {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
               </div>
               
                <div className={currentStep === 13 ? 'block' : 'hidden'}>

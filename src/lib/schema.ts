@@ -7,10 +7,10 @@ export const surveySchema = z.object({
   q1_country: z.string().min(1, "El país es requerido."),
   q1_phone: z.string().min(1, "El número de contacto es requerido."),
   q1_experience: z.number().nullable().optional(),
-  q1_role: z.string().min(1, "Tu cargo o rol es requerido."),
+  q1_role: z.array(z.string()).optional(),
   
   // Section 2
-  q2_services: z.string().min(1, "Describe al menos un servicio principal."),
+  q2_services: z.array(z.string()).optional(),
   q2_unique: z.string().optional(),
   
   // Section 3
@@ -50,7 +50,7 @@ export const surveySchema = z.object({
   q12_details: z.string().optional(),
   
   // Section 12
-  q13_colors: z.string().min(1, "Describe tu paleta de colores."),
+  q13_colors: z.array(z.string()).optional(),
   q14_hobby: z.string().optional(),
 
   // Section 13
