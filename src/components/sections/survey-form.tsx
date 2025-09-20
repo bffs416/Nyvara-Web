@@ -141,7 +141,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                     </FormItem>
                   )} />
                   {watchedRole?.includes("Otra especialidad") && (
-                    <FormField name="q1_role_other" control={form.control} render={({ field }) => <FormItem><FormLabel>Por favor, especifica tu otra especialidad</FormLabel><FormControl><Input placeholder="Escribe aquí..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
+                    <FormField name="q1_role_other" control={form.control} render={({ field }) => <FormItem><FormLabel>Por favor, especifica tu otra especialidad</FormLabel><FormControl><Input placeholder="Ej: Especialista en Medicina Regenerativa" {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                   )}
                 </div>
               </div>
@@ -158,7 +158,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                     </FormItem>
                  )} />
                   {watchedServices?.includes("Otro") && (
-                    <FormField name="q2_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica otro servicio</FormLabel><FormControl><Input placeholder="Escribe aquí..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
+                    <FormField name="q2_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica otro servicio</FormLabel><FormControl><Input placeholder="Ej: Terapia de quelación" {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                   )}
                 
                 <FormField name="q2_unique" control={form.control} render={({ field }) => <FormItem className="mt-6"><FormLabel>¿Existen servicios o especialidades únicas que los diferencien?</FormLabel><FormControl><Textarea rows={4} placeholder="Ej: Nuestra técnica 'Renacer Lift' combina hilos tensores con bioestimuladores para un resultado natural sin cirugía." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
@@ -175,7 +175,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                 <p className="text-muted-foreground mb-6">¿Qué imagen deseas que los pacientes tengan de ti? (Selecciona hasta 3)</p>
                 <FormField name="q4_perception" control={form.control} render={() => (<FormItem><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q4_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q4_perception" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox disabled={!field.value?.includes(item) && field.value?.length === 3} checked={field.value?.includes(item)} onCheckedChange={(checked) => { const current = field.value || []; if(checked) { if (current.length < 3) return field.onChange([...current, item]); } else { return field.onChange(current.filter(value => value !== item)); } }} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>)} />
                  {watchedPerception?.includes("Otro") && (
-                    <FormField name="q4_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica tu percepción</FormLabel><FormControl><Textarea rows={3} placeholder="Escribe aquí..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
+                    <FormField name="q4_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica tu percepción</FormLabel><FormControl><Textarea rows={3} placeholder="Ej: Pionero en técnicas de rejuvenecimiento sin dolor" {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                 )}
               </div>
               
@@ -184,7 +184,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                 <p className="text-muted-foreground mb-6">¿Qué emociones quieres evocar en tus pacientes? (Selecciona hasta 3)</p>
                 <FormField name="q5_emotions" control={form.control} render={() => (<FormItem><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q5_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q5_emotions" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox disabled={!field.value?.includes(item) && field.value?.length === 3} checked={field.value?.includes(item)} onCheckedChange={(checked) => { const current = field.value || []; if(checked) { if (current.length < 3) return field.onChange([...current, item]); } else { return field.onChange(current.filter(value => value !== item)); } }} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>)} />
                  {watchedEmotions?.includes("Otro") && (
-                    <FormField name="q5_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica qué emociones</FormLabel><FormControl><Textarea rows={3} placeholder="Escribe aquí..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
+                    <FormField name="q5_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica qué emociones</FormLabel><FormControl><Textarea rows={3} placeholder="Ej: Serenidad, vitalidad, etc." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                 )}
               </div>
 
@@ -200,7 +200,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                 <FormField name="q7_differentiation" control={form.control} render={() => (<FormItem><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q7_OPTIONS.map(item => (<FormField key={item.value} control={form.control} name="q7_differentiation" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox disabled={!field.value?.includes(item.label) && field.value?.length === 3} checked={field.value?.includes(item.label)} onCheckedChange={(checked) => { const current = field.value || []; if(checked) { if (current.length < 3) return field.onChange([...current, item.label]); } else { return field.onChange(current.filter(value => value !== item.label)); } }} /></FormControl><FormLabel className="font-normal cursor-pointer">{item.label}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>)} />
                 <FormField name="q7_why" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Describe brevemente el elemento que seleccionaste.</FormLabel><FormControl><Textarea rows={3} placeholder="¿Qué lo hace especial y único?" {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                 {watchedDifferentiation?.includes("Otro") && (
-                    <FormField name="q7_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica tu diferenciación</FormLabel><FormControl><Textarea rows={3} placeholder="Escribe aquí..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
+                    <FormField name="q7_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica tu diferenciación</FormLabel><FormControl><Textarea rows={3} placeholder="Ej: Ofrezco consultas de seguimiento gratuitas por 6 meses." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                 )}
               </div>
 
@@ -209,7 +209,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                 <p className="text-muted-foreground mb-6">¿Cuál es tu principal valor añadido para tus clientes? (Selecciona hasta 3)</p>
                 <FormField name="q8_value" control={form.control} render={() => (<FormItem><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q8_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q8_value" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox disabled={!field.value?.includes(item) && field.value?.length === 3} checked={field.value?.includes(item)} onCheckedChange={(checked) => { const current = field.value || []; if(checked) { if (current.length < 3) return field.onChange([...current, item]); } else { return field.onChange(current.filter(value => value !== item)); } }} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>)} />
                  {watchedValue?.includes("Otro") && (
-                    <FormField name="q8_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica tu valor añadido</FormLabel><FormControl><Textarea rows={3} placeholder="Escribe aquí..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
+                    <FormField name="q8_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica tu valor añadido</FormLabel><FormControl><Textarea rows={3} placeholder="Ej: Diagnóstico facial con IA antes de cada procedimiento." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                 )}
               </div>
 
@@ -218,7 +218,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                 <p className="text-muted-foreground mb-6">¿Qué canales de comunicación y redes sociales utilizas?</p>
                 <FormField name="q9_presence" control={form.control} render={() => (<FormItem><div className="grid grid-cols-2 md:grid-cols-3 gap-4">{Q9_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q9_presence" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox checked={field.value?.includes(item)} onCheckedChange={(checked) => {return checked ? field.onChange([...(field.value || []), item]) : field.onChange(field.value?.filter(value => value !== item))}} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>)} />
                  {watchedPresence?.includes("Otros") && (
-                    <FormField name="q9_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica otros canales</FormLabel><FormControl><Textarea rows={3} placeholder="Escribe aquí..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
+                    <FormField name="q9_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica otros canales</FormLabel><FormControl><Textarea rows={3} placeholder="Ej: Publicaciones en revistas, podcasts, etc." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                 )}
               </div>
 
@@ -232,7 +232,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                 <p className="text-muted-foreground mb-6 mt-8">¿Cuáles son tus mayores desafíos? (Selecciona hasta 3)</p>
                 <FormField name="q10_challenges" control={form.control} render={() => (<FormItem><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q10_CHALLENGES_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q10_challenges" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox disabled={!field.value?.includes(item) && field.value?.length === 3} checked={field.value?.includes(item)} onCheckedChange={(checked) => { const current = field.value || []; if(checked) { if (current.length < 3) return field.onChange([...current, item]); } else { return field.onChange(current.filter(value => value !== item)); } }} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>)} />
                 {watchedChallenges?.includes("Otro") && (
-                    <FormField name="q10_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica otro desafío</FormLabel><FormControl><Textarea rows={3} placeholder="Escribe aquí..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
+                    <FormField name="q10_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica otro desafío</FormLabel><FormControl><Textarea rows={3} placeholder="Ej: Mantenerse actualizado con las nuevas tendencias." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                 )}
               </div>
               
@@ -257,7 +257,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                     </FormItem>
                  )} />
                 {watchedColors?.includes("Otro") && (
-                    <FormField name="q13_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica otro color</FormLabel><FormControl><Input placeholder="Escribe aquí..." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
+                    <FormField name="q13_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica otro color</FormLabel><FormControl><Input placeholder="Ej: Turquesa, Coral, etc." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                 )}
 
                 <FormField name="q14_hobby" control={form.control} render={({ field }) => <FormItem className="mt-6"><FormLabel>¿Qué te gusta hacer en tu tiempo libre? (Opcional)</FormLabel><FormControl><Textarea rows={3} placeholder="¿Algún hobby o interés que te apasione?" {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
@@ -266,7 +266,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
               <div className={currentStep === 12 ? 'block' : 'hidden'}>
                 <h2 className="font-headline text-3xl text-primary mb-2">Reflexión Final</h2>
                 <p className="text-muted-foreground mb-6">Este es un espacio para ti.</p>
-                <FormField name="q15_final" control={form.control} render={({ field }) => <FormItem><FormLabel>¿Cómo visualizas tu negocio en 2 años? ¿Cuál es la necesidad más urgente que tienes hoy o qué esperas lograr con nuestra ayuda?</FormLabel><FormControl><Textarea rows={5} {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
+                <FormField name="q15_final" control={form.control} render={({ field }) => <FormItem><FormLabel>¿Cómo visualizas tu negocio en 2 años? ¿Cuál es la necesidad más urgente que tienes hoy o qué esperas lograr con nuestra ayuda?</FormLabel><FormControl><Textarea rows={5} placeholder="Ej: En 2 años, veo mi clínica como un referente nacional. Mi necesidad más urgente es atraer pacientes que valoren la calidad sobre el precio. Espero que Nyvara me ayude a construir una marca sólida que comunique ese valor." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
               </div>
               
                <div className={currentStep === 13 ? 'block' : 'hidden'}>
@@ -311,4 +311,5 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
     </>
   );
 }
+
 
