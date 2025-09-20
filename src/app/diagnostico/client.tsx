@@ -7,12 +7,20 @@ import SurveyForm from '@/components/sections/survey-form';
 import GeneralSurveyForm from '@/components/sections/general-survey-form';
 import { handleSurveySubmission, summarizeSurveyDataForDownload, handleGeneralSurveySubmission, summarizeGeneralSurveyDataForDownload } from '@/app/client-actions';
 import type { SurveyFormData, GeneralSurveyFormData } from '@/lib/types';
-import { Loader2, ServerCrash, Download, Send, CheckCircle, HeartPulse, Building } from 'lucide-react';
+import { Loader2, ServerCrash, Download, Send, CheckCircle, HeartPulse, Building, Lightbulb } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { siteConfig } from '@/lib/config';
 import { useRouter, useSearchParams } from 'next/navigation';
-
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 
 const SuccessMessage = () => (
     <motion.div
@@ -94,6 +102,30 @@ const SectorSelection = ({ onSelect }: { onSelect: (sector: 'health' | 'general'
   </motion.div>
 );
 
+const WelcomeDialog = ({ open, onContinue }: { open: boolean; onContinue: () => void; }) => (
+    <AlertDialog open={open}>
+        <AlertDialogContent>
+            <AlertDialogHeader>
+                <div className="flex justify-center mb-4">
+                    <Lightbulb className="h-12 w-12 text-primary" />
+                </div>
+                <AlertDialogTitle className="text-center text-2xl font-headline text-primary">Un Momento de Reflexión Antes de Empezar</AlertDialogTitle>
+                <AlertDialogDescription className="text-center text-base text-muted-foreground pt-2">
+                    Estás a punto de dar un paso vital. Las respuestas que proporciones aquí son la base para construir una estrategia que realmente impulse tu negocio.
+                    <br/><br/>
+                    <strong className="text-foreground">Te invitamos a tomarte 5-10 minutos, sin distracciones.</strong> Responde de manera profunda y honesta. Conectar con tu lado profesional y personal es clave para alinear tu marca con tus gustos, tu identidad y tus verdaderos objetivos.
+                    <br/><br/>
+                    Esta es tu oportunidad para ayudarnos a ayudarte al máximo.
+                </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter className="sm:justify-center">
+                <AlertDialogAction onClick={onContinue}>Entendido, ¡empecemos!</AlertDialogAction>
+            </AlertDialogFooter>
+        </AlertDialogContent>
+    </AlertDialog>
+);
+
+
 export default function DiagnosticoClient() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -101,26 +133,33 @@ export default function DiagnosticoClient() {
   const [surveyData, setSurveyData] = useState<SurveyFormData | GeneralSurveyFormData | null>(null);
   const [summaryText, setSummaryText] = useState<string>('');
   const [selectedSector, setSelectedSector] = useState<'health' | 'general' | null>(null);
+  const [showWelcomeDialog, setShowWelcomeDialog] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
 
   useEffect(() => {
     const sector = searchParams.get('sector');
-    if (sector === 'health' || sector === 'general') {
+    if ((sector === 'health' || sector === 'general') && !selectedSector) {
       setSelectedSector(sector);
       setFormStep('form');
-    } else {
-      // If no valid sector, reset to selection
+    } else if (!sector) {
       setFormStep('sector');
       setSelectedSector(null);
     }
-  }, [searchParams]);
+  }, [searchParams, selectedSector]);
 
   
   const handleSectorSelect = (sector: 'health' | 'general') => {
     setSelectedSector(sector);
-    setFormStep('form');
-    router.push(`/diagnostico?sector=${sector}`, { scroll: false });
+    setShowWelcomeDialog(true);
+  };
+
+  const handleStartForm = () => {
+    setShowWelcomeDialog(false);
+    if (selectedSector) {
+      router.push(`/diagnostico?sector=${selectedSector}`, { scroll: false });
+      setFormStep('form');
+    }
   };
   
   const handleFormSubmit = async (data: SurveyFormData | GeneralSurveyFormData) => {
@@ -271,6 +310,7 @@ export default function DiagnosticoClient() {
           </>
         )}
       </div>
+      <WelcomeDialog open={showWelcomeDialog} onContinue={handleStartForm} />
     </div>
   );
 }
