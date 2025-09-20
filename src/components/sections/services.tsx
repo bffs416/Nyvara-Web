@@ -36,7 +36,7 @@ const services = [
       icon: <Code size={36} className="text-primary-foreground" />,
       title: "Tecnología que Impulsa",
       description: "Creamos el motor tecnológico que tu negocio necesita para escalar, desde aplicaciones web hasta soluciones de software a la medida.",
-      features: ["Software a Medida", "Soluciones Web", "Diseño de Bases de Datos", "Aplicaciones Móviles"],
+      features: ["Software a Medida", "Aplicaciones Web", "Optimización de Bases de Datos", "Apps Móviles (iOS/Android)"],
       link: "/desarrollo",
     }
   ];
@@ -54,10 +54,10 @@ export default function Services() {
             className="text-center mb-16"
           >
             <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-6">
-              Soluciones 360° para tu Crecimiento
+              Nuestros Servicios: Soluciones 360° para tu Crecimiento
             </h2>
             <p className="text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
-              Somos el socio estratégico que integra marketing, eventos y tecnología bajo una misma visión: la tuya.
+              Somos el socio estratégico que integra marketing, eventos y tecnología bajo una misma visión: el éxito de tu negocio.
             </p>
           </motion.div>
 
@@ -94,7 +94,7 @@ export default function Services() {
                       
                         <Button asChild className="w-full mt-auto" variant="outline">
                            <Link href={service.link}>
-                              Ver más
+                              Descubrir más sobre {service.title.split(' ')[0]}
                               <ArrowRight size={16} />
                            </Link>
                         </Button>

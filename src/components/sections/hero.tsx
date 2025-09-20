@@ -60,7 +60,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-lg md:text-xl text-primary font-semibold mb-4 font-headline"
           >
-            Más que proveedores, tus socios estratégicos.
+            Más que proveedores, tus socios en crecimiento estratégico.
           </motion.p>
           
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }} className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight">
@@ -69,21 +69,21 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }} className="text-base md:text-lg text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-            Integramos <span className="text-foreground font-semibold">Marketing de vanguardia</span>, 
-            <span className="text-foreground font-semibold"> Eventos de alto impacto</span> y 
-            <span className="text-foreground font-semibold"> Tecnología a la medida</span> para convertir tus objetivos en realidad.
+            Integramos <span className="text-foreground font-semibold">marketing de vanguardia</span>, 
+            <span className="text-foreground font-semibold">eventos de alto impacto</span> y 
+            <span className="text-foreground font-semibold">tecnología a la medida</span> para convertir tus objetivos en resultados medibles y sostenibles.
           </motion.p>
           
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.8 }} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button asChild size="lg" className="font-bold px-8 py-4 text-lg transition-all duration-300 hover:scale-105">
               <Link href="/diagnostico">
-                Haz tu diagnóstico
+                Inicia tu Diagnóstico Estratégico
                 <ArrowRight size={20} />
               </Link>
             </Button>
             <Button onClick={scrollToServices} variant="outline" size="lg" className="font-semibold px-8 py-4 text-lg transition-all duration-300 hover:scale-105">
               <Sparkles size={20} />
-              Nuestros Servicios
+              Explora Nuestros Servicios
             </Button>
           </motion.div>
 

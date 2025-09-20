@@ -31,8 +31,8 @@ const MarketingPage = () => {
   const serviceItems = [
     { 
       icon: <BarChart size={32} />, 
-      title: 'SEO y SEM', 
-      description: 'Optimizamos tu ranking en motores de búsqueda y gestionamos campañas de pago para maximizar tu visibilidad.',
+      title: 'Posicionamiento SEO y SEM', 
+      description: 'Optimizamos tu ranking en Google y gestionamos campañas de anuncios de pago para maximizar tu visibilidad online y atraer clientes cualificados.',
       details: {
         analogy: 'Imagina que internet es una gran biblioteca. El SEO es organizar tu libro en la estantería correcta con un título claro para que lo encuentren al buscar. El SEM es pagar para poner tu libro en un expositor en la entrada principal, asegurando que todos lo vean.',
         whatIs: 'Técnicamente, el SEO (Search Engine Optimization) y SEM (Search Engine Marketing) buscan posicionar tu negocio en la cima de los motores de búsqueda. El SEO mejora tu visibilidad de manera orgánica (gratuita) a largo plazo, mientras que el SEM utiliza anuncios de pago para una visibilidad inmediata y dirigida.',
@@ -42,7 +42,7 @@ const MarketingPage = () => {
     { 
       icon: <Users size={32} />, 
       title: 'Gestión de Redes Sociales', 
-      description: 'Creamos y gestionamos contenido atractivo que construye y fideliza a tu comunidad online.',
+      description: 'Creamos y gestionamos contenido estratégico y atractivo que construye una comunidad fiel alrededor de tu marca y convierte seguidores en clientes.',
       details: {
         analogy: 'Piensa en tus redes sociales como el club social exclusivo de tu marca. Nosotros somos los anfitriones: ponemos buena música (contenido), iniciamos conversaciones interesantes y hacemos que cada miembro se sienta parte de algo especial, convirtiendo tu marca en el alma de la fiesta.',
         whatIs: 'Se trata del arte de construir y nutrir una comunidad activa en plataformas como Instagram, Facebook o LinkedIn. Va más allá de publicar: es definir la voz de tu marca, interactuar con la audiencia, gestionar tu reputación y convertir seguidores en embajadores.',
@@ -51,8 +51,8 @@ const MarketingPage = () => {
     },
     { 
       icon: <Mail size={32} />, 
-      title: 'Email Marketing', 
-      description: 'Diseñamos campañas de email personalizadas que nutren a tus leads y convierten clientes.',
+      title: 'Email Marketing Automatizado', 
+      description: 'Diseñamos campañas y secuencias de email personalizadas que nutren a tus prospectos, recuperan ventas y fidelizan a tus clientes actuales.',
       details: {
         analogy: 'Es como tener una conversación privada y relevante con tus contactos más interesados. En lugar de gritar tu mensaje en una plaza pública, les susurras al oído noticias, historias y ofertas que sabes que les encantarán, fortaleciendo la confianza y la lealtad.',
         whatIs: 'Es una de las herramientas más directas y rentables para comunicarte con tu base de clientes. A través de correos estratégicos, puedes nutrir a los prospectos (leads), informar sobre novedades, recuperar carritos abandonados y fidelizar a quienes ya te compraron.',
@@ -62,7 +62,7 @@ const MarketingPage = () => {
     { 
       icon: <CheckCircle size={32} />, 
       title: 'Marketing de Contenidos', 
-      description: 'Producimos artículos, videos e infografías que posicionan tu marca como líder en la industria.',
+      description: 'Producimos artículos de blog, guías y videos que responden a las dudas de tu audiencia y posicionan tu marca como una autoridad en la industria.',
       details: {
         analogy: 'En lugar de poner un anuncio que grita "¡Compra mis herramientas!", abres un taller gratuito donde enseñas a la gente a solucionar sus problemas. Les aportas valor real, demuestras tu maestría y, cuando necesiten a un experto de confianza, serás el primero en su mente.',
         whatIs: 'Es una estrategia enfocada en atraer y retener a una audiencia específica mediante la creación de contenido valioso y relevante. En lugar de interrumpir, atraes. Respondes a las preguntas de tus clientes potenciales antes de que las hagan, construyendo confianza y autoridad.',
@@ -90,9 +90,9 @@ const MarketingPage = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <h1 className="text-5xl md:text-7xl font-bold mb-4 text-primary font-headline">Marketing Digital</h1>
+              <h1 className="text-5xl md:text-7xl font-bold mb-4 text-primary font-headline">Marketing Digital que Genera Resultados</h1>
               <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto">
-                Impulsamos tu marca al siguiente nivel con estrategias digitales medibles y efectivas.
+                Impulsamos tu marca al siguiente nivel con estrategias digitales medibles y efectivas, diseñadas para atraer, convertir y fidelizar clientes.
               </p>
             </motion.section>
 
@@ -140,7 +140,7 @@ const MarketingPage = () => {
                       <DialogClose asChild>
                          <Button asChild className="w-full">
                             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                              Solicitar Asesoría <Send className="ml-2" />
+                              Solicitar Asesoría de Marketing <Send className="ml-2" />
                            </a>
                          </Button>
                       </DialogClose>
@@ -157,13 +157,13 @@ const MarketingPage = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.6, duration: 0.8 }}
             >
-              <h2 className="text-4xl font-bold mb-4 font-headline">¿Listo para crecer?</h2>
+              <h2 className="text-4xl font-bold mb-4 font-headline">¿Listo para aumentar tu visibilidad y ventas?</h2>
               <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Nuestro equipo de expertos está preparado para diseñar una estrategia a la medida de tus objetivos. ¡Contáctanos hoy!
+                Nuestro equipo de expertos está preparado para diseñar una estrategia de marketing digital a la medida de tus objetivos. ¡Contáctanos hoy!
               </p>
               <Button size="lg" asChild>
                   <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                    Envíanos un Mensaje <Send className="ml-2" />
+                    Hablemos de tu Estrategia <Send className="ml-2" />
                   </a>
               </Button>
             </motion.section>

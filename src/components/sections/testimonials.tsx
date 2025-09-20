@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from "next/image";
@@ -13,49 +12,57 @@ const testimonials = [
     image: PlaceHolderImages.find(img => img.id === 'testimonial-1')!,
     name: "Juana Pérez",
     title: "CEO, Tech Innovators",
-    quote: "El equipo de desarrollo de Nyvara Group es de primera. Entregaron nuestro proyecto a tiempo y superaron nuestras expectativas. Su profesionalismo y habilidad son inigualables.",
+    quote: "El equipo de desarrollo de Nyvara es de primera categoría. Entregaron nuestro software a tiempo, superando nuestras expectativas en funcionalidad y diseño. Su profesionalismo es inigualable.",
+    alt: "Retrato de Juana Pérez, CEO de Tech Innovators",
   },
   {
     image: PlaceHolderImages.find(img => img.id === 'testimonial-2')!,
     name: "Juan García",
     title: "Director de Marketing, EventPros",
-    quote: "El evento corporativo que organizaron para nosotros fue impecable. Cada detalle se manejó con cuidado, permitiéndonos centrarnos en nuestros invitados. ¡Muy recomendable!",
+    quote: "El evento corporativo que Nyvara organizó para nosotros fue impecable. Cada detalle, desde la logística hasta la experiencia del asistente, se manejó con una precisión increíble.",
+    alt: "Retrato de Juan García, Director de Marketing en EventPros",
   },
   {
     image: PlaceHolderImages.find(img => img.id === 'testimonial-3')!,
     name: "Emily Blanco",
     title: "Gerente de RRHH, Future Corp",
-    quote: "Las sesiones de formación fueron increíblemente reveladoras y atractivas. La productividad de nuestro equipo ha mejorado notablemente desde entonces. Una fantástica inversión en nuestra gente.",
+    quote: "Las sesiones de formación que diseñaron fueron reveladoras y atractivas. La productividad y cohesión de nuestro equipo ha mejorado notablemente. Una inversión fantástica.",
+    alt: "Retrato de Emily Blanco, Gerente de RRHH en Future Corp",
   },
   {
     image: PlaceHolderImages.find(img => img.id === 'testimonial-4')!,
     name: "Carlos Rodríguez",
     title: "Fundador, Startup Creativa",
-    quote: "La estrategia de marketing digital que Nyvara diseñó para nosotros duplicó nuestros leads en solo tres meses. ¡Su enfoque basado en datos realmente funciona!",
+    quote: "La estrategia de marketing digital que Nyvara implementó duplicó nuestros leads cualificados en solo tres meses. Su enfoque basado en datos realmente funciona.",
+    alt: "Retrato de Carlos Rodríguez, Fundador de Startup Creativa",
   },
   {
     image: PlaceHolderImages.find(img => img.id === 'testimonial-5')!,
     name: "Sofía Martínez",
     title: "Gerente de Producto, eComm Store",
-    quote: "El stand para nuestra feria fue un éxito total. El diseño fue innovador y atrajo a una cantidad increíble de visitantes. La ejecución fue perfecta.",
+    quote: "El stand para nuestra feria más importante fue un éxito rotundo. El diseño fue innovador y atrajo a una cantidad increíble de visitantes a nuestro espacio.",
+    alt: "Retrato de Sofía Martínez, Gerente de Producto en eComm Store",
   },
   {
     image: PlaceHolderImages.find(img => img.id === 'testimonial-6')!,
     name: "Luis Fernández",
     title: "CTO, Fintech Solutions",
-    quote: "Necesitábamos una base de datos escalable y segura, y Nyvara nos entregó una arquitectura robusta que soporta nuestro crecimiento. Son verdaderos expertos.",
+    quote: "Necesitábamos una arquitectura de base de datos escalable y segura. Nyvara nos entregó una solución robusta que soporta nuestro crecimiento exponencial.",
+    alt: "Retrato de Luis Fernández, CTO de Fintech Solutions",
   },
   {
     image: PlaceHolderImages.find(img => img.id === 'testimonial-7')!,
     name: "Ana Gómez",
     title: "Directora de Comunicaciones, ONG Global",
-    quote: "Organizar nuestro congreso anual siempre fue un desafío. Con Nyvara, todo fluyó sin problemas, desde el registro hasta la transmisión en vivo. Excepcional.",
+    quote: "Organizar nuestro congreso anual siempre fue un desafío logístico. Con Nyvara, todo fluyó sin problemas, desde el registro online hasta la transmisión en vivo.",
+    alt: "Retrato de Ana Gómez, Directora de Comunicaciones",
   },
   {
     image: PlaceHolderImages.find(img => img.id === 'testimonial-8')!,
     name: "Miguel Hernández",
     title: "Dueño, Restaurante Gourmet",
-    quote: "La aplicación móvil que desarrollaron ha mejorado enormemente la experiencia de nuestros clientes y ha incrementado los pedidos a domicilio. ¡Un cambio total para el negocio!",
+    quote: "La aplicación móvil que desarrollaron para nosotros ha mejorado enormemente la experiencia de nuestros clientes y ha incrementado los pedidos a domicilio en un 40%.",
+    alt: "Retrato de Miguel Hernández, Dueño de Restaurante Gourmet",
   }
 ];
 
@@ -70,9 +77,9 @@ export default function Testimonials() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary">Lo que dicen nuestros clientes</h2>
+          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary">Historias de Éxito de Nuestros Clientes</h2>
           <p className="mt-4 max-w-2xl mx-auto text-foreground/80">
-            Historias de éxito de empresas a las que hemos ayudado a prosperar.
+            No solo lo decimos nosotros. Escucha a los líderes de negocio a los que hemos ayudado a crecer y prosperar con nuestras soluciones integradas.
           </p>
         </motion.div>
         <Carousel 
@@ -88,7 +95,7 @@ export default function Testimonials() {
                       <p className="text-foreground/90 italic mb-6 flex-grow">"{testimonial.quote}"</p>
                       <div className="flex items-center pt-6 border-t border-border w-full">
                         <Avatar className="h-12 w-12">
-                           <AvatarImage src={testimonial.image.imageUrl} alt={testimonial.name} data-ai-hint={testimonial.image.imageHint} />
+                           <AvatarImage src={testimonial.image.imageUrl} alt={testimonial.alt} data-ai-hint={testimonial.image.imageHint} />
                            <AvatarFallback>{testimonial.name.substring(0, 2)}</AvatarFallback>
                         </Avatar>
                         <div className="ml-4">

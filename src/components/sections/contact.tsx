@@ -48,13 +48,13 @@ export default function Contact() {
     if (result.success) {
         toast({
             title: "¡Mensaje Enviado!",
-            description: "Gracias por contactarnos. Nos pondremos en contacto contigo en breve.",
+            description: "Gracias por contactarnos. Nuestro equipo de estrategas se pondrá en contacto contigo en breve.",
         });
         form.reset();
     } else {
         toast({
-            title: "Error",
-            description: result.error || "Algo salió mal. Por favor, inténtalo de nuevo.",
+            title: "Error de Envío",
+            description: result.error || "Algo salió mal. Por favor, inténtalo de nuevo o contáctanos directamente por email.",
             variant: "destructive",
         });
     }
@@ -62,8 +62,8 @@ export default function Contact() {
 
   const contactInfo = [
     { icon: <Mail size={24} />, title: "Email", info: siteConfig.contact.email, link: `mailto:${siteConfig.contact.email}` },
-    { icon: <Phone size={24} />, title: "Teléfono", info: `+${siteConfig.contact.phone}`, link: `https://wa.me/${siteConfig.contact.phone}?text=${encodeURIComponent(siteConfig.contact.whatsappMessage)}` },
-    { icon: <MapPin size={24} />, title: "Ubicación", info: "Bogota, Colombia", link: null }
+    { icon: <Phone size={24} />, title: "Teléfono / WhatsApp", info: `+${siteConfig.contact.phone}`, link: `https://wa.me/${siteConfig.contact.phone}?text=${encodeURIComponent(siteConfig.contact.whatsappMessage)}` },
+    { icon: <MapPin size={24} />, title: "Ubicación", info: "Bogota, Colombia (Servicio Global)", link: null }
   ];
 
   return (
@@ -76,14 +76,14 @@ export default function Contact() {
           viewport={{ once: true }} 
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">¿Listo para <span className="text-primary">Comenzar?</span></h2>
-          <p className="text-xl text-foreground/80 max-w-3xl mx-auto">Contáctanos hoy y descubre cómo podemos transformar tu visión en realidad</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">¿Listo para impulsar <span className="text-primary">tu Crecimiento?</span></h2>
+          <p className="text-xl text-foreground/80 max-w-3xl mx-auto">Contáctanos hoy y descubre cómo nuestras soluciones integradas pueden transformar tu visión en resultados tangibles y medibles.</p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className="space-y-8" id="info-de-contacto">
             <div>
-              <h3 className="text-2xl font-bold mb-6 text-foreground">Información de Contacto</h3>
+              <h3 className="text-2xl font-bold mb-6 text-foreground">Información de Contacto Directo</h3>
               <div className="space-y-6">
                 {contactInfo.map((item, index) => (
                   <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: index * 0.1 }} viewport={{ once: true }}>
@@ -101,12 +101,12 @@ export default function Contact() {
               </div>
             </div>
             <Card className="p-6 bg-card border-border/50">
-              <h4 className="text-xl font-bold text-foreground mb-4">¿Por qué elegirnos?</h4>
+              <h4 className="text-xl font-bold text-foreground mb-4">¿Por qué elegir a Nyvara?</h4>
               <ul className="space-y-3 text-muted-foreground">
-                <li className="flex items-center"><div className="w-2 h-2 bg-primary rounded-full mr-3"></div>Experiencia comprobada</li>
-                <li className="flex items-center"><div className="w-2 h-2 bg-primary rounded-full mr-3"></div>Equipo multidisciplinario</li>
-                <li className="flex items-center"><div className="w-2 h-2 bg-primary rounded-full mr-3"></div>Soluciones a medida</li>
-                <li className="flex items-center"><div className="w-2 h-2 bg-primary rounded-full mr-3"></div>Soporte continuo</li>
+                <li className="flex items-center"><div className="w-2 h-2 bg-primary rounded-full mr-3"></div>Visión Estratégica Integral</li>
+                <li className="flex items-center"><div className="w-2 h-2 bg-primary rounded-full mr-3"></div>Equipo Multidisciplinario Experto</li>
+                <li className="flex items-center"><div className="w-2 h-2 bg-primary rounded-full mr-3"></div>Soluciones a Medida de tu Negocio</li>
+                <li className="flex items-center"><div className="w-2 h-2 bg-primary rounded-full mr-3"></div>Enfoque en Resultados Medibles</li>
               </ul>
             </Card>
           </motion.div>
@@ -122,7 +122,7 @@ export default function Contact() {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Nombre</FormLabel>
+                        <FormLabel>Nombre Completo</FormLabel>
                         <FormControl>
                           <Input placeholder="Tu nombre" {...field} />
                         </FormControl>
@@ -135,7 +135,7 @@ export default function Contact() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel>Email Corporativo</FormLabel>
                         <FormControl>
                           <Input type="email" placeholder="tu@email.com" {...field} />
                         </FormControl>
@@ -166,14 +166,14 @@ export default function Contact() {
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="Selecciona un servicio" />
+                            <SelectValue placeholder="Selecciona el área de tu interés" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
                           <SelectItem value="marketing">Marketing Digital</SelectItem>
-                          <SelectItem value="eventos">Eventos Corporativos</SelectItem>
+                          <SelectItem value="eventos">Organización de Eventos</SelectItem>
                           <SelectItem value="desarrollo">Desarrollo de Software</SelectItem>
-                          <SelectItem value="todos">Todos los servicios</SelectItem>
+                          <SelectItem value="todos">Solución Integral 360°</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -188,7 +188,7 @@ export default function Contact() {
                       <FormLabel>Mensaje</FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder="Cuéntanos sobre tu proyecto..."
+                          placeholder="Cuéntanos brevemente sobre tu proyecto, objetivos o desafíos..."
                           className="min-h-[120px] resize-none"
                           {...field}
                         />
@@ -198,7 +198,7 @@ export default function Contact() {
                   )}
                 />
                 <Button type="submit" className="w-full font-bold py-4" disabled={isLoading}>
-                  {isLoading ? (<><Loader2 size={20} className="animate-spin" /> Enviando...</>) : (<><Send size={20} /> Enviar Mensaje</>)}
+                  {isLoading ? (<><Loader2 size={20} className="animate-spin" /> Enviando Consulta...</>) : (<><Send size={20} /> Enviar para Asesoría</>)}
                 </Button>
               </form>
             </Form>

@@ -31,8 +31,8 @@ const EventosCorporativos = () => {
   const serviceItems = [
     {
       icon: <Palette size={32} />,
-      title: 'Diseño y Fabricación de Stands',
-      description: 'Creación, producción y montaje de stands personalizados que atraen la atención y comunican la esencia de la marca.',
+      title: 'Diseño y Fabricación de Stands para Ferias',
+      description: 'Creamos, producimos y montamos stands personalizados que capturan la atención, comunican la esencia de tu marca y generan oportunidades de negocio.',
       details: {
         analogy: 'Imagina que tu stand es la embajada de tu marca en una feria. Nosotros la diseñamos y construimos para que sea el edificio más impresionante y visitado, un espacio donde cada detalle cuenta tu historia y atrae a tus futuros clientes.',
         whatIs: 'Es la conceptualización y materialización de un espacio que representa la identidad de tu marca en ferias y exposiciones. Abarcamos el proceso 360°: desde el diseño creativo y la renderización 3D hasta la producción, el montaje y el desmontaje.',
@@ -41,8 +41,8 @@ const EventosCorporativos = () => {
     },
     {
       icon: <Presentation size={32} />,
-      title: 'Congresos y Conferencias',
-      description: 'Gestión integral de eventos a gran escala, incluyendo tecnología, registro de asistentes y coordinación de ponentes.',
+      title: 'Organización de Congresos y Conferencias',
+      description: 'Ofrecemos una gestión integral de eventos académicos y corporativos a gran escala, incluyendo tecnología, logística, registro de asistentes y coordinación de ponentes.',
       details: {
         analogy: 'Organizar un congreso es como dirigir una sinfonía. Nosotros somos el director de orquesta, asegurando que cada músico (ponente, proveedor, tecnología) toque su parte a la perfección para crear una melodía memorable.',
         whatIs: 'Es la orquestación completa de eventos a gran escala. Nos hacemos cargo de cada detalle: la planificación estratégica, la selección y gestión de la plataforma tecnológica (presencial, virtual o híbrida), la logística de ponentes y el sistema de registro de asistentes.',
@@ -52,7 +52,7 @@ const EventosCorporativos = () => {
     {
       icon: <Rocket size={32} />,
       title: 'Lanzamientos de Productos y Activaciones de Marca',
-      description: 'Creamos eventos estratégicos y campañas de marketing digital para maximizar el impacto y la visibilidad de tu marca.',
+      description: 'Diseñamos eventos de alto impacto y campañas de marketing experiencial para maximizar la visibilidad y el engagement en tu lanzamiento.',
       details: {
         analogy: 'Un lanzamiento es como el despegue de un cohete. Nosotros construimos la plataforma de lanzamiento (el evento) y encendemos los motores (la campaña digital) para asegurar que tu producto capte la atención del mundo entero.',
         whatIs: 'Es el diseño de un momento culminante para tu marca. Se trata de crear una experiencia estratégica, sea un evento físico o una campaña multicanal, diseñada para introducir un nuevo producto o revitalizar la percepción de la marca, generando un impacto medible en la audiencia.',
@@ -61,8 +61,8 @@ const EventosCorporativos = () => {
     },
     {
       icon: <Users size={32} />,
-      title: 'Team-Building y Eventos de Integración',
-      description: 'Diseñamos actividades y experiencias que fortalecen la cohesión del equipo y mejoran la comunicación interna.',
+      title: 'Team-Building y Eventos de Integración Corporativa',
+      description: 'Diseñamos experiencias y actividades a medida que fortalecen la cohesión del equipo, mejoran la comunicación interna y potencian la cultura empresarial.',
       details: {
         analogy: 'Un equipo es como un grupo de escaladores. Nosotros diseñamos la expedición (la actividad) y les damos las herramientas para que aprendan a confiar el uno en el otro, se comuniquen mejor y lleguen juntos a la cima.',
         whatIs: 'Es el diseño de experiencias corporativas con un propósito definido: fortalecer la cultura de la empresa. No son solo actividades recreativas, sino jornadas estratégicamente diseñadas para mejorar la comunicación, fomentar la colaboración y potenciar el liderazgo.',
@@ -90,9 +90,9 @@ const EventosCorporativos = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7 }}
             >
-              <h1 className="text-5xl md:text-7xl font-bold mb-4 text-primary font-headline">Eventos Corporativos</h1>
+              <h1 className="text-5xl md:text-7xl font-bold mb-4 text-primary font-headline">Organización de Eventos Corporativos</h1>
               <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto">
-                Creamos experiencias memorables que conectan marcas con personas.
+                Creamos experiencias memorables que conectan marcas con personas, generan impacto y alcanzan tus objetivos de negocio.
               </p>
             </motion.section>
 
@@ -140,7 +140,7 @@ const EventosCorporativos = () => {
                       <DialogClose asChild>
                          <Button asChild className="w-full">
                            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                              Solicitar Asesoría <Send className="ml-2" />
+                              Cotizar mi Evento <Send className="ml-2" />
                            </a>
                          </Button>
                       </DialogClose>
@@ -157,9 +157,9 @@ const EventosCorporativos = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8, once: true }}
             >
-              <h2 className="text-4xl font-bold mb-4 font-headline">¿Listo para <span className="text-primary">Comenzar?</span></h2>
+              <h2 className="text-4xl font-bold mb-4 font-headline">¿Listo para crear un evento <span className="text-primary">inolvidable?</span></h2>
               <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Contáctanos hoy y descubre cómo podemos transformar tu visión en realidad
+                Contáctanos hoy y descubre cómo podemos transformar tu visión en una realidad exitosa que tus asistentes no olvidarán.
               </p>
               <Button size="lg" asChild>
                   <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
