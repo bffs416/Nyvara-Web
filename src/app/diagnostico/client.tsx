@@ -139,27 +139,25 @@ export default function DiagnosticoClient() {
 
   useEffect(() => {
     const sector = searchParams.get('sector');
-    if ((sector === 'health' || sector === 'general') && !selectedSector) {
+    if ((sector === 'health' || sector === 'general')) {
       setSelectedSector(sector);
       setFormStep('form');
-    } else if (!sector) {
+    } else {
       setFormStep('sector');
       setSelectedSector(null);
     }
-  }, [searchParams, selectedSector]);
+  }, [searchParams]);
 
   
   const handleSectorSelect = (sector: 'health' | 'general') => {
+    router.push(`/diagnostico?sector=${sector}`, { scroll: false });
     setSelectedSector(sector);
     setShowWelcomeDialog(true);
   };
 
   const handleStartForm = () => {
     setShowWelcomeDialog(false);
-    if (selectedSector) {
-      router.push(`/diagnostico?sector=${selectedSector}`, { scroll: false });
-      setFormStep('form');
-    }
+    setFormStep('form');
   };
   
   const handleFormSubmit = async (data: SurveyFormData | GeneralSurveyFormData) => {
