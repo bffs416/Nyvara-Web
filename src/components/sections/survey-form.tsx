@@ -131,7 +131,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                   <FormField name="q1_location" control={form.control} render={({ field }) => <FormItem><FormLabel>Ubicación de la clínica o consultorio</FormLabel><FormControl><Input {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                   <FormField name="q1_country" control={form.control} render={({ field }) => <FormItem><FormLabel>País</FormLabel><FormControl><Input {...field} value={field.value ?? ""} placeholder="Escribe tu país" /></FormControl><FormMessage /></FormItem>} />
                   <FormField name="q1_phone" control={form.control} render={({ field }) => <FormItem><FormLabel>Número de contacto</FormLabel><FormControl><Input type="tel" {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
-                  <FormField name="q1_experience" control={form.control} render={({ field }) => <FormItem><FormLabel>Años de experiencia en medicina estética</FormLabel><FormControl><Input type="number" {...field} value={field.value ?? undefined} onChange={e => field.onChange(e.target.value === '' ? undefined : +e.target.value)} /></FormControl><FormMessage /></FormItem>} />
+                  <FormField name="q1_experience" control={form.control} render={({ field }) => <FormItem><FormLabel>Años de experiencia en medicina estética</FormLabel><FormControl><Input type="number" {...field} value={field.value ?? ''} onChange={e => field.onChange(e.target.value === '' ? undefined : +e.target.value)} /></FormControl><FormMessage /></FormItem>} />
                   
                   <FormField name="q1_role" control={form.control} render={() => (
                     <FormItem>
@@ -311,3 +311,4 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
     </>
   );
 }
+
