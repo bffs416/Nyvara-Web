@@ -1,0 +1,39 @@
+
+{
+  "galleries": [
+    {
+      "id": "cliente-alpha",
+      "name": "Cliente Alpha",
+      "description": "Una selección de retratos corporativos y de producto para la campaña 'Innovación 2024'.",
+      "accessCode": "ALPHA2024",
+      "images": [
+        { "url": "https://picsum.photos/seed/alpha1/800/800", "alt": "Retrato ejecutivo en oficina moderna" },
+        { "url": "https://picsum.photos/seed/alpha2/800/800", "alt": "Detalle de producto tecnológico" },
+        { "url": "https://picsum.photos/seed/alpha3/800/800", "alt": "Equipo colaborando en una reunión" },
+        { "url": "https://picsum.photos/seed/alpha4/800/800", "alt": "Fotografía de producto en un entorno estilizado" },
+        { "url": "https://picsum.photos/seed/alpha5/800/800", "alt": "Primer plano de un empleado sonriendo" },
+        { "url": "https://picsum.photos/seed/alpha6/800/800", "alt": "Vista general de las instalaciones de la empresa" },
+        { "url": "https://picsum.photos/seed/alpha7/800/800", "alt": "Producto en uso por un cliente" },
+        { "url": "https://picsum.photos/seed/alpha8/800/800", "alt": "Retrato casual de un miembro del equipo" }
+      ]
+    },
+    {
+      "id": "evento-beta",
+      "name": "Evento Beta Corp",
+      "description": "Cobertura fotográfica completa del congreso anual 'Future Forward', destacando ponentes, asistentes y momentos de networking.",
+      "accessCode": "BETAFF",
+      "images": [
+        { "url": "https://picsum.photos/seed/beta1/800/800", "alt": "Ponente principal en el escenario" },
+        { "url": "https://picsum.photos/seed/beta2/800/800", "alt": "Asistentes participando en un taller" },
+        { "url": "https://picsum.photos/seed/beta3/800/800", "alt": "Networking durante el coffee break" },
+        { "url": "https://picsum.photos/seed/beta4/800/800", "alt": "Stand de un patrocinador concurrido" },
+        { "url": "https://picsum.photos/seed/beta5/800/800", "alt": "Mesa redonda con expertos de la industria" },
+        { "url": "https://picsum.photos/seed/beta6/800/800", "alt": "Vista panorámica del auditorio lleno" },
+        { "url": "https://picsum.photos/seed/beta7/800/800", "alt": "Cena de gala y premiación" },
+        { "url": "https://picsum.photos/seed/beta8/800/800", "alt": "Detalle del material de bienvenida del evento" },
+        { "url": "https://picsum.photos/seed/beta9/800/800", "alt": "Asistentes interactuando con una demostración de producto" },
+        { "url": "https://picsum.photos/seed/beta10/800/800", "alt": "Clausura del evento con todos los organizadores" }
+      ]
+    }
+  ]
+}
