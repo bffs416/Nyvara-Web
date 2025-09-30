@@ -59,9 +59,8 @@ const About = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="hover:scale-105 transition-transform duration-300"
               >
-                <Card className="bg-card p-6 text-center h-full border-border/50 hover:border-primary/50 hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)]">
+                <Card className="bg-card p-6 text-center h-full border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] hover:scale-105">
                     <div className="text-primary mb-4 flex justify-center">
                     {value.icon}
                     </div>

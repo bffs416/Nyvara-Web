@@ -71,7 +71,7 @@ export default function Services() {
                 viewport={{ once: true }}
                 className="h-full"
               >
-                <Card className="bg-background/50 border-border/50 hover:border-primary/50 hover:-translate-y-2 transition-all duration-300 h-full flex flex-col hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)]">
+                <Card className="bg-background/50 border-border/50 hover:border-primary/50 transition-all duration-300 h-full flex flex-col hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] hover:scale-105">
                   <CardContent className="p-8 h-full flex flex-col">
                       <div className="w-16 h-16 rounded-lg bg-primary flex items-center justify-center mb-6">
                           {service.icon}
