@@ -173,7 +173,43 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
               <div className={currentStep === 3 ? 'block' : 'hidden'}>
                 <h2 className="font-headline text-3xl text-primary mb-2">Sección 2: Percepción de Marca</h2>
                 <p className="text-muted-foreground mb-6">¿Qué imagen deseas que los pacientes tengan de ti? (Selecciona hasta 3)</p>
-                <FormField name="q4_perception" control={form.control} render={({ field }) => (<FormItem><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q4_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q4_perception" render={() => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox disabled={(field.value?.length ?? 0) >= 3 && !field.value?.includes(item)} checked={field.value?.includes(item)} onCheckedChange={(checked) => { const current = field.value || []; if(checked) { if (current.length < 3) return field.onChange([...current, item]); } else { return field.onChange(current.filter(value => value !== item)); } }} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>)} />
+                <FormField
+                  name="q4_perception"
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {Q4_OPTIONS.map((item) => (
+                          <FormField
+                            key={item}
+                            control={form.control}
+                            name="q4_perception"
+                            render={({ field }) => (
+                              <FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md">
+                                <FormControl>
+                                  <Checkbox
+                                    checked={field.value?.includes(item)}
+                                    disabled={(field.value?.length ?? 0) >= 3 && !field.value?.includes(item)}
+                                    onCheckedChange={(checked) => {
+                                      const current = field.value || [];
+                                      if (checked) {
+                                        if (current.length < 3) field.onChange([...current, item]);
+                                      } else {
+                                        field.onChange(current.filter((value) => value !== item));
+                                      }
+                                    }}
+                                  />
+                                </FormControl>
+                                <FormLabel className="font-normal cursor-pointer">{item}</FormLabel>
+                              </FormItem>
+                            )}
+                          />
+                        ))}
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                  {watchedPerception?.includes("Otro") && (
                     <FormField name="q4_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica tu percepción</FormLabel><FormControl><Textarea rows={3} placeholder="Ej: Pionero en técnicas de rejuvenecimiento sin dolor" {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                 )}
@@ -182,7 +218,43 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
               <div className={currentStep === 4 ? 'block' : 'hidden'}>
                 <h2 className="font-headline text-3xl text-primary mb-2">Sección 2: Emociones a Evocar</h2>
                 <p className="text-muted-foreground mb-6">¿Qué emociones quieres evocar en tus pacientes? (Selecciona hasta 3)</p>
-                <FormField name="q5_emotions" control={form.control} render={({ field }) => (<FormItem><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q5_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q5_emotions" render={() => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox disabled={(field.value?.length ?? 0) >= 3 && !field.value?.includes(item)} checked={field.value?.includes(item)} onCheckedChange={(checked) => { const current = field.value || []; if(checked) { if (current.length < 3) return field.onChange([...current, item]); } else { return field.onChange(current.filter(value => value !== item)); } }} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>)} />
+                <FormField
+                  name="q5_emotions"
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {Q5_OPTIONS.map((item) => (
+                          <FormField
+                            key={item}
+                            control={form.control}
+                            name="q5_emotions"
+                            render={({ field }) => (
+                              <FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md">
+                                <FormControl>
+                                  <Checkbox
+                                    checked={field.value?.includes(item)}
+                                    disabled={(field.value?.length ?? 0) >= 3 && !field.value?.includes(item)}
+                                    onCheckedChange={(checked) => {
+                                      const current = field.value || [];
+                                      if (checked) {
+                                        if (current.length < 3) field.onChange([...current, item]);
+                                      } else {
+                                        field.onChange(current.filter((value) => value !== item));
+                                      }
+                                    }}
+                                  />
+                                </FormControl>
+                                <FormLabel className="font-normal cursor-pointer">{item}</FormLabel>
+                              </FormItem>
+                            )}
+                          />
+                        ))}
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                  {watchedEmotions?.includes("Otro") && (
                     <FormField name="q5_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica qué emociones</FormLabel><FormControl><Textarea rows={3} placeholder="Ej: Serenidad, vitalidad, etc." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                 )}
@@ -197,7 +269,43 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
               <div className={currentStep === 6 ? 'block' : 'hidden'}>
                 <h2 className="font-headline text-3xl text-primary mb-2">Sección 3: Diferenciación</h2>
                 <p className="text-muted-foreground mb-6">¿Cómo te diferencias de la competencia? (Selecciona hasta 3)</p>
-                <FormField name="q7_differentiation" control={form.control} render={({ field }) => (<FormItem><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q7_OPTIONS.map(item => (<FormField key={item.value} control={form.control} name="q7_differentiation" render={() => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox disabled={(field.value?.length ?? 0) >= 3 && !field.value?.includes(item.label)} checked={field.value?.includes(item.label)} onCheckedChange={(checked) => { const current = field.value || []; if(checked) { if (current.length < 3) return field.onChange([...current, item.label]); } else { return field.onChange(current.filter(value => value !== item.label)); } }} /></FormControl><FormLabel className="font-normal cursor-pointer">{item.label}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>)} />
+                <FormField
+                  name="q7_differentiation"
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {Q7_OPTIONS.map((item) => (
+                          <FormField
+                            key={item.value}
+                            control={form.control}
+                            name="q7_differentiation"
+                            render={({ field }) => (
+                              <FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md">
+                                <FormControl>
+                                  <Checkbox
+                                    checked={field.value?.includes(item.label)}
+                                    disabled={(field.value?.length ?? 0) >= 3 && !field.value?.includes(item.label)}
+                                    onCheckedChange={(checked) => {
+                                      const current = field.value || [];
+                                      if (checked) {
+                                        if (current.length < 3) field.onChange([...current, item.label]);
+                                      } else {
+                                        field.onChange(current.filter((value) => value !== item.label));
+                                      }
+                                    }}
+                                  />
+                                </FormControl>
+                                <FormLabel className="font-normal cursor-pointer">{item.label}</FormLabel>
+                              </FormItem>
+                            )}
+                          />
+                        ))}
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <FormField name="q7_why" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Describe brevemente el elemento que seleccionaste.</FormLabel><FormControl><Textarea rows={3} placeholder="¿Qué lo hace especial y único?" {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                 {watchedDifferentiation?.includes("Otro") && (
                     <FormField name="q7_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica tu diferenciación</FormLabel><FormControl><Textarea rows={3} placeholder="Ej: Ofrezco consultas de seguimiento gratuitas por 6 meses." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
@@ -207,7 +315,43 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
               <div className={currentStep === 7 ? 'block' : 'hidden'}>
                 <h2 className="font-headline text-3xl text-primary mb-2">Sección 3: Propuesta de Valor</h2>
                 <p className="text-muted-foreground mb-6">¿Cuál es tu principal valor añadido para tus clientes? (Selecciona hasta 3)</p>
-                <FormField name="q8_value" control={form.control} render={({ field }) => (<FormItem><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q8_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q8_value" render={() => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox disabled={(field.value?.length ?? 0) >= 3 && !field.value?.includes(item)} checked={field.value?.includes(item)} onCheckedChange={(checked) => { const current = field.value || []; if(checked) { if (current.length < 3) return field.onChange([...current, item]); } else { return field.onChange(current.filter(value => value !== item)); } }} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>)} />
+                <FormField
+                  name="q8_value"
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {Q8_OPTIONS.map((item) => (
+                          <FormField
+                            key={item}
+                            control={form.control}
+                            name="q8_value"
+                            render={({ field }) => (
+                              <FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md">
+                                <FormControl>
+                                  <Checkbox
+                                    checked={field.value?.includes(item)}
+                                    disabled={(field.value?.length ?? 0) >= 3 && !field.value?.includes(item)}
+                                    onCheckedChange={(checked) => {
+                                      const current = field.value || [];
+                                      if (checked) {
+                                        if (current.length < 3) field.onChange([...current, item]);
+                                      } else {
+                                        field.onChange(current.filter((value) => value !== item));
+                                      }
+                                    }}
+                                  />
+                                </FormControl>
+                                <FormLabel className="font-normal cursor-pointer">{item}</FormLabel>
+                              </FormItem>
+                            )}
+                          />
+                        ))}
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                  {watchedValue?.includes("Otro") && (
                     <FormField name="q8_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica tu valor añadido</FormLabel><FormControl><Textarea rows={3} placeholder="Ej: Diagnóstico facial con IA antes de cada procedimiento." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                 )}
@@ -230,7 +374,43 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                   <div className="text-center mt-4 text-xl font-bold text-primary">{watchedRating}</div>
                 <FormMessage /></FormItem>} />
                 <p className="text-muted-foreground mb-6 mt-8">¿Cuáles son tus mayores desafíos? (Selecciona hasta 3)</p>
-                <FormField name="q10_challenges" control={form.control} render={({ field }) => (<FormItem><div className="grid grid-cols-1 md:grid-cols-2 gap-4">{Q10_CHALLENGES_OPTIONS.map(item => (<FormField key={item} control={form.control} name="q10_challenges" render={() => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox disabled={(field.value?.length ?? 0) >= 3 && !field.value?.includes(item)} checked={field.value?.includes(item)} onCheckedChange={(checked) => { const current = field.value || []; if(checked) { if (current.length < 3) return field.onChange([...current, item]); } else { return field.onChange(current.filter(value => value !== item)); } }} /></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div><FormMessage /></FormItem>)} />
+                <FormField
+                  name="q10_challenges"
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {Q10_CHALLENGES_OPTIONS.map((item) => (
+                          <FormField
+                            key={item}
+                            control={form.control}
+                            name="q10_challenges"
+                            render={({ field }) => (
+                              <FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md">
+                                <FormControl>
+                                  <Checkbox
+                                    checked={field.value?.includes(item)}
+                                    disabled={(field.value?.length ?? 0) >= 3 && !field.value?.includes(item)}
+                                    onCheckedChange={(checked) => {
+                                      const current = field.value || [];
+                                      if (checked) {
+                                        if (current.length < 3) field.onChange([...current, item]);
+                                      } else {
+                                        field.onChange(current.filter((value) => value !== item));
+                                      }
+                                    }}
+                                  />
+                                </FormControl>
+                                <FormLabel className="font-normal cursor-pointer">{item}</FormLabel>
+                              </FormItem>
+                            )}
+                          />
+                        ))}
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 {watchedChallenges?.includes("Otro") && (
                     <FormField name="q10_other" control={form.control} render={({ field }) => <FormItem className="mt-4"><FormLabel>Por favor, especifica otro desafío</FormLabel><FormControl><Textarea rows={3} placeholder="Ej: Mantenerse actualizado con las nuevas tendencias." {...field} value={field.value ?? ""} /></FormControl><FormMessage /></FormItem>} />
                 )}
@@ -287,7 +467,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                   ))}
                   <Button type="button" variant="outline" size="sm" className="mt-2" onClick={() => append({ name: '' })}><PlusCircle className="mr-2 h-4 w-4" />Añadir Competidor</Button>
                 </div>
-                 <Button type="submit" className="mt-8 w-full md:w-auto">
+                 <Button type="button" onClick={form.handleSubmit(onSubmit)} className="mt-8 w-full md:w-auto">
                     Generar Resumen
                   </Button>
               </div>
@@ -314,3 +494,6 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
 
 
 
+
+
+    
