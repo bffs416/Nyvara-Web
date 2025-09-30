@@ -4,25 +4,25 @@
 
 @layer base {
   :root {
-    --background: 227 15% 21%;
+    --background: 216 33% 12%; /* Deep Blue */
     --foreground: 210 40% 98%;
-    --card: 227 15% 24%;
+    --card: 216 33% 16%;
     --card-foreground: 210 40% 98%;
-    --popover: 227 15% 21%;
+    --popover: 216 33% 12%;
     --popover-foreground: 210 40% 98%;
-    --primary: 45 90% 65%;
-    --primary-foreground: 227 15% 10%;
-    --secondary: 223 24% 40%;
-    --secondary-foreground: 45 90% 65%;
-    --muted: 223 24% 30%;
-    --muted-foreground: 223 15% 65%;
-    --accent: 223 24% 35%;
+    --primary: 45 86% 55%; /* Gold/Yellow */
+    --primary-foreground: 216 33% 10%;
+    --secondary: 216 33% 25%;
+    --secondary-foreground: 45 86% 55%;
+    --muted: 216 33% 20%;
+    --muted-foreground: 210 20% 65%;
+    --accent: 185 83% 53%; /* Cyan/Teal */
     --accent-foreground: 210 40% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 223 24% 30%;
-    --input: 223 24% 30%;
-    --ring: 45 90% 65%;
+    --border: 216 33% 25%;
+    --input: 216 33% 25%;
+    --ring: 45 86% 55%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
@@ -31,25 +31,25 @@
     --radius: 0.5rem;
   }
   .dark {
-    --background: 227 15% 21%;
+    --background: 216 33% 12%; /* Deep Blue */
     --foreground: 210 40% 98%;
-    --card: 227 15% 24%;
+    --card: 216 33% 16%;
     --card-foreground: 210 40% 98%;
-    --popover: 227 15% 21%;
+    --popover: 216 33% 12%;
     --popover-foreground: 210 40% 98%;
-    --primary: 45 90% 65%;
-    --primary-foreground: 227 15% 10%;
-    --secondary: 223 24% 40%;
-    --secondary-foreground: 45 90% 65%;
-    --muted: 223 24% 30%;
-    --muted-foreground: 223 15% 65%;
-    --accent: 223 24% 35%;
+    --primary: 45 86% 55%; /* Gold/Yellow */
+    --primary-foreground: 216 33% 10%;
+    --secondary: 216 33% 25%;
+    --secondary-foreground: 45 86% 55%;
+    --muted: 216 33% 20%;
+    --muted-foreground: 210 20% 65%;
+    --accent: 185 83% 53%; /* Cyan/Teal */
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 223 24% 30%;
-    --input: 223 24% 30%;
-    --ring: 45 90% 65%;
+    --border: 216 33% 25%;
+    --input: 216 33% 25%;
+    --ring: 45 86% 55%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
