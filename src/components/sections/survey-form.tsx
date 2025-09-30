@@ -478,9 +478,6 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                   ))}
                   <Button type="button" variant="outline" size="sm" className="mt-2" onClick={() => append({ name: '' })}><PlusCircle className="mr-2 h-4 w-4" />Añadir Competidor</Button>
                 </div>
-                 <Button type="submit" className="mt-8 w-full md:w-auto">
-                    Generar Resumen
-                  </Button>
               </div>
 
               <div className="mt-8 pt-6 border-t-2 border-secondary flex justify-between items-center">
@@ -494,7 +491,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                 {currentStep < TOTAL_STEPS - 1 ? (
                   <Button type="button" onClick={handleNext}>Siguiente</Button>
                 ) : (
-                    <div></div>
+                  <Button type="submit">Generar Resumen</Button>
                 )}
               </div>
             </form>

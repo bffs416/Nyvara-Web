@@ -16,7 +16,7 @@ export const surveySchema = z.object({
   q2_other: z.string().optional(),
   
   // Section 3
-  q3_persona: z.string().min(1, "Describe la personalidad de tu marca."),
+  q3_persona: z.string().optional(),
   
   // Section 4
   q4_perception: z.array(z.string()).max(3, "Selecciona como máximo 3 opciones.").optional(),
@@ -27,11 +27,11 @@ export const surveySchema = z.object({
   q5_other: z.string().optional(),
   
   // Section 6
-  q6_why: z.string().min(1, "Describe el impacto que buscas."),
+  q6_why: z.string().optional(),
   
   // Section 7
   q7_differentiation: z.array(z.string()).max(3, "Selecciona como máximo 3 opciones.").optional(),
-  q7_why: z.string().min(1, "Describe tu diferenciación."),
+  q7_why: z.string().optional(),
   q7_other: z.string().optional(),
   
   // Section 8
