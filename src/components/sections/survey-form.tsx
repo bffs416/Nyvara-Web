@@ -31,6 +31,26 @@ interface SurveyFormProps {
   onSubmit: (data: SurveyFormData) => void;
 }
 
+const getFieldNamesForStep = (step: number): (keyof SurveyFormData)[] => {
+    const stepFields: Record<number, (keyof SurveyFormData)[]> = {
+        0: ["q1_name", "q1_location", "q1_country", "q1_phone", "q1_experience", "q1_role"],
+        1: ["q2_services", "q2_unique"],
+        2: ["q3_persona"],
+        3: ["q4_perception"],
+        4: ["q5_emotions"],
+        5: ["q6_why"],
+        6: ["q7_differentiation", "q7_why"],
+        7: ["q8_value"],
+        8: ["q9_presence"],
+        9: ["q10_rating", "q10_challenges"],
+        10: ["q11_training", "q12_details"],
+        11: ["q13_colors", "q14_hobby"],
+        12: ["q15_final"],
+        13: ["competitors"],
+    };
+    return stepFields[step] || [];
+}
+
 export default function SurveyForm({ onSubmit }: SurveyFormProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const { toast } = useToast();
@@ -38,6 +58,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
 
   const form = useForm<SurveyFormData>({
     resolver: zodResolver(surveySchema),
+    mode: "onChange",
     defaultValues: {
       q1_name: "", q1_location: "", q1_country: "", q1_phone: "", q1_experience: undefined, q1_role: [], q1_role_other: "",
       q2_services: [], q2_unique: "", q2_other: "",
@@ -76,24 +97,14 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
 
 
   const handleNext = async () => {
-    // For now, we will allow to go next without validation, will fix later
-    // const isStepValid = await form.trigger(getFieldNamesForStep(currentStep));
-    // if (isStepValid && currentStep < TOTAL_STEPS - 1) {
-    if (currentStep < TOTAL_STEPS - 1) {
+    const fieldsToValidate = getFieldNamesForStep(currentStep);
+    const isStepValid = await form.trigger(fieldsToValidate);
+    
+    if (isStepValid && currentStep < TOTAL_STEPS - 1) {
         setCurrentStep(currentStep + 1);
         window.scrollTo(0, 0);
     }
   };
-  
-  const getFieldNamesForStep = (step: number): (keyof SurveyFormData)[] => {
-      const stepFields: Record<number, (keyof SurveyFormData)[]> = {
-          0: ["q1_name", "q1_location", "q1_country", "q1_phone"],
-          2: ["q3_persona"],
-          5: ["q6_why"],
-          6: ["q7_why"],
-      };
-      return stepFields[step] || [];
-  }
 
   const handlePrev = () => {
     if (currentStep > 0) {
@@ -184,18 +195,18 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                             key={item}
                             control={form.control}
                             name="q4_perception"
-                            render={({ field }) => (
+                            render={({ field: checkboxField }) => (
                               <FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md">
                                 <FormControl>
                                   <Checkbox
-                                    checked={field.value?.includes(item)}
-                                    disabled={(field.value?.length ?? 0) >= 3 && !field.value?.includes(item)}
+                                    checked={checkboxField.value?.includes(item)}
+                                    disabled={(checkboxField.value?.length ?? 0) >= 3 && !checkboxField.value?.includes(item)}
                                     onCheckedChange={(checked) => {
-                                      const current = field.value || [];
+                                      const current = checkboxField.value || [];
                                       if (checked) {
-                                        if (current.length < 3) field.onChange([...current, item]);
+                                        if (current.length < 3) checkboxField.onChange([...current, item]);
                                       } else {
-                                        field.onChange(current.filter((value) => value !== item));
+                                        checkboxField.onChange(current.filter((value) => value !== item));
                                       }
                                     }}
                                   />
@@ -229,18 +240,18 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                             key={item}
                             control={form.control}
                             name="q5_emotions"
-                            render={({ field }) => (
+                            render={({ field: checkboxField }) => (
                               <FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md">
                                 <FormControl>
                                   <Checkbox
-                                    checked={field.value?.includes(item)}
-                                    disabled={(field.value?.length ?? 0) >= 3 && !field.value?.includes(item)}
+                                    checked={checkboxField.value?.includes(item)}
+                                    disabled={(checkboxField.value?.length ?? 0) >= 3 && !checkboxField.value?.includes(item)}
                                     onCheckedChange={(checked) => {
-                                      const current = field.value || [];
+                                      const current = checkboxField.value || [];
                                       if (checked) {
-                                        if (current.length < 3) field.onChange([...current, item]);
+                                        if (current.length < 3) checkboxField.onChange([...current, item]);
                                       } else {
-                                        field.onChange(current.filter((value) => value !== item));
+                                        checkboxField.onChange(current.filter((value) => value !== item));
                                       }
                                     }}
                                   />
@@ -280,18 +291,18 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                             key={item.value}
                             control={form.control}
                             name="q7_differentiation"
-                            render={({ field }) => (
+                            render={({ field: checkboxField }) => (
                               <FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md">
                                 <FormControl>
                                   <Checkbox
-                                    checked={field.value?.includes(item.label)}
-                                    disabled={(field.value?.length ?? 0) >= 3 && !field.value?.includes(item.label)}
+                                    checked={checkboxField.value?.includes(item.label)}
+                                    disabled={(checkboxField.value?.length ?? 0) >= 3 && !checkboxField.value?.includes(item.label)}
                                     onCheckedChange={(checked) => {
-                                      const current = field.value || [];
+                                      const current = checkboxField.value || [];
                                       if (checked) {
-                                        if (current.length < 3) field.onChange([...current, item.label]);
+                                        if (current.length < 3) checkboxField.onChange([...current, item.label]);
                                       } else {
-                                        field.onChange(current.filter((value) => value !== item.label));
+                                        checkboxField.onChange(current.filter((value) => value !== item.label));
                                       }
                                     }}
                                   />
@@ -326,18 +337,18 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                             key={item}
                             control={form.control}
                             name="q8_value"
-                            render={({ field }) => (
+                            render={({ field: checkboxField }) => (
                               <FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md">
                                 <FormControl>
                                   <Checkbox
-                                    checked={field.value?.includes(item)}
-                                    disabled={(field.value?.length ?? 0) >= 3 && !field.value?.includes(item)}
+                                    checked={checkboxField.value?.includes(item)}
+                                    disabled={(checkboxField.value?.length ?? 0) >= 3 && !checkboxField.value?.includes(item)}
                                     onCheckedChange={(checked) => {
-                                      const current = field.value || [];
+                                      const current = checkboxField.value || [];
                                       if (checked) {
-                                        if (current.length < 3) field.onChange([...current, item]);
+                                        if (current.length < 3) checkboxField.onChange([...current, item]);
                                       } else {
-                                        field.onChange(current.filter((value) => value !== item));
+                                        checkboxField.onChange(current.filter((value) => value !== item));
                                       }
                                     }}
                                   />
@@ -385,18 +396,18 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                             key={item}
                             control={form.control}
                             name="q10_challenges"
-                            render={({ field }) => (
+                            render={({ field: checkboxField }) => (
                               <FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md">
                                 <FormControl>
                                   <Checkbox
-                                    checked={field.value?.includes(item)}
-                                    disabled={(field.value?.length ?? 0) >= 3 && !field.value?.includes(item)}
+                                    checked={checkboxField.value?.includes(item)}
+                                    disabled={(checkboxField.value?.length ?? 0) >= 3 && !checkboxField.value?.includes(item)}
                                     onCheckedChange={(checked) => {
-                                      const current = field.value || [];
+                                      const current = checkboxField.value || [];
                                       if (checked) {
-                                        if (current.length < 3) field.onChange([...current, item]);
+                                        if (current.length < 3) checkboxField.onChange([...current, item]);
                                       } else {
-                                        field.onChange(current.filter((value) => value !== item));
+                                        checkboxField.onChange(current.filter((value) => value !== item));
                                       }
                                     }}
                                   />
@@ -467,7 +478,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                   ))}
                   <Button type="button" variant="outline" size="sm" className="mt-2" onClick={() => append({ name: '' })}><PlusCircle className="mr-2 h-4 w-4" />Añadir Competidor</Button>
                 </div>
-                 <Button type="button" onClick={form.handleSubmit(onSubmit)} className="mt-8 w-full md:w-auto">
+                 <Button type="submit" className="mt-8 w-full md:w-auto">
                     Generar Resumen
                   </Button>
               </div>
@@ -482,7 +493,9 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                 
                 {currentStep < TOTAL_STEPS - 1 ? (
                   <Button type="button" onClick={handleNext}>Siguiente</Button>
-                ) : null}
+                ) : (
+                    <div></div>
+                )}
               </div>
             </form>
           </Form>
@@ -491,9 +504,5 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
     </>
   );
 }
-
-
-
-
 
     
