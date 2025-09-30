@@ -25,7 +25,7 @@ import { SAMPLE_SURVEY_DATA } from "@/lib/sample-data";
 import { useRouter } from "next/navigation";
 
 
-const TOTAL_STEPS = 14;
+const TOTAL_STEPS = 15;
 
 interface SurveyFormProps {
   onSubmit: (data: SurveyFormData) => void;
@@ -461,11 +461,9 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
               </div>
               
                <div className={currentStep === 13 ? 'block' : 'hidden'}>
-                <h2 className="font-headline text-3xl text-primary mb-2">Paso Final: Generar Resumen</h2>
-                <p className="text-muted-foreground mb-6">¡Has completado el diagnóstico! Ahora, genera un resumen de tus respuestas.</p>
+                <h2 className="font-headline text-3xl text-primary mb-2">Análisis de Competencia (Opcional)</h2>
+                <p className="text-muted-foreground mb-6">Nombra algunos competidores clave para enriquecer el análisis. Esto nos ayudará a diferenciarte mejor.</p>
                 <div>
-                  <h3 className="font-headline text-xl text-primary mb-4">Análisis de Competencia (Opcional)</h3>
-                  <p className="text-muted-foreground mb-6">Nombra algunos competidores clave para enriquecer el análisis.</p>
                   {fields.map((field, index) => (
                     <FormField key={field.id} control={form.control} name={`competitors.${index}.name`} render={({ field }) => (
                       <FormItem className="flex items-center gap-2 mb-2">
@@ -479,6 +477,12 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
                   <Button type="button" variant="outline" size="sm" className="mt-2" onClick={() => append({ name: '' })}><PlusCircle className="mr-2 h-4 w-4" />Añadir Competidor</Button>
                 </div>
               </div>
+
+               <div className={currentStep === 14 ? 'block' : 'hidden'}>
+                    <h2 className="font-headline text-3xl text-primary mb-2">¡Casi listo!</h2>
+                    <p className="text-muted-foreground mb-6">Has completado todas las preguntas. Haz clic en el botón de abajo para generar el resumen de tu diagnóstico. Podrás revisarlo antes de enviarlo.</p>
+                </div>
+
 
               <div className="mt-8 pt-6 border-t-2 border-secondary flex justify-between items-center">
                 <div>
@@ -501,5 +505,7 @@ export default function SurveyForm({ onSubmit }: SurveyFormProps) {
     </>
   );
 }
+
+    
 
     
