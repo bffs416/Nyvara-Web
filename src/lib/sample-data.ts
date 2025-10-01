@@ -1,3 +1,4 @@
+
 import { SurveyFormData, GeneralSurveyFormData } from "./types";
 
 export const SAMPLE_SURVEY_DATA: SurveyFormData = {
@@ -41,7 +42,7 @@ export const SAMPLE_SURVEY_DATA: SurveyFormData = {
 
 
 export const SAMPLE_GENERAL_SURVEY_DATA: GeneralSurveyFormData = {
-  name: "Tech Solutions Inc.",
+  name: "Carlos Mendoza",
   company: "Tech Solutions Inc.",
   role: "Gerente de Marketing",
   phone: "+15551234567",
@@ -50,11 +51,17 @@ export const SAMPLE_GENERAL_SURVEY_DATA: GeneralSurveyFormData = {
   main_services: "Nuestra plataforma principal 'ProjectFlow', un software de gestión de proyectos todo en uno. También ofrecemos consultoría para optimizar flujos de trabajo.",
   target_audience: "Pequeñas y medianas empresas (PYMES) en el sector tecnológico y agencias creativas que necesitan mejorar su eficiencia operativa.",
   goals: "Aumentar nuestra base de usuarios en un 30% en el próximo año, mejorar la tasa de retención de clientes y posicionarnos como líderes en el mercado de software de gestión.",
-  challenges: "La competencia es alta y nos cuesta diferenciarnos. Generar leads de alta calidad de forma constante es nuestro mayor desafío actual.",
+  challenges: ["Generación de leads cualificados", "Diferenciación en un mercado saturado"],
+  challenges_cost: "La falta de leads cualificados nos está costando aproximadamente un 15% de crecimiento trimestral y desgasta a nuestro equipo de ventas persiguiendo oportunidades frías.",
+  value_proposition: "Ofrecemos a los equipos la plataforma más intuitiva para gestionar proyectos complejos sin perder tiempo en la configuración.",
+  marketing_rating: 6,
+  growth_expectation: 30,
+  avg_customer_value: 12000000,
   interested_services: [
     "Marketing Digital (SEO, Redes Sociales, Publicidad)",
     "Desarrollo de Software a Medida o Soluciones Web",
     "Estrategia de Marca y Posicionamiento"
   ],
+  competitors: "Competidor A (Asana): Tienen una marca muy reconocida y una gran base de usuarios. Competidor B (Monday): Su interfaz es muy visual y atractiva, lo que les funciona bien en marketing.",
   additional_info: "Estamos explorando la posibilidad de organizar un evento de lanzamiento para una nueva funcionalidad importante de nuestro software y nos gustaría saber más sobre cómo podrían ayudarnos.",
 };

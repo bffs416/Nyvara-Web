@@ -99,34 +99,45 @@ export async function summarizeGeneralSurveyDataForDownload(data: GeneralSurveyF
     const {
         name, company, role, phone, email,
         business_description, main_services, target_audience,
-        goals, challenges, interested_services,
-        additional_info,
+        goals, challenges, challenges_cost, value_proposition, marketing_rating,
+        growth_expectation, avg_customer_value, interested_services,
+        additional_info, competitors
     } = validatedData.data;
 
-    let summary = `RESUMEN DE DIAGNÓSTICO ESTRATÉGICO - GENERAL\n`;
-    summary += `=============================================\n\n`;
-    summary += `--- INFORMACIÓN DE CONTACTO ---\n`;
+    let summary = `RESUMEN DE ANÁLISIS DE NECESIDADES ESTRATÉGICAS (ADN)\n`;
+    summary += `=======================================================\n\n`;
+    summary += `--- PILAR 1: DATOS FUNDAMENTALES ---\n`;
     summary += `Nombre: ${name}\n`;
     summary += `Empresa: ${company}\n`;
     summary += `Rol: ${role}\n`;
     summary += `Teléfono: ${phone}\n`;
     summary += `Email: ${email}\n\n`;
 
-    summary += `--- SOBRE EL NEGOCIO ---\n`;
-    summary += `Descripción del Negocio: ${business_description}\n`;
-    summary += `Servicios/Productos Principales: ${main_services}\n`;
-    summary += `Público Objetivo: ${target_audience}\n\n`;
-    
-    summary += `--- OBJETIVOS Y DESAFÍOS ---\n`;
-    summary += `Principales Objetivos: ${goals}\n`;
-    summary += `Mayores Desafíos: ${challenges}\n\n`;
+    summary += `--- PILAR 2: CLARIDAD DE MARCA Y CONEXIÓN EMOCIONAL ---\n`;
+    summary += `Público Objetivo: ${target_audience}\n`;
+    summary += `Descripción del Negocio y Propósito: ${business_description}\n\n`;
 
-    summary += `--- NECESIDADES ---\n`;
-    if (interested_services?.length) summary += `Servicios de Interés: ${interested_services.join(', ')}\n`;
+    summary += `--- PILAR 3: VENTAJA COMPETITIVA IRREFUTABLE ---\n`;
+    summary += `Productos/Servicios Principales: ${main_services}\n`;
+    summary += `Propuesta de Valor (en una frase): ${value_proposition}\n\n`;
     
+    summary += `--- PILAR 4: DIAGNÓSTICO DE EFICACIA DIGITAL Y DESAFÍOS ---\n`;
+    summary += `Calificación de Marketing Actual (1-10): ${marketing_rating}\n`;
+    if (challenges?.length) summary += `Mayores Desafíos: ${challenges.join(', ')}\n`;
+    summary += `Costo de no resolver el principal desafío: ${challenges_cost}\n\n`;
+
+    summary += `--- PILAR 5: VISIÓN, METAS Y RECURSOS ---\n`;
+    summary += `Principales Objetivos (6-12 meses): ${goals}\n`;
+    if (growth_expectation) summary += `% Crecimiento Esperado (12 meses): ${growth_expectation}%\n`;
+    if (avg_customer_value) summary += `Valor Promedio de Cliente (LTV): $${avg_customer_value.toLocaleString('es-CO')}\n\n`;
+
+    summary += `--- PILAR 6: ANÁLISIS DEL ENTORNO COMPETITIVO ---\n`;
+    if (competitors) summary += `Análisis de Competencia: ${competitors}\n\n`;
+
+    summary += `--- PASO FINAL: ÁREAS DE INTERÉS Y NOTAS ---\n`;
+    if (interested_services?.length) summary += `Servicios de Interés en Nyvara: ${interested_services.join(', ')}\n`;
     if (additional_info) {
-        summary += `\n--- INFORMACIÓN ADICIONAL ---\n`;
-        summary += `${additional_info}\n`;
+        summary += `Información Adicional: ${additional_info}\n`;
     }
 
     return { summary };
@@ -199,41 +210,43 @@ export async function handleGeneralSurveySubmission(
   const { 
     name, company, role, phone, email, 
     business_description, main_services, target_audience, 
-    goals, challenges, interested_services, additional_info 
+    goals, challenges, interested_services, additional_info,
+    value_proposition, marketing_rating, challenges_cost,
+    growth_expectation, avg_customer_value, competitors
   } = validatedData.data;
 
   // Mapear datos del formulario general a la estructura de la encuesta de salud
   const mappedData: Omit<SurveyFormData, 'competitors' | 'q1_role' | 'q2_services' | 'q13_colors'> & { competitors?: string[], q1_role?: string[], q2_services?: string[], q13_colors?: string[] } = {
     q1_name: `${name} (${company})`,
-    q1_location: 'N/A',
+    q1_location: 'N/A (General)',
     q1_country: 'N/A', 
     q1_phone: phone,
     q1_role: [role],
     q1_role_other: undefined,
-    q2_services: [business_description],
-    q2_unique: `Servicios principales: ${main_services}`,
+    q2_services: [main_services],
+    q2_unique: business_description,
     q3_persona: `Público objetivo: ${target_audience}`,
     q6_why: `Metas principales: ${goals}`,
-    q7_why: `Desafíos principales: ${challenges}`,
+    q7_differentiation: challenges,
+    q7_why: `Costo de no resolver desafíos: ${challenges_cost}`,
+    q8_value: [value_proposition],
     q9_presence: interested_services,
-    q13_colors: ["No aplica (Formulario General)"],
-    q15_final: `Email: ${email} | Información adicional: ${additional_info || 'Ninguna'}`,
+    q10_rating: marketing_rating,
+    q10_challenges: challenges,
+    q15_final: `Email: ${email} | Crecimiento esperado: ${growth_expectation}% | LTV Cliente: ${avg_customer_value} | Competencia: ${competitors} | Info Adicional: ${additional_info || 'Ninguna'}`,
     q1_experience: undefined,
     q2_other: undefined,
     q4_perception: undefined,
     q4_other: undefined,
     q5_emotions: undefined,
     q5_other: undefined,
-    q7_differentiation: undefined,
     q7_other: undefined,
-    q8_value: undefined,
     q8_other: undefined,
     q9_other: undefined,
-    q10_rating: undefined,
-    q10_challenges: undefined,
     q10_other: undefined,
     q11_training: undefined,
     q12_details: undefined,
+    q13_colors: ["No aplica (Formulario General)"],
     q13_other: undefined,
     q14_hobby: undefined
   };

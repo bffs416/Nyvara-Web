@@ -1,3 +1,4 @@
+
 import { z } from "zod";
 
 export const surveySchema = z.object({
@@ -65,25 +66,35 @@ export const surveySchema = z.object({
 
 
 export const generalSurveySchema = z.object({
-  // Contact Info
+  // Pilar 1: Datos Fundamentales
   name: z.string().min(1, "El nombre es requerido."),
   company: z.string().min(1, "El nombre de la empresa es requerido."),
   role: z.string().min(1, "Tu cargo es requerido."),
   phone: z.string().min(1, "El teléfono es requerido."),
   email: z.string().email("Por favor, introduce un email válido."),
 
-  // About the business
-  business_description: z.string().min(10, "Por favor, describe tu negocio en al menos 10 caracteres."),
-  main_services: z.string().min(10, "Describe tus servicios o productos principales."),
+  // Pilar 2: Claridad de Marca y Conexión Emocional
   target_audience: z.string().min(10, "Describe tu público objetivo."),
+  business_description: z.string().min(10, "Por favor, describe tu negocio y propósito."),
 
-  // Goals and Challenges
+  // Pilar 3: Ventaja Competitiva
+  main_services: z.string().min(10, "Describe tus servicios o productos principales."),
+  value_proposition: z.string().min(10, "Por favor, resume tu propuesta de valor en una frase."),
+  
+  // Pilar 4: Diagnóstico de Eficacia Digital
+  marketing_rating: z.number().min(1).max(10).default(5),
+  challenges: z.array(z.string()).max(3, "Selecciona como máximo 3 desafíos.").min(1, "Selecciona al menos un desafío."),
+  challenges_cost: z.string().min(10, "Describe el costo de no resolver tu principal desafío."),
+
+  // Pilar 5: Visión y Recursos
   goals: z.string().min(10, "Describe tus principales objetivos."),
-  challenges: z.string().min(10, "Describe tus mayores desafíos."),
+  growth_expectation: z.number({invalid_type_error: "Debe ser un número"}).min(0, "El crecimiento no puede ser negativo.").optional(),
+  avg_customer_value: z.number({invalid_type_error: "Debe ser un número"}).min(0, "El valor no puede ser negativo.").optional(),
 
-  // Needs
+  // Pilar 6: Entorno Competitivo
+  competitors: z.string().optional(),
+
+  // Final
   interested_services: z.array(z.string()).min(1, "Selecciona al menos un servicio de interés."),
-
-  // Final thoughts
   additional_info: z.string().optional(),
 });

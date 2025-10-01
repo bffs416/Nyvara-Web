@@ -47,7 +47,7 @@ const SuccessMessage = () => (
 );
 
 const GeneralSuccessMessage = () => {
-    const whatsappUrl = `https://wa.me/${siteConfig.contact.phone}?text=${encodeURIComponent(siteConfig.contact.whatsappMessage)}`;
+    const whatsappUrl = `https://wa.me/${siteConfig.contact.phone}?text=${encodeURIComponent("Hola, he completado el Análisis de Necesidades (ADN) y me gustaría recibir mi diagnóstico inicial personalizado.")}`;
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -56,9 +56,9 @@ const GeneralSuccessMessage = () => {
             className="bg-card border border-border/50 p-8 rounded-lg shadow-2xl text-center space-y-6"
         >
             <CheckCircle className="mx-auto h-16 w-16 text-primary mb-4" />
-            <h2 className="text-3xl font-bold font-headline text-primary">¡Respuestas Guardadas!</h2>
+            <h2 className="text-3xl font-bold font-headline text-primary">Gracias por la inversión de tu tiempo y honestidad.</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-                Hemos recibido tu información. El siguiente paso es contactarnos directamente para una asesoría personalizada. ¡Haz clic en el botón para iniciar una conversación!
+                La información compartida es ahora la materia prima para nuestro análisis. El siguiente paso es contactarnos directamente para recibir tu diagnóstico inicial personalizado y discutir tus oportunidades de crecimiento.
             </p>
             <div className="flex justify-center gap-4 pt-4">
                  <Button asChild size="lg">
@@ -82,14 +82,14 @@ const SectorSelection = ({ onSelect }: { onSelect: (sector: 'health' | 'general'
     <p className="text-muted-foreground mb-8">Para ofrecerte el diagnóstico más preciso, por favor, selecciona el área que mejor describe tu negocio.</p>
     <div className="flex flex-col sm:flex-row gap-6 justify-center">
       <motion.div whileHover={{ y: -5 }} className="w-full">
-        <Button onClick={() => onSelect('health')} size="lg" className="w-full h-auto py-6 flex flex-col items-center justify-center" variant="outline">
+        <Button onClick={() => onSelect('health')} size="lg" className="w-full h-auto py-6 flex flex-col items-center justify-center hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)]" variant="outline">
           <HeartPulse className="mb-2 h-8 w-8" />
           <span className="font-bold text-lg">Sector Salud</span>
           <span className="font-normal text-sm text-muted-foreground">(Medicina Estética)</span>
         </Button>
       </motion.div>
       <motion.div whileHover={{ y: -5 }} className="w-full">
-        <Button onClick={() => onSelect('general')} size="lg" className="w-full h-auto py-6 flex flex-col items-center justify-center" variant="outline">
+        <Button onClick={() => onSelect('general')} size="lg" className="w-full h-auto py-6 flex flex-col items-center justify-center hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)]" variant="outline">
           <Building className="mb-2 h-8 w-8" />
           <span className="font-bold text-lg">Otro Sector</span>
           <span className="font-normal text-sm text-muted-foreground">(Empresas y Profesionales)</span>
@@ -99,28 +99,45 @@ const SectorSelection = ({ onSelect }: { onSelect: (sector: 'health' | 'general'
   </motion.div>
 );
 
-const WelcomeDialog = ({ open, onContinue }: { open: boolean; onContinue: () => void; }) => (
-    <AlertDialog open={open}>
-        <AlertDialogContent>
-            <AlertDialogHeader>
-                <div className="flex justify-center mb-4">
-                    <Lightbulb className="h-12 w-12 text-primary" />
-                </div>
-                <AlertDialogTitle className="text-center text-2xl font-headline text-primary">Un Momento de Reflexión Antes de Empezar</AlertDialogTitle>
-                <AlertDialogDescription className="text-center text-base text-muted-foreground pt-2">
-                    Estás a punto de dar un paso vital. Las respuestas que proporciones aquí son la base para construir una estrategia que realmente impulse tu negocio.
-                    <br/><br/>
-                    <strong className="text-foreground">Te invitamos a tomarte 5-10 minutos, sin distracciones.</strong> Responde de manera profunda y honesta. Conectar con tu lado profesional y personal es clave para alinear tu marca con tus gustos, tu identidad y tus verdaderos objetivos.
-                    <br/><br/>
-                    Esta es tu oportunidad para ayudarnos a ayudarte al máximo.
-                </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter className="sm:justify-center">
-                <AlertDialogAction onClick={onContinue}>Entendido, ¡empecemos!</AlertDialogAction>
-            </AlertDialogFooter>
-        </AlertDialogContent>
-    </AlertDialog>
-);
+const WelcomeDialog = ({ open, onContinue, sector }: { open: boolean; onContinue: () => void; sector: 'health' | 'general' | null }) => {
+    const isHealth = sector === 'health';
+    const title = isHealth ? "Un Momento de Reflexión Antes de Empezar" : "Análisis de Necesidades Estratégicas (ADN)";
+    const description = isHealth ? (
+        <>
+            Estás a punto de dar un paso vital. Las respuestas que proporciones aquí son la base para construir una estrategia que realmente impulse tu negocio.
+            <br/><br/>
+            <strong className="text-foreground">Te invitamos a tomarte 5-10 minutos, sin distracciones.</strong> Responde de manera profunda y honesta. Conectar con tu lado profesional y personal es clave para alinear tu marca con tus gustos, tu identidad y tus verdaderos objetivos.
+            <br/><br/>
+            Esta es tu oportunidad para ayudarnos a ayudarte al máximo.
+        </>
+    ) : (
+        <>
+            Este Análisis de Necesidades (ADN) de 5-10 minutos no es una simple encuesta; es el primer paso hacia la redefinición de su estrategia de crecimiento.
+            <br/><br/>
+            <strong className="text-foreground">Sea honesto, pues su reflexión es la base de nuestro diagnóstico.</strong>
+        </>
+    );
+
+
+    return (
+        <AlertDialog open={open}>
+            <AlertDialogContent>
+                <AlertDialogHeader>
+                    <div className="flex justify-center mb-4">
+                        <Lightbulb className="h-12 w-12 text-primary" />
+                    </div>
+                    <AlertDialogTitle className="text-center text-2xl font-headline text-primary">{title}</AlertDialogTitle>
+                    <AlertDialogDescription className="text-center text-base text-muted-foreground pt-2">
+                        {description}
+                    </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter className="sm:justify-center">
+                    <AlertDialogAction onClick={onContinue}>Entendido, ¡empecemos!</AlertDialogAction>
+                </AlertDialogFooter>
+            </AlertDialogContent>
+        </AlertDialog>
+    );
+};
 
 
 export default function DiagnosticoClient() {
@@ -182,9 +199,9 @@ export default function DiagnosticoClient() {
   const handleDownloadSummary = () => {
     let fileName = 'resumen-diagnostico.txt';
     if(surveyData && 'q1_name' in surveyData && surveyData.q1_name) {
-        fileName = `resumen-diagnostico-${surveyData.q1_name}.txt`;
+        fileName = `resumen-diagnostico-${surveyData.q1_name.replace(/ /g, '_')}.txt`;
     } else if (surveyData && 'name' in surveyData && surveyData.name) {
-        fileName = `resumen-diagnostico-${surveyData.name}.txt`;
+        fileName = `resumen-diagnostico-${surveyData.name.replace(/ /g, '_')}.txt`;
     }
 
     const blob = new Blob([summaryText], { type: 'text/plain;charset=utf-8' });
@@ -236,6 +253,7 @@ export default function DiagnosticoClient() {
   const getTitle = () => {
       if (formStep === 'sent' || formStep === 'general_sent') return "Gracias por tu confianza.";
       if (formStep === 'sector') return "Comencemos por conocer tu negocio.";
+      if (selectedSector === 'general') return "Este Análisis de Necesidades (ADN) es el primer paso para redefinir su estrategia.";
       return "Completa este formulario para descubrir el potencial oculto de tu marca.";
   }
 
@@ -287,11 +305,11 @@ export default function DiagnosticoClient() {
                 <h2 className="text-2xl font-bold font-headline text-primary mb-4">Paso Final: Revisa y Guarda tu Resumen</h2>
                 <p className="text-muted-foreground mb-6">Hemos generado un resumen de tus respuestas. Descárgalo para tus archivos y luego envíalo para que nuestro equipo lo revise.</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button onClick={handleDownloadSummary} size="lg">
+                  <Button onClick={handleDownloadSummary} size="lg" className="hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)]">
                     <Download className="mr-2" />
                     Descargar Resumen
                   </Button>
-                  <Button onClick={handleSendToSupabase} size="lg" variant="default">
+                  <Button onClick={handleSendToSupabase} size="lg" variant="default" className="hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)]">
                     <Send className="mr-2" />
                     Enviar Diagnóstico
                   </Button>
@@ -305,7 +323,7 @@ export default function DiagnosticoClient() {
           </>
         )}
       </div>
-      <WelcomeDialog open={showWelcomeDialog} onContinue={handleStartForm} />
+      <WelcomeDialog open={showWelcomeDialog} onContinue={handleStartForm} sector={selectedSector} />
     </div>
   );
 }

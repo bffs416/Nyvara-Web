@@ -106,3 +106,14 @@ export const INTERESTED_SERVICES_OPTIONS = [
   "Estrategia de Marca y Posicionamiento",
   "Otro",
 ];
+
+export const GENERAL_CHALLENGES_OPTIONS = [
+  "Generación de leads cualificados",
+  "Diferenciación en un mercado saturado",
+  "Retención y fidelización de clientes",
+  "Optimización de procesos internos",
+  "Falta de una estrategia de marketing clara",
+  "Presencia online poco efectiva",
+  "Medición del ROI de las acciones de marketing",
+  "Falta de tiempo o recursos",
+];
