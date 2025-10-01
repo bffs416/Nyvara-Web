@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from "lucide-react";
 import NyvaraLogo from "../icons/nyvara-logo";
 import { cn } from "@/lib/utils";
-import AnimatedCounter from "../ui/animated-counter";
 
 const CallToAction = () => {
   return (
@@ -76,35 +75,29 @@ export default function Hero() {
           </motion.p>
           
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.8 }} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button asChild size="lg" className="font-bold px-8 py-4 text-lg transition-all duration-300 hover:scale-105">
+            <Button asChild size="lg" className="font-bold px-8 py-4 text-lg">
               <Link href="/diagnostico">
                 Inicia tu Diagnóstico Estratégico
                 <ArrowRight size={20} />
               </Link>
             </Button>
-            <Button onClick={scrollToServices} variant="outline" size="lg" className="font-semibold px-8 py-4 text-lg transition-all duration-300 hover:scale-105">
+            <Button onClick={scrollToServices} variant="outline" size="lg" className="font-semibold px-8 py-4 text-lg">
               <Sparkles size={20} />
               Explora Nuestros Servicios
             </Button>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1 }} className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-card/50 border border-border/30 rounded-lg p-6 hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] transition-all duration-300 hover:scale-105">
-              <div className="text-3xl font-bold text-primary font-headline">
-                <AnimatedCounter value={100} suffix="+" />
-              </div>
+            <div className="bg-card/50 border border-border/30 rounded-lg p-6">
+              <div className="text-3xl font-bold text-primary font-headline">100+</div>
               <div className="text-muted-foreground">Proyectos Exitosos</div>
             </div>
-            <div className="bg-card/50 border border-border/30 rounded-lg p-6 hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] transition-all duration-300 hover:scale-105">
-              <div className="text-3xl font-bold text-primary font-headline">
-                <AnimatedCounter value={5} suffix="+" />
-              </div>
+            <div className="bg-card/50 border border-border/30 rounded-lg p-6">
+              <div className="text-3xl font-bold text-primary font-headline">5+</div>
               <div className="text-muted-foreground">Años de Experiencia</div>
             </div>
-            <div className="bg-card/50 border border-border/30 rounded-lg p-6 hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] transition-all duration-300 hover:scale-105">
-              <div className="text-3xl font-bold text-primary font-headline">
-                 <AnimatedCounter value={98} suffix="%" />
-              </div>
+            <div className="bg-card/50 border border-border/30 rounded-lg p-6">
+              <div className="text-3xl font-bold text-primary font-headline">98%</div>
               <div className="text-muted-foreground">Clientes Satisfechos</div>
             </div>
           </motion.div>
