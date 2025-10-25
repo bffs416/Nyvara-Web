@@ -12,8 +12,8 @@ import Marquee from '@/components/ui/marquee';
 import { Sparkles } from 'lucide-react';
 
 const MarqueeText = ({ children }: { children: React.ReactNode }) => (
-  <span className="flex items-center text-4xl font-bold uppercase mx-4">
-    <Sparkles className="mr-4 text-background" />
+  <span className="flex items-center text-4xl font-bold uppercase mx-4 text-primary-foreground">
+    <Sparkles className="mr-4 text-primary-foreground" />
     {children}
   </span>
 );
@@ -46,7 +46,7 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
-        <section className="bg-card py-8 -mt-12 md:-mt-16 lg:-mt-20 relative z-20">
+        <section className="bg-primary py-8 -mt-12 md:-mt-16 lg:-mt-20 relative z-20">
           <div className="space-y-4">
               <div className="-rotate-2">
                   <Marquee>
