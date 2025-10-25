@@ -51,8 +51,8 @@ export default function Hero() {
       </div>
 
       <motion.div 
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
         className="container mx-auto px-6 text-center relative z-10"
@@ -80,16 +80,16 @@ export default function Hero() {
             Más que proveedores, tus socios en crecimiento estratégico.
           </motion.p>
           
-          <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }} className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight">
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }} className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight">
             Redescubriendo tu Esencia,
             <span className="text-primary block">Potenciando tu Marca</span>
           </motion.h1>
 
-          <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }} className="text-base md:text-lg text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }} className="text-base md:text-lg text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
             Fusionamos estrategia, creatividad y tecnología para revelar el verdadero potencial de tu negocio y comunicarlo de forma impactante.
           </motion.p>
           
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.8 }} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.8 }} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button asChild size="lg" className="font-bold px-8 py-4 text-lg">
               <Link href="/diagnostico">
                 Inicia tu Diagnóstico Estratégico
@@ -102,7 +102,7 @@ export default function Hero() {
             </Button>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1 }} className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1 }} className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-card/50 border border-border/30 rounded-lg p-6 hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] hover:scale-105 transition-all duration-300">
               <div className="text-3xl font-bold text-primary font-headline">
                 <AnimatedCounter value={100} suffix="+" />
