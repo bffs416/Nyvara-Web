@@ -280,9 +280,9 @@ export default function DiagnosticoClient() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7 }}
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 text-primary font-headline">Diagnóstico Estratégico</h1>
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 text-primary font-headline">DIAGNÓSTICO GRATIS</h1>
           <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto">
-            {getTitle()}
+            Permítenos conocerte
           </p>
         </motion.section>
         
