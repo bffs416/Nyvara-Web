@@ -36,11 +36,19 @@ export default function Hero() {
 
   return (
     <section id="inicio" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-24 pb-12">
-      {/* Background animations */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 floating-animation"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-secondary/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 floating-animation" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-primary/20 rounded-full mix-blend-multiply filter blur-xl opacity-70 floating-animation" style={{ animationDelay: '4s' }}></div>
+      {/* Background Video */}
+       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover"
+        >
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-video-of-a-man-with-a-circle-of-dots-42841-large.mp4" type="video/mp4" />
+          Tu navegador no soporta videos.
+        </video>
+        <div className="absolute top-0 left-0 w-full h-full bg-background/80"></div>
       </div>
 
       <motion.div 
@@ -112,4 +120,3 @@ export default function Hero() {
     </section>
   );
 }
-
