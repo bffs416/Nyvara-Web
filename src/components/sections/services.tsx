@@ -1,21 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Megaphone, Calendar, Code, ArrowRight } from 'lucide-react';
+import { Megaphone, Calendar, Code, ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogFooter,
-  DialogClose,
-} from "@/components/ui/dialog";
+import Marquee from '@/components/ui/marquee';
 
 const services = [
     {
@@ -41,10 +32,17 @@ const services = [
     }
   ];
 
+const MarqueeText = ({ children }: { children: React.ReactNode }) => (
+  <span className="flex items-center text-4xl font-bold uppercase mx-4">
+    <Sparkles className="mr-4 text-background" />
+    {children}
+  </span>
+);
+
 export default function Services() {
 
   return (
-    <section id="services" className="py-16 md:py-24 bg-card">
+    <section id="services" className="py-16 md:py-24 bg-card overflow-hidden">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -60,7 +58,30 @@ export default function Services() {
               Somos el socio estratégico que integra marketing, eventos y tecnología bajo una misma visión: el éxito de tu negocio.
             </p>
           </motion.div>
+        </div>
 
+        <div className="space-y-4 mb-16">
+            <div className="-rotate-2">
+                <Marquee>
+                    <MarqueeText>Redescubriendo tu Esencia</MarqueeText>
+                    <MarqueeText>Potenciando tu Marca</MarqueeText>
+                    <MarqueeText>Estrategia</MarqueeText>
+                    <MarqueeText>Creatividad</MarqueeText>
+                    <MarqueeText>Tecnología</MarqueeText>
+                </Marquee>
+            </div>
+            <div className="rotate-2">
+                <Marquee reverse>
+                    <MarqueeText>Soluciones Integrales</MarqueeText>
+                    <MarqueeText>Resultados Medibles</MarqueeText>
+                    <MarqueeText>Marketing</MarqueeText>
+                    <MarqueeText>Eventos</MarqueeText>
+                    <MarqueeText>Desarrollo</MarqueeText>
+                </Marquee>
+            </div>
+        </div>
+
+        <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <motion.div
