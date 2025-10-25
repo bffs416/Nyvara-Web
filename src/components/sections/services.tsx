@@ -51,6 +51,26 @@ export default function Services() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
+            <div className="space-y-4 mb-16">
+              <div className="-rotate-2">
+                  <Marquee>
+                      <MarqueeText>Redescubriendo tu Esencia</MarqueeText>
+                      <MarqueeText>Potenciando tu Marca</MarqueeText>
+                      <MarqueeText>Estrategia</MarqueeText>
+                      <MarqueeText>Creatividad</MarqueeText>
+                      <MarqueeText>Tecnología</MarqueeText>
+                  </Marquee>
+              </div>
+              <div className="rotate-2">
+                  <Marquee reverse>
+                      <MarqueeText>Soluciones Integrales</MarqueeText>
+                      <MarqueeText>Resultados Medibles</MarqueeText>
+                      <MarqueeText>Marketing</MarqueeText>
+                      <MarqueeText>Eventos</MarqueeText>
+                      <MarqueeText>Desarrollo</MarqueeText>
+                  </Marquee>
+              </div>
+            </div>
             <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-6">
               Nuestros Servicios: Soluciones 360° para tu Crecimiento
             </h2>
@@ -58,27 +78,6 @@ export default function Services() {
               Somos el socio estratégico que integra marketing, eventos y tecnología bajo una misma visión: el éxito de tu negocio.
             </p>
           </motion.div>
-        </div>
-
-        <div className="space-y-4 mb-16">
-            <div className="-rotate-2">
-                <Marquee>
-                    <MarqueeText>Redescubriendo tu Esencia</MarqueeText>
-                    <MarqueeText>Potenciando tu Marca</MarqueeText>
-                    <MarqueeText>Estrategia</MarqueeText>
-                    <MarqueeText>Creatividad</MarqueeText>
-                    <MarqueeText>Tecnología</MarqueeText>
-                </Marquee>
-            </div>
-            <div className="rotate-2">
-                <Marquee reverse>
-                    <MarqueeText>Soluciones Integrales</MarqueeText>
-                    <MarqueeText>Resultados Medibles</MarqueeText>
-                    <MarqueeText>Marketing</MarqueeText>
-                    <MarqueeText>Eventos</MarqueeText>
-                    <MarqueeText>Desarrollo</MarqueeText>
-                </Marquee>
-            </div>
         </div>
 
         <div className="container">
