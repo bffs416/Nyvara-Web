@@ -258,8 +258,22 @@ export default function DiagnosticoClient() {
   }
 
   return (
-    <div className="bg-background text-foreground pt-32 pb-20">
-      <div className="container mx-auto px-6">
+    <div className="bg-background text-foreground pt-32 pb-20 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            >
+              <source src="/hero-background.mp4" type="video/mp4" />
+              Tu navegador no soporta videos.
+            </video>
+            <div className="absolute top-0 left-0 w-full h-full bg-background/80"></div>
+        </div>
+
+      <div className="container mx-auto px-6 relative z-10">
         <motion.section
           className="text-center mb-12"
           initial={{ opacity: 0, scale: 0.9 }}
