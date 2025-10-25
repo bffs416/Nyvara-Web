@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Button } from "@/components/ui/button";
@@ -6,6 +7,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from "lucide-react";
 import NyvaraLogo from "../icons/nyvara-logo";
 import { cn } from "@/lib/utils";
+import AnimatedCounter from "../ui/animated-counter";
 
 const CallToAction = () => {
   return (
@@ -64,14 +66,12 @@ export default function Hero() {
           </motion.p>
           
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }} className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight">
-            Llevamos tu Negocio
-            <span className="text-primary block">al Siguiente Nivel</span>
+            Redescubriendo tu Esencia,
+            <span className="text-primary block">Potenciando tu Marca</span>
           </motion.h1>
 
           <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }} className="text-base md:text-lg text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-            Integramos <span className="text-foreground font-semibold">marketing de vanguardia</span>, 
-            <span className="text-foreground font-semibold">eventos de alto impacto</span> y 
-            <span className="text-foreground font-semibold">tecnología a la medida</span> para convertir tus objetivos en resultados medibles y sostenibles.
+            Fusionamos estrategia, creatividad y tecnología para revelar el verdadero potencial de tu negocio y comunicarlo de forma impactante.
           </motion.p>
           
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.8 }} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -88,16 +88,22 @@ export default function Hero() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1 }} className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-card/50 border border-border/30 rounded-lg p-6">
-              <div className="text-3xl font-bold text-primary font-headline">100+</div>
+            <div className="bg-card/50 border border-border/30 rounded-lg p-6 hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] hover:scale-105 transition-all duration-300">
+              <div className="text-3xl font-bold text-primary font-headline">
+                <AnimatedCounter value={100} suffix="+" />
+              </div>
               <div className="text-muted-foreground">Proyectos Exitosos</div>
             </div>
-            <div className="bg-card/50 border border-border/30 rounded-lg p-6">
-              <div className="text-3xl font-bold text-primary font-headline">5+</div>
+            <div className="bg-card/50 border border-border/30 rounded-lg p-6 hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] hover:scale-105 transition-all duration-300">
+              <div className="text-3xl font-bold text-primary font-headline">
+                 <AnimatedCounter value={5} suffix="+" />
+              </div>
               <div className="text-muted-foreground">Años de Experiencia</div>
             </div>
-            <div className="bg-card/50 border border-border/30 rounded-lg p-6">
-              <div className="text-3xl font-bold text-primary font-headline">98%</div>
+            <div className="bg-card/50 border border-border/30 rounded-lg p-6 hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] hover:scale-105 transition-all duration-300">
+              <div className="text-3xl font-bold text-primary font-headline">
+                 <AnimatedCounter value={98} suffix="%" />
+              </div>
               <div className="text-muted-foreground">Clientes Satisfechos</div>
             </div>
           </motion.div>
@@ -106,3 +112,4 @@ export default function Hero() {
     </section>
   );
 }
+
