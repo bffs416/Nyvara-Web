@@ -45,7 +45,7 @@ export default function Hero() {
           playsInline
           className="w-full h-full object-cover"
         >
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-video-of-a-man-with-a-circle-of-dots-42841-large.mp4" type="video/mp4" />
+          <source src="/hero-background.mp4" type="video/mp4" />
           Tu navegador no soporta videos.
         </video>
         <div className="absolute top-0 left-0 w-full h-full bg-background/80"></div>
