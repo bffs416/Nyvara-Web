@@ -8,6 +8,15 @@ import Services from '@/components/sections/services';
 import About from '@/components/sections/about';
 import Testimonials from '@/components/sections/testimonials';
 import Contact from '@/components/sections/contact';
+import Marquee from '@/components/ui/marquee';
+import { Sparkles } from 'lucide-react';
+
+const MarqueeText = ({ children }: { children: React.ReactNode }) => (
+  <span className="flex items-center text-4xl font-bold uppercase mx-4">
+    <Sparkles className="mr-4 text-background" />
+    {children}
+  </span>
+);
 
 export default function Home() {
   useEffect(() => {
@@ -37,6 +46,28 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
+        <section className="bg-card py-8 -mt-12 md:-mt-16 lg:-mt-20 relative z-20">
+          <div className="space-y-4">
+              <div className="-rotate-2">
+                  <Marquee>
+                      <MarqueeText>Redescubriendo tu Esencia</MarqueeText>
+                      <MarqueeText>Potenciando tu Marca</MarqueeText>
+                      <MarqueeText>Estrategia</MarqueeText>
+                      <MarqueeText>Creatividad</MarqueeText>
+                      <MarqueeText>Tecnología</MarqueeText>
+                  </Marquee>
+              </div>
+              <div className="rotate-2">
+                  <Marquee reverse>
+                      <MarqueeText>Soluciones Integrales</MarqueeText>
+                      <MarqueeText>Resultados Medibles</MarqueeText>
+                      <MarqueeText>Marketing</MarqueeText>
+                      <MarqueeText>Eventos</MarqueeText>
+                      <MarqueeText>Desarrollo</MarqueeText>
+                  </Marquee>
+              </div>
+            </div>
+        </section>
         <Services />
         <About />
         <Testimonials />

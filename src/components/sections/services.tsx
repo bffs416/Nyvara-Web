@@ -2,11 +2,10 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Megaphone, Calendar, Code, ArrowRight, Sparkles } from 'lucide-react';
+import { Megaphone, Calendar, Code, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
-import Marquee from '@/components/ui/marquee';
 
 const services = [
     {
@@ -32,17 +31,10 @@ const services = [
     }
   ];
 
-const MarqueeText = ({ children }: { children: React.ReactNode }) => (
-  <span className="flex items-center text-4xl font-bold uppercase mx-4">
-    <Sparkles className="mr-4 text-background" />
-    {children}
-  </span>
-);
-
 export default function Services() {
 
   return (
-    <section id="services" className="py-16 md:py-24 bg-card overflow-hidden">
+    <section id="services" className="py-16 md:py-24 bg-background">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -51,26 +43,6 @@ export default function Services() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="space-y-4 mb-16">
-              <div className="-rotate-2">
-                  <Marquee>
-                      <MarqueeText>Redescubriendo tu Esencia</MarqueeText>
-                      <MarqueeText>Potenciando tu Marca</MarqueeText>
-                      <MarqueeText>Estrategia</MarqueeText>
-                      <MarqueeText>Creatividad</MarqueeText>
-                      <MarqueeText>Tecnología</MarqueeText>
-                  </Marquee>
-              </div>
-              <div className="rotate-2">
-                  <Marquee reverse>
-                      <MarqueeText>Soluciones Integrales</MarqueeText>
-                      <MarqueeText>Resultados Medibles</MarqueeText>
-                      <MarqueeText>Marketing</MarqueeText>
-                      <MarqueeText>Eventos</MarqueeText>
-                      <MarqueeText>Desarrollo</MarqueeText>
-                  </Marquee>
-              </div>
-            </div>
             <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-6">
               Nuestros Servicios: Soluciones 360° para tu Crecimiento
             </h2>
@@ -91,7 +63,7 @@ export default function Services() {
                 viewport={{ once: true }}
                 className="h-full"
               >
-                <Card className="bg-background/50 border-border/50 hover:border-primary/50 transition-all duration-300 h-full flex flex-col hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] hover:scale-105">
+                <Card className="bg-card border-border/50 hover:border-primary/50 transition-all duration-300 h-full flex flex-col hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] hover:scale-105">
                   <CardContent className="p-8 h-full flex flex-col">
                       <div className="w-16 h-16 rounded-lg bg-primary flex items-center justify-center mb-6">
                           {service.icon}
