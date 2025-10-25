@@ -6,9 +6,8 @@ import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import NyvaraLogo from '@/components/icons/nyvara-logo';
 import { usePathname, useRouter } from 'next/navigation';
-import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 const navItems = [
   { name: 'Inicio', href: '/' },
@@ -82,8 +81,14 @@ const Header = () => {
       <nav className="container flex h-20 items-center">
         <div className="mr-auto flex">
            <Link href="/" className="mr-6 flex items-center space-x-2 cursor-pointer">
-            <motion.div whileHover={{ scale: 1.05 }}>
-                <NyvaraLogo className="h-10 w-48" />
+            <motion.div whileHover={{ scale: 1.05 }} className="relative h-10 w-48">
+                <Image
+                  src="/logo-header.png"
+                  alt="Nyvara Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
             </motion.div>
           </Link>
         </div>

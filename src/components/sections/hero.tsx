@@ -5,8 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from "lucide-react";
-import NyvaraLogo from "../icons/nyvara-logo";
-import { cn } from "@/lib/utils";
+import Image from "next/image";
 import AnimatedCounter from "../ui/animated-counter";
 
 const CallToAction = () => {
@@ -61,7 +60,15 @@ export default function Hero() {
         <div className="max-w-4xl mx-auto">
           
           <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 1, delay: 0.2 }} className="mb-6 flex justify-center">
-            <NyvaraLogo className="w-96 h-24 md:h-32 md:w-[32rem]" />
+            <div className="relative w-96 h-24 md:h-32 md:w-[32rem]">
+              <Image
+                src="/logo-hero.png"
+                alt="Nyvara Logo"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
           </motion.div>
           
           <motion.p 

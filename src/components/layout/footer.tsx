@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from 'react';
@@ -5,7 +6,7 @@ import { motion } from 'framer-motion';
 import { Instagram, Linkedin } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
-import NyvaraLogo from '@/components/icons/nyvara-logo';
+import Image from 'next/image';
 import {
   Dialog,
   DialogContent,
@@ -114,7 +115,14 @@ const Footer = () => {
           viewport={{ once: true }}
           className="flex justify-center mt-20"
         >
-          <NyvaraLogo className="h-24 w-80" />
+          <div className="relative h-24 w-80">
+            <Image
+              src="/logo-header.png"
+              alt="Nyvara Logo"
+              fill
+              className="object-contain"
+            />
+          </div>
         </motion.div>
 
         <motion.div
