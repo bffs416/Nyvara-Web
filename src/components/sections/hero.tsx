@@ -57,7 +57,7 @@ export default function Hero() {
         viewport={{ once: true }}
         className="container mx-auto px-6 text-center relative z-10"
       >
-        <div className="max-w-4xl mx-auto">
+        <div className="mx-auto">
           
           <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 1, delay: 0.2 }} className="mb-6 flex justify-center">
             <div className="relative w-96 h-24 md:h-32 md:w-[32rem]">
