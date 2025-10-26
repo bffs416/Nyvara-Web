@@ -50,13 +50,13 @@ export default function Hero() {
             animate={{ scale: 1, opacity: 1 }} 
             transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="mb-6 flex justify-center"
+            className="mb-4 flex justify-center"
           >
             {/* --- AJUSTA EL TAMAÑO DEL LOGO AQUÍ --- */}
             {/* Modifica las clases `w-` (ancho) y `h-` (alto) para cambiar el tamaño. */}
             {/* Ejemplo: `w-96 h-24` significa 384px de ancho y 96px de alto. */}
             {/* `md:w-[40rem]` ajusta el ancho en pantallas medianas y grandes. */}
-            <div className="relative w-96 h-40 md:h-40 md:w-[40rem]">
+            <div className="relative w-[70%] h-auto aspect-[4/1]">
               <Image
                 src={siteConfig.logos.hero}
                 alt="Nyvara Logo"
@@ -67,7 +67,7 @@ export default function Hero() {
             </div>
           </motion.div>
           
-          <motion.div 
+          <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
@@ -75,7 +75,7 @@ export default function Hero() {
             className="text-lg md:text-xl text-primary font-semibold mb-4 font-headline"
           >
             Más que proveedores, tus socios en crecimiento estratégico.
-          </motion.div>
+          </motion.p>
           
           <motion.h1 
             initial={{ opacity: 0, y: 20 }} 
