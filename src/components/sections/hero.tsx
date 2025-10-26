@@ -55,8 +55,8 @@ export default function Hero() {
             {/* --- AJUSTA EL TAMAÑO DEL LOGO AQUÍ --- */}
             {/* Modifica las clases `w-` (ancho) y `h-` (alto) para cambiar el tamaño. */}
             {/* Ejemplo: `w-96 h-24` significa 384px de ancho y 96px de alto. */}
-            {/* `md:w-[32rem]` ajusta el ancho en pantallas medianas y grandes. */}
-            <div className="relative w-96 h-24 md:h-32 md:w-[32rem]">
+            {/* `md:w-[40rem]` ajusta el ancho en pantallas medianas y grandes. */}
+            <div className="relative w-96 h-40 md:h-40 md:w-[40rem]">
               <Image
                 src={siteConfig.logos.hero}
                 alt="Nyvara Logo"
