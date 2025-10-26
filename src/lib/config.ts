@@ -1,7 +1,7 @@
 export const siteConfig = {
   logos: {
     header: '/logo-header.png',
-    hero: '/logo-hero.png',
+    hero: '/logo-hero_1.png',
   },
   contact: {
     phone: '573203004537',
