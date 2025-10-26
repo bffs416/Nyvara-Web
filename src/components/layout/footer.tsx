@@ -15,6 +15,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { siteConfig } from '@/lib/config';
 
 const Footer = () => {
   const { toast } = useToast()
@@ -117,7 +118,7 @@ const Footer = () => {
         >
           <div className="relative h-24 w-80">
             <Image
-              src="/logo-header.png"
+              src={siteConfig.logos.header}
               alt="Nyvara Logo"
               fill
               className="object-contain"

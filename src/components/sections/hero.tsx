@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Button } from "@/components/ui/button";
@@ -6,6 +7,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from "lucide-react";
 import Image from "next/image";
 import AnimatedCounter from "../ui/animated-counter";
+import { siteConfig } from "@/lib/config";
 
 export default function Hero() {
 
@@ -52,7 +54,7 @@ export default function Hero() {
           >
             <div className="relative w-96 h-24 md:h-32 md:w-[32rem]">
               <Image
-                src="/logo-hero.png"
+                src={siteConfig.logos.hero}
                 alt="Nyvara Logo"
                 fill
                 className="object-contain"
@@ -82,7 +84,7 @@ export default function Hero() {
             <span className="text-primary block">Potenciando tu Marca</span>
           </motion.h1>
 
-          <motion.p 
+          <motion.div 
             initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
@@ -90,7 +92,7 @@ export default function Hero() {
             className="text-base md:text-lg text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed"
           >
             Fusionamos estrategia, creatividad y tecnología para revelar el verdadero potencial de tu negocio y comunicarlo de forma impactante.
-          </motion.p>
+          </motion.div>
           
           <motion.div 
             initial={{ opacity: 0, y: 20 }} 

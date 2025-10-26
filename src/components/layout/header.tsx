@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { siteConfig } from '@/lib/config';
 
 const navItems = [
   { name: 'Inicio', href: '/' },
@@ -83,7 +84,7 @@ const Header = () => {
            <Link href="/" className="mr-6 flex items-center space-x-2 cursor-pointer">
             <motion.div whileHover={{ scale: 1.05 }} className="relative h-10 w-48">
                 <Image
-                  src="/logo-header.png"
+                  src={siteConfig.logos.header}
                   alt="Nyvara Logo"
                   fill
                   className="object-contain"

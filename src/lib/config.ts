@@ -1,4 +1,8 @@
 export const siteConfig = {
+  logos: {
+    header: '/logo-header.png',
+    hero: '/logo-hero.png',
+  },
   contact: {
     phone: '573203004537',
     email: 'nyvara@nyvaragroup.com',
