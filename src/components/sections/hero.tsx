@@ -50,12 +50,11 @@ export default function Hero() {
             animate={{ scale: 1, opacity: 1 }} 
             transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="mb-4 flex justify-center"
+            className="mb-4 flex justify-center floating-animation"
           >
             {/* --- AJUSTA EL TAMAÑO DEL LOGO AQUÍ --- */}
             {/* Modifica las clases `w-` (ancho) y `h-` (alto) para cambiar el tamaño. */}
-            {/* Ejemplo: `w-96 h-24` significa 384px de ancho y 96px de alto. */}
-            {/* `md:w-[40rem]` ajusta el ancho en pantallas medianas y grandes. */}
+            {/* Ejemplo: `w-[70%]` significa 70% del ancho del contenedor. */}
             <div className="relative w-[70%] h-auto aspect-[4/1]">
               <Image
                 src={siteConfig.logos.hero}
