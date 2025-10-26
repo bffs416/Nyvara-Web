@@ -18,6 +18,27 @@ export default function Hero() {
     }
   };
 
+  const title1 = "Redescubriendo tu Esencia,";
+  const title2 = "Potenciando tu Marca";
+
+  const sentence = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delay: 0.5,
+        staggerChildren: 0.04,
+      },
+    },
+  };
+
+  const letter = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+    },
+  };
 
   return (
     <section id="inicio" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-24 pb-12">
@@ -52,9 +73,6 @@ export default function Hero() {
             viewport={{ once: true }}
             className="mb-4 flex justify-center floating-animation"
           >
-            {/* --- AJUSTA EL TAMAÑO DEL LOGO AQUÍ --- */}
-            {/* Modifica las clases `w-` (ancho) y `h-` (alto) para cambiar el tamaño. */}
-            {/* Ejemplo: `w-[70%]` significa 70% del ancho del contenedor. */}
             <div className="relative w-[70%] h-auto aspect-[4/1]">
               <Image
                 src={siteConfig.logos.hero}
@@ -66,7 +84,7 @@ export default function Hero() {
             </div>
           </motion.div>
           
-          <motion.p 
+          <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
@@ -74,17 +92,27 @@ export default function Hero() {
             className="text-lg md:text-xl text-primary font-semibold mb-4 font-headline"
           >
             Más que proveedores, tus socios en crecimiento estratégico.
-          </motion.p>
+          </motion.div>
           
           <motion.h1 
-            initial={{ opacity: 0, y: 20 }} 
-            animate={{ opacity: 1, y: 0 }} 
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            viewport={{ once: true }}
+            variants={sentence}
+            initial="hidden"
+            animate="visible"
             className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight"
           >
-            Redescubriendo tu Esencia,
-            <span className="text-primary block">Potenciando tu Marca</span>
+            {title1.split("").map((char, index) => (
+              <motion.span key={char + "-" + index} variants={letter}>
+                {char}
+              </motion.span>
+            ))}
+            <br />
+            <span className="text-primary">
+              {title2.split("").map((char, index) => (
+                <motion.span key={char + "-" + index} variants={letter}>
+                  {char}
+                </motion.span>
+              ))}
+            </span>
           </motion.h1>
 
           <motion.div 
