@@ -3,8 +3,8 @@
 
 import React, { useEffect, useState } from 'react';
 import type { QuoteFormData } from './quote-generator';
-import NyvaraLogo from '../icons/nyvara-logo';
 import { siteConfig } from '@/lib/config';
+import Image from 'next/image';
 
 interface PrintData extends QuoteFormData {
     finalQuoteNumber: string;
@@ -82,8 +82,14 @@ const QuotePrintView = () => {
             `}</style>
             
             <header className="flex justify-between items-start pb-8 border-b-2 border-gray-900">
-                <div className="w-1/3">
-                    <NyvaraLogo className="h-16 w-full" />
+                <div className="relative h-16 w-1/3">
+                    <Image
+                        src={siteConfig.logos.header}
+                        alt="Nyvara Logo"
+                        fill
+                        className="object-contain"
+                        priority
+                     />
                 </div>
                 <div className="text-right">
                     <h1 className="font-headline text-4xl font-bold">Propuesta Comercial</h1>
