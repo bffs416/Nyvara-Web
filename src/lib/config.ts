@@ -1,6 +1,6 @@
 export const siteConfig = {
   logos: {
-    header: '/logo-header.png',
+    header: '/logo-hero_1.png',
     hero: '/logo-hero_1.png',
   },
   contact: {
