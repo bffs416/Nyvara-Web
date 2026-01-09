@@ -1,117 +1,147 @@
 'use client';
 
+import React, { useState, useEffect } from 'react';
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { Quote } from "lucide-react";
 
 const testimonials = [
   {
-    image: PlaceHolderImages.find(img => img.id === 'testimonial-1')!,
-    name: "Juana Pérez",
-    title: "CEO, Tech Innovators",
-    quote: "El equipo de desarrollo de Nyvara es de primera categoría. Entregaron nuestro software a tiempo, superando nuestras expectativas en funcionalidad y diseño. Su profesionalismo es inigualable.",
-    alt: "Retrato de Juana Pérez, CEO de Tech Innovators",
-  },
-  {
-    image: PlaceHolderImages.find(img => img.id === 'testimonial-2')!,
-    name: "Juan García",
-    title: "Director de Marketing, EventPros",
-    quote: "El evento corporativo que Nyvara organizó para nosotros fue impecable. Cada detalle, desde la logística hasta la experiencia del asistente, se manejó con una precisión increíble.",
-    alt: "Retrato de Juan García, Director de Marketing en EventPros",
-  },
-  {
-    image: PlaceHolderImages.find(img => img.id === 'testimonial-3')!,
-    name: "Emily Blanco",
-    title: "Gerente de RRHH, Future Corp",
-    quote: "Las sesiones de formación que diseñaron fueron reveladoras y atractivas. La productividad y cohesión de nuestro equipo ha mejorado notablemente. Una inversión fantástica.",
-    alt: "Retrato de Emily Blanco, Gerente de RRHH en Future Corp",
-  },
-  {
-    image: PlaceHolderImages.find(img => img.id === 'testimonial-4')!,
-    name: "Carlos Rodríguez",
-    title: "Fundador, Startup Creativa",
-    quote: "La estrategia de marketing digital que Nyvara implementó duplicó nuestros leads cualificados en solo tres meses. Su enfoque basado en datos realmente funciona.",
-    alt: "Retrato de Carlos Rodríguez, Fundador de Startup Creativa",
-  },
-  {
-    image: PlaceHolderImages.find(img => img.id === 'testimonial-5')!,
-    name: "Sofía Martínez",
-    title: "Gerente de Producto, eComm Store",
-    quote: "El stand para nuestra feria más importante fue un éxito rotundo. El diseño fue innovador y atrajo a una cantidad increíble de visitantes a nuestro espacio.",
-    alt: "Retrato de Sofía Martínez, Gerente de Producto en eComm Store",
-  },
-  {
-    image: PlaceHolderImages.find(img => img.id === 'testimonial-6')!,
-    name: "Luis Fernández",
-    title: "CTO, Fintech Solutions",
-    quote: "Necesitábamos una arquitectura de base de datos escalable y segura. Nyvara nos entregó una solución robusta que soporta nuestro crecimiento exponencial.",
-    alt: "Retrato de Luis Fernández, CTO de Fintech Solutions",
-  },
-  {
-    image: PlaceHolderImages.find(img => img.id === 'testimonial-7')!,
+    image: PlaceHolderImages.find(img => img.id === 'testimonial-1')!.imageUrl,
     name: "Ana Gómez",
-    title: "Directora de Comunicaciones, ONG Global",
-    quote: "Organizar nuestro congreso anual siempre fue un desafío logístico. Con Nyvara, todo fluyó sin problemas, desde el registro online hasta la transmisión en vivo.",
+    title: "Directora de Comunicaciones, Grupo Alpha",
+    quote: "Nyvara transformó completamente nuestras conferencias anuales. Su capacidad para integrar tecnología en tiempo real y diseño de vanguardia superó nuestras expectativas.",
     alt: "Retrato de Ana Gómez, Directora de Comunicaciones",
   },
   {
-    image: PlaceHolderImages.find(img => img.id === 'testimonial-8')!,
+    image: PlaceHolderImages.find(img => img.id === 'testimonial-8')!.imageUrl,
     name: "Miguel Hernández",
     title: "Dueño, Restaurante Gourmet",
     quote: "La aplicación móvil que desarrollaron para nosotros ha mejorado enormemente la experiencia de nuestros clientes y ha incrementado los pedidos a domicilio en un 40%.",
     alt: "Retrato de Miguel Hernández, Dueño de Restaurante Gourmet",
+  },
+  {
+    image: PlaceHolderImages.find(img => img.id === 'testimonial-4')!.imageUrl,
+    name: "Felipe Franco",
+    title: "Director de ventas & Producto, HANSBIOMED",
+    quote: "La implementación de la plataforma de gestión de Nyvara ha optimizado nuestros procesos internos, permitiéndonos enfocarnos más en la innovación y el cuidado del paciente. Un socio estratégico invaluable.",
+    alt: "Retrato del Dr. Kim Min-joon, CEO de HANSBIOMED",
   }
 ];
 
 export default function Testimonials() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % testimonials.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <section id="testimonials" className="py-16 md:py-24">
-      <div className="container">
-        <motion.div 
-          initial={{ opacity: 0, y: 50 }}
+    <section id="testimonials" className="relative py-24 overflow-hidden bg-[linear-gradient(135deg,#e0e7ff_0%,#f8faff_100%)] font-jakarta">
+      {/* Background Depth Elements */}
+      {/* These classes (depth-blob, glass-card) are assumed to be defined in your global CSS (e.g., globals.css) */}
+      {/* Example CSS for depth-blob:
+      .depth-blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        animation: blob-move 15s infinite alternate ease-in-out;
+        z-index: 0;
+      }
+      @keyframes blob-move {
+        0% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(30px, -50px) scale(1.1); }
+        66% { transform: translate(-20px, 40px) scale(0.9); }
+        100% { transform: translate(0, 0) scale(1); }
+      }
+      */}
+      <div className="depth-blob w-[500px] h-[500px] bg-[#4f46e5]/5 top-[-100px] left-[-100px]" />
+      <div className="depth-blob w-[400px] h-[400px] bg-[#fbbf24]/5 bottom-[-50px] right-[-100px] [animation-delay:-5s]" />
+
+      <div className="container relative z-10 mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary">Historias de Éxito de Nuestros Clientes</h2>
-          <p className="mt-4 max-w-2xl mx-auto text-foreground/80">
-            No solo lo decimos nosotros. Escucha a los líderes de negocio a los que hemos ayudado a crecer y prosperar con nuestras soluciones integradas.
+          <h2 className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight text-[#1e293b]">
+            Historias de Éxito de <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#fbbf24] to-[#f59e0b]">Nuestros Clientes</span>
+          </h2>
+          <p className="text-lg md:text-xl text-[#64748b] max-w-2xl mx-auto leading-relaxed">
+            La confianza de nuestros clientes es el motor que impulsa nuestra búsqueda constante por la excelencia.
           </p>
         </motion.div>
-        <Carousel 
-          opts={{ align: "start", loop: true }} 
-          className="w-full max-w-6xl mx-auto"
-        >
-          <CarouselContent className="-ml-4">
-            {testimonials.map((testimonial, index) => (
-              <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                <div className="p-1 h-full">
-                  <Card className="h-full bg-card border-border/50 p-6 flex flex-col justify-between hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] transition-shadow duration-300">
-                    <CardContent className="p-0 flex flex-col items-start text-left h-full">
-                      <p className="text-foreground/90 italic mb-6 flex-grow">"{testimonial.quote}"</p>
-                      <div className="flex items-center pt-6 border-t border-border w-full">
-                        <Avatar className="h-12 w-12">
-                           <AvatarImage src={testimonial.image.imageUrl} alt={testimonial.alt} data-ai-hint={testimonial.image.imageHint} />
-                           <AvatarFallback>{testimonial.name.substring(0, 2)}</AvatarFallback>
-                        </Avatar>
-                        <div className="ml-4">
-                          <p className="font-semibold text-primary">{testimonial.name}</p>
-                          <p className="text-sm text-muted-foreground">{testimonial.title}</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+
+        <div className="relative max-w-4xl mx-auto">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 1.1, y: -20 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="glass-card rounded-[40px] p-10 md:p-16 text-center shadow-2xl"
+            >
+              {/* Example CSS for glass-card:
+              .glass-card {
+                background: rgba(255, 255, 255, 0.6);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+              }
+              */}
+              <div className="flex flex-col items-center">
+                <div className="relative w-24 h-24 mb-8">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#facc15] to-[#4f46e5] rounded-full blur-md opacity-30 animate-pulse" />
+                  <Image
+                    src={testimonials[activeIndex].image}
+                    alt={testimonials[activeIndex].name}
+                    width={96}
+                    height={96}
+                    className="rounded-full object-cover relative z-10 border-2 border-white/50"
+                  />
                 </div>
-              </CarouselItem>
+
+                <div className="mb-8">
+                  <Quote className="w-12 h-12 text-[#facc15] opacity-40 mx-auto mb-4" />
+                  <p className="text-xl md:text-3xl font-bold text-[#1e293b] italic leading-tight">
+                    "{testimonials[activeIndex].quote}"
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-xl font-black text-[#1e293b] mb-1">
+                    {testimonials[activeIndex].name}
+                  </h4>
+                  <p className="text-[#4f46e5] font-black uppercase tracking-widest text-xs">
+                    {testimonials[activeIndex].title}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          <div className="flex justify-center gap-4 mt-12">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveIndex(index)}
+                className={`h-2.5 transition-all duration-500 rounded-full ${activeIndex === index ? "w-10 bg-[#4f46e5]" : "w-2.5 bg-[#cbd5e1] hover:bg-[#94a3b8]"
+                  }`}
+                aria-label={`Go to testimonial ${index + 1}`}
+              />
             ))}
-          </CarouselContent>
-          <CarouselPrevious className="hidden lg:flex" />
-          <CarouselNext className="hidden lg:flex" />
-        </Carousel>
+          </div>
+        </div>
       </div>
     </section>
   );

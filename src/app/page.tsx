@@ -46,27 +46,25 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
-        <section className="bg-primary py-8 -mt-12 md:-mt-16 lg:-mt-20 relative z-20">
-          <div className="space-y-4">
-              <div className="-rotate-2">
-                  <Marquee>
-                      <MarqueeText>Redescubriendo tu Esencia</MarqueeText>
-                      <MarqueeText>Potenciando tu Marca</MarqueeText>
-                      <MarqueeText>Estrategia</MarqueeText>
-                      <MarqueeText>Creatividad</MarqueeText>
-                      <MarqueeText>Tecnología</MarqueeText>
-                  </Marquee>
-              </div>
-              <div className="rotate-2">
-                  <Marquee reverse>
-                      <MarqueeText>Soluciones Integrales</MarqueeText>
-                      <MarqueeText>Resultados Medibles</MarqueeText>
-                      <MarqueeText>Marketing</MarqueeText>
-                      <MarqueeText>Eventos</MarqueeText>
-                      <MarqueeText>Desarrollo</MarqueeText>
-                  </Marquee>
-              </div>
+        <section className="relative z-20 pt-12 pb-0 -mt-10 md:-mt-14 overflow-visible">
+          <div className="marquee-container">
+            <div className="marquee-content-bold">
+              {/* Set 1 */}
+              <div className="marquee-item-bold">Potenciando tu Marca <span className="separator-spark">✦</span></div>
+              <div className="marquee-item-bold">Estrategia <span className="separator-spark">✦</span></div>
+              <div className="marquee-item-bold">Desarrollo <span className="separator-spark">✦</span></div>
+              <div className="marquee-item-bold">Soluciones <span className="separator-spark">✦</span></div>
+              <div className="marquee-item-bold">Resultados <span className="separator-spark">✦</span></div>
+              <div className="marquee-item-bold">Esencia <span className="separator-spark">✦</span></div>
+              {/* Set 2 */}
+              <div className="marquee-item-bold">Potenciando tu Marca <span className="separator-spark">✦</span></div>
+              <div className="marquee-item-bold">Estrategia <span className="separator-spark">✦</span></div>
+              <div className="marquee-item-bold">Desarrollo <span className="separator-spark">✦</span></div>
+              <div className="marquee-item-bold">Soluciones <span className="separator-spark">✦</span></div>
+              <div className="marquee-item-bold">Resultados <span className="separator-spark">✦</span></div>
+              <div className="marquee-item-bold">Esencia <span className="separator-spark">✦</span></div>
             </div>
+          </div>
         </section>
         <Services />
         <About />
