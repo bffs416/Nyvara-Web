@@ -1,10 +1,15 @@
+'use client';
 
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { siteConfig } from '@/lib/config';
 import Services from '@/components/sections/services';
 import About from '@/components/sections/about';
 import Testimonials from '@/components/sections/testimonials';
 import Contact from '@/components/sections/contact';
+
 
 export default function Home() {
   return (
@@ -12,8 +17,25 @@ export default function Home() {
       <Header />
       <main>
         <div className="container">
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0 }} 
+              animate={{ scale: 1, opacity: 1 }} 
+              transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="mb-4 flex justify-center floating-animation"
+            >
+              <div className="relative w-[70%] h-auto aspect-[4/1]">
+                <Image
+                  src={siteConfig.logos.hero}
+                  alt="Nyvara Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </motion.div>
             <span className="badge">Estrategia Digital 2024</span>
-            <h1>Redescubriendo tu <br/><span style={{ color: 'var(--accent-cyan)' }}>Esencia Digital</span></h1>
+            <h1>Redescubriendo tu <br/><span style={{ color: 'var(--accent)' }}>Esencia Digital</span></h1>
             <p className="subtitle">Elevamos tu negocio mediante soluciones estratégicas de alto impacto. Diseño minimalista, rendimiento futurista.</p>
 
             <div className="btn-group">
