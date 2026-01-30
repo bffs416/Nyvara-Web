@@ -17,9 +17,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['Livvic', 'sans-serif'],
-        headline: ['Oswald', 'serif'],
-        code: ['monospace'],
+        body: ['Inter', 'sans-serif'],
+        headline: ['JetBrains Mono', 'monospace'],
+        code: ['JetBrains Mono', 'monospace'],
       },
       colors: {
         background: 'hsl(var(--background))',

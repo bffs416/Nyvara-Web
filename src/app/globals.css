@@ -4,52 +4,53 @@
 
 @layer base {
   :root {
-    --background: 216 33% 8%; /* Darker Blue */
-    --foreground: 210 40% 98%;
-    --card: 216 33% 12%;
-    --card-foreground: 210 40% 98%;
-    --popover: 216 33% 8%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 45 100% 60%; /* Brighter Gold/Yellow */
-    --primary-foreground: 216 33% 6%;
+    --background: 220 44% 2%;
+    --foreground: 0 0% 100%;
+    --card: 220 44% 7% / 0.7;
+    --card-foreground: 0 0% 100%;
+    --popover: 220 44% 2%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 48 100% 50%;
+    --primary-foreground: 0 0% 0%;
     --secondary: 216 33% 25%;
-    --secondary-foreground: 45 90% 65%;
+    --secondary-foreground: 48 100% 50%;
     --muted: 216 33% 20%;
-    --muted-foreground: 210 20% 65%;
-    --accent: 45 95% 70%; /* Shinier Gold */
-    --accent-foreground: 216 33% 6%;
+    --muted-foreground: 0 0% 100% / 0.6;
+    --accent: 182 100% 50%;
+    --accent-foreground: 0 0% 0%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 216 33% 25%;
-    --input: 216 33% 25%;
-    --ring: 45 100% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 100% / 0.1;
+    --input: 0 0% 100% / 0.1;
+    --ring: 182 100% 50%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    --grid-color: rgba(0, 243, 255, 0.07);
   }
   .dark {
-    --background: 216 33% 8%; /* Darker Blue */
-    --foreground: 210 40% 98%;
-    --card: 216 33% 12%;
-    --card-foreground: 210 40% 98%;
-    --popover: 216 33% 8%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 45 100% 60%; /* Brighter Gold/Yellow */
-    --primary-foreground: 216 33% 6%;
+    --background: 220 44% 2%;
+    --foreground: 0 0% 100%;
+    --card: 220 44% 7% / 0.7;
+    --card-foreground: 0 0% 100%;
+    --popover: 220 44% 2%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 48 100% 50%;
+    --primary-foreground: 0 0% 0%;
     --secondary: 216 33% 25%;
-    --secondary-foreground: 45 90% 65%;
+    --secondary-foreground: 48 100% 50%;
     --muted: 216 33% 20%;
-    --muted-foreground: 210 20% 65%;
-    --accent: 45 95% 70%; /* Shinier Gold */
-    --accent-foreground: 216 33% 6%;
+    --muted-foreground: 0 0% 100% / 0.6;
+    --accent: 182 100% 50%;
+    --accent-foreground: 0 0% 0%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 216 33% 25%;
-    --input: 216 33% 25%;
-    --ring: 45 100% 60%;
+    --border: 0 0% 100% / 0.1;
+    --input: 0 0% 100% / 0.1;
+    --ring: 182 100% 50%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -67,6 +68,276 @@
     scroll-behavior: smooth;
   }
 }
+
+.cyber-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -1;
+    mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%);
+}
+
+.glow-sphere {
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, hsl(var(--accent) / 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    top: 20%;
+    right: 10%;
+    z-index: -1;
+    filter: blur(40px);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: hsl(var(--accent));
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    display: inline-block;
+    border: 1px solid hsl(var(--accent));
+    padding: 4px 12px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px hsla(var(--accent) / 0.2);
+}
+
+h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+    line-height: 1.1;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: hsl(var(--muted-foreground));
+    max-width: 600px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+}
+
+.btn-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 80px;
+}
+
+.btn {
+    padding: 16px 32px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-primary {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 10% 100%, 0 70%);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px hsla(var(--primary) / 0.3);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: hsl(var(--foreground));
+    border: 1px solid hsl(var(--border));
+    position: relative;
+}
+
+.btn-secondary:hover {
+    border-color: hsl(var(--accent));
+    background: hsla(var(--accent) / 0.05);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    margin-bottom: 100px;
+}
+
+.stat-card {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    padding: 40px;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+    transition: 0.4s;
+}
+
+.stat-card:hover {
+    border-color: hsl(var(--accent));
+    transform: translateY(-5px);
+}
+
+.stat-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, hsl(var(--accent)), transparent);
+    transform: translateX(-100%);
+    transition: 0.6s;
+}
+
+.stat-card:hover::before {
+    transform: translateX(100%);
+}
+
+.stat-value {
+    font-size: 3rem;
+    font-weight: 900;
+    color: hsl(var(--primary));
+    margin-bottom: 8px;
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: hsl(var(--muted-foreground));
+}
+
+.marquee-container {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    padding: 20px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    transform: rotate(-1deg) scale(1.05);
+    margin-top: 50px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 10;
+}
+
+.marquee-content {
+    display: flex;
+    animation: scroll 20s linear infinite;
+}
+
+.marquee-item {
+    font-size: 1.2rem;
+    font-weight: 900;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+}
+
+.marquee-item span {
+    margin: 0 15px;
+    opacity: 0.4;
+}
+
+.white-section {
+    background-color: #ffffff;
+    color: #030508;
+    padding: 120px 20px;
+    position: relative;
+    z-index: 5;
+    margin-top: -10px;
+}
+
+.white-section-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    text-align: left;
+}
+
+.white-section h2 {
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+.white-section p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.feature-list {
+    list-style: none;
+}
+
+.feature-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.feature-item span {
+    color: hsl(var(--primary));
+    background: #000;
+    padding: 2px 8px;
+    font-size: 0.7rem;
+    border-radius: 3px;
+}
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.corner-decor {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 2px solid hsl(var(--accent));
+}
+
+.tl { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+.br { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+@media (max-width: 768px) {
+    .white-section-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}
+
 
 @layer utilities {
   .floating-animation {

@@ -29,6 +29,8 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body bg-background text-foreground antialiased">
+        <div className="cyber-grid"></div>
+        <div className="glow-sphere"></div>
         <ClientProviders>
           {children}
         </ClientProviders>
