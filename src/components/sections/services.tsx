@@ -9,21 +9,21 @@ import { Card, CardContent } from '@/components/ui/card';
 
 const services = [
     {
-      icon: <Megaphone size={36} className="text-primary-foreground" />,
+      icon: <Megaphone size={36} className="text-primary" />,
       title: "Marketing que Convierte",
       description: "Atraemos a tu cliente ideal, convertimos su interés en acción y lo fidelizamos a través de estrategias de datos. Construimos audiencias, no solo seguidores.",
       features: ["Estrategia de Marca", "Publicidad Inteligente (Ads)", "Posicionamiento SEO", "Contenido que Enamora"],
       link: "/marketing",
     },
     {
-      icon: <Calendar size={36} className="text-primary-foreground" />,
+      icon: <Calendar size={36} className="text-primary" />,
       title: "Eventos que Impactan",
       description: "Transformamos cada evento en una poderosa herramienta de negocio. Diseñamos experiencias memorables que fortalecen tu marca y crean conexiones de valor.",
       features: ["Stands y Ferias", "Congresos y Conferencias", "Lanzamientos de Producto", "Team Building Estratégico"],
       link: "/eventos",
     },
     {
-      icon: <Code size={36} className="text-primary-foreground" />,
+      icon: <Code size={36} className="text-primary" />,
       title: "Tecnología que Impulsa",
       description: "Creamos el motor tecnológico que tu negocio necesita para escalar, desde aplicaciones web hasta soluciones de software a la medida.",
       features: ["Software a Medida", "Aplicaciones Web", "Optimización de Bases de Datos", "Apps Móviles (iOS/Android)"],
@@ -43,10 +43,10 @@ export default function Services() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-6">
+            <h2 className="font-headline text-3xl md:text-4xl font-bold text-background mb-6">
               Nuestros Servicios: Soluciones 360° para tu Crecimiento
             </h2>
-            <p className="text-lg md:text-xl text-neutral-800 max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-secondary max-w-3xl mx-auto">
               Somos el socio estratégico que integra marketing, eventos y tecnología bajo una misma visión: el éxito de tu negocio.
             </p>
           </motion.div>
@@ -65,19 +65,19 @@ export default function Services() {
               >
                 <Card className="bg-neutral-50 border-border/50 hover:border-primary/50 transition-all duration-300 h-full flex flex-col hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] hover:scale-105">
                   <CardContent className="p-8 h-full flex flex-col">
-                      <div className="w-16 h-16 rounded-lg bg-primary flex items-center justify-center mb-6">
+                      <div className="w-16 h-16 rounded-lg bg-background flex items-center justify-center mb-6">
                           {service.icon}
                       </div>
                       
-                      <h3 className="text-2xl font-bold mb-4 font-headline text-primary">{service.title}</h3>
-                      <p className="text-neutral-700 mb-6 flex-grow">{service.description}</p>
+                      <h3 className="text-2xl font-bold mb-4 font-headline text-background">{service.title}</h3>
+                      <p className="text-secondary mb-6 flex-grow">{service.description}</p>
                       
                       <div className="mb-6">
-                          <h4 className="text-primary font-semibold mb-3">Áreas Clave:</h4>
+                          <h4 className="text-background font-semibold mb-3">Áreas Clave:</h4>
                           <ul className="space-y-2">
                           {service.features.map((feature, idx) => (
-                              <li key={idx} className="text-neutral-700 flex items-center">
-                              <div className="w-2 h-2 bg-primary rounded-full mr-3"></div>
+                              <li key={idx} className="text-secondary flex items-center">
+                              <div className="w-2 h-2 bg-background rounded-full mr-3"></div>
                               {feature}
                               </li>
                           ))}
