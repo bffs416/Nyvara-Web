@@ -82,7 +82,7 @@ const Header = () => {
       <nav className="container flex h-20 items-center">
         <div className="mr-auto flex">
            <Link href="/" className="mr-6 flex items-center space-x-2 cursor-pointer">
-            <motion.div whileHover={{ scale: 1.05 }} className="relative h-10 w-48">
+            <motion.div whileHover={{ scale: 1.05 }} className="relative h-16 w-64">
                 <Image
                   src={siteConfig.logos.header}
                   alt="Nyvara Logo"
