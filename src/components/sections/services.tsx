@@ -34,7 +34,7 @@ const services = [
 export default function Services() {
 
   return (
-    <section id="services" className="py-16 md:py-24 bg-background">
+    <section id="services" className="py-16 md:py-24 bg-white">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -46,7 +46,7 @@ export default function Services() {
             <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-6">
               Nuestros Servicios: Soluciones 360° para tu Crecimiento
             </h2>
-            <p className="text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-neutral-800 max-w-3xl mx-auto">
               Somos el socio estratégico que integra marketing, eventos y tecnología bajo una misma visión: el éxito de tu negocio.
             </p>
           </motion.div>
@@ -63,20 +63,20 @@ export default function Services() {
                 viewport={{ once: true }}
                 className="h-full"
               >
-                <Card className="bg-card border-border/50 hover:border-primary/50 transition-all duration-300 h-full flex flex-col hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] hover:scale-105">
+                <Card className="bg-neutral-50 border-border/50 hover:border-primary/50 transition-all duration-300 h-full flex flex-col hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] hover:scale-105">
                   <CardContent className="p-8 h-full flex flex-col">
                       <div className="w-16 h-16 rounded-lg bg-primary flex items-center justify-center mb-6">
                           {service.icon}
                       </div>
                       
                       <h3 className="text-2xl font-bold mb-4 font-headline text-primary">{service.title}</h3>
-                      <p className="text-foreground/80 mb-6 flex-grow">{service.description}</p>
+                      <p className="text-neutral-700 mb-6 flex-grow">{service.description}</p>
                       
                       <div className="mb-6">
                           <h4 className="text-primary font-semibold mb-3">Áreas Clave:</h4>
                           <ul className="space-y-2">
                           {service.features.map((feature, idx) => (
-                              <li key={idx} className="text-foreground/80 flex items-center">
+                              <li key={idx} className="text-neutral-700 flex items-center">
                               <div className="w-2 h-2 bg-primary rounded-full mr-3"></div>
                               {feature}
                               </li>
