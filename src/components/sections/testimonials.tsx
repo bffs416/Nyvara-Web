@@ -77,7 +77,7 @@ export default function Testimonials() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary">Historias de Éxito de Nuestros Clientes</h2>
+          <h2 className="font-headline text-3xl md:text-4xl font-bold text-background">Historias de Éxito de Nuestros Clientes</h2>
           <p className="mt-4 max-w-2xl mx-auto text-secondary">
             No solo lo decimos nosotros. Escucha a los líderes de negocio a los que hemos ayudado a crecer y prosperar con nuestras soluciones integradas.
           </p>
@@ -90,7 +90,7 @@ export default function Testimonials() {
             {testimonials.map((testimonial, index) => (
               <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
                 <div className="p-1 h-full">
-                  <Card className="h-full bg-neutral-50 border-border/50 p-6 flex flex-col justify-between hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] transition-shadow duration-300">
+                  <Card className="h-full bg-neutral-50 border-border/50 p-6 flex flex-col justify-between hover:shadow-[0_0_20px_4px_hsl(var(--secondary)/0.5)] transition-shadow duration-300">
                     <CardContent className="p-0 flex flex-col items-start text-left h-full">
                       <p className="text-secondary italic mb-6 flex-grow">"{testimonial.quote}"</p>
                       <div className="flex items-center pt-6 border-t border-border w-full">
@@ -99,7 +99,7 @@ export default function Testimonials() {
                            <AvatarFallback>{testimonial.name.substring(0, 2)}</AvatarFallback>
                         </Avatar>
                         <div className="ml-4">
-                          <p className="font-semibold text-primary">{testimonial.name}</p>
+                          <p className="font-semibold text-background">{testimonial.name}</p>
                           <p className="text-sm text-secondary">{testimonial.title}</p>
                         </div>
                       </div>
