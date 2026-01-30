@@ -5,7 +5,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, useSpring } from 'framer-motion';
 
 const CustomCursor = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  // Start position off-screen
+  const [position, setPosition] = useState({ x: -100, y: -100 }); 
   const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
@@ -13,12 +14,11 @@ const CustomCursor = () => {
       setPosition({ x: e.clientX, y: e.clientY });
 
       const target = e.target as HTMLElement;
-      const computedStyle = window.getComputedStyle(target);
+      // Use .closest() for more reliable hover detection on complex elements
       if (
-        target.tagName === 'A' ||
-        target.tagName === 'BUTTON' ||
-        (target.parentElement && target.parentElement.tagName === 'BUTTON') ||
-        computedStyle.cursor === 'pointer'
+        target.closest('a') ||
+        target.closest('button') ||
+        window.getComputedStyle(target).cursor === 'pointer'
       ) {
         setIsHovering(true);
       } else {
@@ -31,7 +31,7 @@ const CustomCursor = () => {
     return () => {
       document.removeEventListener('mousemove', onMouseMove);
     };
-  }, []);
+  }, []); // Empty array is correct here as the function doesn't depend on any changing state from the component scope
 
   const cursorSize = isHovering ? 32 : 8;
   const blurSize = isHovering ? 64 : 32;
