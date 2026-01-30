@@ -9,21 +9,21 @@ import { Card, CardContent } from '@/components/ui/card';
 
 const services = [
     {
-      icon: <Megaphone size={36} className="text-primary" />,
+      icon: <Megaphone size={36} className="text-foreground" />,
       title: "Marketing que Convierte",
       description: "Atraemos a tu cliente ideal, convertimos su interés en acción y lo fidelizamos a través de estrategias de datos. Construimos audiencias, no solo seguidores.",
       features: ["Estrategia de Marca", "Publicidad Inteligente (Ads)", "Posicionamiento SEO", "Contenido que Enamora"],
       link: "/marketing",
     },
     {
-      icon: <Calendar size={36} className="text-primary" />,
+      icon: <Calendar size={36} className="text-foreground" />,
       title: "Eventos que Impactan",
       description: "Transformamos cada evento en una poderosa herramienta de negocio. Diseñamos experiencias memorables que fortalecen tu marca y crean conexiones de valor.",
       features: ["Stands y Ferias", "Congresos y Conferencias", "Lanzamientos de Producto", "Team Building Estratégico"],
       link: "/eventos",
     },
     {
-      icon: <Code size={36} className="text-primary" />,
+      icon: <Code size={36} className="text-foreground" />,
       title: "Tecnología que Impulsa",
       description: "Creamos el motor tecnológico que tu negocio necesita para escalar, desde aplicaciones web hasta soluciones de software a la medida.",
       features: ["Software a Medida", "Aplicaciones Web", "Optimización de Bases de Datos", "Apps Móviles (iOS/Android)"],
