@@ -31,7 +31,7 @@ const DesarrolloSoftware = () => {
     {
       icon: <Braces size={32} />,
       title: 'Desarrollo de Software a Medida',
-      description: 'Creamos sistemas y aplicaciones informáticas diseñadas exclusivamente para resolver los desafíos únicos de tu operación y darte una ventaja competitiva.',
+      description: 'Creamos software a medida para resolver los desafíos únicos de tu operación y darte una ventaja competitiva.',
       details: {
         analogy: 'Un software a medida es como un traje de sastrería. En lugar de una solución genérica que no es perfecta para nadie, te confeccionamos una herramienta que se adapta a cada proceso de tu empresa, dándote una ventaja única.',
         whatIs: 'Es el diseño y construcción de software creado desde cero para un cliente. A diferencia del software pre-empaquetado, cada función se alinea con tus flujos de trabajo, reglas de negocio y objetivos particulares (ej. software contable, gestión de inventarios).',
@@ -41,7 +41,7 @@ const DesarrolloSoftware = () => {
     {
       icon: <Globe size={32} />,
       title: 'Desarrollo de Aplicaciones Web',
-      description: 'Diseñamos y construimos plataformas web potentes y escalables, desde sitios corporativos y tiendas online hasta aplicaciones web complejas (SaaS).',
+      description: 'Diseñamos y construimos plataformas web potentes, desde sitios corporativos hasta complejas aplicaciones SaaS.',
       details: {
         analogy: 'Tu sitio web es tu principal escaparate al mundo digital. Nosotros lo diseñamos para que cada pasillo sea intuitivo, cada producto brille y el proceso de pago sea tan simple que tus clientes compren con una sonrisa.',
         whatIs: 'Abarca la creación de cualquier solución accesible a través de un navegador: desde páginas web institucionales, hasta plataformas de e-commerce con pasarelas de pago o aplicaciones web interactivas (Web Apps) con funcionalidades complejas.',
@@ -51,7 +51,7 @@ const DesarrolloSoftware = () => {
     {
       icon: <Database size={32} />,
       title: 'Diseño y Optimización de Bases de Datos',
-      description: 'Estructuramos el activo más valioso de tu empresa —tus datos— para que sean accesibles, seguros y potentes, garantizando el rendimiento de tus aplicaciones.',
+      description: 'Estructuramos tus datos para que sean accesibles, seguros y potentes, garantizando el rendimiento de tus apps.',
       details: {
         analogy: 'Una base de datos es la biblioteca central de tu negocio. Si los libros (datos) están desordenados, encontrar información es una pesadilla. Nosotros diseñamos las estanterías lógicas y el sistema de catalogación para que encuentres cualquier dato en segundos.',
         whatIs: 'Es la arquitectura fundamental sobre la que se apoya cualquier software. Implica diseñar el modelo lógico y físico de la base de datos (SQL o NoSQL), definir las relaciones y establecer las reglas para garantizar la integridad y seguridad de la información.',
@@ -61,7 +61,7 @@ const DesarrolloSoftware = () => {
     {
       icon: <Smartphone size={32} />,
       title: 'Desarrollo de Aplicaciones Móviles (iOS y Android)',
-      description: 'Creamos aplicaciones nativas e híbridas para iOS y Android que llevan tu negocio al bolsillo de tus clientes, mejorando la interacción y fidelización.',
+      description: 'Creamos apps para iOS y Android que llevan tu negocio al bolsillo de tus clientes, mejorando interacción y fidelidad.',
       details: {
         analogy: 'Una app es un canal directo y permanente con tu cliente. Es como darle una llave de acceso VIP a tu negocio, permitiéndole interactuar y comprar contigo en cualquier momento y lugar, creando una relación mucho más cercana.',
         whatIs: 'Es el desarrollo de aplicaciones para smartphones y tablets (iOS y Android). Pueden ser nativas (usando Swift/Kotlin para máximo rendimiento) o híbridas (usando tecnologías como React Native para optimizar costes y tiempos).',
@@ -91,7 +91,7 @@ const DesarrolloSoftware = () => {
             >
               <h1 className="text-5xl md:text-7xl font-bold mb-4 text-primary font-headline">Desarrollo de Software y Soluciones Tecnológicas</h1>
               <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto">
-                Construimos las herramientas digitales a medida que tu negocio necesita para crecer, optimizar procesos y escalar operaciones.
+                Construimos las herramientas digitales que tu negocio necesita para crecer, optimizar y escalar.
               </p>
             </motion.section>
 
@@ -159,7 +159,7 @@ const DesarrolloSoftware = () => {
             >
               <h2 className="text-4xl font-bold mb-4 font-headline">¿Tienes una idea o un problema que resolver?</h2>
               <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Nuestro equipo de expertos está listo para convertir tu visión en una solución de software funcional y de alto impacto. ¡Hablemos de tu proyecto!
+                Nuestro equipo de expertos convertirá tu visión en una solución de software funcional y de alto impacto. ¡Hablemos!
               </p>
               <Button size="lg" asChild>
                 <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">

@@ -95,7 +95,7 @@ export default function Contact() {
                 Estrategia de <span className="text-primary relative inline-block after:content-[''] after:absolute after:bottom-2 after:left-0 after:w-full after:h-2 after:bg-primary/20 after:-z-10">Alto Impacto</span>
             </h1>
             <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-              Conecta con expertos para llevar tu modelo de negocio al siguiente nivel mediante soluciones sobrias, eficientes y orientadas a resultados.
+              Conecta con expertos para llevar tu negocio al siguiente nivel con soluciones eficientes y orientadas a resultados.
             </p>
         </header>
 

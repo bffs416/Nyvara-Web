@@ -39,8 +39,7 @@ export default function Home() {
             <span style={{ color: 'var(--accent)' }}>Esencia Digital</span>
           </h1>
           <p className="subtitle">
-            Elevamos tu negocio mediante soluciones estratégicas de alto
-            impacto. Diseño minimalista, rendimiento futurista.
+            Soluciones estratégicas de alto impacto para tu negocio. Rendimiento futurista, diseño minimalista.
           </p>
 
           <div className="btn-group">

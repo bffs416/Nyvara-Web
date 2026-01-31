@@ -9,22 +9,22 @@ const values = [
   {
     icon: <Handshake size={32} />,
     title: "Somos Socios, no Proveedores",
-    description: "Nos integramos como una extensión de tu equipo. Tu éxito es nuestro éxito, y cada proyecto lo abordamos con una mentalidad de partnership."
+    description: "Nos integramos en tu equipo. Tu éxito es el nuestro. Abordamos cada proyecto como socios estratégicos."
   },
   {
     icon: <Brain size={32} />,
     title: "Estrategia Antes de la Ejecución",
-    description: "No empezamos a construir sin un plano detallado. Cada acción está guiada por una estrategia clara y objetivos medibles para maximizar el retorno."
+    description: "Nunca construimos sin un plano. Cada acción sigue una estrategia clara con objetivos medibles para maximizar tu retorno."
   },
   {
     icon: <Trophy size={32} />,
-    title: "Enfocados en Resultados, no solo en Entregables",
-    description: "Nuestra meta no es solo entregar un proyecto, sino generar un impacto real y tangible en tu negocio. Nos obsesionan tus resultados y métricas de éxito."
+    title: "Enfocados en Resultados",
+    description: "Nuestra meta es generar un impacto real en tu negocio. Nos enfocamos en resultados y métricas de éxito, no solo en entregables."
   },
   {
     icon: <Telescope size={32} />,
-    title: "Innovación Constante como Estándar",
-    description: "El mercado evoluciona a una velocidad increíble, y nosotros también. Te ofrecemos soluciones que no solo funcionan hoy, sino que te preparan para el mañana."
+    title: "Innovación Constante",
+    description: "El mercado evoluciona y nosotros también. Te ofrecemos soluciones que funcionan hoy y te preparan para el mañana."
   }
 ];
 
@@ -43,10 +43,10 @@ const About = () => {
               La fragmentación es el mayor enemigo del crecimiento.
             </h2>
             <div className="text-muted-foreground space-y-6 leading-relaxed">
-                <p>En el mercado actual, las empresas se ven forzadas a contratar múltiples agencias y proveedores que no se comunican entre sí. El marketing, la tecnología y los eventos terminan trabajando en silos, sin una visión estratégica unificada, diluyendo el impacto y el presupuesto.</p>
+                <p>Las empresas a menudo contratan agencias que no se comunican entre sí. Marketing, tecnología y eventos operan en silos, diluyendo el impacto y el presupuesto.</p>
                 <p className="text-foreground font-semibold">Nosotros rompemos ese paradigma.</p>
-                <p>Nyvara nació para ser la solución integral que tu negocio necesita. Unificamos la creatividad del marketing de vanguardia, el poder de la tecnología a la medida y la emoción de los eventos de alto impacto bajo un mismo techo y una sola estrategia.</p>
-                <p>Somos tu socio estratégico, tu cerebro centralizado, diseñado para eliminar la fricción, alinear objetivos y liberar el verdadero potencial de tu marca.</p>
+                <p>Nyvara es la solución integral que tu negocio necesita. Unificamos marketing, tecnología y eventos bajo una sola estrategia.</p>
+                <p>Somos tu socio estratégico centralizado, diseñado para alinear objetivos y liberar el potencial de tu marca.</p>
                 <p className="text-primary font-bold">Una visión. Un equipo. Un crecimiento sin límites.</p>
             </div>
           </motion.div>
