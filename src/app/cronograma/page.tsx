@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -19,7 +20,7 @@ const initialProjects: Project[] = [
     imageUrl: 'https://picsum.photos/seed/205620/800/600',
     dueDate: '2026-01-30',
     createdAt: new Date().toISOString(),
-    status: 'pending',
+    status: 'urgent',
   },
   {
     id: '478242',
@@ -29,7 +30,7 @@ const initialProjects: Project[] = [
     imageUrl: 'https://picsum.photos/seed/478242/800/600',
     dueDate: '2026-01-30',
     createdAt: new Date().toISOString(),
-    status: 'pending',
+    status: 'urgent',
   },
   {
     id: '1',
@@ -39,7 +40,7 @@ const initialProjects: Project[] = [
     imageUrl: 'https://picsum.photos/seed/1/800/600',
     dueDate: '2026-02-02',
     createdAt: new Date().toISOString(),
-    status: 'pending',
+    status: 'urgent',
   },
   {
     id: '895552',
@@ -49,7 +50,7 @@ const initialProjects: Project[] = [
     imageUrl: 'https://picsum.photos/seed/895552/800/600',
     dueDate: '2026-02-03',
     createdAt: new Date().toISOString(),
-    status: 'pending',
+    status: 'urgent',
   },
   {
     id: '421790',
@@ -59,7 +60,7 @@ const initialProjects: Project[] = [
     imageUrl: 'https://picsum.photos/seed/421790/800/600',
     dueDate: '2026-02-05',
     createdAt: new Date().toISOString(),
-    status: 'pending',
+    status: 'urgent',
   },
   {
     id: '517116',

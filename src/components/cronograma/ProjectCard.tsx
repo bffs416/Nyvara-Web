@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from 'react';
@@ -18,18 +19,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
   const monthName = dateObj.toLocaleString('es-ES', { month: 'short', timeZone: 'UTC' }).toUpperCase();
   const year = dateObj.getUTCFullYear();
   
-  const isArchived = project.status === 'archived';
-  const timeDiff = new Date(project.dueDate).getTime() - new Date().getTime();
-  const isUrgent = timeDiff < 86400000 * 7 && !isArchived;
-
   const getStatusDisplay = () => {
-    if (isArchived) return { label: 'Archivo', icon: <Archive size={10} />, classes: 'border-gray-200 text-gray-400' };
-    if (isUrgent) return { label: 'Urgente', icon: <AlertCircle size={10} />, classes: 'border-red-600 text-red-600 bg-red-50' };
+    if (project.status === 'archived') return { label: 'Archivo', icon: <Archive size={10} />, classes: 'border-gray-200 text-gray-400' };
+    if (project.status === 'urgent') return { label: 'Urgente', icon: <AlertCircle size={10} />, classes: 'border-red-600 text-red-600 bg-red-50' };
     if (project.status === 'completed') return { label: 'Éxito', icon: <CheckCircle size={10} />, classes: 'border-emerald-600 text-emerald-600 bg-emerald-50' };
     return { label: 'Activo', icon: <Clock size={10} />, classes: 'border-black text-black' };
   };
 
   const status = getStatusDisplay();
+  const isArchived = project.status === 'archived';
 
   return (
     <div className={`swiss-grid group transition-all duration-700 ${isArchived ? 'opacity-50' : 'opacity-100'}`}>

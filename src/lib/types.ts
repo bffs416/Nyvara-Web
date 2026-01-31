@@ -13,5 +13,5 @@ export interface Project {
   imageUrl: string;
   dueDate: string;
   createdAt: string;
-  status: 'pending' | 'completed' | 'archived';
+  status: 'pending' | 'completed' | 'archived' | 'urgent';
 }
