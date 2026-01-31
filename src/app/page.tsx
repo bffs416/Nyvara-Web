@@ -33,7 +33,7 @@ export default function Home() {
               />
             </div>
           </motion.div>
-          <span className="badge">Estrategia Digital 2024</span>
+          <span className="badge">Estrategia Digital 2026</span>
           <h1>
             Redescubriendo tu <br />
             <span style={{ color: 'var(--accent)' }}>Esencia Digital</span>
