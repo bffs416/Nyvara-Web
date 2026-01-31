@@ -104,7 +104,7 @@ export default function Contact() {
             {contactInfo.map((item) => (
               <a href={item.link || '#'} key={item.title} target={item.link ? '_blank' : '_self'} rel="noopener noreferrer" className="group block">
                 <Card className="p-6 flex items-center gap-5 bg-card/70 border-border/50 backdrop-blur-sm transition-all duration-500 ease-out hover:bg-card hover:border-primary hover:shadow-2xl hover:shadow-primary/20 hover:scale-105">
-                    <div className="w-14 h-14 bg-primary text-primary-foreground flex-shrink-0 flex items-center justify-center rounded-xl transition-transform duration-500 ease-out group-hover:rotate-12 group-hover:scale-110">
+                    <div className="w-14 h-14 bg-secondary text-secondary-foreground flex-shrink-0 flex items-center justify-center rounded-xl transition-transform duration-500 ease-out group-hover:rotate-12 group-hover:scale-110">
                         {item.icon}
                     </div>
                     <div className="overflow-hidden">
@@ -227,7 +227,7 @@ export default function Contact() {
                       )}
                     />
                   </div>
-                  <Button type="submit" className="w-full font-bold py-4 text-lg h-auto mt-4 group" disabled={isLoading}>
+                  <Button type="submit" variant="secondary" className="w-full font-bold py-4 text-lg h-auto mt-4 group" disabled={isLoading}>
                     {isLoading ? (
                       <Loader2 size={24} className="animate-spin" />
                     ) : (
