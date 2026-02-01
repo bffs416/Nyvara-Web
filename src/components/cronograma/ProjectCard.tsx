@@ -1,4 +1,3 @@
-
 'use client';
 
 import React from 'react';
@@ -32,7 +31,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
   return (
     <div className={`swiss-grid group transition-all duration-700 ${isArchived ? 'opacity-50' : 'opacity-100'}`}>
       {/* Col 1: Tiempo con Q, Mes y Año */}
-      <div className="py-20 md:text-right flex flex-col items-end border-r border-transparent">
+      <div className="py-20 md:text-right flex flex-col items-end border-r border-transparent pr-4">
         <span className="text-6xl font-black tracking-tighter leading-none transition-all duration-500 group-hover:text-blue-600">
           Q{quarter}
         </span>
