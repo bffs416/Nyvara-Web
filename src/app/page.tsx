@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main>
+      <main className="overflow-hidden">
         <div className="container">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
