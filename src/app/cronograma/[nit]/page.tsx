@@ -187,14 +187,16 @@ const CronogramaClientePage = () => {
                       />
                   ))}
                   
-                  <div className="my-16 text-center">
-                      <button onClick={() => setShowArchived(!showArchived)} className="text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-black flex items-center gap-3 mx-auto">
-                          <Archive size={16} />
-                          {showArchived ? 'Ocultar Archivo' : `Mostrar Archivo (${archivedProjects.length})`}
-                      </button>
-                  </div>
+                  {archivedProjects.length > 0 && (
+                    <div className="my-16 text-center">
+                        <button onClick={() => setShowArchived(!showArchived)} className="text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-black flex items-center gap-3 mx-auto">
+                            <Archive size={16} />
+                            {showArchived ? 'Ocultar Archivo' : `Mostrar Archivo (${archivedProjects.length})`}
+                        </button>
+                    </div>
+                  )}
 
-                  {showArchived && (
+                  {showArchived && archivedProjects.length > 0 && (
                       <div className="animate-in fade-in duration-500">
                          {archivedProjects.map(p => (
                             <ProjectCard 
