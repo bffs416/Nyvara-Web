@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { Plus, LayoutGrid, Calendar, Archive, Loader2, ShieldAlert } from 'lucide-react';
+import { Plus, LayoutGrid, Calendar, Archive, Loader2, ShieldAlert, Lock } from 'lucide-react';
 import { Project, Client } from '@/lib/types';
 import ProjectCard from '@/components/cronograma/ProjectCard';
 import CalendarView from '@/components/cronograma/CalendarView';
@@ -11,9 +11,10 @@ import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { clients } from '@/lib/cronogramas';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { BriefForm } from '@/components/brief/BriefForm';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Input } from '@/components/ui/input';
 
 const CronogramaClientePage = () => {
   const router = useRouter();
@@ -30,6 +31,12 @@ const CronogramaClientePage = () => {
   const [showArchived, setShowArchived] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | undefined>(undefined);
+
+  // State for the access code modal
+  const [isAccessCodeModalOpen, setIsAccessCodeModalOpen] = useState(false);
+  const [pendingAction, setPendingAction] = useState<{type: 'create' | 'edit', project?: Project} | null>(null);
+  const [accessCodeInput, setAccessCodeInput] = useState('');
+  const [accessCodeError, setAccessCodeError] = useState('');
   
   useEffect(() => {
     if (nit) {
@@ -106,23 +113,37 @@ const CronogramaClientePage = () => {
   };
 
   const openFormForEdit = (project: Project) => {
-    const code = prompt("Por favor, introduce el código de acceso para editar:");
-    if (code === "1629") {
-      setEditingProject(project);
-      setIsFormOpen(true);
-    } else if (code !== null) {
-      alert("Código incorrecto. No tienes permiso para editar.");
-    }
+    setPendingAction({ type: 'edit', project });
+    setIsAccessCodeModalOpen(true);
   };
 
   const openFormForNew = () => {
-    const code = prompt("Por favor, introduce el código de acceso para crear un nuevo proyecto:");
-    if (code === "1629") {
-      setEditingProject(undefined);
-      setIsFormOpen(true);
-    } else if (code !== null) {
-      alert("Código incorrecto. No tienes permiso para crear proyectos.");
-    }
+    setPendingAction({ type: 'create' });
+    setIsAccessCodeModalOpen(true);
+  };
+  
+  const closeAccessCodeModal = () => {
+      setIsAccessCodeModalOpen(false);
+      setAccessCodeInput('');
+      setAccessCodeError('');
+      setPendingAction(null);
+  };
+
+  const handleAccessCodeSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+      if (accessCodeInput === "1629") {
+          if (pendingAction?.type === 'create') {
+              setEditingProject(undefined);
+              setIsFormOpen(true);
+          } else if (pendingAction?.type === 'edit' && pendingAction.project) {
+              setEditingProject(pendingAction.project);
+              setIsFormOpen(true);
+          }
+          closeAccessCodeModal();
+      } else {
+          setAccessCodeError("Código incorrecto. Inténtalo de nuevo.");
+          setAccessCodeInput('');
+      }
   };
   
   const activeProjects = projects.filter(p => p.status !== 'archived');
@@ -246,6 +267,38 @@ const CronogramaClientePage = () => {
             initialData={editingProject} 
           />
         )}
+
+        {/* Access Code Modal */}
+        <Dialog open={isAccessCodeModalOpen} onOpenChange={(isOpen) => !isOpen && closeAccessCodeModal()}>
+            <DialogContent className="sm:max-w-md bg-white text-black border-2 border-black">
+                <DialogHeader>
+                    <DialogTitle className="flex items-center gap-3 text-2xl font-black uppercase tracking-tighter">
+                        <Lock className="text-blue-600" />
+                        Verificación de Acceso
+                    </DialogTitle>
+                    <DialogDescription className="text-gray-600 pt-2">
+                        Para {pendingAction?.type === 'create' ? 'crear un nuevo proyecto' : 'modificar este proyecto'}, introduce el código de seguridad.
+                    </DialogDescription>
+                </DialogHeader>
+                <form onSubmit={handleAccessCodeSubmit} className="space-y-4 pt-4">
+                    <Input
+                        id="accessCode"
+                        type="password"
+                        value={accessCodeInput}
+                        onChange={(e) => setAccessCodeInput(e.target.value)}
+                        placeholder="Código de Acceso"
+                        autoFocus
+                        className="h-12 text-center text-lg font-bold tracking-widest border-2 border-black focus:ring-4 focus:ring-blue-100"
+                    />
+                    {accessCodeError && <p className="text-sm text-red-600 text-center">{accessCodeError}</p>}
+                    <DialogFooter className="!mt-8 gap-2 sm:!gap-0">
+                        <Button type="button" variant="outline" onClick={closeAccessCodeModal} className="border-2 border-black font-bold uppercase tracking-widest hover:bg-gray-100">Cancelar</Button>
+                        <Button type="submit" className="bg-black text-white font-bold uppercase tracking-widest hover:bg-blue-600">Confirmar</Button>
+                    </DialogFooter>
+                </form>
+            </DialogContent>
+        </Dialog>
+
       </main>
       <Footer />
     </div>
