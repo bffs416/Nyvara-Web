@@ -15,7 +15,7 @@ const navItems = [
   { name: 'Diagnostico', href: '/diagnostico' },
   { name: 'Cronograma', href: '/cronograma' },
   { name: 'Nosotros', href: '/#nosotros' },
-  { name: 'Testimonios', href: '/#testimonials' },
+  { name: 'Clientes', href: '/#clientes' },
 ];
 
 const Header = () => {

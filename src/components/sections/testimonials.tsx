@@ -68,7 +68,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="py-16 md:py-24 bg-white">
+    <section id="clientes" className="py-16 md:py-24 bg-white">
       <div className="container">
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
@@ -77,9 +77,9 @@ export default function Testimonials() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-background">Historias de Éxito de Nuestros Clientes</h2>
+          <h2 className="font-headline text-3xl md:text-4xl font-bold text-background">Lo que Dicen Nuestros Clientes</h2>
           <p className="mt-4 max-w-2xl mx-auto text-secondary">
-            No solo lo decimos nosotros. Escucha a los líderes de negocio a los que hemos ayudado a crecer y prosperar con nuestras soluciones integradas.
+            La confianza de nuestros socios es nuestro mayor activo. Descubre las historias de éxito de quienes han crecido con nosotros.
           </p>
         </motion.div>
         <Carousel 
