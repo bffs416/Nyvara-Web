@@ -15,3 +15,9 @@ export interface Project {
   createdAt: string;
   status: 'pending' | 'completed' | 'archived' | 'urgent';
 }
+
+export interface Client {
+  nit: string;
+  clientName: string;
+  projects: Project[];
+}
