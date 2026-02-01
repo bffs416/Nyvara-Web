@@ -3,6 +3,7 @@
 import React from 'react';
 import { Project } from '@/lib/types';
 import { Archive, AlertCircle, Clock, CheckCircle, RotateCcw, Target, Layers, Edit2, Trash2 } from 'lucide-react';
+import Image from 'next/image';
 
 interface ProjectCardProps {
   project: Project;
@@ -59,14 +60,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
           <div className="w-full xl:w-[450px] flex-shrink-0">
             {/* Contenedor Adaptable: Se quita aspect-[16/10] */}
             <div className="relative overflow-hidden border border-black bg-gray-50 shadow-[20px_20px_0px_0px_rgba(0,0,0,0.03)] group-hover:shadow-[20px_20px_0px_0px_rgba(37,99,235,0.08)] transition-all duration-700 flex items-center justify-center">
-              <img 
+              <Image 
                 src={project.imageUrl} 
                 alt={project.title}
+                width={800}
+                height={600}
                 className="w-full h-auto block transition-transform duration-[2000ms] group-hover:scale-105 p-0.5"
                 style={{ maxHeight: '70vh' }}
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=800';
-                }}
               />
               <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-sm text-white text-[8px] font-black uppercase tracking-widest px-3 py-1.5 flex items-center gap-2 pointer-events-none">
                 <Layers size={10} />
