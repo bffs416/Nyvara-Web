@@ -111,7 +111,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
               {project.description}
             </p>
 
-            <div className="bg-black text-white p-10 relative overflow-hidden group-hover:translate-x-2 md:group-hover:translate-x-4 transition-transform duration-700">
+            <div className="bg-black text-white p-10 relative overflow-hidden md:group-hover:translate-x-4 transition-transform duration-700">
                <div className="absolute -right-4 -bottom-4 opacity-10 rotate-12">
                 <Target size={120} />
               </div>

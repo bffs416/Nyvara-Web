@@ -198,7 +198,7 @@ const CronogramaClientePage = () => {
           </div>
           
           {view === 'list' && (
-              <div className="overflow-hidden">
+              <div>
                   {activeProjects.map(p => (
                       <ProjectCard 
                           key={p.id} 
