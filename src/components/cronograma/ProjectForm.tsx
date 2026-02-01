@@ -20,7 +20,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onAdd, onClose, initialData }
     dueDate: initialData?.dueDate || '',
   });
   const [isEnhancing, setIsEnhancing] = useState(false);
-  const [isCompressing, setIsCompressing] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(initialData?.imageUrl || null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -36,46 +36,6 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onAdd, onClose, initialData }
       setImagePreview(initialData.imageUrl);
     }
   }, [initialData]);
-
-  const compressImage = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = (event) => {
-        const img = new Image();
-        img.src = event.target?.result as string;
-        img.onload = () => {
-          const canvas = document.createElement('canvas');
-          let width = img.width;
-          let height = img.height;
-          const MAX_SIZE = 1200;
-
-          if (width > height) {
-            if (width > MAX_SIZE) {
-              height *= MAX_SIZE / width;
-              width = MAX_SIZE;
-            }
-          } else {
-            if (height > MAX_SIZE) {
-              width *= MAX_SIZE / height;
-              height = MAX_SIZE;
-            }
-          }
-
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext('2d');
-          if (!ctx) return reject('No se pudo obtener el contexto del canvas');
-          
-          ctx.drawImage(img, 0, 0, width, height);
-          const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
-          resolve(compressedBase64);
-        };
-        img.onerror = reject;
-      };
-      reader.onerror = reject;
-    });
-  };
 
   const handleAI = async () => {
     if (!formData.title) return alert('Define un título para iniciar el análisis.');
@@ -110,16 +70,25 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onAdd, onClose, initialData }
         return;
       }
       
-      setIsCompressing(true);
+      setIsProcessing(true);
       try {
-        const compressedBase64 = await compressImage(file);
-        setImagePreview(compressedBase64);
-        setFormData(prev => ({ ...prev, imageUrl: compressedBase64 }));
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (event) => {
+          const base64 = event.target?.result as string;
+          setImagePreview(base64);
+          setFormData(prev => ({ ...prev, imageUrl: base64 }));
+          setIsProcessing(false);
+        };
+        reader.onerror = () => {
+            setIsProcessing(false);
+            alert("No se pudo leer el archivo.");
+        };
       } catch (err) {
         console.error("Error al procesar imagen:", err);
         alert("No se pudo procesar la imagen.");
+        setIsProcessing(false);
       } finally {
-        setIsCompressing(false);
         if (fileInputRef.current) fileInputRef.current.value = "";
       }
     }
@@ -226,12 +195,12 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onAdd, onClose, initialData }
                     </div>
                     <button
                       type="button"
-                      disabled={isCompressing}
+                      disabled={isProcessing}
                       onClick={() => fileInputRef.current?.click()}
                       className="w-full py-4 border-2 border-black font-black uppercase text-[11px] hover:bg-black hover:text-white transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                     >
-                      {isCompressing ? <Sparkles size={18} className="animate-spin" /> : <Upload size={18} />}
-                      {isCompressing ? 'Procesando Activo...' : 'Seleccionar de Equipo'}
+                      {isProcessing ? <Sparkles size={18} className="animate-spin" /> : <Upload size={18} />}
+                      {isProcessing ? 'Procesando Activo...' : 'Seleccionar de Equipo'}
                     </button>
                     <input 
                       type="file" 
@@ -256,7 +225,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onAdd, onClose, initialData }
                       <span className="text-[10px] font-black uppercase tracking-[0.5em]">Sin Previsualización</span>
                     </div>
                   )}
-                  {imagePreview && !isCompressing && (
+                  {imagePreview && !isProcessing && (
                     <button 
                       type="button"
                       onClick={() => { setImagePreview(null); setFormData(p => ({...p, imageUrl: ''})); }}
@@ -308,7 +277,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onAdd, onClose, initialData }
             </button>
             <button
               type="submit"
-              disabled={isCompressing}
+              disabled={isProcessing}
               className="flex-1 py-6 bg-black text-white text-[14px] font-black uppercase tracking-[0.3em] hover:bg-blue-600 transition-all shadow-[12px_12px_0px_0px_rgba(0,0,0,0.1)] active:translate-y-2 active:shadow-none disabled:opacity-50 flex items-center justify-center gap-3"
             >
               <Save size={20} />
