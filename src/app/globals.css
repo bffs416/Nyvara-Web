@@ -371,3 +371,293 @@ h1 {
     background: hsl(var(--primary) / 0.3);
     filter: blur(30px);
 }
+
+/* Brutalist Theme for Diagnostico */
+.brutalist-theme {
+    --brut-bg: #f3f4f6;
+    --brut-main: #FFD600;
+    --brut-secondary: #00F0FF;
+    --brut-accent: #FF3366;
+    --brut-dark: #000000;
+    --brut-white: #ffffff;
+    --brut-border-width: 3px;
+    --brut-shadow-offset: 6px;
+}
+
+.brutalist-theme {
+    background-color: var(--brut-bg);
+    background-image: radial-gradient(var(--brut-dark) 1px, transparent 0);
+    background-size: 30px 30px;
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--brut-dark);
+    line-height: 1.4;
+    padding: 40px 20px;
+}
+
+.brutalist-theme * {
+    box-sizing: border-box;
+    cursor: crosshair;
+}
+
+.brutalist-theme .brut-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--brut-white);
+    border: var(--brut-border-width) solid var(--brut-dark);
+    box-shadow: var(--brut-shadow-offset) var(--brut-shadow-offset) 0px var(--brut-dark);
+    padding: 40px;
+    position: relative;
+}
+
+.brutalist-theme .brut-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.brutalist-theme .brut-h1 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 4rem;
+    text-transform: uppercase;
+    line-height: 0.9;
+    background: var(--brut-main);
+    display: inline-block;
+    padding: 10px 20px;
+    border: var(--brut-border-width) solid var(--brut-dark);
+    transform: rotate(-2deg);
+    box-shadow: 6px 6px 0px var(--brut-dark);
+    margin-bottom: 30px;
+}
+
+.brutalist-theme .brut-subtitle {
+    display: block;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    margin-top: 15px;
+}
+
+.brutalist-theme .progress-container {
+    border: var(--brut-border-width) solid var(--brut-dark);
+    height: 30px;
+    background: var(--brut-white);
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.brutalist-theme .progress-fill {
+    height: 100%;
+    background: var(--brut-secondary);
+    border-right: var(--brut-border-width) solid var(--brut-dark);
+    transition: width 0.3s ease-in-out;
+}
+
+.brutalist-theme .step-indicator {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 900;
+    font-size: 0.8rem;
+}
+
+.brutalist-theme .section-header {
+    background: var(--brut-dark);
+    color: var(--brut-main);
+    padding: 15px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brutalist-theme .section-header h2 {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.brutalist-theme .form-group {
+    margin-bottom: 25px;
+}
+
+.brutalist-theme .form-group label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.brutalist-theme .form-group input,
+.brutalist-theme .form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: var(--brut-border-width) solid var(--brut-dark);
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 1.1rem;
+    outline: none;
+    transition: all 0.2s ease;
+}
+.brutalist-theme .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.brutalist-theme .form-group input:focus,
+.brutalist-theme .form-group textarea:focus {
+    background-color: #f0f0f0;
+    box-shadow: 4px 4px 0px var(--brut-accent);
+}
+
+.brutalist-theme .selection-title {
+    text-align: center;
+    margin: 40px 0 20px;
+    font-weight: 900;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+.brutalist-theme .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.brutalist-theme .option-card {
+    border: var(--brut-border-width) solid var(--brut-dark);
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    font-weight: 700;
+    background: var(--brut-white);
+    position: relative;
+}
+
+.brutalist-theme .option-card:hover {
+    background: var(--brut-main);
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0px var(--brut-dark);
+}
+
+.brutalist-theme .option-card input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.brutalist-theme .option-card .checkbox-visual,
+.brutalist-theme .option-card .radio-visual {
+    width: 20px;
+    height: 20px;
+    border: var(--brut-border-width) solid var(--brut-dark);
+    flex-shrink: 0;
+    position: relative;
+}
+.brutalist-theme .option-card input:checked + .checkbox-visual::after,
+.brutalist-theme .option-card input:checked + .radio-visual::after {
+    content: "X";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 900;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.brutalist-theme .option-card.selected {
+    background-color: var(--brut-main);
+}
+
+
+.brutalist-theme .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: var(--brut-border-width) dashed var(--brut-dark);
+}
+
+.brutalist-theme .btn {
+    font-family: 'Archivo Black', sans-serif;
+    text-transform: uppercase;
+    padding: 15px 40px;
+    border: var(--brut-border-width) solid var(--brut-dark);
+    font-size: 1.1rem;
+    transition: all 0.1s ease;
+    background: var(--brut-white);
+    color: var(--brut-dark);
+}
+
+.brutalist-theme .btn:disabled {
+    background: #ccc;
+    color: #888;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.brutalist-theme .btn-prev:hover {
+    background: #eee;
+}
+
+.brutalist-theme .btn-next {
+    background: var(--brut-main);
+    box-shadow: 6px 6px 0px var(--brut-dark);
+}
+
+.brutalist-theme .btn-next:hover:not(:disabled) {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px var(--brut-dark);
+}
+
+.brutalist-theme .btn-next:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px var(--brut-dark);
+}
+
+.brutalist-theme .page-counter {
+    font-weight: 900;
+    font-size: 1rem;
+}
+
+.brutalist-theme .slider-container {
+    padding: 20px 0;
+}
+.brutalist-theme .slider-track {
+    height: 10px;
+    background: var(--brut-white);
+    border: var(--brut-border-width) solid var(--brut-dark);
+    position: relative;
+}
+.brutalist-theme .slider-thumb {
+    width: 24px;
+    height: 24px;
+    background: var(--brut-main);
+    border: var(--brut-border-width) solid var(--brut-dark);
+    position: absolute;
+    top: -7px;
+    transform: translateX(-50%);
+    box-shadow: 4px 4px 0px var(--brut-dark);
+}
+.brutalist-theme .slider-rating {
+    text-align: center;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 2rem;
+    margin-top: 20px;
+    color: var(--brut-accent);
+}
+
+@media (max-width: 600px) {
+    .brutalist-theme .brut-h1 { font-size: 2.5rem; }
+    .brutalist-theme .grid { grid-template-columns: 1fr; }
+    .brutalist-theme .brut-container { padding: 20px; }
+    .brutalist-theme .actions { flex-direction: column-reverse; gap: 20px; }
+    .brutalist-theme .btn { width: 100%; }
+}

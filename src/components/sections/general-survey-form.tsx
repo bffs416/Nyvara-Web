@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -6,17 +5,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { generalSurveySchema } from "@/lib/schema";
 import type { GeneralSurveyFormData } from "@/lib/types";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Checkbox } from "@/components/ui/checkbox";
 import { INTERESTED_SERVICES_OPTIONS, GENERAL_CHALLENGES_OPTIONS } from "@/lib/constants";
 import { useToast } from "@/hooks/use-toast";
 import { SAMPLE_GENERAL_SURVEY_DATA } from "@/lib/sample-data";
-import { Progress } from "@/components/ui/progress";
-import { Slider } from "../ui/slider";
 
 interface GeneralSurveyFormProps {
   onSubmit: (data: GeneralSurveyFormData) => void;
@@ -37,6 +28,56 @@ const getFieldNamesForStep = (step: number): (keyof GeneralSurveyFormData)[] => 
     };
     return stepFields[step] || [];
 }
+
+const BrutalistInput = ({ name, label, placeholder, type = 'text', register, error, ...props }: any) => (
+    <div className="form-group">
+        <label htmlFor={name}>{label}</label>
+        <input id={name} type={type} placeholder={placeholder} {...register(name)} {...props} />
+        {error && <p className="text-red-500 text-xs mt-1">{error.message}</p>}
+    </div>
+);
+
+const BrutalistTextarea = ({ name, label, placeholder, register, error, ...props }: any) => (
+    <div className="form-group">
+        <label htmlFor={name}>{label}</label>
+        <textarea id={name} placeholder={placeholder} {...register(name)} {...props}></textarea>
+        {error && <p className="text-red-500 text-xs mt-1">{error.message}</p>}
+    </div>
+);
+
+const BrutalistCheckbox = ({ name, value, label, register, disabled, isChecked }: any) => (
+    <label className={`option-card ${isChecked ? 'selected' : ''}`}>
+        <input type="checkbox" value={value} {...register(name)} disabled={disabled} />
+        <div className="checkbox-visual"></div>
+        {label}
+    </label>
+);
+
+const BrutalistSlider = ({ name, label, min, max, value, onChange }: any) => {
+    const percentage = ((value - min) / (max - min)) * 100;
+    return (
+        <div className="form-group">
+            <label>{label}</label>
+            <div className="slider-container">
+                <div className="slider-track">
+                     <div 
+                        className="slider-thumb" 
+                        style={{ left: `${percentage}%` }}
+                    />
+                </div>
+                <input
+                    type="range"
+                    min={min}
+                    max={max}
+                    value={value}
+                    onChange={(e) => onChange(parseInt(e.target.value))}
+                    className="w-full h-2 opacity-0 absolute top-0 left-0 cursor-pointer"
+                />
+            </div>
+             <div className="slider-rating">{value}</div>
+        </div>
+    );
+};
 
 export default function GeneralSurveyForm({ onSubmit }: GeneralSurveyFormProps) {
   const { toast } = useToast();
@@ -67,9 +108,10 @@ export default function GeneralSurveyForm({ onSubmit }: GeneralSurveyFormProps) 
     },
   });
 
-  const watchedName = form.watch("name");
-  const watchedRating = form.watch("marketing_rating");
-  const watchedChallenges = form.watch("challenges");
+  const { register, control, watch, trigger, formState: { errors } } = form;
+  const watchedName = watch("name");
+  const watchedRating = watch("marketing_rating");
+  const watchedChallenges = watch("challenges");
 
   useEffect(() => {
     if (watchedName === "0520") {
@@ -83,7 +125,7 @@ export default function GeneralSurveyForm({ onSubmit }: GeneralSurveyFormProps) 
 
   const handleNext = async () => {
     const fieldsToValidate = getFieldNamesForStep(currentStep);
-    const isStepValid = await form.trigger(fieldsToValidate);
+    const isStepValid = await trigger(fieldsToValidate);
     
     if (isStepValid && currentStep < TOTAL_STEPS - 1) {
         setCurrentStep(currentStep + 1);
@@ -97,138 +139,144 @@ export default function GeneralSurveyForm({ onSubmit }: GeneralSurveyFormProps) 
       window.scrollTo(0, 0);
     }
   };
+  
+  const renderStep = () => {
+      switch (currentStep) {
+        case 0:
+          return (
+            <>
+              <div className="section-header"><h2>Pilar 1: Sus Datos Fundamentales</h2></div>
+              <BrutalistInput name="name" label="Nombre Completo" register={register} error={errors.name} />
+              <BrutalistInput name="company" label="Nombre de la Empresa" register={register} error={errors.company} />
+              <BrutalistInput name="role" label="Tu Cargo o Rol" register={register} error={errors.role} />
+              <BrutalistInput name="phone" label="Número de Teléfono" type="tel" register={register} error={errors.phone} />
+              <BrutalistInput name="email" label="Email" type="email" register={register} error={errors.email} />
+            </>
+          );
+        case 1:
+          return (
+            <>
+              <div className="section-header"><h2>Pilar 2: Claridad de Marca y Conexión Emocional</h2></div>
+              <BrutalistTextarea name="target_audience" label="¿Quién es su cliente o público ideal? (Descríbalo con detalle)" register={register} error={errors.target_audience} />
+              <BrutalistTextarea name="business_description" label="Describe brevemente tu negocio y el propósito que lo impulsa" register={register} error={errors.business_description} />
+            </>
+          );
+        case 2:
+            return (
+                <>
+                    <div className="section-header"><h2>Pilar 3: Su Ventaja Competitiva</h2></div>
+                    <BrutalistTextarea name="main_services" label="¿Cuáles son sus productos o servicios principales?" register={register} error={errors.main_services} />
+                    <BrutalistTextarea name="value_proposition" label="Si tuviera que resumir su Propuesta de Valor en una sola frase, ¿cuál sería?" placeholder="Ej: 'Ayudamos a las empresas a ahorrar tiempo automatizando sus finanzas con un software intuitivo'." register={register} error={errors.value_proposition} />
+                </>
+            )
+        case 3:
+            return (
+                <>
+                    <div className="section-header"><h2>Pilar 4: Diagnóstico de Eficacia Digital</h2></div>
+                    <BrutalistSlider 
+                        name="marketing_rating" 
+                        label="En una escala de 1 a 10, ¿qué tan eficaz considera su marketing digital actual? (1 es ineficaz, 10 es líder del sector)" 
+                        min={1} 
+                        max={10} 
+                        value={watchedRating} 
+                        onChange={(val: number) => form.setValue('marketing_rating', val, { shouldValidate: true })} 
+                    />
+                </>
+            )
+        case 4:
+            const challengesValue = watch('challenges') || [];
+            return (
+                <>
+                    <div className="section-header"><h2>Pilar 4: Desafíos y Oportunidades</h2></div>
+                    <label>¿Cuáles son los mayores desafíos o frustraciones que enfrenta actualmente? (Seleccione hasta 3)</label>
+                    <div className="grid">
+                        {GENERAL_CHALLENGES_OPTIONS.map(item => (
+                            <BrutalistCheckbox 
+                                key={item} 
+                                name="challenges" 
+                                value={item} 
+                                label={item} 
+                                register={register} 
+                                disabled={challengesValue.length >= 3 && !challengesValue.includes(item)}
+                                isChecked={challengesValue.includes(item)}
+                            />
+                        ))}
+                    </div>
+                    {errors.challenges && <p className="text-red-500 text-xs mt-1">{errors.challenges.message}</p>}
+                    {(watchedChallenges && watchedChallenges.length > 0) &&
+                        <BrutalistTextarea name="challenges_cost" label="¿Cuál es el costo real (en tiempo, dinero u oportunidades perdidas) de no resolver su principal desafío en los próximos 6 meses?" register={register} error={errors.challenges_cost} />
+                    }
+                </>
+            )
+        case 5:
+             return (
+                <>
+                    <div className="section-header"><h2>Pilar 5: Visión, Metas y Recursos</h2></div>
+                    <BrutalistTextarea name="goals" label="¿Cuáles son los principales objetivos de negocio que quiere alcanzar en los próximos 6-12 meses?" register={register} error={errors.goals} />
+                    <BrutalistInput name="growth_expectation" label="¿Cuál es el % de crecimiento que espera alcanzar en los próximos 12 meses?" type="number" register={register} error={errors.growth_expectation} placeholder="Ej: 25" onChange={(e: React.ChangeEvent<HTMLInputElement>) => form.setValue('growth_expectation', e.target.value === '' ? undefined : +e.target.value)} />
+                    <BrutalistInput name="avg_customer_value" label="¿Cuál es el valor promedio (Lifetime Value) de un cliente para su negocio? (Opcional)" type="number" register={register} error={errors.avg_customer_value} placeholder="Ej: 5000000" onChange={(e: React.ChangeEvent<HTMLInputElement>) => form.setValue('avg_customer_value', e.target.value === '' ? undefined : +e.target.value)} />
+                </>
+             )
+        case 6:
+            return (
+                <>
+                    <div className="section-header"><h2>Pilar 6: Análisis del Entorno Competitivo</h2></div>
+                    <BrutalistTextarea name="competitors" label="Al analizar a sus competidores, ¿siente que ellos han logrado el 'Product-Market Fit' que usted está buscando? Nómbrelos y describa brevemente qué hacen bien." placeholder="Ej: Competidor A: Tienen una marca muy fuerte en redes sociales. Competidor B: Su producto es más fácil de usar." register={register} error={errors.competitors} />
+                </>
+            )
+        case 7:
+            const interestedServicesValue = watch('interested_services') || [];
+            return (
+                 <>
+                    <div className="section-header"><h2>Paso Final: Áreas de Interés</h2></div>
+                     <label>Para finalizar, ¿en qué áreas de servicio de Nyvara está más interesado/a?</label>
+                    <div className="grid">
+                        {INTERESTED_SERVICES_OPTIONS.map(item => (
+                             <BrutalistCheckbox 
+                                key={item} 
+                                name="interested_services" 
+                                value={item} 
+                                label={item} 
+                                register={register} 
+                                isChecked={interestedServicesValue.includes(item)}
+                            />
+                        ))}
+                    </div>
+                     {errors.interested_services && <p className="text-red-500 text-xs mt-1">{errors.interested_services.message}</p>}
+
+                    <BrutalistTextarea name="additional_info" label="¿Hay algo más que considere importante que sepamos para este diagnóstico?" register={register} error={errors.additional_info} />
+                 </>
+            )
+          default:
+            return null;
+      }
+  }
+
 
   return (
-    <>
-      <div className="w-full bg-secondary rounded-full h-2.5 mb-8 shadow-inner">
-        <Progress value={(currentStep / (TOTAL_STEPS - 1)) * 100} className="h-2.5" />
-      </div>
-      <Card className="shadow-2xl relative min-h-[500px]">
-        <CardContent className="p-8">
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              
-              {/* Step 0: Datos Fundamentales */}
-              <div className={currentStep === 0 ? 'block' : 'hidden'}>
-                <h2 className="font-headline text-3xl text-primary mb-6">Pilar 1: Sus Datos Fundamentales</h2>
-                <div className="space-y-6">
-                  <FormField name="name" control={form.control} render={({ field }) => <FormItem><FormLabel>Nombre Completo</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>} />
-                  <FormField name="company" control={form.control} render={({ field }) => <FormItem><FormLabel>Nombre de la Empresa</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>} />
-                  <FormField name="role" control={form.control} render={({ field }) => <FormItem><FormLabel>Tu Cargo o Rol</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>} />
-                  <FormField name="phone" control={form.control} render={({ field }) => <FormItem><FormLabel>Número de Teléfono</FormLabel><FormControl><Input type="tel" {...field} /></FormControl><FormMessage /></FormItem>} />
-                  <FormField name="email" control={form.control} render={({ field }) => <FormItem><FormLabel>Email</FormLabel><FormControl><Input type="email" {...field} /></FormControl><FormMessage /></FormItem>} />
-                </div>
-              </div>
+    <div className="brut-container">
+        <header className="brut-header">
+            <h1 className="brut-h1">ADN</h1>
+            <span className="brut-subtitle">Análisis de Necesidades Estratégicas</span>
+        </header>
+         <div className="progress-container">
+            <div className="progress-fill" style={{ width: `${((currentStep + 1) / TOTAL_STEPS) * 100}%` }}></div>
+            <div className="step-indicator">{`${Math.round(((currentStep + 1) / TOTAL_STEPS) * 100)}% COMPLETADO`}</div>
+        </div>
 
-              {/* Step 1: Claridad de Marca */}
-              <div className={currentStep === 1 ? 'block' : 'hidden'}>
-                  <h2 className="font-headline text-3xl text-primary mb-6">Pilar 2: Claridad de Marca y Conexión Emocional</h2>
-                  <div className="space-y-6">
-                    <FormField name="target_audience" control={form.control} render={({ field }) => <FormItem><FormLabel>¿Quién es su cliente o público ideal? (Descríbalo con detalle)</FormLabel><FormControl><Textarea rows={3} {...field} /></FormControl><FormMessage /></FormItem>} />
-                    <FormField name="business_description" control={form.control} render={({ field }) => <FormItem><FormLabel>Describe brevemente tu negocio y el propósito que lo impulsa</FormLabel><FormControl><Textarea rows={3} {...field} /></FormControl><FormMessage /></FormItem>} />
-                  </div>
-              </div>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+            {renderStep()}
 
-              {/* Step 2: Ventaja Competitiva */}
-              <div className={currentStep === 2 ? 'block' : 'hidden'}>
-                  <h2 className="font-headline text-3xl text-primary mb-6">Pilar 3: Su Ventaja Competitiva Irrefutable</h2>
-                  <div className="space-y-6">
-                    <FormField name="main_services" control={form.control} render={({ field }) => <FormItem><FormLabel>¿Cuáles son sus productos o servicios principales?</FormLabel><FormControl><Textarea rows={3} {...field} /></FormControl><FormMessage /></FormItem>} />
-                    <FormField name="value_proposition" control={form.control} render={({ field }) => <FormItem><FormLabel>Si tuviera que resumir su Propuesta de Valor en una sola frase, ¿cuál sería?</FormLabel><FormControl><Textarea rows={3} placeholder="Ej: 'Ayudamos a las empresas a ahorrar tiempo automatizando sus finanzas con un software intuitivo'." {...field} /></FormControl><FormMessage /></FormItem>} />
-                  </div>
-              </div>
-
-              {/* Step 3: Eficacia Digital */}
-              <div className={currentStep === 3 ? 'block' : 'hidden'}>
-                  <h2 className="font-headline text-3xl text-primary mb-6">Pilar 4: Diagnóstico de Eficacia Digital</h2>
-                  <div className="space-y-6">
-                    <FormField name="marketing_rating" control={form.control} render={({ field }) => <FormItem>
-                      <FormLabel>En una escala de 1 a 10, ¿qué tan eficaz considera su marketing digital actual para generar negocio? (1 es ineficaz, 10 es líder del sector)</FormLabel>
-                      <div className="flex items-center space-x-4"><span className="text-sm">1</span><FormControl><Slider min={1} max={10} step={1} defaultValue={[field.value ?? 5]} onValueChange={(vals) => field.onChange(vals[0])} /></FormControl><span className="text-sm">10</span></div>
-                      <div className="text-center mt-4 text-xl font-bold text-primary">{watchedRating}</div>
-                      <FormMessage />
-                    </FormItem>} />
-                  </div>
-              </div>
-
-               {/* Step 4: Desafíos */}
-              <div className={currentStep === 4 ? 'block' : 'hidden'}>
-                  <h2 className="font-headline text-3xl text-primary mb-6">Pilar 4: Desafíos y Oportunidades</h2>
-                  <div className="space-y-6">
-                    <FormField name="challenges" control={form.control} render={() => (
-                        <FormItem>
-                            <FormLabel>¿Cuáles son los mayores desafíos o frustraciones que enfrenta actualmente? (Seleccione hasta 3)</FormLabel>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">{GENERAL_CHALLENGES_OPTIONS.map((item) => (<FormField key={item} control={form.control} name="challenges" render={({ field }) => (
-                                <FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md">
-                                    <FormControl><Checkbox checked={field.value?.includes(item)} disabled={(field.value?.length ?? 0) >= 3 && !field.value?.includes(item)} onCheckedChange={(checked) => {
-                                        const current = field.value || [];
-                                        if (checked) { if (current.length < 3) field.onChange([...current, item]); }
-                                        else { field.onChange(current.filter(value => value !== item)); }
-                                    }} /></FormControl>
-                                    <FormLabel className="font-normal cursor-pointer">{item}</FormLabel>
-                                </FormItem>
-                            )} />))}</div>
-                            <FormMessage />
-                        </FormItem>
-                    )} />
-                    {(watchedChallenges && watchedChallenges.length > 0) &&
-                        <FormField name="challenges_cost" control={form.control} render={({ field }) => <FormItem><FormLabel>¿Cuál es el costo real (en tiempo, dinero u oportunidades perdidas) de no resolver su principal desafío en los próximos 6 meses?</FormLabel><FormControl><Textarea rows={3} {...field} /></FormControl><FormMessage /></FormItem>} />
-                    }
-                  </div>
-              </div>
-
-              {/* Step 5: Visión y Recursos */}
-              <div className={currentStep === 5 ? 'block' : 'hidden'}>
-                  <h2 className="font-headline text-3xl text-primary mb-6">Pilar 5: Visión, Metas y Recursos</h2>
-                  <div className="space-y-6">
-                    <FormField name="goals" control={form.control} render={({ field }) => <FormItem><FormLabel>¿Cuáles son los principales objetivos de negocio que quiere alcanzar en los próximos 6-12 meses?</FormLabel><FormControl><Textarea rows={3} {...field} /></FormControl><FormMessage /></FormItem>} />
-                    <FormField name="growth_expectation" control={form.control} render={({ field }) => <FormItem><FormLabel>¿Cuál es el % de crecimiento que espera alcanzar en los próximos 12 meses?</FormLabel><FormControl><Input type="number" placeholder="Ej: 25" {...field} value={field.value ?? ''} onChange={e => field.onChange(e.target.value === '' ? undefined : +e.target.value)} /></FormControl><FormMessage /></FormItem>} />
-                    <FormField name="avg_customer_value" control={form.control} render={({ field }) => <FormItem><FormLabel>¿Cuál es el valor promedio (Lifetime Value) de un cliente para su negocio? (Opcional)</FormLabel><FormControl><Input type="number" placeholder="Ej: 5000000" {...field} value={field.value ?? ''} onChange={e => field.onChange(e.target.value === '' ? undefined : +e.target.value)} /></FormControl><FormMessage /></FormItem>} />
-                  </div>
-              </div>
-
-              {/* Step 6: Competencia */}
-              <div className={currentStep === 6 ? 'block' : 'hidden'}>
-                  <h2 className="font-headline text-3xl text-primary mb-6">Pilar 6: Análisis del Entorno Competitivo</h2>
-                  <div className="space-y-6">
-                    <FormField name="competitors" control={form.control} render={({ field }) => <FormItem><FormLabel>Al analizar a sus competidores, ¿siente que ellos han logrado el 'Product-Market Fit' que usted está buscando? Nómbrelos y describa brevemente qué hacen bien.</FormLabel><FormControl><Textarea rows={4} placeholder="Ej: Competidor A: Tienen una marca muy fuerte en redes sociales. Competidor B: Su producto es más fácil de usar." {...field} /></FormControl><FormMessage /></FormItem>} />
-                  </div>
-              </div>
-              
-              {/* Step 7: Intereses y Cierre */}
-              <div className={currentStep === 7 ? 'block' : 'hidden'}>
-                  <h2 className="font-headline text-3xl text-primary mb-6">Paso Final: Áreas de Interés</h2>
-                  <div className="space-y-6">
-                    <FormField name="interested_services" control={form.control} render={() => (
-                        <FormItem>
-                            <FormLabel>Para finalizar, ¿en qué áreas de servicio de Nyvara está más interesado/a?</FormLabel>
-                            <div className="grid grid-cols-1 gap-4">{INTERESTED_SERVICES_OPTIONS.map((item) => (<FormField key={item} control={form.control} name="interested_services" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 bg-secondary p-3 rounded-md"><FormControl><Checkbox checked={field.value?.includes(item)} onCheckedChange={(checked) => { return checked ? field.onChange([...(field.value || []), item]) : field.onChange(field.value?.filter((value) => value !== item))}}/></FormControl><FormLabel className="font-normal cursor-pointer">{item}</FormLabel></FormItem>)}/>))}</div>
-                            <FormMessage />
-                        </FormItem>
-                    )} />
-                    <FormField name="additional_info" control={form.control} render={({ field }) => <FormItem><FormLabel>¿Hay algo más que considere importante que sepamos para este diagnóstico?</FormLabel><FormControl><Textarea rows={4} {...field} /></FormControl><FormMessage /></FormItem>} />
-                  </div>
-              </div>
-
-
-              <div className="mt-8 pt-6 border-t-2 border-secondary flex justify-between items-center">
-                 <div>
-                    <Button type="button" onClick={handlePrev} disabled={currentStep === 0} variant="secondary">Anterior</Button>
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Paso {currentStep + 1} de {TOTAL_STEPS}
-                </div>
-                
-                {currentStep < TOTAL_STEPS - 1 ? (
-                  <Button type="button" onClick={handleNext}>Siguiente</Button>
+            <div className="actions">
+                <button type="button" onClick={handlePrev} disabled={currentStep === 0} className="btn btn-prev">Anterior</button>
+                <div className="page-counter">PASO {String(currentStep + 1).padStart(2, '0')} de {String(TOTAL_STEPS).padStart(2, '0')}</div>
+                 {currentStep < TOTAL_STEPS - 1 ? (
+                  <button type="button" onClick={handleNext} className="btn btn-next">Siguiente →</button>
                 ) : (
-                  <Button type="submit">Generar Resumen de Diagnóstico</Button>
+                  <button type="submit" className="btn btn-next">Generar Resumen</button>
                 )}
-              </div>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
-    </>
+            </div>
+        </form>
+    </div>
   );
 }
