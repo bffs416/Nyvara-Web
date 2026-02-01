@@ -2,7 +2,7 @@
 'use server';
 
 import { surveySchema, generalSurveySchema, briefFormSchema } from '@/lib/schema';
-import { SurveyFormData, GeneralSurveyFormData, BriefFormValues } from '@/lib/types';
+import { SurveyFormData, GeneralSurveyFormData, BriefFormValues, Project } from '@/lib/types';
 import { createClient } from '@/lib/supabase/server';
 import { z } from 'zod';
 
@@ -273,41 +273,27 @@ export async function handleGeneralSurveySubmission(
   }
 }
 
-export async function processBriefAction(values: BriefFormValues): Promise<{ success: boolean; data?: { briefText: string; tags: string[]; sector: string; }; error?: string; }> {
-    // Simulate AI processing
-    console.log("Processing brief with AI:", values);
+export async function processBriefAction(values: BriefFormValues): Promise<{ success: boolean; data?: Project; error?: string; }> {
+    console.log("Processing brief:", values);
 
-    // For now, return mock data.
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+        const newProject: Project = {
+            id: Date.now().toString(),
+            title: values.projectName.toUpperCase(),
+            description: values.bodyText,
+            reason: `OBJETIVO: ${values.goal}. TITULAR: ${values.headline}. ${values.references ? `REFERENCIAS: ${values.references}` : ''}`.trim(),
+            imageUrl: `https://picsum.photos/seed/${Date.now().toString()}/800/600`,
+            dueDate: values.deadline,
+            createdAt: new Date().toISOString(),
+            status: 'pending'
+        };
 
-    const briefText = `
-CLIENTE: ${values.clientName}
-CONSECUTIVO: ${values.consecutive}
-PROYECTO: ${values.projectName}
-FECHA LÍMITE: ${values.deadline}
-------------------------------------------------------------
-OBJETIVO: ${values.goal}
-FORMATO: ${values.format}
-------------------------------------------------------------
-HEADLINE:
-${values.headline}
-
-CUERPO DEL TEXTO:
-${values.bodyText}
-------------------------------------------------------------
-CTA: ${values.cta}
-REFERENCIAS: ${values.references}
-`;
-
-    const tags = ["Branding", "Marketing Digital", values.goal];
-    const sector = "Servicios Creativos";
-
-    return {
-        success: true,
-        data: {
-            briefText,
-            tags,
-            sector
-        }
-    };
+        return {
+            success: true,
+            data: newProject
+        };
+    } catch (error: any) {
+        console.error("Error creating project from brief:", error);
+        return { success: false, error: 'Ocurrió un error inesperado al procesar el brief.' };
+    }
 }

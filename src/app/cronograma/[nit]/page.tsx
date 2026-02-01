@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { Plus, LayoutGrid, Calendar, Archive, Loader2, ShieldAlert, Lock } from 'lucide-react';
+import { Plus, LayoutGrid, Calendar, Archive, Loader2, ShieldAlert, Lock, Upload, Download } from 'lucide-react';
 import { Project, Client } from '@/lib/types';
+import { projectArraySchema } from '@/lib/schema';
 import ProjectCard from '@/components/cronograma/ProjectCard';
 import CalendarView from '@/components/cronograma/CalendarView';
 import ProjectForm from '@/components/cronograma/ProjectForm';
@@ -15,6 +16,11 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { BriefForm } from '@/components/brief/BriefForm';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Input } from '@/components/ui/input';
+
+type PendingAction = {
+  type: 'create' | 'edit' | 'delete' | 'export' | 'import';
+  data?: any;
+};
 
 const CronogramaClientePage = () => {
   const router = useRouter();
@@ -29,14 +35,18 @@ const CronogramaClientePage = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [view, setView] = useState<'list' | 'calendar'>('list');
   const [showArchived, setShowArchived] = useState(false);
+  
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isBriefFormOpen, setIsBriefFormOpen] = useState(false);
+
   const [editingProject, setEditingProject] = useState<Project | undefined>(undefined);
 
-  // State for the access code modal
   const [isAccessCodeModalOpen, setIsAccessCodeModalOpen] = useState(false);
-  const [pendingAction, setPendingAction] = useState<{type: 'create' | 'edit', project?: Project} | null>(null);
+  const [pendingAction, setPendingAction] = useState<PendingAction | null>(null);
   const [accessCodeInput, setAccessCodeInput] = useState('');
   const [accessCodeError, setAccessCodeError] = useState('');
+  
+  const importFileRef = useRef<HTMLInputElement>(null);
   
   useEffect(() => {
     if (nit) {
@@ -97,6 +107,11 @@ const CronogramaClientePage = () => {
       return updatedProjects;
     });
   };
+  
+  const handleBriefCreated = (project: Project) => {
+    handleAddOrUpdateProject(project);
+    setIsBriefFormOpen(false);
+  };
 
   const handleArchiveProject = (id: string) => {
     setProjects(projects.map(p => p.id === id ? { ...p, status: 'archived' } : p));
@@ -105,15 +120,24 @@ const CronogramaClientePage = () => {
   const handleRestoreProject = (id: string) => {
     setProjects(projects.map(p => p.id === id ? { ...p, status: 'pending' } : p));
   };
+  
+  const requestDeleteProject = (id: string) => {
+    setPendingAction({ type: 'delete', data: { id } });
+    setIsAccessCodeModalOpen(true);
+  };
+  
+  const requestExport = () => {
+    setPendingAction({ type: 'export' });
+    setIsAccessCodeModalOpen(true);
+  };
 
-  const handleDeleteProject = (id: string) => {
-    if (window.confirm('¿Estás seguro de que quieres eliminar este proyecto permanentemente?')) {
-      setProjects(projects.filter(p => p.id !== id));
-    }
+  const requestImport = () => {
+    setPendingAction({ type: 'import' });
+    setIsAccessCodeModalOpen(true);
   };
 
   const openFormForEdit = (project: Project) => {
-    setPendingAction({ type: 'edit', project });
+    setPendingAction({ type: 'edit', data: { project } });
     setIsAccessCodeModalOpen(true);
   };
 
@@ -129,15 +153,75 @@ const CronogramaClientePage = () => {
       setPendingAction(null);
   };
 
+  const executeExport = () => {
+    try {
+        const dataStr = JSON.stringify(projects, null, 2);
+        const blob = new Blob([dataStr], { type: "text/plain;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `cronograma_${client?.nit}_${new Date().toISOString().split('T')[0]}.txt`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error("Error exporting data:", error);
+        alert("No se pudo exportar el cronograma.");
+    }
+  };
+
+  const handleFileSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        try {
+            const text = e.target?.result as string;
+            const parsedData = JSON.parse(text);
+            const validation = projectArraySchema.safeParse(parsedData);
+            
+            if (!validation.success) {
+                console.error("Import validation error:", validation.error);
+                throw new Error("El archivo no tiene el formato de proyectos esperado.");
+            }
+
+            if (window.confirm("¿Estás seguro de que quieres reemplazar el cronograma actual con los datos del archivo? Esta acción no se puede deshacer.")) {
+                setProjects(validation.data);
+            }
+
+        } catch (error) {
+            console.error("Error importing data:", error);
+            alert("Error al importar el archivo. Asegúrate de que sea un archivo de exportación válido.");
+        }
+    };
+    reader.readAsText(file);
+  };
+
   const handleAccessCodeSubmit = (e: React.FormEvent) => {
       e.preventDefault();
       if (accessCodeInput === "1629") {
-          if (pendingAction?.type === 'create') {
+          switch (pendingAction?.type) {
+            case 'create':
               setEditingProject(undefined);
               setIsFormOpen(true);
-          } else if (pendingAction?.type === 'edit' && pendingAction.project) {
-              setEditingProject(pendingAction.project);
+              break;
+            case 'edit':
+              setEditingProject(pendingAction.data.project);
               setIsFormOpen(true);
+              break;
+            case 'delete':
+              if (window.confirm('¿Estás seguro de que quieres eliminar este proyecto permanentemente?')) {
+                setProjects(projects.filter(p => p.id !== pendingAction.data.id));
+              }
+              break;
+            case 'export':
+                executeExport();
+                break;
+            case 'import':
+                importFileRef.current?.click();
+                break;
           }
           closeAccessCodeModal();
       } else {
@@ -188,12 +272,12 @@ const CronogramaClientePage = () => {
               </p>
             </div>
             <div className="flex items-start gap-2 flex-shrink-0">
-              <div className="flex flex-col gap-2">
+              <div className="grid grid-cols-2 gap-2">
                 <button onClick={openFormForNew} className="px-6 py-4 bg-black text-white text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-blue-600 transition-colors">
                   <Plus size={16} />
                   Nuevo Proyecto
                 </button>
-                 <Dialog>
+                 <Dialog open={isBriefFormOpen} onOpenChange={setIsBriefFormOpen}>
                     <DialogTrigger asChild>
                         <button className="px-6 py-4 bg-gray-700 text-white text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-gray-800 transition-colors">
                             <Plus size={16} />
@@ -205,10 +289,16 @@ const CronogramaClientePage = () => {
                             <DialogTitle className="text-2xl font-bold text-gray-900">Protocolo de Registro de Activos Creativos</DialogTitle>
                         </DialogHeader>
                         <ScrollArea className="h-full pr-6">
-                          <BriefForm />
+                          <BriefForm onBriefCreated={handleBriefCreated} onClose={() => setIsBriefFormOpen(false)} />
                         </ScrollArea>
                     </DialogContent>
                 </Dialog>
+                <button onClick={requestImport} className="px-6 py-3 bg-gray-200 text-black text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-gray-300 transition-colors">
+                  <Upload size={14} /> Importar
+                </button>
+                <button onClick={requestExport} className="px-6 py-3 bg-gray-200 text-black text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-gray-300 transition-colors">
+                  <Download size={14} /> Exportar
+                </button>
               </div>
 
               <div className="flex flex-col gap-2">
@@ -218,6 +308,8 @@ const CronogramaClientePage = () => {
             </div>
           </div>
           
+          <input type="file" ref={importFileRef} onChange={handleFileSelected} accept=".txt,application/json" className="hidden" />
+
           {view === 'list' && (
               <div>
                   {activeProjects.map(p => (
@@ -226,7 +318,7 @@ const CronogramaClientePage = () => {
                           project={p} 
                           onArchive={handleArchiveProject} 
                           onEdit={openFormForEdit}
-                          onDelete={handleDeleteProject}
+                          onDelete={requestDeleteProject}
                       />
                   ))}
                   
@@ -249,7 +341,7 @@ const CronogramaClientePage = () => {
                                 project={p} 
                                 onArchive={handleArchiveProject}
                                 onRestore={handleRestoreProject}
-                                onDelete={handleDeleteProject}
+                                onDelete={requestDeleteProject}
                             />
                          ))}
                       </div>
@@ -257,7 +349,7 @@ const CronogramaClientePage = () => {
               </div>
           )}
 
-          {view === 'calendar' && <CalendarView projects={projects} onEditProject={openFormForEdit} onDeleteProject={handleDeleteProject} />}
+          {view === 'calendar' && <CalendarView projects={projects} onEditProject={openFormForEdit} onDeleteProject={requestDeleteProject} />}
         </div>
         
         {isFormOpen && (
@@ -268,7 +360,6 @@ const CronogramaClientePage = () => {
           />
         )}
 
-        {/* Access Code Modal */}
         <Dialog open={isAccessCodeModalOpen} onOpenChange={(isOpen) => !isOpen && closeAccessCodeModal()}>
             <DialogContent className="sm:max-w-md bg-white text-black border-2 border-black">
                 <DialogHeader>
@@ -277,7 +368,7 @@ const CronogramaClientePage = () => {
                         Verificación de Acceso
                     </DialogTitle>
                     <DialogDescription className="text-gray-600 pt-2">
-                        Para {pendingAction?.type === 'create' ? 'crear un nuevo proyecto' : 'modificar este proyecto'}, introduce el código de seguridad.
+                        Para realizar esta acción, introduce el código de seguridad.
                     </DialogDescription>
                 </DialogHeader>
                 <form onSubmit={handleAccessCodeSubmit} className="space-y-4 pt-4">
