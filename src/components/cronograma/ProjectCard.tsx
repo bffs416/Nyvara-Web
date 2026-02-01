@@ -107,7 +107,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
               </div>
             </div>
 
-            <p className="text-xl md:text-2xl leading-tight text-gray-600 font-light tracking-tight max-w-2xl border-l-2 border-gray-100 pl-6 md:pl-8">
+            <p className="text-xl md:text-2xl leading-tight text-gray-600 font-light tracking-tight max-w-2xl border-l-2 border-gray-100 pl-6 md:pl-8 text-justify">
               {project.description}
             </p>
 
