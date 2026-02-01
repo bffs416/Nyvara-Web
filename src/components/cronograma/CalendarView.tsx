@@ -52,71 +52,73 @@ const CalendarView: React.FC<CalendarViewProps> = ({ projects, onEditProject, on
         </div>
       </div>
 
-      <div className="grid grid-cols-7 border-l border-t border-black">
-        {dayNames.map(d => (
-          <div key={d} className="p-4 border-r border-b border-black text-[10px] font-bold tracking-widest text-center bg-gray-50">
-            {d}
-          </div>
-        ))}
-        
-        {padding.map(i => (
-          <div key={`pad-${i}`} className="p-4 border-r border-b border-black min-h-[140px] bg-gray-50/50"></div>
-        ))}
-
-        {days.map(day => {
-          const dayProjects = getProjectsForDay(day);
-          const isToday = new Date().toDateString() === new Date(year, month, day).toDateString();
-          
-          return (
-            <div 
-              key={day} 
-              className={`p-4 border-r border-b border-black min-h-[160px] h-auto transition-all hover:bg-gray-50 flex flex-col gap-2 relative ${isToday ? 'bg-blue-50/30' : ''}`}
-            >
-              <span className={`text-sm font-black ${isToday ? 'text-blue-600 underline underline-offset-8' : 'text-gray-300'}`}>
-                {day.toString().padStart(2, '0')}
-              </span>
-              
-              <div className="flex flex-col gap-1.5 flex-1 overflow-visible">
-                {dayProjects.map(p => (
-                  <div 
-                    key={p.id} 
-                    className="group/item text-[8px] font-black uppercase p-2 bg-black text-white kerning-wide flex items-center justify-between gap-1 shadow-sm hover:bg-blue-600 transition-colors"
-                  >
-                    <span className="truncate flex-1">{p.title}</span>
-                    <div className="flex gap-1 opacity-0 group-hover/item:opacity-100 transition-opacity">
-                      <button 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onEditProject?.(p);
-                        }}
-                        className="p-0.5 hover:text-yellow-400"
-                        title="Editar"
-                      >
-                        <Edit2 size={10} />
-                      </button>
-                      <button 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onDeleteProject?.(p.id);
-                        }}
-                        className="p-0.5 hover:text-red-400"
-                        title="Eliminar"
-                      >
-                        <Trash2 size={10} />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              
-              {dayProjects.length > 3 && (
-                <span className="text-[7px] font-bold text-gray-400 uppercase text-right">
-                  + {dayProjects.length - 3} adicionales
-                </span>
-              )}
+      <div className="overflow-x-auto">
+        <div className="grid grid-cols-7 border-l border-t border-black min-w-[840px]">
+          {dayNames.map(d => (
+            <div key={d} className="p-4 border-r border-b border-black text-[10px] font-bold tracking-widest text-center bg-gray-50">
+              {d}
             </div>
-          );
-        })}
+          ))}
+          
+          {padding.map(i => (
+            <div key={`pad-${i}`} className="p-4 border-r border-b border-black min-h-[140px] bg-gray-50/50"></div>
+          ))}
+
+          {days.map(day => {
+            const dayProjects = getProjectsForDay(day);
+            const isToday = new Date().toDateString() === new Date(year, month, day).toDateString();
+            
+            return (
+              <div 
+                key={day} 
+                className={`p-4 border-r border-b border-black min-h-[160px] h-auto transition-all hover:bg-gray-50 flex flex-col gap-2 relative ${isToday ? 'bg-blue-50/30' : ''}`}
+              >
+                <span className={`text-sm font-black ${isToday ? 'text-blue-600 underline underline-offset-8' : 'text-gray-300'}`}>
+                  {day.toString().padStart(2, '0')}
+                </span>
+                
+                <div className="flex flex-col gap-1.5 flex-1 overflow-visible">
+                  {dayProjects.map(p => (
+                    <div 
+                      key={p.id} 
+                      className="group/item text-[8px] font-black uppercase p-2 bg-black text-white kerning-wide flex items-center justify-between gap-1 shadow-sm hover:bg-blue-600 transition-colors"
+                    >
+                      <span className="truncate flex-1">{p.title}</span>
+                      <div className="flex gap-1 opacity-0 group-hover/item:opacity-100 transition-opacity">
+                        <button 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onEditProject?.(p);
+                          }}
+                          className="p-0.5 hover:text-yellow-400"
+                          title="Editar"
+                        >
+                          <Edit2 size={10} />
+                        </button>
+                        <button 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onDeleteProject?.(p.id);
+                          }}
+                          className="p-0.5 hover:text-red-400"
+                          title="Eliminar"
+                        >
+                          <Trash2 size={10} />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                {dayProjects.length > 3 && (
+                  <span className="text-[7px] font-bold text-gray-400 uppercase text-right">
+                    + {dayProjects.length - 3} adicionales
+                  </span>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
       <div className="py-4 text-[9px] font-bold text-gray-400 uppercase tracking-widest italic">
         * Las celdas se expanden verticalmente según la densidad de proyectos.
