@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -12,9 +13,9 @@ import { siteConfig } from '@/lib/config';
 const navItems = [
   { name: 'Inicio', href: '/' },
   { name: 'Servicios', href: '/#services' },
-  { name: 'Cronograma', href: '/cronograma' },
   { name: 'Nosotros', href: '/#nosotros' },
-  { name: 'Clientes', href: '/diagnostico' },
+  { name: 'Diagnóstico', href: '/diagnostico' },
+  { name: 'Clientes', href: '/cronograma' },
 ];
 
 const Header = () => {
