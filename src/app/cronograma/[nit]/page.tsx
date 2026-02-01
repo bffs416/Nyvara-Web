@@ -304,6 +304,20 @@ const CronogramaClientePage = () => {
               <div className="flex flex-col gap-2">
                 <button onClick={() => setView('list')} className={`p-4 border border-black transition-colors ${view === 'list' ? 'bg-black text-white' : 'hover:bg-gray-100'}`} title="Vista de Lista"><LayoutGrid size={20}/></button>
                 <button onClick={() => setView('calendar')} className={`p-4 border border-black transition-colors ${view === 'calendar' ? 'bg-black text-white' : 'hover:bg-gray-100'}`} title="Vista de Calendario"><Calendar size={20}/></button>
+                {view === 'list' && (
+                    <button
+                        onClick={() => setShowArchived(!showArchived)}
+                        disabled={archivedProjects.length === 0}
+                        className={`p-4 border border-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+                            showArchived
+                            ? 'bg-blue-600 text-white'
+                            : 'hover:bg-gray-100'
+                        }`}
+                        title={showArchived ? 'Ocultar Archivo' : `Mostrar Archivo (${archivedProjects.length})`}
+                    >
+                        <Archive size={20} />
+                    </button>
+                )}
               </div>
             </div>
           </div>
@@ -322,19 +336,11 @@ const CronogramaClientePage = () => {
                       />
                   ))}
                   
-                  <div className="my-16 text-center">
-                      <button 
-                          onClick={() => showArchived ? setShowArchived(false) : setShowArchived(true)} 
-                          disabled={archivedProjects.length === 0}
-                          className="text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-black flex items-center gap-3 mx-auto disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                          <Archive size={16} />
-                          {showArchived ? 'Ocultar Archivo' : `Mostrar Archivo (${archivedProjects.length})`}
-                      </button>
-                  </div>
-
                   {showArchived && archivedProjects.length > 0 && (
                       <div className="animate-in fade-in duration-500">
+                         <div className="my-12 text-center border-y-2 border-dashed py-4">
+                           <h3 className="text-sm font-bold uppercase tracking-widest text-gray-400">Proyectos Archivados</h3>
+                         </div>
                          {archivedProjects.map(p => (
                             <ProjectCard 
                                 key={p.id} 
