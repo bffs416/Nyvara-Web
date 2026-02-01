@@ -77,7 +77,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
 
           <div className="flex-1 space-y-8 w-full">
             <div className="flex justify-between items-start gap-4">
-              <h3 className="text-3xl md:text-6xl font-black uppercase tracking-tighter leading-[0.85] group-hover:text-blue-600 transition-colors duration-500 break-words">
+              <h3 className="text-3xl md:text-6xl font-black uppercase tracking-tighter leading-[0.85] group-hover:text-blue-600 transition-colors duration-500 break-words text-justify">
                 {project.title}
               </h3>
               <div className="flex gap-2">
