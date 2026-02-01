@@ -147,7 +147,7 @@ const CronogramaClientePage = () => {
   return (
     <div className="bg-white text-black min-h-screen font-body">
       <Header />
-      <main className="px-4 sm:px-6 lg:px-8 py-16 overflow-hidden">
+      <main className="px-4 sm:px-6 lg:px-8 py-16">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-b-4 border-black pb-8 mb-12">
             <div>
@@ -188,7 +188,7 @@ const CronogramaClientePage = () => {
           </div>
           
           {view === 'list' && (
-              <div>
+              <div className="overflow-hidden">
                   {activeProjects.map(p => (
                       <ProjectCard 
                           key={p.id} 
@@ -201,7 +201,7 @@ const CronogramaClientePage = () => {
                   
                   <div className="my-16 text-center">
                       <button 
-                          onClick={() => showArchived ? setShowArchived(false) : (archivedProjects.length > 0 && setShowArchived(true))} 
+                          onClick={() => showArchived ? setShowArchived(false) : setShowArchived(true)} 
                           disabled={archivedProjects.length === 0}
                           className="text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-black flex items-center gap-3 mx-auto disabled:opacity-50 disabled:cursor-not-allowed"
                       >
