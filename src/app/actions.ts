@@ -1,8 +1,8 @@
 
 'use server';
 
-import { surveySchema, generalSurveySchema } from '@/lib/schema';
-import { SurveyFormData, GeneralSurveyFormData } from '@/lib/types';
+import { surveySchema, generalSurveySchema, briefFormSchema } from '@/lib/schema';
+import { SurveyFormData, GeneralSurveyFormData, BriefFormValues } from '@/lib/types';
 import { createClient } from '@/lib/supabase/server';
 import { z } from 'zod';
 
@@ -271,4 +271,43 @@ export async function handleGeneralSurveySubmission(
     console.error('Error en handleGeneralSurveySubmission:', error);
     return { success: false, error: 'Ocurrió un error inesperado en el servidor. ' + (error.message || '') };
   }
+}
+
+export async function processBriefAction(values: BriefFormValues): Promise<{ success: boolean; data?: { briefText: string; tags: string[]; sector: string; }; error?: string; }> {
+    // Simulate AI processing
+    console.log("Processing brief with AI:", values);
+
+    // For now, return mock data.
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    const briefText = `
+CLIENTE: ${values.clientName}
+CONSECUTIVO: ${values.consecutive}
+PROYECTO: ${values.projectName}
+FECHA LÍMITE: ${values.deadline}
+------------------------------------------------------------
+OBJETIVO: ${values.goal}
+FORMATO: ${values.format}
+------------------------------------------------------------
+HEADLINE:
+${values.headline}
+
+CUERPO DEL TEXTO:
+${values.bodyText}
+------------------------------------------------------------
+CTA: ${values.cta}
+REFERENCIAS: ${values.references}
+`;
+
+    const tags = ["Branding", "Marketing Digital", values.goal];
+    const sector = "Servicios Creativos";
+
+    return {
+        success: true,
+        data: {
+            briefText,
+            tags,
+            sector
+        }
+    };
 }

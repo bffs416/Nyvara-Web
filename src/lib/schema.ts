@@ -98,3 +98,17 @@ export const generalSurveySchema = z.object({
   interested_services: z.array(z.string()).min(1, "Selecciona al menos un servicio de interés."),
   additional_info: z.string().optional(),
 });
+
+export const briefFormSchema = z.object({
+    clientName: z.string().min(1, "El nombre del cliente es requerido."),
+    consecutive: z.string().min(1, "El consecutivo es requerido."),
+    projectName: z.string().min(1, "El nombre de la pieza es requerido."),
+    deadline: z.string().min(1, "La fecha límite es requerida."),
+    format: z.string(),
+    goal: z.string(),
+    headline: z.string().min(1, "El titular es requerido."),
+    bodyText: z.string().min(1, "La información detallada es requerida."),
+    cta: z.string().optional(),
+    references: z.string().optional(),
+    otherFormat: z.string().optional(),
+});

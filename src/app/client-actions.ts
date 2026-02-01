@@ -14,7 +14,8 @@ import {
     handleSurveySubmission,
     summarizeSurveyDataForDownload,
     handleGeneralSurveySubmission,
-    summarizeGeneralSurveyDataForDownload
+    summarizeGeneralSurveyDataForDownload,
+    processBriefAction
 } from './actions';
 
 // We need to re-export the server actions individually
@@ -25,5 +26,6 @@ export {
     handleSurveySubmission,
     summarizeSurveyDataForDownload,
     handleGeneralSurveySubmission,
-    summarizeGeneralSurveyDataForDownload
+    summarizeGeneralSurveyDataForDownload,
+    processBriefAction
 };

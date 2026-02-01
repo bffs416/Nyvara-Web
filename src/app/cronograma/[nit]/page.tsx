@@ -11,6 +11,9 @@ import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { clients } from '@/lib/cronogramas';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { BriefForm } from '@/components/brief/BriefForm';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const CronogramaClientePage = () => {
   const router = useRouter();
@@ -147,10 +150,22 @@ const CronogramaClientePage = () => {
                   <Plus size={16} />
                   Nuevo Proyecto
                 </button>
-                <button onClick={() => router.push('/diagnostico?sector=health')} className="px-6 py-4 bg-gray-700 text-white text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-gray-800 transition-colors">
-                  <Plus size={16} />
-                  Nuevo Brief
-                </button>
+                 <Dialog>
+                    <DialogTrigger asChild>
+                        <button className="px-6 py-4 bg-gray-700 text-white text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-gray-800 transition-colors">
+                            <Plus size={16} />
+                            Nuevo Brief
+                        </button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-4xl h-[90vh] bg-background border-border text-foreground">
+                        <DialogHeader>
+                            <DialogTitle className="text-2xl font-bold text-primary">Protocolo de Registro de Activos Creativos</DialogTitle>
+                        </DialogHeader>
+                        <ScrollArea className="h-full pr-6">
+                          <BriefForm />
+                        </ScrollArea>
+                    </DialogContent>
+                </Dialog>
               </div>
 
               <div className="flex flex-col gap-2">

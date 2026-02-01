@@ -1,9 +1,10 @@
 
 import { z } from "zod";
-import { surveySchema, generalSurveySchema } from "./schema";
+import { surveySchema, generalSurveySchema, briefFormSchema } from "./schema";
 
 export type SurveyFormData = z.infer<typeof surveySchema>;
 export type GeneralSurveyFormData = z.infer<typeof generalSurveySchema>;
+export type BriefFormValues = z.infer<typeof briefFormSchema>;
 
 export interface Project {
   id: string;
