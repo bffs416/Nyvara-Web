@@ -106,13 +106,23 @@ const CronogramaClientePage = () => {
   };
 
   const openFormForEdit = (project: Project) => {
-    setEditingProject(project);
-    setIsFormOpen(true);
+    const code = prompt("Por favor, introduce el código de acceso para editar:");
+    if (code === "1629") {
+      setEditingProject(project);
+      setIsFormOpen(true);
+    } else if (code !== null) {
+      alert("Código incorrecto. No tienes permiso para editar.");
+    }
   };
 
   const openFormForNew = () => {
-    setEditingProject(undefined);
-    setIsFormOpen(true);
+    const code = prompt("Por favor, introduce el código de acceso para crear un nuevo proyecto:");
+    if (code === "1629") {
+      setEditingProject(undefined);
+      setIsFormOpen(true);
+    } else if (code !== null) {
+      alert("Código incorrecto. No tienes permiso para crear proyectos.");
+    }
   };
   
   const activeProjects = projects.filter(p => p.status !== 'archived');
@@ -188,7 +198,7 @@ const CronogramaClientePage = () => {
           </div>
           
           {view === 'list' && (
-              <div>
+              <div className="overflow-hidden">
                   {activeProjects.map(p => (
                       <ProjectCard 
                           key={p.id} 
