@@ -36,18 +36,23 @@ const CronogramaClientePage = () => {
       const hasAccess = localStorage.getItem(`cronograma_access_${nit}`) === 'true';
       if (hasAccess && client) {
         setIsAuthorized(true);
+        let loadedProjects: Project[] = [];
         try {
           const savedProjectsKey = `cronograma_projects_${nit}`;
           const savedProjects = localStorage.getItem(savedProjectsKey);
           if (savedProjects) {
-            setProjects(JSON.parse(savedProjects));
+            loadedProjects = JSON.parse(savedProjects);
           } else {
-            setProjects(client.projects);
+            loadedProjects = client.projects;
           }
         } catch (error) {
             console.error("Failed to load projects from localStorage", error);
-            setProjects(client.projects);
+            loadedProjects = client.projects;
         }
+        
+        loadedProjects.sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime());
+        setProjects(loadedProjects);
+
       } else {
         setTimeout(() => {
           router.push('/cronograma');
@@ -69,14 +74,21 @@ const CronogramaClientePage = () => {
   }, [projects, isAuthorized, nit]);
 
   const handleAddOrUpdateProject = (project: Project) => {
-    const existingIndex = projects.findIndex(p => p.id === project.id);
-    if (existingIndex > -1) {
-      const updatedProjects = [...projects];
-      updatedProjects[existingIndex] = project;
-      setProjects(updatedProjects);
-    } else {
-      setProjects([project, ...projects]);
-    }
+    setProjects(currentProjects => {
+      const existingIndex = currentProjects.findIndex(p => p.id === project.id);
+      let updatedProjects;
+
+      if (existingIndex > -1) {
+        updatedProjects = [...currentProjects];
+        updatedProjects[existingIndex] = project;
+      } else {
+        updatedProjects = [...currentProjects, project];
+      }
+
+      updatedProjects.sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime());
+      
+      return updatedProjects;
+    });
   };
 
   const handleArchiveProject = (id: string) => {
