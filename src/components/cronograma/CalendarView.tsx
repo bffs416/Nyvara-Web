@@ -82,9 +82,9 @@ const CalendarView: React.FC<CalendarViewProps> = ({ projects, onEditProject, on
                     <div
                       key={p.id}
                       title={p.title}
-                      className="group/item cursor-pointer rounded-sm text-[10px] font-bold p-1.5 bg-black text-white flex items-center justify-between gap-1 shadow-sm hover:bg-blue-600 transition-colors"
+                      className="group/item cursor-pointer rounded-sm text-[10px] font-bold p-1.5 bg-black text-white flex items-start justify-between gap-2 shadow-sm hover:bg-blue-600 transition-colors"
                     >
-                      <span className="truncate flex-1">{p.title}</span>
+                      <span className="flex-1 break-words">{p.title}</span>
                       <div className="flex gap-1 opacity-0 group-hover/item:opacity-100 transition-opacity">
                         <button
                           onClick={(e) => {
