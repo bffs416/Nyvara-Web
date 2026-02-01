@@ -68,7 +68,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section id="clientes" className="py-16 md:py-24 bg-white">
+    <section id="testimonials" className="py-16 md:py-24 bg-white">
       <div className="container">
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
