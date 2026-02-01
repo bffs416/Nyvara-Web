@@ -163,14 +163,22 @@ const CronogramaClientePage = () => {
                 Portal de Proyectos para: <strong className="text-blue-600">{client.clientName}</strong>
               </p>
             </div>
-            <div className="flex items-center gap-2 flex-shrink-0">
-              <button onClick={openFormForNew} className="px-6 py-4 bg-black text-white text-sm font-bold uppercase tracking-widest flex items-center gap-3 hover:bg-blue-600 transition-colors">
-                <Plus size={16} />
-                Nuevo Proyecto
-              </button>
-              
-              <button onClick={() => setView('list')} className={`p-4 border border-black transition-colors ${view === 'list' ? 'bg-black text-white' : 'hover:bg-gray-100'}`} title="Vista de Lista"><LayoutGrid size={20}/></button>
-              <button onClick={() => setView('calendar')} className={`p-4 border border-black transition-colors ${view === 'calendar' ? 'bg-black text-white' : 'hover:bg-gray-100'}`} title="Vista de Calendario"><Calendar size={20}/></button>
+            <div className="flex items-start gap-2 flex-shrink-0">
+              <div className="flex flex-col gap-2">
+                <button onClick={openFormForNew} className="px-6 py-4 bg-black text-white text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-blue-600 transition-colors">
+                  <Plus size={16} />
+                  Nuevo Proyecto
+                </button>
+                <button onClick={() => router.push('/diagnostico?sector=health')} className="px-6 py-4 bg-gray-700 text-white text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-gray-800 transition-colors">
+                  <Plus size={16} />
+                  Nuevo Brief
+                </button>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <button onClick={() => setView('list')} className={`p-4 border border-black transition-colors ${view === 'list' ? 'bg-black text-white' : 'hover:bg-gray-100'}`} title="Vista de Lista"><LayoutGrid size={20}/></button>
+                <button onClick={() => setView('calendar')} className={`p-4 border border-black transition-colors ${view === 'calendar' ? 'bg-black text-white' : 'hover:bg-gray-100'}`} title="Vista de Calendario"><Calendar size={20}/></button>
+              </div>
             </div>
           </div>
           
