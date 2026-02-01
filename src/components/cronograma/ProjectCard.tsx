@@ -30,9 +30,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
   const isArchived = project.status === 'archived';
 
   return (
-    <div className={`swiss-grid group transition-all duration-700 ${isArchived ? 'opacity-50' : 'opacity-100'}`}>
-      {/* Col 1: Tiempo con Q, Mes y Año */}
-      <div className="py-20 md:text-right flex flex-col items-end border-r border-transparent pr-4">
+    <div className={`group grid grid-cols-1 md:grid-cols-[200px_20px_1fr] transition-all duration-700 border-b border-gray-100 ${isArchived ? 'opacity-50' : 'opacity-100'}`}>
+      
+      <div className="hidden md:flex py-20 md:text-right flex-col items-end border-r border-transparent pr-4">
         <span className="text-6xl font-black tracking-tighter leading-none transition-all duration-500 group-hover:text-blue-600">
           Q{quarter}
         </span>
@@ -47,19 +47,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
         </div>
       </div>
 
-      {/* Col 2: Eje Visual */}
-      <div className="vertical-line bg-gray-100 relative">
-        <div className="absolute top-0 bottom-0 left-0 w-full bg-black scale-y-0 group-hover:scale-y-100 origin-top transition-transform duration-1000"></div>
-        <div className={`absolute top-24 -left-[6px] w-[14px] h-[14px] border-2 border-white z-10 transition-all duration-500 ${isArchived ? 'bg-gray-300' : 'bg-black group-hover:scale-[2] group-hover:bg-blue-600 group-hover:border-0 shadow-xl'}`}></div>
+      
+      <div className="hidden md:block w-full bg-gray-100 relative">
+        <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-0.5 h-full bg-gray-100 group-hover:bg-black transition-colors duration-1000"></div>
+        <div className={`absolute top-24 left-1/2 -translate-x-1/2 w-[14px] h-[14px] border-2 border-white z-10 transition-all duration-500 ${isArchived ? 'bg-gray-300' : 'bg-black group-hover:scale-[2] group-hover:bg-blue-600 group-hover:border-0 shadow-xl'}`}></div>
       </div>
 
-      {/* Col 3: Contenido Visual y Texto */}
-      <div className="py-20 pl-8 pb-32 border-b border-gray-100">
-        <div className="flex flex-col xl:flex-row gap-16 items-start">
+      
+      <div className="py-10 md:py-20 md:pl-8 pb-16 md:pb-24">
+        <div className="flex flex-col xl:flex-row gap-12 items-start">
           
           <div className="w-full xl:w-[450px] flex-shrink-0">
-            {/* Contenedor Adaptable: Se quita aspect-[16/10] */}
-            <div className="relative overflow-hidden border border-black bg-gray-50 shadow-[20px_20px_0px_0px_rgba(0,0,0,0.03)] group-hover:shadow-[20px_20px_0px_0px_rgba(37,99,235,0.08)] transition-all duration-700 flex items-center justify-center">
+            <div className="relative overflow-hidden border border-black bg-gray-50 shadow-[10px_10px_0px_0px_rgba(0,0,0,0.03)] group-hover:shadow-[20px_20px_0px_0px_rgba(37,99,235,0.08)] transition-all duration-700 flex items-center justify-center">
               <Image 
                 src={project.imageUrl} 
                 alt={project.title}
@@ -78,7 +77,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
 
           <div className="flex-1 space-y-8 w-full">
             <div className="flex justify-between items-start gap-4">
-              <h3 className="text-4xl md:text-7xl font-black uppercase tracking-tighter leading-[0.85] group-hover:text-blue-600 transition-colors duration-500">
+              <h3 className="text-3xl md:text-6xl font-black uppercase tracking-tighter leading-[0.85] group-hover:text-blue-600 transition-colors duration-500">
                 {project.title}
               </h3>
               <div className="flex gap-2">
@@ -108,21 +107,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
               </div>
             </div>
 
-            <p className="text-2xl leading-tight text-gray-600 font-light tracking-tight max-w-2xl border-l-2 border-gray-100 pl-8">
+            <p className="text-xl md:text-2xl leading-tight text-gray-600 font-light tracking-tight max-w-2xl border-l-2 border-gray-100 pl-6 md:pl-8">
               {project.description}
             </p>
 
-            <div className="bg-black text-white p-10 relative overflow-hidden group-hover:translate-x-4 transition-transform duration-700">
+            <div className="bg-black text-white p-10 relative overflow-hidden group-hover:translate-x-2 md:group-hover:translate-x-4 transition-transform duration-700">
                <div className="absolute -right-4 -bottom-4 opacity-10 rotate-12">
                 <Target size={120} />
               </div>
               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-400 block mb-6">Objetivo Estratégico</span>
-              <p className="text-xl font-medium leading-snug italic relative z-10">
+              <p className="text-lg md:text-xl font-medium leading-snug italic relative z-10">
                 "{project.reason}"
               </p>
             </div>
 
-            <div className="flex items-center gap-12 pt-6">
+            <div className="flex items-center gap-8 md:gap-12 pt-6">
               <div className="flex flex-col">
                 <span className="text-[9px] font-black uppercase text-gray-300 tracking-widest mb-2">Plazo de Entrega</span>
                 <span className="text-sm font-black border-b-2 border-black pb-1">

@@ -131,28 +131,6 @@ const CronogramaClientePage = () => {
 
   return (
     <div className="bg-white text-black min-h-screen font-body">
-      <style jsx global>{`
-          .swiss-grid {
-            display: grid;
-            grid-template-columns: 200px 20px 1fr;
-            border-bottom: 1px solid #f0f0f0;
-          }
-          .vertical-line {
-            width: 2px;
-          }
-          .kerning-tight {
-            letter-spacing: -0.05em;
-          }
-          @media (max-width: 768px) {
-              .swiss-grid {
-                  grid-template-columns: 1fr;
-              }
-              .vertical-line,
-              .swiss-grid > div:first-child {
-                  display: none;
-              }
-          }
-      `}</style>
       <Header />
       <main className="px-4 sm:px-6 lg:px-8 py-16">
         <div className="max-w-7xl mx-auto">

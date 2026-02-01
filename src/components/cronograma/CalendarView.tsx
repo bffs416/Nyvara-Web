@@ -39,7 +39,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({ projects, onEditProject, on
   return (
     <div className="border-t border-black animate-in fade-in duration-500">
       <div className="flex justify-between items-center py-8">
-        <h2 className="text-4xl font-black uppercase kerning-tight tracking-tighter">
+        <h2 className="text-4xl font-black uppercase tracking-tighter">
           {monthName} <span className="text-gray-300 italic">{year}</span>
         </h2>
         <div className="flex gap-4">
