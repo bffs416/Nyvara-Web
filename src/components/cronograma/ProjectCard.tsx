@@ -54,7 +54,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
       </div>
 
       {/* Col 3: Contenido Visual y Texto */}
-      <div className="py-20 pb-32 border-b border-gray-100">
+      <div className="py-20 pl-8 pb-32 border-b border-gray-100">
         <div className="flex flex-col xl:flex-row gap-16 items-start">
           
           <div className="w-full xl:w-[450px] flex-shrink-0">
