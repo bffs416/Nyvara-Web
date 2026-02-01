@@ -79,13 +79,14 @@ const CalendarView: React.FC<CalendarViewProps> = ({ projects, onEditProject, on
                 
                 <div className="flex flex-col gap-1.5 flex-1 overflow-visible">
                   {dayProjects.map(p => (
-                    <div 
-                      key={p.id} 
-                      className="group/item text-[8px] font-black uppercase p-2 bg-black text-white kerning-wide flex items-center justify-between gap-1 shadow-sm hover:bg-blue-600 transition-colors"
+                    <div
+                      key={p.id}
+                      title={p.title}
+                      className="group/item cursor-pointer rounded-sm text-[10px] font-bold p-1.5 bg-black text-white flex items-center justify-between gap-1 shadow-sm hover:bg-blue-600 transition-colors"
                     >
                       <span className="truncate flex-1">{p.title}</span>
                       <div className="flex gap-1 opacity-0 group-hover/item:opacity-100 transition-opacity">
-                        <button 
+                        <button
                           onClick={(e) => {
                             e.stopPropagation();
                             onEditProject?.(p);
@@ -95,7 +96,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({ projects, onEditProject, on
                         >
                           <Edit2 size={10} />
                         </button>
-                        <button 
+                        <button
                           onClick={(e) => {
                             e.stopPropagation();
                             onDeleteProject?.(p.id);
