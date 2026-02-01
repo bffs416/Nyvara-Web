@@ -112,3 +112,16 @@ export const briefFormSchema = z.object({
     references: z.string().optional(),
     otherFormat: z.string().optional(),
 });
+
+const projectSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  description: z.string(),
+  reason: z.string(),
+  imageUrl: z.string().optional(),
+  dueDate: z.string(),
+  createdAt: z.string(),
+  status: z.enum(['pending', 'completed', 'archived', 'urgent']),
+});
+
+export const projectArraySchema = z.array(projectSchema);

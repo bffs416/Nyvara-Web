@@ -155,7 +155,8 @@ const CronogramaClientePage = () => {
 
   const executeExport = () => {
     try {
-        const dataStr = JSON.stringify(projects, null, 2);
+        const projectsToExport = projects.map(({ imageUrl, ...rest }) => rest);
+        const dataStr = JSON.stringify(projectsToExport, null, 2);
         const blob = new Blob([dataStr], { type: "text/plain;charset=utf-8" });
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
@@ -188,7 +189,11 @@ const CronogramaClientePage = () => {
             }
 
             if (window.confirm("¿Estás seguro de que quieres reemplazar el cronograma actual con los datos del archivo? Esta acción no se puede deshacer.")) {
-                setProjects(validation.data);
+                const projectsWithImages = validation.data.map(p => ({
+                  ...p,
+                  imageUrl: p.imageUrl || `https://picsum.photos/seed/${p.id}/800/600`,
+                }));
+                setProjects(projectsWithImages);
             }
 
         } catch (error) {
