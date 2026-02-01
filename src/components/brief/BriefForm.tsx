@@ -38,12 +38,12 @@ type BriefResult = {
 };
 
 const SectionHeader = ({ step, title }: { step: string; title:string }) => (
-    <div className="flex items-center gap-5 mb-8 pb-4 border-b border-secondary">
-      <div className="font-headline text-3xl text-accent italic relative pr-5">
+    <div className="flex items-center gap-5 mb-8 pb-4 border-b border-gray-300">
+      <div className="font-headline text-3xl text-indigo-500 italic relative pr-5">
         {step}
-        <div className="absolute right-0 top-1/4 h-1/2 w-px bg-accent/60"></div>
+        <div className="absolute right-0 top-1/4 h-1/2 w-px bg-indigo-500/60"></div>
       </div>
-      <h2 className="text-lg font-semibold tracking-wider uppercase text-primary">
+      <h2 className="text-lg font-semibold tracking-wider uppercase text-blue-500">
         {title}
       </h2>
     </div>
@@ -84,7 +84,9 @@ export function BriefForm() {
       const canvas = await html2canvas(formElement, {
         scale: 2, 
         useCORS: true,
-        backgroundColor: '#0A0F1E' // Matching dark theme background
+        backgroundColor: '#ffffff',
+        height: formElement.scrollHeight,
+        windowHeight: formElement.scrollHeight
       });
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF({
@@ -99,7 +101,7 @@ export function BriefForm() {
       toast({
         title: "PDF Generado",
         description: "El PDF del brief ha sido descargado.",
-        className: "bg-primary text-primary-foreground"
+        className: "bg-blue-500 text-white"
       });
     } catch (error) {
       console.error("Error generating PDF:", error);
@@ -154,7 +156,7 @@ TAGS: ${result.tags.join(', ')}
     toast({
       title: "COPIADO AL PORTAPAPELES",
       description: "El resumen del brief ha sido copiado como texto.",
-      className: "bg-primary text-primary-foreground"
+      className: "bg-blue-500 text-white"
     });
   };
 
@@ -174,25 +176,25 @@ TAGS: ${result.tags.join(', ')}
     toast({
       title: "JSON COPIADO",
       description: "Los datos del protocolo han sido copiados en formato JSON.",
-      className: "bg-primary text-primary-foreground"
+      className: "bg-blue-500 text-white"
     });
   };
 
   return (
     <>
-    <Card className="shadow-lg border-accent/20 bg-transparent border-none shadow-none">
+    <Card className="shadow-none border-none bg-transparent">
       <CardContent className="p-1">
         <Form {...form}>
-          <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="space-y-12">
+          <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="space-y-12 bg-white text-black">
             
             <div>
               <SectionHeader step="01" title="Identificación del Cliente" />
               <div className="grid md:grid-cols-2 gap-6">
                 <FormField control={form.control} name="clientName" render={({ field }) => (
-                  <FormItem><FormLabel>Nombre del Cliente</FormLabel><FormControl><Input placeholder="Nombre de la empresa o médico" {...field} /></FormControl><FormMessage /></FormItem>
+                  <FormItem><FormLabel>Nombre del Cliente</FormLabel><FormControl><Input className="bg-gray-100 border-gray-300" placeholder="Nombre de la empresa o médico" {...field} /></FormControl><FormMessage /></FormItem>
                 )}/>
                 <FormField control={form.control} name="consecutive" render={({ field }) => (
-                  <FormItem><FormLabel>Consecutivo Interno</FormLabel><FormControl><Input placeholder="Ej: FVNY-001" {...field} /></FormControl><FormMessage /></FormItem>
+                  <FormItem><FormLabel>Consecutivo Interno</FormLabel><FormControl><Input className="bg-gray-100 border-gray-300" placeholder="Ej: FVNY-001" {...field} /></FormControl><FormMessage /></FormItem>
                 )}/>
               </div>
             </div>
@@ -201,10 +203,10 @@ TAGS: ${result.tags.join(', ')}
               <SectionHeader step="02" title="Contexto y Tiempos" />
               <div className="grid md:grid-cols-2 gap-6">
                  <FormField control={form.control} name="projectName" render={({ field }) => (
-                  <FormItem><FormLabel>Nombre de la Pieza</FormLabel><FormControl><Input placeholder="Ej: Campaña Mensual" {...field} /></FormControl><FormMessage /></FormItem>
+                  <FormItem><FormLabel>Nombre de la Pieza</FormLabel><FormControl><Input className="bg-gray-100 border-gray-300" placeholder="Ej: Campaña Mensual" {...field} /></FormControl><FormMessage /></FormItem>
                 )}/>
                 <FormField control={form.control} name="deadline" render={({ field }) => (
-                  <FormItem><FormLabel>Fecha Límite</FormLabel><FormControl><Input type="date" {...field} /></FormControl><FormMessage /></FormItem>
+                  <FormItem><FormLabel>Fecha Límite</FormLabel><FormControl><Input type="date" className="bg-gray-100 border-gray-300" {...field} /></FormControl><FormMessage /></FormItem>
                 )}/>
               </div>
             </div>
@@ -215,7 +217,7 @@ TAGS: ${result.tags.join(', ')}
                 <FormField control={form.control} name="format" render={({ field }) => (
                   <FormItem><FormLabel>Formato Requerido</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl><SelectTrigger><SelectValue placeholder="Seleccione un formato" /></SelectTrigger></FormControl>
+                      <FormControl><SelectTrigger className="bg-gray-100 border-gray-300"><SelectValue placeholder="Seleccione un formato" /></SelectTrigger></FormControl>
                       <SelectContent>
                         <SelectItem value="Post IG/FB (1080x1080)">Post Cuadrado (1080x1080)</SelectItem>
                         <SelectItem value="Stories / Reel (1080x1920)">Story / Reel (1080x1920)</SelectItem>
@@ -242,7 +244,7 @@ TAGS: ${result.tags.join(', ')}
                 <FormField control={form.control} name="goal" render={({ field }) => (
                   <FormItem><FormLabel>Objetivo Estratégico</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
-                     <FormControl><SelectTrigger><SelectValue placeholder="Seleccione un objetivo" /></SelectTrigger></FormControl>
+                     <FormControl><SelectTrigger className="bg-gray-100 border-gray-300"><SelectValue placeholder="Seleccione un objetivo" /></SelectTrigger></FormControl>
                       <SelectContent>
                         <SelectItem value="Ventas">Ventas Directas</SelectItem>
                         <SelectItem value="Contenido Educativo">Contenido Educativo</SelectItem>
@@ -259,7 +261,7 @@ TAGS: ${result.tags.join(', ')}
                     <FormItem>
                       <FormLabel>Especifique el formato</FormLabel>
                       <FormControl>
-                        <Input placeholder="Describa el formato requerido" {...field} />
+                        <Input className="bg-gray-100 border-gray-300" placeholder="Describa el formato requerido" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -272,23 +274,23 @@ TAGS: ${result.tags.join(', ')}
               <SectionHeader step="04" title="Contenido Estructural" />
               <div className="space-y-6">
                  <FormField control={form.control} name="headline" render={({ field }) => (
-                  <FormItem><FormLabel>Titular Principal</FormLabel><FormControl><Input placeholder="Frase destacada" {...field} /></FormControl><FormMessage /></FormItem>
+                  <FormItem><FormLabel>Titular Principal</FormLabel><FormControl><Input className="bg-gray-100 border-gray-300" placeholder="Frase destacada" {...field} /></FormControl><FormMessage /></FormItem>
                 )}/>
                 <FormField control={form.control} name="bodyText" render={({ field }) => (
-                  <FormItem><FormLabel>Información Detallada</FormLabel><FormControl><Textarea placeholder="Texto secundario, beneficios o datos técnicos..." {...field} /></FormControl><FormMessage /></FormItem>
+                  <FormItem><FormLabel>Información Detallada</FormLabel><FormControl><Textarea className="bg-gray-100 border-gray-300" placeholder="Texto secundario, beneficios o datos técnicos..." {...field} /></FormControl><FormMessage /></FormItem>
                 )}/>
                 <div className="grid md:grid-cols-2 gap-6">
                    <FormField control={form.control} name="cta" render={({ field }) => (
-                    <FormItem><FormLabel>Llamado a la Acción (CTA)</FormLabel><FormControl><Input placeholder="Ej: Contáctanos aquí" {...field} /></FormControl><FormMessage /></FormItem>
+                    <FormItem><FormLabel>Llamado a la Acción (CTA)</FormLabel><FormControl><Input className="bg-gray-100 border-gray-300" placeholder="Ej: Contáctanos aquí" {...field} /></FormControl><FormMessage /></FormItem>
                   )}/>
                   <FormField control={form.control} name="references" render={({ field }) => (
-                    <FormItem><FormLabel>Referencias Visuales</FormLabel><FormControl><Input placeholder="Links o ideas visuales" {...field} /></FormControl><FormMessage /></FormItem>
+                    <FormItem><FormLabel>Referencias Visuales</FormLabel><FormControl><Input className="bg-gray-100 border-gray-300" placeholder="Links o ideas visuales" {...field} /></FormControl><FormMessage /></FormItem>
                   )}/>
                 </div>
               </div>
             </div>
 
-            <div className="bg-secondary/80 border-l-4 border-accent p-5 rounded-md text-sm text-foreground/80">
+            <div className="bg-blue-50 border-l-4 border-blue-500 p-5 rounded-md text-sm text-blue-900">
               <strong>Normas de Servicio:</strong> Toda solicitud formal procesada bajo este protocolo incluye hasta <strong>dos (2) tandas de revisión</strong>. Asegúrese de incluir toda la información técnica necesaria para evitar cargos adicionales por modificaciones fuera de alcance.
             </div>
 
@@ -296,7 +298,7 @@ TAGS: ${result.tags.join(', ')}
                <Button 
                 type="submit" 
                 disabled={isPending} 
-                className="w-auto h-12 px-8 text-xs font-bold uppercase tracking-widest bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground transition-all duration-300 transform hover:-translate-y-0.5"
+                className="w-auto h-12 px-8 text-xs font-bold uppercase tracking-widest bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 transform hover:-translate-y-0.5"
               >
                 {isPending ? <Loader2 className="animate-spin" /> : "Generar Registro de Envío"}
               </Button>
@@ -305,12 +307,12 @@ TAGS: ${result.tags.join(', ')}
                 variant="outline"
                 onClick={generatePdf} 
                 disabled={isPending || !form.formState.isValid}
-                className="w-auto h-12 px-8 text-xs font-bold uppercase tracking-widest border-accent text-accent hover:bg-accent/10"
+                className="w-auto h-12 px-8 text-xs font-bold uppercase tracking-widest border-blue-500 text-blue-500 hover:bg-blue-500/10"
               >
                 <FileDown className="mr-2 h-4 w-4"/>
                 Exportar PDF
               </Button>
-              <Button type="reset" variant="outline" onClick={() => {form.reset(); setResult(null); setError(null);}} className="h-12 px-8 text-xs uppercase tracking-widest ml-auto">
+              <Button type="reset" variant="outline" onClick={() => {form.reset(); setResult(null); setError(null);}} className="h-12 px-8 text-xs uppercase tracking-widest ml-auto border-gray-300 text-gray-700 hover:bg-gray-100">
                 Limpiar
               </Button>
             </div>
@@ -320,35 +322,35 @@ TAGS: ${result.tags.join(', ')}
     </Card>
 
     {result && (
-        <Card className="shadow-lg border-accent/20 animate-in fade-in slide-in-from-bottom-5 duration-500 mt-12 bg-transparent border-none shadow-none">
-            <CardContent className="p-1">
+        <Card className="bg-gray-50 text-black shadow-lg border-gray-200 animate-in fade-in slide-in-from-bottom-5 duration-500 mt-12">
+            <CardContent className="p-10">
                 <SectionHeader step="05" title="Resumen Generado" />
 
                 <div className="mb-8 space-y-4">
-                  <h3 className="font-bold text-primary flex items-center gap-2 text-lg"><Sparkles className="text-accent"/> Análisis con IA</h3>
+                  <h3 className="font-bold text-blue-500 flex items-center gap-2 text-lg"><Sparkles className="text-indigo-500"/> Análisis con IA</h3>
                   <div className="flex flex-col gap-3">
-                    <p><span className="font-semibold text-muted-foreground mr-2">Sector Identificado:</span> <Badge variant="outline" className="font-semibold border-accent text-accent">{result.sector}</Badge></p>
+                    <p><span className="font-semibold text-gray-500 mr-2">Sector Identificado:</span> <Badge variant="outline" className="font-semibold border-blue-500 text-blue-500">{result.sector}</Badge></p>
                     <div className="flex items-start">
-                      <span className="font-semibold text-muted-foreground mt-1 mr-2">Tags Sugeridos:</span>
+                      <span className="font-semibold text-gray-500 mt-1 mr-2">Tags Sugeridos:</span>
                       <div className="flex flex-wrap gap-2">
-                        {result.tags.map(tag => <Badge key={tag} variant="secondary" className="font-medium bg-secondary text-primary">{tag}</Badge>)}
+                        {result.tags.map(tag => <Badge key={tag} variant="secondary" className="font-medium bg-gray-200 text-gray-800">{tag}</Badge>)}
                       </div>
                     </div>
                   </div>
                 </div>
 
                 <div className="relative group">
-                  <div className="bg-zinc-100 dark:bg-zinc-900 p-8 rounded-md font-code text-sm text-foreground/90 whitespace-pre-wrap border border-accent/10 shadow-inner">
+                  <div className="bg-gray-100 p-8 rounded-md font-code text-sm text-gray-800 whitespace-pre-wrap border border-gray-200 shadow-inner">
                       {result.briefText}
                   </div>
                 </div>
 
                 <div className="grid sm:grid-cols-2 gap-4 mt-8">
-                  <Button onClick={copyBrief} className="h-12 text-xs font-bold uppercase tracking-widest bg-primary hover:bg-accent transition-all">
+                  <Button onClick={copyBrief} className="h-12 text-xs font-bold uppercase tracking-widest bg-blue-500 text-white hover:bg-blue-600 transition-all">
                       <Copy className="mr-2 h-4 w-4"/>
                       Copiar Texto Plano
                   </Button>
-                  <Button onClick={copyJson} variant="outline" className="h-12 text-xs font-bold uppercase tracking-widest border-accent text-accent hover:bg-accent/10">
+                  <Button onClick={copyJson} variant="outline" className="h-12 text-xs font-bold uppercase tracking-widest border-blue-500 text-blue-500 hover:bg-blue-500/10">
                       <FileJson className="mr-2 h-4 w-4"/>
                       Copiar como JSON
                   </Button>

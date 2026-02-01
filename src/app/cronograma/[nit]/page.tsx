@@ -157,9 +157,9 @@ const CronogramaClientePage = () => {
                             Nuevo Brief
                         </button>
                     </DialogTrigger>
-                    <DialogContent className="max-w-4xl h-[90vh] bg-background border-border text-foreground">
+                    <DialogContent className="max-w-4xl h-[90vh] bg-white text-black">
                         <DialogHeader>
-                            <DialogTitle className="text-2xl font-bold text-primary">Protocolo de Registro de Activos Creativos</DialogTitle>
+                            <DialogTitle className="text-2xl font-bold text-gray-900">Protocolo de Registro de Activos Creativos</DialogTitle>
                         </DialogHeader>
                         <ScrollArea className="h-full pr-6">
                           <BriefForm />
