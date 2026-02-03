@@ -97,7 +97,7 @@
 }
 
 .badge {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-jetbrains), monospace;
     font-size: 12px;
     color: hsl(var(--accent));
     text-transform: uppercase;
@@ -388,7 +388,7 @@ h1 {
     background-color: var(--brut-bg);
     background-image: radial-gradient(var(--brut-dark) 1px, transparent 0);
     background-size: 30px 30px;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-space), sans-serif;
     color: var(--brut-dark);
     line-height: 1.4;
     padding: 40px 20px;
@@ -415,7 +415,7 @@ h1 {
 }
 
 .brutalist-theme .brut-h1 {
-    font-family: 'Archivo Black', sans-serif;
+    font-family: var(--font-archivo), sans-serif;
     font-size: 4rem;
     text-transform: uppercase;
     line-height: 0.9;
@@ -586,7 +586,7 @@ h1 {
 }
 
 .brutalist-theme .btn {
-    font-family: 'Archivo Black', sans-serif;
+    font-family: var(--font-archivo), sans-serif;
     text-transform: uppercase;
     padding: 15px 40px;
     border: var(--brut-border-width) solid var(--brut-dark);
@@ -648,7 +648,7 @@ h1 {
 }
 .brutalist-theme .slider-rating {
     text-align: center;
-    font-family: 'Archivo Black', sans-serif;
+    font-family: var(--font-archivo), sans-serif;
     font-size: 2rem;
     margin-top: 20px;
     color: var(--brut-accent);

@@ -1,4 +1,4 @@
-import type {Config} from 'tailwindcss';
+import type { Config } from 'tailwindcss';
 
 export default {
   darkMode: ['class'],
@@ -17,9 +17,11 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['Inter', 'sans-serif'],
-        headline: ['JetBrains Mono', 'monospace'],
-        code: ['JetBrains Mono', 'monospace'],
+        body: ['var(--font-inter)', 'sans-serif'],
+        headline: ['var(--font-jetbrains)', 'monospace'],
+        code: ['var(--font-jetbrains)', 'monospace'],
+        brutalist: ['var(--font-archivo)', 'sans-serif'],
+        grotesk: ['var(--font-space)', 'sans-serif'],
       },
       colors: {
         background: 'hsl(var(--background))',
@@ -100,8 +102,8 @@ export default {
           to: { transform: 'translateX(calc(-100% - var(--gap)))' },
         },
         'marquee-reverse': {
-            from: { transform: 'translateX(calc(-100% - var(--gap)))' },
-            to: { transform: 'translateX(0)' },
+          from: { transform: 'translateX(calc(-100% - var(--gap)))' },
+          to: { transform: 'translateX(0)' },
         },
       },
       animation: {

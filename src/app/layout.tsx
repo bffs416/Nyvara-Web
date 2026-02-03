@@ -1,8 +1,34 @@
-import type {Metadata} from 'next';
+import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 import { ClientProviders } from '@/components/layout/client-providers';
 import { Analytics } from '@vercel/analytics/react';
+import { Inter, JetBrains_Mono, Space_Grotesk, Archivo_Black } from 'next/font/google';
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-jetbrains',
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-space',
+});
+
+const archivoBlack = Archivo_Black({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-archivo',
+});
 
 export const metadata: Metadata = {
   title: {
@@ -23,13 +49,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="dark">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet" />
-      </head>
-      <body className="font-body bg-background text-foreground antialiased">
+      <body className={`${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} ${archivoBlack.variable} font-body bg-background text-foreground antialiased`}>
         <div className="cyber-grid"></div>
         <div className="glow-sphere"></div>
         <ClientProviders>
