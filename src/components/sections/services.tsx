@@ -66,33 +66,31 @@ export default function Services() {
               viewport={{ once: true }}
               className="h-full"
             >
-              <Card className="bg-white border-none rounded-[32px] shadow-[0_15px_40px_-15px_rgba(0,0,0,0.08)] hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.15)] transition-all duration-300 h-full flex flex-col hover:-translate-y-2 overflow-hidden">
-                <CardContent className="p-10 h-full flex flex-col">
-                  <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center mb-8 shadow-lg shadow-primary/20">
+              <Card className="bg-white border-none rounded-[40px] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_-10px_rgba(0,0,0,0.12)] transition-all duration-300 h-full flex flex-col hover:-translate-y-2 overflow-hidden px-8 py-10">
+                <CardContent className="p-0 h-full flex flex-col">
+                  <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center mb-8 shadow-md">
                     {service.icon}
                   </div>
 
-                  <h3 className="text-2xl font-bold mb-4 font-headline text-[#1a1a2e]">{service.title}</h3>
-                  <p className="text-[#646480] mb-8 flex-grow leading-relaxed">{service.description}</p>
+                  <h3 className="text-2xl font-bold mb-4 font-headline text-[#1a1a2e] tracking-tight">{service.title}</h3>
+                  <p className="text-[#646480] text-[15px] mb-8 flex-grow leading-relaxed">{service.description}</p>
 
-                  <div className="mb-8 p-6 bg-slate-50/80 rounded-2xl">
-                    <h4 className="text-[#1a1a2e] text-xs font-bold uppercase tracking-wider mb-4 opacity-80">Áreas Clave:</h4>
-                    <ul className="space-y-3">
+                  <div className="mb-8">
+                    <h4 className="text-[#1a1a2e] text-[10px] font-extrabold uppercase tracking-widest mb-4 opacity-80">ÁREAS CLAVE:</h4>
+                    <ul className="space-y-2">
                       {service.features.map((feature, idx) => (
-                        <li key={idx} className="text-[#5a5a75] flex items-center text-sm font-medium">
-                          <div className="w-1.5 h-1.5 bg-primary rounded-full mr-3 shadow-[0_0_8px_rgba(255,214,0,0.6)]"></div>
+                        <li key={idx} className="text-[#5a5a75] flex items-center text-[13px] font-semibold">
+                          <div className="w-1.5 h-1.5 bg-primary rounded-full mr-2.5"></div>
                           {feature}
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <Button asChild className="w-full mt-auto bg-white hover:bg-slate-50 text-[#1a1a2e] border border-slate-100 h-auto py-5 px-6 rounded-full justify-between group shadow-sm hover:shadow-md transition-all duration-300" variant="ghost">
+                  <Button asChild className="w-full mt-auto bg-slate-50 hover:bg-white text-[#1a1a2e] border border-slate-200 h-auto py-4 px-6 rounded-full justify-between group shadow-sm hover:shadow-md transition-all duration-300" variant="ghost">
                     <Link href={service.link}>
-                      <span className="font-bold text-sm">Descubrir más sobre {service.title.split(' ')[0]}</span>
-                      <div className="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-primary/20 flex items-center justify-center transition-colors">
-                        <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                      </div>
+                      <span className="font-bold text-xs tracking-wide">Descubrir más sobre {service.title.split(' ')[0]}</span>
+                      <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform opacity-70" />
                     </Link>
                   </Button>
 
