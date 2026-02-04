@@ -37,3 +37,24 @@ export async function fetchProjects(nit: string): Promise<Project[]> {
         return [];
     }
 }
+
+export async function updateProjectStatus(id: string, status: 'pending' | 'completed' | 'archived' | 'urgent'): Promise<boolean> {
+    try {
+        const supabase = createClient();
+
+        const { error } = await supabase
+            .from('projects')
+            .update({ status })
+            .eq('id', id);
+
+        if (error) {
+            console.error('Error updating project status in Supabase:', error);
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        console.error('Unexpected error updating project status:', error);
+        return false;
+    }
+}

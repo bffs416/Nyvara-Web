@@ -11,7 +11,7 @@ import ProjectForm from '@/components/cronograma/ProjectForm';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { clients } from '@/lib/cronogramas';
-import { fetchProjects } from '@/app/cronograma/actions';
+import { fetchProjects, updateProjectStatus } from '@/app/cronograma/actions';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { BriefForm } from '@/components/brief/BriefForm';
@@ -136,6 +136,22 @@ const CronogramaClientePage = () => {
 
   const handleRestoreProject = (id: string) => {
     setProjects(projects.map(p => p.id === id ? { ...p, status: 'pending' } : p));
+  };
+
+  const handleToggleComplete = async (id: string, currentStatus: string) => {
+    const newStatus = currentStatus === 'completed' ? 'pending' : 'completed';
+
+    // Optimistic update
+    setProjects(projects.map(p => p.id === id ? { ...p, status: newStatus as any } : p));
+
+    // Server update
+    const success = await updateProjectStatus(id, newStatus);
+
+    if (!success) {
+      // Revert if failed
+      setProjects(projects.map(p => p.id === id ? { ...p, status: currentStatus as any } : p));
+      console.error("Failed to update status");
+    }
   };
 
   const requestDeleteProject = (id: string) => {
@@ -360,6 +376,7 @@ const CronogramaClientePage = () => {
                   onArchive={handleArchiveProject}
                   onEdit={openFormForEdit}
                   onDelete={requestDeleteProject}
+                  onToggleComplete={handleToggleComplete}
                 />
               ))}
 
