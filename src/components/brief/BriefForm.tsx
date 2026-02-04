@@ -34,22 +34,24 @@ import { Card, CardContent } from "@/components/ui/card";
 interface BriefFormProps {
   onBriefCreated: (project: Project) => void;
   onClose: () => void;
+  nit?: string;
+  clientName?: string;
 }
 
-const SectionHeader = ({ step, title }: { step: string; title:string }) => (
-    <div className="flex items-center gap-5 mb-8 pb-4 border-b border-gray-300">
-      <div className="font-headline text-3xl text-indigo-500 italic relative pr-5">
-        {step}
-        <div className="absolute right-0 top-1/4 h-1/2 w-px bg-indigo-500/60"></div>
-      </div>
-      <h2 className="text-lg font-semibold tracking-wider uppercase text-blue-500">
-        {title}
-      </h2>
+const SectionHeader = ({ step, title }: { step: string; title: string }) => (
+  <div className="flex items-center gap-5 mb-8 pb-4 border-b border-gray-300">
+    <div className="font-headline text-3xl text-indigo-500 italic relative pr-5">
+      {step}
+      <div className="absolute right-0 top-1/4 h-1/2 w-px bg-indigo-500/60"></div>
     </div>
-  );
+    <h2 className="text-lg font-semibold tracking-wider uppercase text-blue-500">
+      {title}
+    </h2>
+  </div>
+);
 
 
-export function BriefForm({ onBriefCreated, onClose }: BriefFormProps) {
+export function BriefForm({ onBriefCreated, onClose, nit, clientName }: BriefFormProps) {
   const [isPending, startTransition] = useTransition();
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
@@ -57,7 +59,7 @@ export function BriefForm({ onBriefCreated, onClose }: BriefFormProps) {
   const form = useForm<BriefFormValues>({
     resolver: zodResolver(briefFormSchema),
     defaultValues: {
-      clientName: "",
+      clientName: clientName || "",
       consecutive: "FVNY-",
       projectName: "",
       deadline: "",
@@ -68,18 +70,19 @@ export function BriefForm({ onBriefCreated, onClose }: BriefFormProps) {
       cta: "",
       references: "",
       otherFormat: "",
+      nit: nit || "",
     },
   });
 
   const watchedFormat = form.watch("format");
-  
+
   const generatePdf = async () => {
     const formElement = formRef.current;
     if (!formElement) return;
 
     try {
       const canvas = await html2canvas(formElement, {
-        scale: 2, 
+        scale: 2,
         useCORS: true,
         backgroundColor: '#ffffff',
         height: formElement.scrollHeight,
@@ -91,7 +94,7 @@ export function BriefForm({ onBriefCreated, onClose }: BriefFormProps) {
         unit: 'px',
         format: [canvas.width, canvas.height]
       });
-      
+
       pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
       const consecutive = form.getValues("consecutive") || "brief";
       pdf.save(`brief-${consecutive}.pdf`);
@@ -146,28 +149,28 @@ export function BriefForm({ onBriefCreated, onClose }: BriefFormProps) {
       <CardContent className="p-1">
         <Form {...form}>
           <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="space-y-12 bg-white text-black">
-            
+
             <div>
               <SectionHeader step="01" title="Identificación del Cliente" />
               <div className="grid md:grid-cols-2 gap-6">
                 <FormField control={form.control} name="clientName" render={({ field }) => (
                   <FormItem><FormLabel>Nombre del Cliente</FormLabel><FormControl><Input className="bg-gray-100 border-gray-300" placeholder="Nombre de la empresa o médico" {...field} /></FormControl><FormMessage /></FormItem>
-                )}/>
+                )} />
                 <FormField control={form.control} name="consecutive" render={({ field }) => (
                   <FormItem><FormLabel>Consecutivo Interno</FormLabel><FormControl><Input className="bg-gray-100 border-gray-300" placeholder="Ej: FVNY-001" {...field} /></FormControl><FormMessage /></FormItem>
-                )}/>
+                )} />
               </div>
             </div>
 
             <div>
               <SectionHeader step="02" title="Contexto y Tiempos" />
               <div className="grid md:grid-cols-2 gap-6">
-                 <FormField control={form.control} name="projectName" render={({ field }) => (
+                <FormField control={form.control} name="projectName" render={({ field }) => (
                   <FormItem><FormLabel>Nombre de la Pieza (Título del Proyecto)</FormLabel><FormControl><Input className="bg-gray-100 border-gray-300" placeholder="Ej: Campaña Mensual" {...field} /></FormControl><FormMessage /></FormItem>
-                )}/>
+                )} />
                 <FormField control={form.control} name="deadline" render={({ field }) => (
                   <FormItem><FormLabel>Fecha Límite</FormLabel><FormControl><Input type="date" className="bg-gray-100 border-gray-300" {...field} /></FormControl><FormMessage /></FormItem>
-                )}/>
+                )} />
               </div>
             </div>
 
@@ -199,12 +202,12 @@ export function BriefForm({ onBriefCreated, onClose }: BriefFormProps) {
                         <SelectItem value="Otro">Otro</SelectItem>
                       </SelectContent>
                     </Select>
-                  <FormMessage /></FormItem>
-                )}/>
+                    <FormMessage /></FormItem>
+                )} />
                 <FormField control={form.control} name="goal" render={({ field }) => (
                   <FormItem><FormLabel>Objetivo Estratégico</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
-                     <FormControl><SelectTrigger className="bg-gray-100 border-gray-300"><SelectValue placeholder="Seleccione un objetivo" /></SelectTrigger></FormControl>
+                      <FormControl><SelectTrigger className="bg-gray-100 border-gray-300"><SelectValue placeholder="Seleccione un objetivo" /></SelectTrigger></FormControl>
                       <SelectContent>
                         <SelectItem value="Ventas">Ventas Directas</SelectItem>
                         <SelectItem value="Contenido Educativo">Contenido Educativo</SelectItem>
@@ -212,10 +215,10 @@ export function BriefForm({ onBriefCreated, onClose }: BriefFormProps) {
                         <SelectItem value="Lanzamiento">Lanzamiento</SelectItem>
                       </SelectContent>
                     </Select>
-                  <FormMessage /></FormItem>
-                )}/>
+                    <FormMessage /></FormItem>
+                )} />
               </div>
-               {watchedFormat === "Otro" && (
+              {watchedFormat === "Otro" && (
                 <div className="mt-6">
                   <FormField control={form.control} name="otherFormat" render={({ field }) => (
                     <FormItem>
@@ -225,7 +228,7 @@ export function BriefForm({ onBriefCreated, onClose }: BriefFormProps) {
                       </FormControl>
                       <FormMessage />
                     </FormItem>
-                  )}/>
+                  )} />
                 </div>
               )}
             </div>
@@ -233,19 +236,19 @@ export function BriefForm({ onBriefCreated, onClose }: BriefFormProps) {
             <div>
               <SectionHeader step="04" title="Contenido Estructural" />
               <div className="space-y-6">
-                 <FormField control={form.control} name="headline" render={({ field }) => (
+                <FormField control={form.control} name="headline" render={({ field }) => (
                   <FormItem><FormLabel>Titular Principal</FormLabel><FormControl><Input className="bg-gray-100 border-gray-300" placeholder="Frase destacada" {...field} /></FormControl><FormMessage /></FormItem>
-                )}/>
+                )} />
                 <FormField control={form.control} name="bodyText" render={({ field }) => (
                   <FormItem><FormLabel>Información Detallada (Memoria Descriptiva)</FormLabel><FormControl><Textarea className="bg-gray-100 border-gray-300" placeholder="Texto secundario, beneficios o datos técnicos..." {...field} /></FormControl><FormMessage /></FormItem>
-                )}/>
+                )} />
                 <div className="grid md:grid-cols-2 gap-6">
-                   <FormField control={form.control} name="cta" render={({ field }) => (
+                  <FormField control={form.control} name="cta" render={({ field }) => (
                     <FormItem><FormLabel>Llamado a la Acción (CTA)</FormLabel><FormControl><Input className="bg-gray-100 border-gray-300" placeholder="Ej: Contáctanos aquí" {...field} /></FormControl><FormMessage /></FormItem>
-                  )}/>
+                  )} />
                   <FormField control={form.control} name="references" render={({ field }) => (
                     <FormItem><FormLabel>Referencias Visuales</FormLabel><FormControl><Input className="bg-gray-100 border-gray-300" placeholder="Links o ideas visuales" {...field} /></FormControl><FormMessage /></FormItem>
-                  )}/>
+                  )} />
                 </div>
               </div>
             </div>
@@ -255,21 +258,21 @@ export function BriefForm({ onBriefCreated, onClose }: BriefFormProps) {
             </div>
 
             <div className="flex flex-wrap items-center gap-4">
-               <Button 
-                type="submit" 
-                disabled={isPending} 
+              <Button
+                type="submit"
+                disabled={isPending}
                 className="w-auto h-12 px-8 text-xs font-bold uppercase tracking-widest bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 transform hover:-translate-y-0.5"
               >
                 {isPending ? <Loader2 className="animate-spin" /> : "Crear Proyecto en Cronograma"}
               </Button>
-               <Button 
-                type="button" 
+              <Button
+                type="button"
                 variant="outline"
-                onClick={generatePdf} 
+                onClick={generatePdf}
                 disabled={isPending || !form.formState.isValid}
                 className="w-auto h-12 px-8 text-xs font-bold uppercase tracking-widest border-blue-500 text-blue-500 hover:bg-blue-500/10"
               >
-                <FileDown className="mr-2 h-4 w-4"/>
+                <FileDown className="mr-2 h-4 w-4" />
                 Exportar PDF de Brief
               </Button>
               <Button type="button" variant="outline" onClick={handleReset} className="h-12 px-8 text-xs uppercase tracking-widest ml-auto border-gray-300 text-gray-700 hover:bg-gray-100">

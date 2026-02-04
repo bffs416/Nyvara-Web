@@ -17,8 +17,8 @@ const testimonials = [
   },
   {
     image: PlaceHolderImages.find(img => img.id === 'testimonial-2')!,
-    name: "Juan García",
-    title: "Director de Marketing, EventPros",
+    name: "Felipe Franco",
+    title: "Director de ventas & producto, Hansbiomed Colombia",
     quote: "El evento corporativo que Nyvara organizó para nosotros fue impecable. Cada detalle, desde la logística hasta la experiencia del asistente, se manejó con una precisión increíble.",
     alt: "Retrato de Juan García, Director de Marketing en EventPros",
   },

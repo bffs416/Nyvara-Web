@@ -294,7 +294,12 @@ const CronogramaClientePage = () => {
                       <DialogTitle className="text-2xl font-bold text-gray-900">Protocolo de Registro de Activos Creativos</DialogTitle>
                     </DialogHeader>
                     <ScrollArea className="h-full pr-6">
-                      <BriefForm onBriefCreated={handleBriefCreated} onClose={() => setIsBriefFormOpen(false)} />
+                      <BriefForm
+                        onBriefCreated={handleBriefCreated}
+                        onClose={() => setIsBriefFormOpen(false)}
+                        nit={nit}
+                        clientName={client?.clientName}
+                      />
                     </ScrollArea>
                   </DialogContent>
                 </Dialog>
@@ -307,18 +312,7 @@ const CronogramaClientePage = () => {
               </div>
 
               <div className="flex flex-col gap-2">
-                <button
-                  onClick={() => {
-                    if (window.confirm('¿Quieres reiniciar los datos del cronograma con la configuración del servidor? Se perderán los cambios manuales que no hayas exportado.')) {
-                      localStorage.removeItem(`cronograma_projects_${nit}`);
-                      window.location.reload();
-                    }
-                  }}
-                  className="p-4 border border-black hover:bg-yellow-400 text-black transition-colors"
-                  title="Reiniciar desde Servidor"
-                >
-                  <RotateCcw size={20} />
-                </button>
+
                 <button onClick={() => setView('list')} className={`p-4 border border-black transition-colors ${view === 'list' ? 'bg-black text-white' : 'hover:bg-gray-100'}`} title="Vista de Lista"><LayoutGrid size={20} /></button>
                 <button onClick={() => setView('calendar')} className={`p-4 border border-black transition-colors ${view === 'calendar' ? 'bg-black text-white' : 'hover:bg-gray-100'}`} title="Vista de Calendario"><Calendar size={20} /></button>
                 {view === 'list' && (
