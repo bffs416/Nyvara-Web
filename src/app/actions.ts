@@ -308,9 +308,31 @@ export async function processBriefAction(values: BriefFormValues): Promise<{ suc
         }
       } catch (fsError) {
         console.error("Error writing to cronogramas.json:", fsError);
-        // Continue execution - return success so UI updates even if file write fails (local dev only feature?)
-        // Actually, if this is strict "in the root of the code", we should probably report error if it fails.
-        // But for now, let's log it.
+      }
+
+      // --- SAVE TO SUPABASE ---
+      try {
+        const supabase = createClient();
+        const { error: dbError } = await supabase
+          .from('projects')
+          .insert([{
+            title: newProject.title,
+            description: newProject.description,
+            reason: newProject.reason,
+            image_url: newProject.imageUrl,
+            due_date: newProject.dueDate,
+            status: newProject.status,
+            nit: values.nit,
+            client_name: values.clientName || 'Cliente Web'
+          }]);
+
+        if (dbError) {
+          console.error("Error saving to Supabase:", dbError.message);
+        } else {
+          console.log(`Saved new project to Supabase for client ${values.nit}`);
+        }
+      } catch (dbEx) {
+        console.error("Exception saving to Supabase:", dbEx);
       }
     }
 

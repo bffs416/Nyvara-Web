@@ -11,6 +11,7 @@ import ProjectForm from '@/components/cronograma/ProjectForm';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { clients } from '@/lib/cronogramas';
+import { fetchProjects } from '@/app/cronograma/actions';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { BriefForm } from '@/components/brief/BriefForm';
@@ -62,6 +63,22 @@ const CronogramaClientePage = () => {
           } else {
             loadedProjects = client.projects;
           }
+
+          // --- FETCH FROM SUPABASE ---
+          fetchProjects(nit).then(supabaseProjects => {
+            if (supabaseProjects && supabaseProjects.length > 0) {
+              // Combine local/json projects with Supabase projects
+              // Avoid duplicates based on ID
+              const existingIds = new Set(loadedProjects.map(p => p.id));
+              const newProjects = supabaseProjects.filter(p => !existingIds.has(p.id));
+
+              if (newProjects.length > 0) {
+                const combinedProjects = [...loadedProjects, ...newProjects];
+                combinedProjects.sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime());
+                setProjects(combinedProjects);
+              }
+            }
+          });
         } catch (error) {
           console.error("Failed to load projects from localStorage", error);
           loadedProjects = client.projects;
