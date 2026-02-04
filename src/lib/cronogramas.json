@@ -1,4 +1,3 @@
-
 {
   "clients": [
     {
@@ -10,7 +9,7 @@
           "title": "PDF INFORMATIVO CARACTERISTICAS DE D+ & R+ PARA LOS EJECUTIVOS",
           "description": "Información estilo brochure con características de los productos, en cuanto a sus componentes y beneficios.",
           "reason": "Para que el Equipo tenga claras las características técnicas de material, con el fin de comercializar el producto a los especialista",
-          "imageUrl": "/cronograma/205620.jpg",
+          "imageUrl": "/cronograma/D+.png",
           "dueDate": "2026-01-30",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "urgent"
@@ -20,7 +19,7 @@
           "title": "HISTORIA: CAPACITACIÓN D2D MINT™ & KLARDIE (CALI 2026)",
           "description": "Creación de Flyer Vertical (Formato Historia/Reel) para difusión en WhatsApp y redes sociales, optimizado para móviles. Adaptación de identidad para folletería impresa o posts cuadrados (Feed). Integración de Branding: Fusión de la identidad corporativa de Hansbiomed, MINT™ y Klardie con la marca personal de la Dra. Virginia Escobar, manteniendo coherencia visual y jerarquía de logotipos.",
           "reason": "Maximizar la atracción de nuevos prospectos (médicos estéticos) hacia los talleres educativos de Hansbiomed e impulsar la conversión de ventas inmediata, comunicando visualmente una oferta de valor premium que motive la adquisición de la promoción vigente.",
-          "imageUrl": "/cronograma/478242.jpg",
+          "imageUrl": "/cronograma/HILOS MINT - CALI.png",
           "dueDate": "2026-01-30",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "urgent"
@@ -30,7 +29,7 @@
           "title": "HISTORIA: UPGRADE D+",
           "description": "Mostrar el cambio de la imagen. Mostrar la mayor cantidad de componentes que tienen adicionales. Mostrar un comparativo entre lo que era Dia y la versión mejorada que es D+",
           "reason": "Hacer una visual del Upgrade que tiene D+ vs Dia en comparativa, para que los médicos conozcan el producto y sepan que tiene mejores componentes que sirven para sus procedimientos.",
-          "imageUrl": "/cronograma/1.jpg",
+          "imageUrl": "/cronograma/D+_6.jpg",
           "dueDate": "2026-02-02",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "urgent"
@@ -40,7 +39,7 @@
           "title": "HISTORIA: UPGRADE R+",
           "description": "Mostrar el cambio de la imagen. Mostrar la mayor cantidad de componentes que tienen adicionales. Mostrar un comparativo entre lo que era Dia y la versión mejorada que es R+",
           "reason": "Hacer una visual del Upgrade que tiene R+ vs Dia en comparativa, para que los médicos conozcan el producto y sepan que tiene mejores componentes que sirven para sus procedimientos.",
-          "imageUrl": "/cronograma/895552.jpg",
+          "imageUrl": "/cronograma/R+_6.jpg",
           "dueDate": "2026-02-03",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "urgent"
@@ -50,7 +49,7 @@
           "title": "CARRUSEL INFORMATIVO: KLARDIE D+ (LANZAMIENTO DE PRODUCTO)",
           "description": "Primeras imágenes serían hablar un poco de las características del producto y de la presentación. Las siguientes imágenes del carrusel serían de aplicación del producto.",
           "reason": "Brindar información amplia del nuevo producto a los clientes. ",
-          "imageUrl": "/cronograma/421790.jpg",
+          "imageUrl": "/cronograma/바이알_3.jpg",
           "dueDate": "2026-02-05",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "pending"
@@ -60,7 +59,7 @@
           "title": "CARRUSEL INFORMATIVO: KLARDIE R+ (LANZAMIENTO DE PRODUCTO)",
           "description": "Primeras imágenes serían hablar un poco de las características del producto y de la presentación. Las siguientes imágenes del carrusel serían de aplicación del producto.",
           "reason": "Brindar información amplia del nuevo producto a los clientes. ",
-          "imageUrl": "/cronograma/517116.jpg",
+          "imageUrl": "/cronograma/바이알_2.jpg",
           "dueDate": "2026-02-09",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "pending"
@@ -70,7 +69,7 @@
           "title": "HISTORIA: PRE- CARNAVAL DE BARRANQUILLA",
           "description": "Pieza publicitaria para hacer énfasis al cuidado de la piel antes de las fiestas de Barranquilla que van desde el 14 al 18 de febrero, haciendo conciencia de que las personas deben cuidarse la piel.",
           "reason": "La idea con esto es impulsar la venta del producto Fusi-Ket, que está diseñado para pieles sensibles. Apto específicamente para la promoción del carnaval de Barranquilla, por el cuidado que deben de tener antes la piel y la protección debido a la exposición a los rayos solares. ",
-          "imageUrl": "/cronograma/150255.jpg",
+          "imageUrl": "/cronograma/slidecarna26.jpeg",
           "dueDate": "2026-02-13",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "pending"
@@ -80,7 +79,7 @@
           "title": "HISTORIA: SAN VALENTIN",
           "description": "La idea central es la analogía entre la fusión física del producto y el sentimiento de la fecha de San Valentín.",
           "reason": "Busca transmitir: amor propio, tecnología con propósito, seguridad y respaldo de la marca.",
-          "imageUrl": "/cronograma/064633.jpg",
+          "imageUrl": "/cronograma/images.jpg",
           "dueDate": "2026-02-14",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "pending"
@@ -90,7 +89,7 @@
           "title": "HISTORIA: LION + KLARDIE / PROMOCION",
           "description": "Pieza Publicitaria, para Promocionar el producto de estimulación Capilar e implante capilar, ya que juntos para la practica medica, funcionan mejor.",
           "reason": "El objetivo es brindar la información a los médicos para que asocien la combinación de ambos productos ",
-          "imageUrl": "/cronograma/983180.jpg",
+          "imageUrl": "/cronograma/Lion.jpg",
           "dueDate": "2026-02-17",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "pending"
@@ -100,7 +99,7 @@
           "title": "HISTORIA: CUIDADO POST CARNAVALES",
           "description": "Una pieza publicitaria que haga referencia al evento que hay en Barranquilla del Carnaval, en el cual le digamos al usuario que utilice el producto después de deshidratación, exposición al sol, y aquí tenemos el producto Fusicare",
           "reason": "El objetivo o el propósito básicamente es que los usuarios, población normal que desea cuidarse la piel, conozca el producto Fusicare, que es para pieles sensibles, irritadas, que necesita cuidado post incluso en ambientes que tienen mucho impacto solar.",
-          "imageUrl": "/cronograma/090467.jpg",
+          "imageUrl": "/cronograma/images.png",
           "dueDate": "2026-02-17",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "pending"
@@ -110,7 +109,7 @@
           "title": "VIDEO: PROTOCOLO KLARDIE D+& R+CON MONOFILAMENTO EN CUERO CABELLUDO",
           "description": "Un video desechando el uso combinado de los hilos monofilamento con el bioestimulador KLARDIE. Combinacion de productos.",
           "reason": "Mostrar la efectividad de los dos productos combinados para estimulación capilar.",
-          "imageUrl": "/cronograma/474488.jpg",
+          "imageUrl": "/cronograma/PDO_Threads_for_Hair_Growth1.webp",
           "dueDate": "2026-02-19",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "pending"
@@ -120,7 +119,7 @@
           "title": "VIDEO POTCAST # 3 : SIN HILOS EN LA LENGUA",
           "description": "Video para apoyar el concepto de los hilos tensores, con base en la experiencia de dos médicos expertos en la materia, para desinformar las redes y el concepto de los hilos.",
           "reason": "Generar confianza en los clientes finales y los clientes directos, con el fin de que se incrementen las ventas para Hansbiomed.",
-          "imageUrl": "/cronograma/184466.jpg",
+          "imageUrl": "/cronograma/potcast.png",
           "dueDate": "2026-02-24",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "pending"
@@ -130,7 +129,7 @@
           "title": "HISTORIA: HILOS TENSORES",
           "description": "Generar tanto deseo como confianza para el paciente y médico.",
           "reason": "Desmentificar el procedimiento de hilos tensores, mostrándolo no como una cirugía agresiva, sino como una intervención de alta precisión tecnológica.",
-          "imageUrl": "/cronograma/606687.jpg",
+          "imageUrl": "/cronograma/Hilos.png",
           "dueDate": "2026-02-25",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "pending"

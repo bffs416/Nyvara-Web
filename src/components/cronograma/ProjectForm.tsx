@@ -48,7 +48,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onAdd, onClose, initialData }
         description: result.description,
         reason: result.reason,
       }));
-      
+
       if (!imagePreview && !formData.imageUrl) {
         const fallback = `https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800`;
         setFormData(prev => ({ ...prev, imageUrl: fallback }));
@@ -69,7 +69,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onAdd, onClose, initialData }
         alert("El archivo original es demasiado pesado (Máx 20MB).");
         return;
       }
-      
+
       setIsProcessing(true);
       try {
         const reader = new FileReader();
@@ -81,8 +81,8 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onAdd, onClose, initialData }
           setIsProcessing(false);
         };
         reader.onerror = () => {
-            setIsProcessing(false);
-            alert("No se pudo leer el archivo.");
+          setIsProcessing(false);
+          alert("No se pudo leer el archivo.");
         };
       } catch (err) {
         console.error("Error al procesar imagen:", err);
@@ -137,7 +137,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onAdd, onClose, initialData }
 
         <form onSubmit={handleSubmit} className="p-12 space-y-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            
+
             <div className="col-span-full">
               <label className="block text-[11px] font-black uppercase tracking-widest mb-4">Título del Proyecto</label>
               <div className="relative">
@@ -177,12 +177,17 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onAdd, onClose, initialData }
             <div className="col-span-full border-2 border-black p-8 bg-gray-50">
               <label className="block text-[11px] font-black uppercase tracking-widest mb-6 flex items-center gap-2">
                 <ImageIcon size={14} /> Componente Visual / Multimedia
+                {formData.imageUrl && (
+                  <span className="ml-auto text-blue-600 font-bold lowercase">
+                    {formData.imageUrl.split('/').pop()}
+                  </span>
+                )}
               </label>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                 <div className="space-y-6">
                   <div className="flex flex-col gap-4">
                     <input
-                      type="url"
+                      type="text"
                       placeholder="PEGAR URL DE IMAGEN..."
                       className="w-full px-6 py-4 bg-white border-2 border-black font-bold uppercase text-[10px] outline-none focus:ring-4 focus:ring-blue-100"
                       value={formData.imageUrl.startsWith('data:') ? '' : formData.imageUrl}
@@ -202,22 +207,22 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onAdd, onClose, initialData }
                       {isProcessing ? <Sparkles size={18} className="animate-spin" /> : <Upload size={18} />}
                       {isProcessing ? 'Procesando Activo...' : 'Seleccionar de Equipo'}
                     </button>
-                    <input 
-                      type="file" 
-                      ref={fileInputRef} 
-                      className="hidden" 
-                      accept="image/*" 
-                      onChange={handleFileChange} 
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      className="hidden"
+                      accept="image/*"
+                      onChange={handleFileChange}
                     />
                   </div>
                 </div>
 
                 <div className="aspect-video border-4 border-black bg-white flex items-center justify-center overflow-hidden relative shadow-inner">
                   {imagePreview ? (
-                    <img 
-                      src={imagePreview} 
-                      alt="Preview" 
-                      className="max-w-full max-h-full object-contain p-2" 
+                    <img
+                      src={imagePreview}
+                      alt="Preview"
+                      className="max-w-full max-h-full object-contain p-2"
                     />
                   ) : (
                     <div className="text-gray-200 flex flex-col items-center gap-4">
@@ -226,9 +231,9 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onAdd, onClose, initialData }
                     </div>
                   )}
                   {imagePreview && !isProcessing && (
-                    <button 
+                    <button
                       type="button"
-                      onClick={() => { setImagePreview(null); setFormData(p => ({...p, imageUrl: ''})); }}
+                      onClick={() => { setImagePreview(null); setFormData(p => ({ ...p, imageUrl: '' })); }}
                       className="absolute top-2 right-2 p-1 bg-black text-white hover:bg-red-600 transition-colors"
                     >
                       <X size={16} />

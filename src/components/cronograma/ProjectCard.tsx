@@ -18,7 +18,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
   const quarter = Math.floor((dateObj.getUTCMonth() + 3) / 3);
   const monthName = dateObj.toLocaleString('es-ES', { month: 'short', timeZone: 'UTC' }).toUpperCase();
   const year = dateObj.getUTCFullYear();
-  
+
   const getStatusDisplay = () => {
     if (project.status === 'archived') return { label: 'Archivo', icon: <Archive size={10} />, classes: 'border-gray-200 text-gray-400' };
     if (project.status === 'urgent') return { label: 'Urgente', icon: <AlertCircle size={10} />, classes: 'border-red-600 text-red-600 bg-red-50' };
@@ -31,7 +31,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
 
   return (
     <div className={`group grid grid-cols-1 md:grid-cols-[200px_20px_1fr] transition-all duration-700 border-b border-gray-100 ${isArchived ? 'opacity-50' : 'opacity-100'}`}>
-      
+
       <div className="hidden md:flex py-20 md:text-right flex-col items-end border-r border-transparent pr-4">
         <span className="text-6xl font-black tracking-tighter leading-none transition-all duration-500 group-hover:text-blue-600">
           Q{quarter}
@@ -40,31 +40,29 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
           {monthName}
         </span>
         <span className="text-[10px] font-black uppercase text-gray-300 mt-1 tracking-[0.2em]">{year}</span>
-        
+
         <div className={`mt-8 text-[9px] font-black uppercase tracking-[0.2em] px-4 py-2 border-2 flex items-center gap-2 ${status.classes}`}>
           {status.icon}
           {status.label}
         </div>
       </div>
 
-      
+
       <div className="hidden md:block w-full bg-gray-100 relative">
         <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-0.5 h-full bg-gray-100 group-hover:bg-black transition-colors duration-1000"></div>
         <div className={`absolute top-24 left-1/2 -translate-x-1/2 w-[14px] h-[14px] border-2 border-white z-10 transition-all duration-500 ${isArchived ? 'bg-gray-300' : 'bg-black group-hover:scale-[2] group-hover:bg-blue-600 group-hover:border-0 shadow-xl'}`}></div>
       </div>
 
-      
+
       <div className="py-10 md:py-20 md:pl-8 pb-16 md:pb-24">
         <div className="flex flex-col xl:flex-row gap-12 items-start">
-          
+
           <div className="w-full xl:w-[450px] flex-shrink-0">
-            <div className="relative aspect-[4/3] w-full overflow-hidden border border-black bg-gray-50 shadow-[10px_10px_0px_0px_rgba(0,0,0,0.03)] group-hover:shadow-[20px_20px_0px_0px_rgba(37,99,235,0.08)] transition-all duration-700">
-              <Image 
-                src={project.imageUrl} 
+            <div className="relative w-full overflow-hidden border border-black bg-gray-50 shadow-[10px_10px_0px_0px_rgba(0,0,0,0.03)] group-hover:shadow-[20px_20px_0px_0px_rgba(37,99,235,0.08)] transition-all duration-700">
+              <img
+                src={project.imageUrl}
                 alt={project.title}
-                fill
-                sizes="(max-width: 1280px) 100vw, 450px"
-                className="object-cover transition-transform duration-[2000ms] group-hover:scale-105"
+                className="w-full h-auto block transition-transform duration-[2000ms] group-hover:scale-105"
               />
               <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-sm text-white text-[8px] font-black uppercase tracking-widest px-3 py-1.5 flex items-center gap-2 pointer-events-none">
                 <Layers size={10} />
@@ -81,8 +79,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
               </h3>
               <div className="flex gap-2">
                 {!isArchived && onEdit && (
-                  <button 
-                    onClick={() => onEdit(project)} 
+                  <button
+                    onClick={() => onEdit(project)}
                     title="Editar proyecto"
                     className="p-4 border border-gray-200 hover:bg-black hover:text-white transition-all text-gray-400"
                   >
@@ -95,13 +93,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
                   <button onClick={() => onArchive(project.id)} title="Archivar" className="p-4 border border-gray-200 hover:bg-blue-600 hover:text-white transition-all text-gray-400"><Archive size={20} /></button>
                 )}
                 {onDelete && (
-                <button 
-                  onClick={() => onDelete?.(project.id)} 
-                  title="Eliminar permanentemente"
-                  className="p-4 border border-gray-200 hover:bg-red-600 hover:text-white transition-all text-gray-400"
-                >
-                  <Trash2 size={20} />
-                </button>
+                  <button
+                    onClick={() => onDelete?.(project.id)}
+                    title="Eliminar permanentemente"
+                    className="p-4 border border-gray-200 hover:bg-red-600 hover:text-white transition-all text-gray-400"
+                  >
+                    <Trash2 size={20} />
+                  </button>
                 )}
               </div>
             </div>
@@ -111,7 +109,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
             </p>
 
             <div className="bg-black text-white p-10 relative overflow-hidden md:group-hover:translate-x-4 transition-transform duration-700">
-               <div className="absolute -right-4 -bottom-4 opacity-10 rotate-12">
+              <div className="absolute -right-4 -bottom-4 opacity-10 rotate-12">
                 <Target size={120} />
               </div>
               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-400 block mb-6">Objetivo Estratégico</span>
