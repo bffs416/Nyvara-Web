@@ -87,67 +87,68 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
                     className="p-4 border border-gray-200 hover:bg-black hover:text-white transition-all text-gray-400"
                   >
                     <Edit2 size={20} />
+                  </button>
                 )}
 
-              {!isArchived && onToggleComplete && (
-                <button
-                  onClick={() => onToggleComplete(project.id, project.status)}
-                  title={isCompleted ? "Marcar como pendiente" : "Marcar como completado"}
-                  className={`p-4 border border-gray-200 transition-all ${isCompleted ? 'bg-emerald-600 text-white hover:bg-emerald-700' : 'hover:bg-emerald-600 hover:text-white text-gray-400'}`}
-                >
-                  <CheckCircle size={20} />
-                </button>
-              )}
+                {!isArchived && onToggleComplete && (
+                  <button
+                    onClick={() => onToggleComplete(project.id, project.status)}
+                    title={isCompleted ? "Marcar como pendiente" : "Marcar como completado"}
+                    className={`p-4 border border-gray-200 transition-all ${isCompleted ? 'bg-emerald-600 text-white hover:bg-emerald-700' : 'hover:bg-emerald-600 hover:text-white text-gray-400'}`}
+                  >
+                    <CheckCircle size={20} />
+                  </button>
+                )}
 
-              {isArchived ? (
-                <button onClick={() => onRestore?.(project.id)} title="Restaurar" className="p-4 border border-gray-200 hover:bg-black hover:text-white transition-all"><RotateCcw size={20} /></button>
-              ) : (
-                <button onClick={() => onArchive(project.id)} title="Archivar" className="p-4 border border-gray-200 hover:bg-blue-600 hover:text-white transition-all text-gray-400"><Archive size={20} /></button>
-              )}
-              {onDelete && (
-                <button
-                  onClick={() => onDelete?.(project.id)}
-                  title="Eliminar permanentemente"
-                  className="p-4 border border-gray-200 hover:bg-red-600 hover:text-white transition-all text-gray-400"
-                >
-                  <Trash2 size={20} />
-                </button>
-              )}
+                {isArchived ? (
+                  <button onClick={() => onRestore?.(project.id)} title="Restaurar" className="p-4 border border-gray-200 hover:bg-black hover:text-white transition-all"><RotateCcw size={20} /></button>
+                ) : (
+                  <button onClick={() => onArchive(project.id)} title="Archivar" className="p-4 border border-gray-200 hover:bg-blue-600 hover:text-white transition-all text-gray-400"><Archive size={20} /></button>
+                )}
+                {onDelete && (
+                  <button
+                    onClick={() => onDelete?.(project.id)}
+                    title="Eliminar permanentemente"
+                    className="p-4 border border-gray-200 hover:bg-red-600 hover:text-white transition-all text-gray-400"
+                  >
+                    <Trash2 size={20} />
+                  </button>
+                )}
+              </div>
             </div>
-          </div>
 
-          <p className="text-xl md:text-2xl leading-tight text-gray-600 font-light tracking-tight max-w-2xl border-l-2 border-gray-100 pl-6 md:pl-8 text-justify">
-            {project.description}
-          </p>
-
-          <div className="bg-black text-white p-10 relative overflow-hidden md:group-hover:translate-x-4 transition-transform duration-700">
-            <div className="absolute -right-4 -bottom-4 opacity-10 rotate-12">
-              <Target size={120} />
-            </div>
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-400 block mb-6">Objetivo Estratégico</span>
-            <p className="text-lg md:text-xl font-medium leading-snug italic relative z-10">
-              "{project.reason}"
+            <p className="text-xl md:text-2xl leading-tight text-gray-600 font-light tracking-tight max-w-2xl border-l-2 border-gray-100 pl-6 md:pl-8 text-justify">
+              {project.description}
             </p>
-          </div>
 
-          <div className="flex items-center gap-8 md:gap-12 pt-6">
-            <div className="flex flex-col">
-              <span className="text-[9px] font-black uppercase text-gray-300 tracking-widest mb-2">Plazo de Entrega</span>
-              <span className="text-sm font-black border-b-2 border-black pb-1">
-                {new Date(project.dueDate).toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric', timeZone: 'UTC' }).toUpperCase()}
-              </span>
+            <div className="bg-black text-white p-10 relative overflow-hidden md:group-hover:translate-x-4 transition-transform duration-700">
+              <div className="absolute -right-4 -bottom-4 opacity-10 rotate-12">
+                <Target size={120} />
+              </div>
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-400 block mb-6">Objetivo Estratégico</span>
+              <p className="text-lg md:text-xl font-medium leading-snug italic relative z-10">
+                "{project.reason}"
+              </p>
             </div>
-            <div className="flex flex-col">
-              <span className="text-[9px] font-black uppercase text-gray-300 tracking-widest mb-2">Identificador Único</span>
-              <span className="text-sm font-bold text-gray-400">
-                ID-{project.id.slice(-6).toUpperCase()}
-              </span>
+
+            <div className="flex items-center gap-8 md:gap-12 pt-6">
+              <div className="flex flex-col">
+                <span className="text-[9px] font-black uppercase text-gray-300 tracking-widest mb-2">Plazo de Entrega</span>
+                <span className="text-sm font-black border-b-2 border-black pb-1">
+                  {new Date(project.dueDate).toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric', timeZone: 'UTC' }).toUpperCase()}
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[9px] font-black uppercase text-gray-300 tracking-widest mb-2">Identificador Único</span>
+                <span className="text-sm font-bold text-gray-400">
+                  ID-{project.id.slice(-6).toUpperCase()}
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    </div >
   );
 };
 
