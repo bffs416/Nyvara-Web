@@ -369,16 +369,53 @@ const CronogramaClientePage = () => {
 
           {view === 'list' && (
             <div>
-              {activeProjects.map(p => (
-                <ProjectCard
-                  key={p.id}
-                  project={p}
-                  onArchive={handleArchiveProject}
-                  onEdit={openFormForEdit}
-                  onDelete={requestDeleteProject}
-                  onToggleComplete={handleToggleComplete}
-                />
-              ))}
+              {(() => {
+                const getCategory = (project: Project) => {
+                  const title = project.title.toUpperCase();
+                  if (title.includes('KLARDIE')) return 'Klardie';
+                  if (title.includes('MINT')) return 'Mint';
+                  if (title.includes('LION')) return 'Lion';
+                  return 'Otros';
+                };
+
+                const categories = ['Klardie', 'Mint', 'Lion', 'Otros'];
+                const categorizedProjects = activeProjects.reduce((acc, project) => {
+                  const category = getCategory(project);
+                  if (!acc[category]) acc[category] = [];
+                  acc[category].push(project);
+                  return acc;
+                }, {} as Record<string, typeof activeProjects>);
+
+                return categories.map(category => {
+                  const categoryProjects = categorizedProjects[category];
+                  if (!categoryProjects || categoryProjects.length === 0) return null;
+
+                  return (
+                    <div key={category} className="mb-12">
+                      <div className="flex items-center gap-4 mb-6 border-b-2 border-black/10 pb-2">
+                        <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-black/80">
+                          {category}
+                        </h2>
+                        <span className="text-sm font-bold bg-black text-white px-2 py-1 rounded-full">
+                          {categoryProjects.length}
+                        </span>
+                      </div>
+                      <div className="flex flex-col gap-4">
+                        {categoryProjects.map(p => (
+                          <ProjectCard
+                            key={p.id}
+                            project={p}
+                            onArchive={handleArchiveProject}
+                            onEdit={openFormForEdit}
+                            onDelete={requestDeleteProject}
+                            onToggleComplete={handleToggleComplete}
+                          />
+                        ))}
+                      </div>
+                    </div> // Close category div
+                  );
+                });
+              })()}
 
               {showArchived && archivedProjects.length > 0 && (
                 <div className="animate-in fade-in duration-500">
