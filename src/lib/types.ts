@@ -15,6 +15,7 @@ export interface Project {
   dueDate: string;
   createdAt: string;
   status: 'pending' | 'completed' | 'archived' | 'urgent';
+  publishTime?: string;
 }
 
 export interface Client {

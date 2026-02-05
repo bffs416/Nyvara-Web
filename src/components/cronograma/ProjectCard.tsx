@@ -138,10 +138,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
                   {new Date(project.dueDate).toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric', timeZone: 'UTC' }).toUpperCase()}
                 </span>
               </div>
+              {project.publishTime && (
+                <div className="flex flex-col">
+                  <span className="text-[9px] font-black uppercase text-gray-300 tracking-widest mb-2">Hora de Publicación</span>
+                  <span className="text-sm font-black border-b-2 border-black pb-1">
+                    {project.publishTime}
+                  </span>
+                </div>
+              )}
               <div className="flex flex-col">
                 <span className="text-[9px] font-black uppercase text-gray-300 tracking-widest mb-2">Identificador Único</span>
                 <span className="text-sm font-bold text-gray-400">
-                  ID-{project.id.slice(-6).toUpperCase()}
+                  ID-{project.id}
                 </span>
               </div>
             </div>
