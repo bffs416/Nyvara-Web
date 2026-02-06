@@ -17,6 +17,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { BriefForm } from '@/components/brief/BriefForm';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Input } from '@/components/ui/input';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 type PendingAction = {
   type: 'create' | 'edit' | 'delete' | 'export' | 'import';
@@ -30,6 +32,7 @@ const CronogramaClientePage = () => {
 
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
 
   const client: Client | undefined = useMemo(() => clients.find(c => c.nit === nit), [nit]);
 
@@ -48,6 +51,7 @@ const CronogramaClientePage = () => {
   const [accessCodeError, setAccessCodeError] = useState('');
 
   const importFileRef = useRef<HTMLInputElement>(null);
+  const printRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (nit) {
@@ -136,6 +140,44 @@ const CronogramaClientePage = () => {
 
   const handleRestoreProject = (id: string) => {
     setProjects(projects.map(p => p.id === id ? { ...p, status: 'pending' } : p));
+  };
+
+  const handleDownloadPDF = async () => {
+    if (!printRef.current) return;
+
+    setIsGeneratingPDF(true);
+    try {
+      // Small delay to ensure any layout changes are settled
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      const element = printRef.current;
+      const canvas = await html2canvas(element, {
+        scale: 2, // High resolution
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff',
+        windowWidth: 1280 // Force desktop-like responsive width for capture
+      });
+
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'px',
+        format: [canvas.width / 2, canvas.height / 2] // Scale back to normal size
+      });
+
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`cronograma-${client?.clientName}-${new Date().toISOString().split('T')[0]}.pdf`);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Hubo un error al generar el PDF. Puedes intentar imprimir directamente (Ctrl+P) que ya está optimizado.');
+    } finally {
+      setIsGeneratingPDF(false);
+    }
   };
 
   const handleToggleComplete = async (id: string, currentStatus: string) => {
@@ -302,7 +344,7 @@ const CronogramaClientePage = () => {
       <Header />
       <main className="px-2 sm:px-4 lg:px-6 py-16">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-b-4 border-black pb-8 mb-12">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-b-4 border-black pb-8 mb-12 no-print">
             <div>
               <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter">Cronograma</h1>
               <p className="text-xl text-gray-500 mt-2 max-w-2xl">
@@ -342,6 +384,14 @@ const CronogramaClientePage = () => {
                 <button onClick={requestExport} className="px-6 py-3 bg-gray-200 text-black text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-gray-300 transition-colors">
                   <Download size={14} /> Exportar
                 </button>
+                <button
+                  onClick={handleDownloadPDF}
+                  disabled={isGeneratingPDF}
+                  className="col-span-2 px-6 py-3 bg-blue-600 text-white text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors disabled:opacity-50"
+                >
+                  {isGeneratingPDF ? <Loader2 size={14} className="animate-spin" /> : <Download size={14} />}
+                  {isGeneratingPDF ? 'Generando...' : 'Descargar PDF Professional'}
+                </button>
               </div>
 
               <div className="flex flex-col gap-2">
@@ -367,76 +417,89 @@ const CronogramaClientePage = () => {
 
           <input type="file" ref={importFileRef} onChange={handleFileSelected} accept=".txt,application/json" className="hidden" />
 
-          {view === 'list' && (
-            <div>
-              {(() => {
-                const getCategory = (project: Project) => {
-                  const title = project.title.toUpperCase();
-                  if (title.includes('KLARDIE')) return 'Klardie';
-                  if (title.includes('MINT')) return 'Mint';
-                  if (title.includes('LION')) return 'Lion';
-                  return 'Otros';
-                };
-
-                const categories = ['Klardie', 'Mint', 'Lion', 'Otros'];
-                const categorizedProjects = activeProjects.reduce((acc, project) => {
-                  const category = getCategory(project);
-                  if (!acc[category]) acc[category] = [];
-                  acc[category].push(project);
-                  return acc;
-                }, {} as Record<string, typeof activeProjects>);
-
-                return categories.map(category => {
-                  const categoryProjects = categorizedProjects[category];
-                  if (!categoryProjects || categoryProjects.length === 0) return null;
-
-                  return (
-                    <div key={category} className="mb-12">
-                      <div className="flex items-center gap-4 mb-6 border-b-2 border-black/10 pb-2">
-                        <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-black/80">
-                          {category}
-                        </h2>
-                        <span className="text-sm font-bold bg-black text-white px-2 py-1 rounded-full">
-                          {categoryProjects.length}
-                        </span>
-                      </div>
-                      <div className="flex flex-col gap-4">
-                        {categoryProjects.map(p => (
-                          <ProjectCard
-                            key={p.id}
-                            project={p}
-                            onArchive={handleArchiveProject}
-                            onEdit={openFormForEdit}
-                            onDelete={requestDeleteProject}
-                            onToggleComplete={handleToggleComplete}
-                          />
-                        ))}
-                      </div>
-                    </div> // Close category div
-                  );
-                });
-              })()}
-
-              {showArchived && archivedProjects.length > 0 && (
-                <div className="animate-in fade-in duration-500">
-                  <div className="my-12 text-center border-y-2 border-dashed py-4">
-                    <h3 className="text-sm font-bold uppercase tracking-widest text-gray-400">Proyectos Archivados</h3>
-                  </div>
-                  {archivedProjects.map(p => (
-                    <ProjectCard
-                      key={p.id}
-                      project={p}
-                      onArchive={handleArchiveProject}
-                      onRestore={handleRestoreProject}
-                      onDelete={requestDeleteProject}
-                    />
-                  ))}
-                </div>
-              )}
+          <div ref={printRef} className="print-container">
+            {/* Header for PDF report */}
+            <div className="hidden print:block mb-10 border-b-8 border-black pb-6">
+              <h1 className="text-7xl font-black uppercase tracking-tighter">Cronograma de Proyectos</h1>
+              <div className="flex justify-between items-end mt-4">
+                <p className="text-2xl text-gray-500 font-bold uppercase italic">
+                  Cliente: <span className="text-blue-600">{client.clientName}</span>
+                </p>
+                <p className="text-sm font-black text-gray-400">FECHA DE EMISIÓN: {new Date().toLocaleDateString('es-ES')}</p>
+              </div>
             </div>
-          )}
 
-          {view === 'calendar' && <CalendarView projects={projects} onEditProject={openFormForEdit} onDeleteProject={requestDeleteProject} />}
+            {view === 'list' && (
+              <div>
+                {(() => {
+                  const getCategory = (project: Project) => {
+                    const title = project.title.toUpperCase();
+                    if (title.includes('KLARDIE')) return 'Klardie';
+                    if (title.includes('MINT')) return 'Mint';
+                    if (title.includes('LION')) return 'Lion';
+                    return 'Otros';
+                  };
+
+                  const categories = ['Klardie', 'Mint', 'Lion', 'Otros'];
+                  const categorizedProjects = activeProjects.reduce((acc, project) => {
+                    const category = getCategory(project);
+                    if (!acc[category]) acc[category] = [];
+                    acc[category].push(project);
+                    return acc;
+                  }, {} as Record<string, typeof activeProjects>);
+
+                  return categories.map(category => {
+                    const categoryProjects = categorizedProjects[category];
+                    if (!categoryProjects || categoryProjects.length === 0) return null;
+
+                    return (
+                      <div key={category} className="mb-12">
+                        <div className="flex items-center gap-4 mb-6 border-b-2 border-black/10 pb-2">
+                          <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-black/80">
+                            {category}
+                          </h2>
+                          <span className="text-sm font-bold bg-black text-white px-2 py-1 rounded-full">
+                            {categoryProjects.length}
+                          </span>
+                        </div>
+                        <div className="flex flex-col gap-4">
+                          {categoryProjects.map(p => (
+                            <ProjectCard
+                              key={p.id}
+                              project={p}
+                              onArchive={handleArchiveProject}
+                              onEdit={openFormForEdit}
+                              onDelete={requestDeleteProject}
+                              onToggleComplete={handleToggleComplete}
+                            />
+                          ))}
+                        </div>
+                      </div> // Close category div
+                    );
+                  });
+                })()}
+
+                {showArchived && archivedProjects.length > 0 && (
+                  <div className="animate-in fade-in duration-500 no-print">
+                    <div className="my-12 text-center border-y-2 border-dashed py-4">
+                      <h3 className="text-sm font-bold uppercase tracking-widest text-gray-400">Proyectos Archivados</h3>
+                    </div>
+                    {archivedProjects.map(p => (
+                      <ProjectCard
+                        key={p.id}
+                        project={p}
+                        onArchive={handleArchiveProject}
+                        onRestore={handleRestoreProject}
+                        onDelete={requestDeleteProject}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {view === 'calendar' && <CalendarView projects={projects} onEditProject={openFormForEdit} onDeleteProject={requestDeleteProject} />}
+          </div>
         </div>
 
         {isFormOpen && (
