@@ -30,7 +30,7 @@
           "description": "Mostrar el cambio de la imagen. Mostrar la mayor cantidad de componentes que tienen adicionales. Mostrar un comparativo entre lo que era Dia y la versión mejorada que es D+",
           "reason": "Hacer una visual del Upgrade que tiene D+ vs Dia en comparativa, para que los médicos conozcan el producto y sepan que tiene mejores componentes que sirven para sus procedimientos.",
           "imageUrl": "/cronograma/3.png",
-          "dueDate": "2026-02-02",
+          "dueDate": "2026-02-05",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "urgent"
         },
@@ -40,7 +40,7 @@
           "description": "Mostrar el cambio de la imagen. Mostrar la mayor cantidad de componentes que tienen adicionales. Mostrar un comparativo entre lo que era Dia y la versión mejorada que es R+",
           "reason": "Hacer una visual del Upgrade que tiene R+ vs Dia en comparativa, para que los médicos conozcan el producto y sepan que tiene mejores componentes que sirven para sus procedimientos.",
           "imageUrl": "/cronograma/4.png",
-          "dueDate": "2026-02-03",
+          "dueDate": "2026-02-06",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "urgent"
         },
@@ -50,7 +50,7 @@
           "description": "Primeras imágenes serían hablar un poco de las características del producto y de la presentación. Las siguientes imágenes del carrusel serían de aplicación del producto.",
           "reason": "Brindar información amplia del nuevo producto a los clientes. ",
           "imageUrl": "/cronograma/바이알_3.jpg",
-          "dueDate": "2026-02-05",
+          "dueDate": "2026-02-09",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "pending"
         },
@@ -60,7 +60,7 @@
           "description": "Primeras imágenes serían hablar un poco de las características del producto y de la presentación. Las siguientes imágenes del carrusel serían de aplicación del producto.",
           "reason": "Brindar información amplia del nuevo producto a los clientes. ",
           "imageUrl": "/cronograma/바이알_2.jpg",
-          "dueDate": "2026-02-09",
+          "dueDate": "2026-02-11",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "pending"
         },
@@ -70,7 +70,7 @@
           "description": "Pieza publicitaria para hacer énfasis al cuidado de la piel antes de las fiestas de Barranquilla que van desde el 14 al 18 de febrero, haciendo conciencia de que las personas deben cuidarse la piel.",
           "reason": "La idea con esto es impulsar la venta del producto Fusi-Ket, que está diseñado para pieles sensibles. Apto específicamente para la promoción del carnaval de Barranquilla, por el cuidado que deben de tener antes la piel y la protección debido a la exposición a los rayos solares. ",
           "imageUrl": "/cronograma/slidecarna26.jpeg",
-          "dueDate": "2026-02-13",
+          "dueDate": "2026-02-12",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "pending"
         },
@@ -90,7 +90,7 @@
           "description": "Pieza Publicitaria, para Promocionar el producto de estimulación Capilar e implante capilar, ya que juntos para la practica medica, funcionan mejor.",
           "reason": "El objetivo es brindar la información a los médicos para que asocien la combinación de ambos productos ",
           "imageUrl": "/cronograma/Lion.jpg",
-          "dueDate": "2026-02-17",
+          "dueDate": "2026-02-16",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "pending"
         },
@@ -110,7 +110,7 @@
           "description": "Un video desechando el uso combinado de los hilos monofilamento con el bioestimulador KLARDIE. Combinacion de productos.",
           "reason": "Mostrar la efectividad de los dos productos combinados para estimulación capilar.",
           "imageUrl": "/cronograma/PDO_Threads_for_Hair_Growth1.webp",
-          "dueDate": "2026-02-19",
+          "dueDate": "2026-02-20",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "pending"
         },
@@ -130,7 +130,7 @@
           "description": "Generar tanto deseo como confianza para el paciente y médico.",
           "reason": "Desmentificar el procedimiento de hilos tensores, mostrándolo no como una cirugía agresiva, sino como una intervención de alta precisión tecnológica.",
           "imageUrl": "/cronograma/Hilos.png",
-          "dueDate": "2026-02-25",
+          "dueDate": "2026-02-23",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "pending"
         }
