@@ -133,6 +133,16 @@
           "dueDate": "2026-02-23",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "pending"
+        },
+        {
+          "id": "772233",
+          "title": "VIDEO: ANIMACIÓN KLARDIE (MÉXICO)",
+          "description": "Video animado de Klardie proveniente de la filial de México, destacando las bondades del producto.",
+          "reason": "Reforzar la presencia de marca con contenido audiovisual de alta calidad internacional.",
+          "imageUrl": "/cronograma/animacion_mexico.mp4",
+          "dueDate": "2026-02-26",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "status": "pending"
         }
       ]
     }

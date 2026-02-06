@@ -211,7 +211,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onAdd, onClose, initialData }
                       type="file"
                       ref={fileInputRef}
                       className="hidden"
-                      accept="image/*"
+                      accept="image/*,video/*"
                       onChange={handleFileChange}
                     />
                   </div>
@@ -219,11 +219,20 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ onAdd, onClose, initialData }
 
                 <div className="aspect-video border-4 border-black bg-white flex items-center justify-center overflow-hidden relative shadow-inner">
                   {imagePreview ? (
-                    <img
-                      src={imagePreview}
-                      alt="Preview"
-                      className="max-w-full max-h-full object-contain p-2"
-                    />
+                    imagePreview.startsWith('data:video/') || imagePreview.endsWith('.mp4') || imagePreview.endsWith('.webm') || imagePreview.endsWith('.ogg') ? (
+                      <video
+                        src={imagePreview}
+                        className="max-w-full max-h-full object-contain p-2"
+                        controls
+                        muted
+                      />
+                    ) : (
+                      <img
+                        src={imagePreview}
+                        alt="Preview"
+                        className="max-w-full max-h-full object-contain p-2"
+                      />
+                    )
                   ) : (
                     <div className="text-gray-200 flex flex-col items-center gap-4">
                       <ImageIcon size={64} />
