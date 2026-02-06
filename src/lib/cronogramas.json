@@ -5,147 +5,134 @@
       "clientName": "HANSBIOMED SAS",
       "projects": [
         {
-          "id": "16783",
-          "title": "PDF INFORMATIVO CARACTERISTICAS DE D+ & R+ PARA LOS EJECUTIVOS",
+          "id": "205620",
+          "title": "PDF INFORMATIVO CARACTERISTICAS DE KLARDIE D+ & R+ PARA LOS EJECUTIVOS",
           "description": "Información estilo brochure con características de los productos, en cuanto a sus componentes y beneficios.",
           "reason": "Para que el Equipo tenga claras las características técnicas de material, con el fin de comercializar el producto a los especialista",
           "imageUrl": "/cronograma/D+.png",
           "dueDate": "2026-01-30",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "urgent",
-          "publishTime": "18:00"
+          "status": "done"
         },
         {
-          "id": "16803",
+          "id": "478242",
           "title": "HISTORIA: CAPACITACIÓN D2D MINT™ & KLARDIE (CALI 2026)",
           "description": "Creación de Flyer Vertical (Formato Historia/Reel) para difusión en WhatsApp y redes sociales, optimizado para móviles. Adaptación de identidad para folletería impresa o posts cuadrados (Feed). Integración de Branding: Fusión de la identidad corporativa de Hansbiomed, MINT™ y Klardie con la marca personal de la Dra. Virginia Escobar, manteniendo coherencia visual y jerarquía de logotipos.",
           "reason": "Maximizar la atracción de nuevos prospectos (médicos estéticos) hacia los talleres educativos de Hansbiomed e impulsar la conversión de ventas inmediata, comunicando visualmente una oferta de valor premium que motive la adquisición de la promoción vigente.",
           "imageUrl": "/cronograma/HILOS MINT - CALI.png",
           "dueDate": "2026-01-30",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "urgent",
-          "publishTime": "18:00"
+          "status": "urgent"
         },
         {
-          "id": "16823",
-          "title": "HISTORIA: UPGRADE D+",
+          "id": "1",
+          "title": "HISTORIA: UPGRADE KLARDIE D+",
           "description": "Mostrar el cambio de la imagen. Mostrar la mayor cantidad de componentes que tienen adicionales. Mostrar un comparativo entre lo que era Dia y la versión mejorada que es D+",
           "reason": "Hacer una visual del Upgrade que tiene D+ vs Dia en comparativa, para que los médicos conozcan el producto y sepan que tiene mejores componentes que sirven para sus procedimientos.",
-          "imageUrl": "/cronograma/D+_6.jpg",
+          "imageUrl": "/cronograma/3.png",
           "dueDate": "2026-02-02",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "urgent",
-          "publishTime": "18:00"
+          "status": "urgent"
         },
         {
-          "id": "16843",
-          "title": "HISTORIA: UPGRADE R+",
+          "id": "895552",
+          "title": "HISTORIA: UPGRADE KLARDIE R+",
           "description": "Mostrar el cambio de la imagen. Mostrar la mayor cantidad de componentes que tienen adicionales. Mostrar un comparativo entre lo que era Dia y la versión mejorada que es R+",
           "reason": "Hacer una visual del Upgrade que tiene R+ vs Dia en comparativa, para que los médicos conozcan el producto y sepan que tiene mejores componentes que sirven para sus procedimientos.",
-          "imageUrl": "/cronograma/R+_6.jpg",
+          "imageUrl": "/cronograma/4.png",
           "dueDate": "2026-02-03",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "urgent",
-          "publishTime": "18:00"
+          "status": "urgent"
         },
         {
-          "id": "16863",
+          "id": "421790",
           "title": "CARRUSEL INFORMATIVO: KLARDIE D+ (LANZAMIENTO DE PRODUCTO)",
           "description": "Primeras imágenes serían hablar un poco de las características del producto y de la presentación. Las siguientes imágenes del carrusel serían de aplicación del producto.",
           "reason": "Brindar información amplia del nuevo producto a los clientes. ",
           "imageUrl": "/cronograma/바이알_3.jpg",
           "dueDate": "2026-02-05",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending",
-          "publishTime": "18:00"
+          "status": "pending"
         },
         {
-          "id": "16883",
+          "id": "517116",
           "title": "CARRUSEL INFORMATIVO: KLARDIE R+ (LANZAMIENTO DE PRODUCTO)",
           "description": "Primeras imágenes serían hablar un poco de las características del producto y de la presentación. Las siguientes imágenes del carrusel serían de aplicación del producto.",
           "reason": "Brindar información amplia del nuevo producto a los clientes. ",
           "imageUrl": "/cronograma/바이알_2.jpg",
           "dueDate": "2026-02-09",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending",
-          "publishTime": "18:00"
+          "status": "pending"
         },
         {
-          "id": "16903",
+          "id": "150255",
           "title": "HISTORIA: PRE- CARNAVAL DE BARRANQUILLA",
           "description": "Pieza publicitaria para hacer énfasis al cuidado de la piel antes de las fiestas de Barranquilla que van desde el 14 al 18 de febrero, haciendo conciencia de que las personas deben cuidarse la piel.",
           "reason": "La idea con esto es impulsar la venta del producto Fusi-Ket, que está diseñado para pieles sensibles. Apto específicamente para la promoción del carnaval de Barranquilla, por el cuidado que deben de tener antes la piel y la protección debido a la exposición a los rayos solares. ",
           "imageUrl": "/cronograma/slidecarna26.jpeg",
           "dueDate": "2026-02-13",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending",
-          "publishTime": "18:00"
+          "status": "pending"
         },
         {
-          "id": "16923",
+          "id": "064633",
           "title": "HISTORIA: SAN VALENTIN",
           "description": "La idea central es la analogía entre la fusión física del producto y el sentimiento de la fecha de San Valentín.",
           "reason": "Busca transmitir: amor propio, tecnología con propósito, seguridad y respaldo de la marca.",
           "imageUrl": "/cronograma/images.jpg",
           "dueDate": "2026-02-14",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending",
-          "publishTime": "18:00"
+          "status": "pending"
         },
         {
-          "id": "16943",
-          "title": "HISTORIA: LION + KLARDIE / PROMOCION",
+          "id": "983180",
+          "title": "HISTORIA: LION + COSMETICOS / PROMOCION",
           "description": "Pieza Publicitaria, para Promocionar el producto de estimulación Capilar e implante capilar, ya que juntos para la practica medica, funcionan mejor.",
           "reason": "El objetivo es brindar la información a los médicos para que asocien la combinación de ambos productos ",
           "imageUrl": "/cronograma/Lion.jpg",
           "dueDate": "2026-02-17",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending",
-          "publishTime": "18:00"
+          "status": "pending"
         },
         {
-          "id": "16963",
+          "id": "090467",
           "title": "HISTORIA: CUIDADO POST CARNAVALES",
           "description": "Una pieza publicitaria que haga referencia al evento que hay en Barranquilla del Carnaval, en el cual le digamos al usuario que utilice el producto después de deshidratación, exposición al sol, y aquí tenemos el producto Fusicare",
           "reason": "El objetivo o el propósito básicamente es que los usuarios, población normal que desea cuidarse la piel, conozca el producto Fusicare, que es para pieles sensibles, irritadas, que necesita cuidado post incluso en ambientes que tienen mucho impacto solar.",
           "imageUrl": "/cronograma/images.png",
           "dueDate": "2026-02-17",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending",
-          "publishTime": "18:00"
+          "status": "pending"
         },
         {
-          "id": "16983",
+          "id": "474488",
           "title": "VIDEO: PROTOCOLO KLARDIE D+& R+CON MONOFILAMENTO EN CUERO CABELLUDO",
           "description": "Un video desechando el uso combinado de los hilos monofilamento con el bioestimulador KLARDIE. Combinacion de productos.",
           "reason": "Mostrar la efectividad de los dos productos combinados para estimulación capilar.",
           "imageUrl": "/cronograma/PDO_Threads_for_Hair_Growth1.webp",
           "dueDate": "2026-02-19",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending",
-          "publishTime": "18:00"
+          "status": "pending"
         },
         {
-          "id": "17003",
-          "title": "VIDEO POTCAST # 3 : SIN HILOS EN LA LENGUA",
+          "id": "184466",
+          "title": "VIDEO POTCAST # 3 MINT: SIN HILOS EN LA LENGUA",
           "description": "Video para apoyar el concepto de los hilos tensores, con base en la experiencia de dos médicos expertos en la materia, para desinformar las redes y el concepto de los hilos.",
           "reason": "Generar confianza en los clientes finales y los clientes directos, con el fin de que se incrementen las ventas para Hansbiomed.",
           "imageUrl": "/cronograma/potcast.png",
           "dueDate": "2026-02-24",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending",
-          "publishTime": "18:00"
+          "status": "pending"
         },
         {
-          "id": "17023",
-          "title": "HISTORIA: HILOS TENSORES",
+          "id": "606687",
+          "title": "HISTORIA: HILOS TENSORES MINT",
           "description": "Generar tanto deseo como confianza para el paciente y médico.",
           "reason": "Desmentificar el procedimiento de hilos tensores, mostrándolo no como una cirugía agresiva, sino como una intervención de alta precisión tecnológica.",
           "imageUrl": "/cronograma/Hilos.png",
           "dueDate": "2026-02-25",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending",
-          "publishTime": "18:00"
+          "status": "pending"
         }
       ]
     }
