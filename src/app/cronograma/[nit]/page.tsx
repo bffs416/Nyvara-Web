@@ -396,6 +396,12 @@ const CronogramaClientePage = () => {
 
               <div className="flex flex-col gap-2">
 
+                <button onClick={() => {
+                  if (window.confirm('¿Quieres sincronizar con los últimos cambios de la nube? Esto borrará cualquier cambio no guardado que hayas hecho localmente.')) {
+                    localStorage.removeItem(`cronograma_projects_${nit}`);
+                    window.location.reload();
+                  }
+                }} className={`p-4 border border-black hover:bg-blue-50 transition-colors text-blue-600`} title="Sincronizar con la Nube"><RotateCcw size={20} /></button>
                 <button onClick={() => setView('list')} className={`p-4 border border-black transition-colors ${view === 'list' ? 'bg-black text-white' : 'hover:bg-gray-100'}`} title="Vista de Lista"><LayoutGrid size={20} /></button>
                 <button onClick={() => setView('calendar')} className={`p-4 border border-black transition-colors ${view === 'calendar' ? 'bg-black text-white' : 'hover:bg-gray-100'}`} title="Vista de Calendario"><Calendar size={20} /></button>
                 {view === 'list' && (
