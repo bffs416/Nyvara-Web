@@ -143,6 +143,16 @@
           "dueDate": "2026-02-26",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "pending"
+        },
+        {
+          "id": "4",
+          "title": "CARNET",
+          "description": "Retomando lo conversado por WhatsApp, necesitamos una propuesta de diseño de carnet corporativo, como el de referencia adjunto.\n\nLineamientos:\n\nMedidas: 8,5 cm alto x 5,3 cm ancho\n\nCantidad inicial: 13 carnets\n\nIncluir:\n\nFoto del ejecutivo\n\nDatos básicos\n\nQR (puede dirigir a una imagen o ficha del ejecutivo, no a la web por ahora, ya que está desactualizada)\n\n\nLa idea es que esta plantilla luego pueda compartirse con Talento Humano. Adjunto foto de referencia que tenían",
+          "reason": "OBJETIVO: Contenido Educativo. TITULAR: Carnet corporativo – 2  Propuestas. REFERENCIAS: ADJUNTO correo enviado 4 de febrero",
+          "imageUrl": "/cronograma/Carnet.jpeg",
+          "dueDate": "2026-02-09",
+          "createdAt": "2026-02-06T21:07:36.915476+00:00",
+          "status": "pending"
         }
       ]
     }
