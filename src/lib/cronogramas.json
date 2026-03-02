@@ -12,7 +12,14 @@
           "imageUrl": "/cronograma/D+.png",
           "dueDate": "2026-01-30",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "done"
+          "status": "done",
+          "kpis": {
+            "contentType": "pdf",
+            "platform": "Interno",
+            "periodMonth": "2026-01",
+            "strategicSummary": "Pieza de soporte comercial interno enfocada en claridad tecnica para fuerza de ventas.",
+            "notes": "Proyecto interno no orientado a KPIs de redes; medir por adopcion del equipo, uso en visitas y calidad de argumentario."
+          }
         },
         {
           "id": "478242",
@@ -22,7 +29,26 @@
           "imageUrl": "/cronograma/HILOS MINT - CALI.png",
           "dueDate": "2026-01-30",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "urgent"
+          "status": "urgent",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-02",
+            "reach": 164,
+            "impressions": 165,
+            "interactions": 4,
+            "shares": 2,
+            "profileVisits": 2,
+            "newFollowers": 0,
+            "storyNavigation": 200,
+            "storyBacks": 4,
+            "storyForwards": 145,
+            "storyNextStory": 22,
+            "storyExits": 29,
+            "storyReplies": 0,
+            "strategicSummary": "Historia con buen equilibrio entre alcance e intención: obtuvo compartidos y visitas al perfil, señal de interés en el evento.",
+            "notes": "Evento MINT. Acciones: 4 (2 compartidos y 2 visitas al perfil)."
+          }
         },
         {
           "id": "1",
@@ -32,7 +58,26 @@
           "imageUrl": "/cronograma/3.png",
           "dueDate": "2026-02-05",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "urgent"
+          "status": "urgent",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-02",
+            "reach": 194,
+            "impressions": 200,
+            "interactions": 1,
+            "shares": 1,
+            "profileVisits": 0,
+            "newFollowers": 0,
+            "storyNavigation": 124,
+            "storyBacks": 2,
+            "storyForwards": 83,
+            "storyNextStory": 22,
+            "storyExits": 17,
+            "storyReplies": 0,
+            "strategicSummary": "Historia de upgrade con buen alcance base y consumo secuencial estable; la acción principal se concentró en compartidos.",
+            "notes": "Klaridie D+ collage."
+          }
         },
         {
           "id": "895552",
@@ -42,7 +87,26 @@
           "imageUrl": "/cronograma/4.png",
           "dueDate": "2026-02-06",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "urgent"
+          "status": "urgent",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-02",
+            "reach": 160,
+            "impressions": 169,
+            "interactions": 1,
+            "shares": 1,
+            "profileVisits": 0,
+            "newFollowers": 0,
+            "storyNavigation": 54,
+            "storyBacks": 1,
+            "storyForwards": 32,
+            "storyNextStory": 13,
+            "storyExits": 8,
+            "storyReplies": 0,
+            "strategicSummary": "Historia de upgrade con menor profundidad de navegación que otras piezas, pero con señal de compartibilidad.",
+            "notes": "Klaridie R+ collage."
+          }
         },
         {
           "id": "421790",
@@ -52,7 +116,28 @@
           "imageUrl": "/cronograma/1.png",
           "dueDate": "2026-02-09",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending"
+          "status": "pending",
+          "kpis": {
+            "contentType": "carrusel",
+            "platform": "Instagram",
+            "periodMonth": "2026-02",
+            "reach": 312,
+            "impressions": 897,
+            "interactions": 23,
+            "likes": 13,
+            "reposts": 1,
+            "shares": 4,
+            "comments": 0,
+            "saves": 5,
+            "profileVisits": 2,
+            "linkClicks": 0,
+            "newFollowers": 0,
+            "feedViewsPercent": 55.9,
+            "profileViewsPercent": 24.1,
+            "storiesViewsPercent": 18.4,
+            "strategicSummary": "El carrusel D mantuvo buen volumen de visualizaciones y destacó por acciones de consideración (guardados y compartidos).",
+            "notes": "Visualizaciones: 897. Interacciones: 23."
+          }
         },
         {
           "id": "517116",
@@ -62,7 +147,29 @@
           "imageUrl": "/cronograma/8.png",
           "dueDate": "2026-02-11",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending"
+          "status": "pending",
+          "kpis": {
+            "contentType": "carrusel",
+            "platform": "Instagram",
+            "periodMonth": "2026-02",
+            "reach": 294,
+            "impressions": 897,
+            "interactions": 26,
+            "likes": 15,
+            "reposts": 2,
+            "shares": 2,
+            "comments": 0,
+            "saves": 7,
+            "profileVisits": 12,
+            "linkClicks": 0,
+            "newFollowers": 0,
+            "feedViewsPercent": 68.2,
+            "profileViewsPercent": 15.7,
+            "storiesViewsPercent": 13.9,
+            "exploreViewsPercent": 0.9,
+            "strategicSummary": "El carrusel R obtuvo igual volumen de visualizaciones y mayor profundidad de interacción, especialmente en guardados.",
+            "notes": "Visualizaciones: 897. Interacciones: 26."
+          }
         },
         {
           "id": "150255",
@@ -72,7 +179,26 @@
           "imageUrl": "/cronograma/Pre-Carnaval.png",
           "dueDate": "2026-02-12",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending"
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-02",
+            "reach": 134,
+            "impressions": 138,
+            "interactions": 5,
+            "shares": 1,
+            "profileVisits": 4,
+            "newFollowers": 0,
+            "storyNavigation": 79,
+            "storyBacks": 5,
+            "storyForwards": 50,
+            "storyNextStory": 7,
+            "storyExits": 17,
+            "storyReplies": 0,
+            "strategicSummary": "Historia estacional con buen rendimiento relativo en acciones, especialmente visitas al perfil.",
+            "notes": "Carnaval. Acciones: 5 (1 compartido y 4 visitas al perfil)."
+          }
         },
         {
           "id": "064633",
@@ -82,7 +208,26 @@
           "imageUrl": "/cronograma/Amor& Amistad.png",
           "dueDate": "2026-02-14",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending"
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-02",
+            "reach": 57,
+            "impressions": 57,
+            "interactions": 1,
+            "shares": 0,
+            "profileVisits": 1,
+            "newFollowers": 0,
+            "storyNavigation": 67,
+            "storyBacks": 1,
+            "storyForwards": 48,
+            "storyNextStory": 6,
+            "storyExits": 12,
+            "storyReplies": 0,
+            "strategicSummary": "Historia de temporada con alcance bajo pero lectura clara de intención por visita al perfil.",
+            "notes": "San Valentin."
+          }
         },
         {
           "id": "983180",
@@ -92,7 +237,26 @@
           "imageUrl": "/cronograma/Lion+Klardie.png",
           "dueDate": "2026-02-16",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending"
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-02",
+            "reach": 100,
+            "impressions": 100,
+            "interactions": 0,
+            "shares": 0,
+            "profileVisits": 0,
+            "newFollowers": 0,
+            "storyNavigation": 110,
+            "storyBacks": 1,
+            "storyForwards": 72,
+            "storyNextStory": 19,
+            "storyExits": 18,
+            "storyReplies": 0,
+            "strategicSummary": "Historia promocional con alcance medio y nula acción; requiere CTA más directo para activar conversaciones.",
+            "notes": "Promocion especial."
+          }
         },
         {
           "id": "090467",
@@ -102,7 +266,26 @@
           "imageUrl": "/cronograma/images.png",
           "dueDate": "2026-02-17",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending"
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-02",
+            "reach": 64,
+            "impressions": 67,
+            "interactions": 2,
+            "shares": 0,
+            "profileVisits": 2,
+            "newFollowers": 0,
+            "storyNavigation": 71,
+            "storyBacks": 0,
+            "storyForwards": 43,
+            "storyNextStory": 13,
+            "storyExits": 15,
+            "storyReplies": 0,
+            "strategicSummary": "Historia de cuidado post-evento con menor alcance, pero con intención visible en visitas al perfil.",
+            "notes": "Fusicare."
+          }
         },
         {
           "id": "474488",
@@ -112,7 +295,16 @@
           "imageUrl": "/cronograma/PDO_Threads_for_Hair_Growth1.webp",
           "dueDate": "2026-02-20",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending"
+          "status": "pending",
+          "kpis": {
+            "contentType": "video",
+            "platform": "Instagram",
+            "periodMonth": "2026-02",
+            "plays": 378,
+            "interactions": 12,
+            "strategicSummary": "Video técnico con rendimiento de interacción moderado; conviene reforzar hook inicial y CTA de cierre para elevar respuesta.",
+            "notes": "Material base entregado por Hansbiomed con ajuste final de Nyvara para publicación."
+          }
         },
         {
           "id": "184466",
@@ -122,7 +314,16 @@
           "imageUrl": "/cronograma/potcast.png",
           "dueDate": "2026-02-24",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending"
+          "status": "pending",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram",
+            "periodMonth": "2026-02",
+            "plays": 1814,
+            "interactions": 43,
+            "strategicSummary": "Fue la pieza audiovisual de mayor desempeño del periodo, validando la co-creación como palanca orgánica.",
+            "notes": "Sin hilos en la lengua (colab speakers)."
+          }
         },
         {
           "id": "606687",
@@ -132,7 +333,27 @@
           "imageUrl": "/cronograma/Hilos.png",
           "dueDate": "2026-02-23",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending"
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-02",
+            "reach": 61,
+            "impressions": 63,
+            "interactions": 3,
+            "comments": 1,
+            "shares": 0,
+            "profileVisits": 2,
+            "newFollowers": 0,
+            "storyNavigation": 73,
+            "storyBacks": 5,
+            "storyForwards": 52,
+            "storyNextStory": 10,
+            "storyExits": 6,
+            "storyReplies": 1,
+            "strategicSummary": "Historia con interacción cualitativa valiosa al registrar respuesta directa por DM.",
+            "notes": "Hilos MINT. Acciones: 3 (1 respuesta y 2 visitas al perfil)."
+          }
         },
         {
           "id": "772233",
@@ -142,7 +363,16 @@
           "imageUrl": "/cronograma/Guerreros.png",
           "dueDate": "2026-02-26",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending"
+          "status": "pending",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram",
+            "periodMonth": "2026-02",
+            "plays": 571,
+            "interactions": 20,
+            "strategicSummary": "Video de rendimiento intermedio: mejoró frente a piezas técnicas, pero por debajo del contenido colaborativo.",
+            "notes": "Mono con D+."
+          }
         },
         {
           "id": "4",
@@ -152,7 +382,305 @@
           "imageUrl": "/cronograma/Carnet.jpeg",
           "dueDate": "2026-02-09",
           "createdAt": "2026-02-06T21:07:36.915476+00:00",
-          "status": "pending"
+          "status": "pending",
+          "kpis": {
+            "contentType": "carnet",
+            "platform": "Interno",
+            "periodMonth": "2026-02",
+            "strategicSummary": "Activo de identidad corporativa para estandarizar presentacion del equipo comercial y mejorar reconocimiento de marca en campo.",
+            "notes": "Proyecto interno no orientado a redes; medir por cobertura de entrega, tiempo de produccion y calidad de impresion."
+          }
+        }
+      ]
+    },
+    {
+      "nit": "1234567890",
+      "clientName": "MILDRED MORENO",
+      "projects": [
+        {
+          "id": "102030",
+          "title": "HISTORIA: TRASCENDENCIA EXPECTATIVA",
+          "description": "Contenido tipo historia para generar expectativa sobre la trascendencia de la marca.",
+          "reason": "Generar engagement y curiosidad en la audiencia.",
+          "imageUrl": "/cronograma/default.png",
+          "dueDate": "2026-03-02",
+          "createdAt": "2026-03-02T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-03"
+          }
+        },
+        {
+          "id": "102031",
+          "title": "REEL: TRANSICION DE CAMBIO DE LOGO",
+          "description": "Video corto que muestra la transición del logo antiguo al nuevo.",
+          "reason": "Comunicar el refrescamiento de marca de forma dinámica.",
+          "imageUrl": "/cronograma/default.png",
+          "dueDate": "2026-03-03",
+          "createdAt": "2026-03-02T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram",
+            "periodMonth": "2026-03"
+          }
+        },
+        {
+          "id": "102032",
+          "title": "PIEZA: CAMPAÑA DEL MES",
+          "description": "Diseño gráfico para la campaña principal del mes de marzo.",
+          "reason": "Promover los servicios destacados de la temporada.",
+          "imageUrl": "/cronograma/default.png",
+          "dueDate": "2026-03-03",
+          "createdAt": "2026-03-02T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza",
+            "platform": "Instagram",
+            "periodMonth": "2026-03"
+          }
+        },
+        {
+          "id": "102033",
+          "title": "PIEZA: SERVICIOS DE LA CLINICA",
+          "description": "Infografía sobre los servicios ofrecidos por la clínica.",
+          "reason": "Informar a los pacientes sobre las opciones disponibles.",
+          "imageUrl": "/cronograma/default.png",
+          "dueDate": "2026-03-05",
+          "createdAt": "2026-03-02T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza",
+            "platform": "Instagram",
+            "periodMonth": "2026-03"
+          }
+        },
+        {
+          "id": "102034",
+          "title": "HISTORIA: RE-DIRECCION PAGINA WEB",
+          "description": "Historia con enlace directo a la nueva página web.",
+          "reason": "Aumentar el tráfico hacia el sitio web oficial.",
+          "imageUrl": "/cronograma/default.png",
+          "dueDate": "2026-03-06",
+          "createdAt": "2026-03-02T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-03"
+          }
+        },
+        {
+          "id": "102035",
+          "title": "PIEZA: DIA DE LA MUJER",
+          "description": "Contenido conmemorativo por el Día Internacional de la Mujer.",
+          "reason": "Fidelización y reconocimiento a la comunidad femenina.",
+          "imageUrl": "/cronograma/default.png",
+          "dueDate": "2026-03-08",
+          "createdAt": "2026-03-02T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza",
+            "platform": "Instagram",
+            "periodMonth": "2026-03"
+          }
+        },
+        {
+          "id": "102036",
+          "title": "HISTORIA: LIPOVASER VS LIPOLASER",
+          "description": "Comparativa entre técnicas de liposucción.",
+          "reason": "Educar al paciente sobre la mejor opción tecnológica.",
+          "imageUrl": "/cronograma/default.png",
+          "dueDate": "2026-03-09",
+          "createdAt": "2026-03-02T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-03"
+          }
+        },
+        {
+          "id": "102037",
+          "title": "CARRUSEL: LIPOVASER",
+          "description": "Detalles técnicos y beneficios del procedimiento Lipovaser.",
+          "reason": "Profundizar en la información de un servicio clave.",
+          "imageUrl": "/cronograma/default.png",
+          "dueDate": "2026-03-10",
+          "createdAt": "2026-03-02T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "carrusel",
+            "platform": "Instagram",
+            "periodMonth": "2026-03"
+          }
+        },
+        {
+          "id": "102038",
+          "title": "PIEZA: ANTES Y DESPUES",
+          "description": "Resultados reales de pacientes.",
+          "reason": "Generar confianza a través de evidencia visual.",
+          "imageUrl": "/cronograma/default.png",
+          "dueDate": "2026-03-12",
+          "createdAt": "2026-03-02T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza",
+            "platform": "Instagram",
+            "periodMonth": "2026-03"
+          }
+        },
+        {
+          "id": "102039",
+          "title": "HISTORIA: RESULTADO LIPOVASER",
+          "description": "Testimonio o resultado rápido de Lipovaser.",
+          "reason": "Reforzar el éxito del procedimiento estrella.",
+          "imageUrl": "/cronograma/default.png",
+          "dueDate": "2026-03-13",
+          "createdAt": "2026-03-02T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-03"
+          }
+        },
+        {
+          "id": "102040",
+          "title": "HISTORIA: EXPLANTACION MAMARIA",
+          "description": "Contenido informativo sobre la explantación.",
+          "reason": "Atender dudas sobre un procedimiento en tendencia.",
+          "imageUrl": "/cronograma/default.png",
+          "dueDate": "2026-03-16",
+          "createdAt": "2026-03-02T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-03"
+          }
+        },
+        {
+          "id": "102041",
+          "title": "PIEZA: PODER DE LA BIOESTIMULACION",
+          "description": "Explicación de cómo funciona la bioestimulación.",
+          "reason": "Posicionar la técnica como innovadora y efectiva.",
+          "imageUrl": "/cronograma/default.png",
+          "dueDate": "2026-03-18",
+          "createdAt": "2026-03-02T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza",
+            "platform": "Instagram",
+            "periodMonth": "2026-03"
+          }
+        },
+        {
+          "id": "102042",
+          "title": "REEL: PRESENTACION DE LA EMPRESA / TESTIMONIO",
+          "description": "Video de marca presentando la filosofía y testimonios.",
+          "reason": "Humanizar la marca y mostrar el respaldo profesional.",
+          "imageUrl": "/cronograma/default.png",
+          "dueDate": "2026-03-19",
+          "createdAt": "2026-03-02T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram",
+            "periodMonth": "2026-03"
+          }
+        },
+        {
+          "id": "102043",
+          "title": "PIEZA: ANTES & DESPUES",
+          "description": "Caso de éxito de bioestimulación.",
+          "reason": "Mostrar resultados tangibles del tratamiento.",
+          "imageUrl": "/cronograma/default.png",
+          "dueDate": "2026-03-20",
+          "createdAt": "2026-03-02T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza",
+            "platform": "Instagram",
+            "periodMonth": "2026-03"
+          }
+        },
+        {
+          "id": "102044",
+          "title": "HISTORIA: BIOESTIMULACION",
+          "description": "Actualización o recordatorio del servicio.",
+          "reason": "Mantener el servicio en la mente del consumidor.",
+          "imageUrl": "/cronograma/default.png",
+          "dueDate": "2026-03-24",
+          "createdAt": "2026-03-02T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-03"
+          }
+        },
+        {
+          "id": "102045",
+          "title": "PIEZA: LIPOPAPADA CON PERFILAMIENTO",
+          "description": "Detalles del servicio de lipopapada.",
+          "reason": "Promover un servicio de alta demanda estética.",
+          "imageUrl": "/cronograma/default.png",
+          "dueDate": "2026-03-25",
+          "createdAt": "2026-03-02T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza",
+            "platform": "Instagram",
+            "periodMonth": "2026-03"
+          }
+        },
+        {
+          "id": "102046",
+          "title": "CARRUSEL: DRA MILDRED",
+          "description": "Hitos y trayectoria de la Dra. Mildred.",
+          "reason": "Fortalecer la marca personal y autoridad médica.",
+          "imageUrl": "/cronograma/default.png",
+          "dueDate": "2026-03-26",
+          "createdAt": "2026-03-02T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "carrusel",
+            "platform": "Instagram",
+            "periodMonth": "2026-03"
+          }
+        },
+        {
+          "id": "102047",
+          "title": "HISTORIA: FILOSOFIA AL CAMBIO",
+          "description": "Contenido reflexivo sobre la transformación.",
+          "reason": "Conectar emocionalmente con la audiencia.",
+          "imageUrl": "/cronograma/default.png",
+          "dueDate": "2026-03-30",
+          "createdAt": "2026-03-02T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-03"
+          }
+        },
+        {
+          "id": "102048",
+          "title": "PIEZA: ANTES & DESPUES",
+          "description": "Cierre de mes con resultados finales.",
+          "reason": "Validar la satisfacción del cliente al final del ciclo.",
+          "imageUrl": "/cronograma/default.png",
+          "dueDate": "2026-03-31",
+          "createdAt": "2026-03-02T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza",
+            "platform": "Instagram",
+            "periodMonth": "2026-03"
+          }
         }
       ]
     }

@@ -2,8 +2,9 @@
 
 import React from 'react';
 import { Project } from '@/lib/types';
-import { Archive, AlertCircle, Clock, CheckCircle, RotateCcw, Target, Layers, Edit2, Trash2 } from 'lucide-react';
+import { Archive, AlertCircle, Clock, CheckCircle, RotateCcw, Target, Layers, Edit2, Trash2, ChevronDown } from 'lucide-react';
 import Image from 'next/image';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
 interface ProjectCardProps {
   project: Project;
@@ -30,6 +31,52 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
   const status = getStatusDisplay();
   const isArchived = project.status === 'archived';
   const isCompleted = project.status === 'completed';
+  const inferredContentType = (() => {
+    const title = project.title.toUpperCase();
+    if (title.includes('CARNET')) return 'carnet';
+    if (title.includes('PDF')) return 'pdf';
+    if (title.includes('HISTORIA')) return 'historia';
+    if (title.includes('REEL')) return 'reel';
+    if (title.includes('CARRUSEL')) return 'carrusel';
+    if (title.includes('VIDEO')) return 'video';
+    return 'post';
+  })();
+  const kpis = project.kpis ?? {
+    contentType: inferredContentType,
+    platform: 'Instagram',
+    periodMonth: project.dueDate.slice(0, 7),
+  };
+  const hasKpiData =
+    kpis.reach !== undefined ||
+    kpis.impressions !== undefined ||
+    kpis.interactions !== undefined ||
+    kpis.plays !== undefined ||
+    kpis.profileVisits !== undefined ||
+    kpis.linkClicks !== undefined ||
+    kpis.comments !== undefined ||
+    kpis.saves !== undefined;
+  const formatPercent = (value: number) => `${value.toFixed(2)}%`;
+  const engagementRate = kpis?.interactions && kpis?.reach
+    ? (kpis.interactions / kpis.reach) * 100
+    : undefined;
+  const ctr = kpis?.linkClicks && kpis?.impressions
+    ? (kpis.linkClicks / kpis.impressions) * 100
+    : undefined;
+  const isSocialFormat = ['historia', 'reel', 'video', 'carrusel', 'post'].includes(kpis.contentType);
+  const isRetentionFormat = ['reel', 'video'].includes(kpis.contentType);
+  const isCarouselFormat = kpis.contentType === 'carrusel';
+  const isStoryFormat = kpis.contentType === 'historia';
+  const isInternalFormat = ['pdf', 'carnet'].includes(kpis.contentType);
+  const monthlySummary = (() => {
+    if (!hasKpiData) return 'Pendiente de carga de métricas. Cuando registres datos, aquí verás el diagnóstico experto del rendimiento.';
+    if ((engagementRate ?? 0) >= 5) {
+      return 'Excelente respuesta de audiencia para este formato; conviene replicar la narrativa visual y el timing.';
+    }
+    if ((engagementRate ?? 0) >= 2) {
+      return 'Rendimiento estable; se recomienda probar variaciones de hook y CTA para escalar interacción.';
+    }
+    return 'Rendimiento por optimizar; sugerimos ajustar gancho inicial, primer frame y llamada a la acción.';
+  })();
 
   return (
     <div className={`group grid grid-cols-1 md:grid-cols-[200px_20px_1fr] transition-all duration-700 border-b border-gray-100 ${isArchived ? 'opacity-50' : 'opacity-100'}`}>
@@ -85,12 +132,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
             <p className="mt-4 text-[8px] font-bold text-gray-300 uppercase tracking-widest text-right">Escalamiento Dinámico de Asset</p>
           </div>
 
-          <div className="flex-1 space-y-8 w-full">
-            <div className="flex justify-between items-start gap-4">
-              <h3 className="text-3xl md:text-6xl font-black uppercase tracking-tighter leading-[0.85] group-hover:text-blue-600 transition-colors duration-500 break-words text-justify">
+          <div className="flex-1 space-y-8 w-full min-w-0">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
+              <h3 className="text-2xl sm:text-3xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] group-hover:text-blue-600 transition-colors duration-500 break-words text-left min-w-0">
                 {project.title}
               </h3>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2 self-end md:self-auto shrink-0">
                 {!isArchived && onEdit && (
                   <button
                     onClick={() => onEdit(project)}
@@ -128,7 +175,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
               </div>
             </div>
 
-            <p className="text-xl md:text-2xl leading-tight text-gray-600 font-light tracking-tight max-w-2xl border-l-2 border-gray-100 pl-6 md:pl-8 text-justify">
+            <p className="text-base sm:text-lg md:text-2xl leading-tight text-gray-600 font-light tracking-tight max-w-2xl border-l-2 border-gray-100 pl-4 md:pl-8 text-left">
               {project.description}
             </p>
 
@@ -142,7 +189,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
               </p>
             </div>
 
-            <div className="flex items-center gap-8 md:gap-12 pt-6">
+            <div className="flex flex-wrap items-start gap-5 md:gap-12 pt-6">
               <div className="flex flex-col">
                 <span className="text-[9px] font-black uppercase text-gray-300 tracking-widest mb-2">Plazo de Entrega</span>
                 <span className="text-sm font-black border-b-2 border-black pb-1">
@@ -157,13 +204,107 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
                   </span>
                 </div>
               )}
-              <div className="flex flex-col">
+              <div className="flex flex-col min-w-[140px]">
                 <span className="text-[9px] font-black uppercase text-gray-300 tracking-widest mb-2">Identificador Único</span>
                 <span className="text-sm font-bold text-gray-400">
                   ID-{project.id}
                 </span>
               </div>
             </div>
+
+            <Collapsible className="border-2 border-black bg-gray-50" defaultOpen={false}>
+              <CollapsibleTrigger asChild>
+                <button className="w-full p-6 flex flex-wrap items-center justify-between gap-3 text-left hover:bg-gray-100 transition-colors">
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-[0.25em] text-blue-600">
+                      KPI por Publicación
+                    </p>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mt-2">
+                      {kpis.platform || 'Red social'} · {kpis.contentType.toUpperCase()} {kpis.periodMonth ? `· ${kpis.periodMonth}` : ''}
+                    </p>
+                  </div>
+                  <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-600">
+                    Desplegar <ChevronDown size={16} />
+                  </span>
+                </button>
+              </CollapsibleTrigger>
+              <CollapsibleContent className="px-6 pb-6">
+                {isSocialFormat && (
+                  <>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                      <div className="border border-black/10 bg-white p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Alcance</p><p className="font-black text-lg">{kpis.reach ?? '-'}</p></div>
+                      <div className="border border-black/10 bg-white p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Impresiones</p><p className="font-black text-lg">{kpis.impressions ?? '-'}</p></div>
+                      <div className="border border-black/10 bg-white p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Interacciones</p><p className="font-black text-lg">{kpis.interactions ?? '-'}</p></div>
+                      <div className="border border-black/10 bg-white p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Reproducciones</p><p className="font-black text-lg">{kpis.plays ?? '-'}</p></div>
+                      <div className="border border-black/10 bg-white p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Visitas perfil</p><p className="font-black text-lg">{kpis.profileVisits ?? '-'}</p></div>
+                      <div className="border border-black/10 bg-white p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Clics enlace</p><p className="font-black text-lg">{kpis.linkClicks ?? '-'}</p></div>
+                      <div className="border border-black/10 bg-white p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Comentarios</p><p className="font-black text-lg">{kpis.comments ?? '-'}</p></div>
+                      <div className="border border-black/10 bg-white p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Guardados</p><p className="font-black text-lg">{kpis.saves ?? '-'}</p></div>
+                    </div>
+                    <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                      <div className="border border-black/10 bg-white p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Me gusta</p><p className="font-black text-lg">{kpis.likes ?? '-'}</p></div>
+                      <div className="border border-black/10 bg-white p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Reposts</p><p className="font-black text-lg">{kpis.reposts ?? '-'}</p></div>
+                      <div className="border border-black/10 bg-white p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Nuevos seguidores</p><p className="font-black text-lg">{kpis.newFollowers ?? '-'}</p></div>
+                      <div className="border border-black/10 bg-white p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Prom. reproducción</p><p className="font-black text-lg">{kpis.avgWatchTimeSec !== undefined ? `${kpis.avgWatchTimeSec}s` : '-'}</p></div>
+                    </div>
+                    {isStoryFormat && (
+                      <div className="mt-3 grid grid-cols-2 md:grid-cols-3 gap-3 text-xs">
+                        <div className="border border-black/10 bg-white p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Respuestas</p><p className="font-black text-lg">{kpis.storyReplies ?? '-'}</p></div>
+                        <div className="border border-black/10 bg-white p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Navegación total</p><p className="font-black text-lg">{kpis.storyNavigation ?? '-'}</p></div>
+                        <div className="border border-black/10 bg-white p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Retrocesos</p><p className="font-black text-lg">{kpis.storyBacks ?? '-'}</p></div>
+                        <div className="border border-black/10 bg-white p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Avances</p><p className="font-black text-lg">{kpis.storyForwards ?? '-'}</p></div>
+                        <div className="border border-black/10 bg-white p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Siguiente historia</p><p className="font-black text-lg">{kpis.storyNextStory ?? '-'}</p></div>
+                        <div className="border border-black/10 bg-white p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Abandonos</p><p className="font-black text-lg">{kpis.storyExits ?? '-'}</p></div>
+                      </div>
+                    )}
+                    <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                      <div className="border border-blue-200 bg-blue-50 p-3">
+                        <p className="text-[9px] uppercase tracking-widest font-bold text-blue-700">Engagement Rate</p>
+                        <p className="font-black text-lg text-blue-700">{engagementRate !== undefined ? formatPercent(engagementRate) : '-'}</p>
+                      </div>
+                      <div className="border border-emerald-200 bg-emerald-50 p-3">
+                        <p className="text-[9px] uppercase tracking-widest font-bold text-emerald-700">CTR</p>
+                        <p className="font-black text-lg text-emerald-700">{ctr !== undefined ? formatPercent(ctr) : '-'}</p>
+                      </div>
+                    </div>
+                    <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                      <div className="border border-black/10 bg-white p-3">
+                        <p className="text-[9px] uppercase tracking-widest font-bold text-gray-500">Distribución Audiencia</p>
+                        <p className="font-semibold text-sm mt-1">Seguidores: {kpis.followerViewsPercent !== undefined ? `${kpis.followerViewsPercent}%` : '-'}</p>
+                        <p className="font-semibold text-sm">No seguidores: {kpis.nonFollowerViewsPercent !== undefined ? `${kpis.nonFollowerViewsPercent}%` : '-'}</p>
+                      </div>
+                      {(isRetentionFormat || isStoryFormat) && (
+                        <div className="border border-black/10 bg-white p-3">
+                          <p className="text-[9px] uppercase tracking-widest font-bold text-gray-500">Retención</p>
+                          <p className="font-semibold text-sm mt-1">Duración: {kpis.videoDurationSec !== undefined ? `${kpis.videoDurationSec}s` : '-'}</p>
+                          <p className="font-semibold text-sm">Omisión: {kpis.skipRatePercent !== undefined ? `${kpis.skipRatePercent}%` : '-'} (habitual {kpis.usualSkipRatePercent !== undefined ? `${kpis.usualSkipRatePercent}%` : '-'})</p>
+                        </div>
+                      )}
+                    </div>
+                    {(isRetentionFormat || isCarouselFormat || isStoryFormat) && (
+                      <div className="mt-4 border border-black/10 bg-white p-3 text-xs">
+                        <p className="text-[9px] uppercase tracking-widest font-bold text-gray-500">Origen de visualizaciones</p>
+                        <p className="mt-1 text-sm font-semibold">
+                          Feed {kpis.feedViewsPercent !== undefined ? `${kpis.feedViewsPercent}%` : '-'} · Reels {kpis.reelsTabViewsPercent !== undefined ? `${kpis.reelsTabViewsPercent}%` : '-'} · Perfil {kpis.profileViewsPercent !== undefined ? `${kpis.profileViewsPercent}%` : '-'} · Historias {kpis.storiesViewsPercent !== undefined ? `${kpis.storiesViewsPercent}%` : '-'}
+                        </p>
+                      </div>
+                    )}
+                  </>
+                )}
+                {isInternalFormat && (
+                  <div className="border border-black/10 bg-white p-4 text-sm text-gray-700">
+                    <p className="font-black uppercase tracking-widest text-[10px] text-gray-500 mb-2">KPI de Proyecto Interno</p>
+                    <p>Este tipo de activo ({kpis.contentType.toUpperCase()}) se evalua por calidad de entrega, aprobacion y utilidad comercial interna. Puedes documentar resultados y observaciones en las notas.</p>
+                  </div>
+                )}
+                <p className="mt-4 text-sm leading-snug text-gray-700 border-l-2 border-blue-500 pl-3">
+                  <span className="font-bold">Resumen experto:</span> {kpis.strategicSummary || monthlySummary}
+                </p>
+                {kpis.notes && (
+                  <p className="mt-2 text-xs text-gray-500 italic">Nota: {kpis.notes}</p>
+                )}
+              </CollapsibleContent>
+            </Collapsible>
           </div>
         </div>
       </div>

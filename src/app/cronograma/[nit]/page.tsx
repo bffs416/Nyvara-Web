@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { Plus, LayoutGrid, Calendar, Archive, Loader2, ShieldAlert, Lock, Upload, Download, RotateCcw } from 'lucide-react';
+import { Plus, LayoutGrid, Calendar, Archive, Loader2, ShieldAlert, Lock, Upload, Download, RotateCcw, ChevronDown } from 'lucide-react';
 import { Project, Client } from '@/lib/types';
 import { projectArraySchema } from '@/lib/schema';
 import ProjectCard from '@/components/cronograma/ProjectCard';
@@ -17,6 +17,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { BriefForm } from '@/components/brief/BriefForm';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Input } from '@/components/ui/input';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
@@ -312,6 +313,150 @@ const CronogramaClientePage = () => {
 
   const activeProjects = projects.filter(p => p.status !== 'archived');
   const archivedProjects = projects.filter(p => p.status === 'archived');
+  const monthlyKpiSummary = useMemo(() => {
+    const inferContentType = (project: Project) => {
+      const title = project.title.toUpperCase();
+      if (title.includes('CARNET')) return 'carnet';
+      if (title.includes('PDF')) return 'pdf';
+      if (title.includes('HISTORIA')) return 'historia';
+      if (title.includes('REEL')) return 'reel';
+      if (title.includes('CARRUSEL')) return 'carrusel';
+      if (title.includes('VIDEO')) return 'video';
+      return 'post';
+    };
+
+    const extractLeadsFromNotes = (notes?: string) => {
+      if (!notes) return undefined;
+      const match = notes.match(/leads?\s*[:=]?\s*(\d+)/i);
+      return match ? Number(match[1]) : undefined;
+    };
+
+    const grouped = new Map<string, {
+      month: string;
+      publications: number;
+      reels: number;
+      historias: number;
+      videos: number;
+      carruseles: number;
+      internos: number;
+      alcance: number;
+      impresiones: number;
+      interacciones: number;
+      reproducciones: number;
+      clics: number;
+      comentarios: number;
+      guardados: number;
+      hasReportedLeads: boolean;
+      reportedLeads: number;
+      storyRows: Array<{ title: string; reach?: number; impressions?: number; interactions?: number; shares?: number; profileVisits?: number; }>;
+      carouselRows: Array<{ title: string; views?: number; interactions?: number; likes?: number; saves?: number; shares?: number; comments?: number; profileVisits?: number; }>;
+      reelRows: Array<{ title: string; views?: number; interactions?: number; likes?: number; shares?: number; comments?: number; saves?: number; }>;
+    }>();
+
+    const sortedProjects = [...activeProjects].sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime());
+
+    for (const project of sortedProjects) {
+      const month = project.kpis?.periodMonth || project.dueDate.slice(0, 7);
+      const inferredType = inferContentType(project);
+      const contentType = project.kpis?.contentType || inferredType;
+      const key = month;
+      const current = grouped.get(key) || {
+        month,
+        publications: 0,
+        reels: 0,
+        historias: 0,
+        videos: 0,
+        carruseles: 0,
+        internos: 0,
+        alcance: 0,
+        impresiones: 0,
+        interacciones: 0,
+        reproducciones: 0,
+        clics: 0,
+        comentarios: 0,
+        guardados: 0,
+        hasReportedLeads: false,
+        reportedLeads: 0,
+        storyRows: [],
+        carouselRows: [],
+        reelRows: [],
+      };
+
+      current.publications += 1;
+      if (contentType === 'reel') current.reels += 1;
+      if (contentType === 'historia') current.historias += 1;
+      if (contentType === 'video') current.videos += 1;
+      if (contentType === 'carrusel') current.carruseles += 1;
+      if (contentType === 'pdf' || contentType === 'carnet') current.internos += 1;
+      current.alcance += project.kpis?.reach || 0;
+      current.impresiones += project.kpis?.impressions || 0;
+      current.interacciones += project.kpis?.interactions || 0;
+      current.reproducciones += project.kpis?.plays || 0;
+      current.clics += project.kpis?.linkClicks || 0;
+      current.comentarios += project.kpis?.comments || 0;
+      current.guardados += project.kpis?.saves || 0;
+      const leads = extractLeadsFromNotes(project.kpis?.notes);
+      if (leads !== undefined) {
+        current.hasReportedLeads = true;
+        current.reportedLeads += leads;
+      }
+
+      if (contentType === 'historia') {
+        current.storyRows.push({
+          title: project.title,
+          reach: project.kpis?.reach,
+          impressions: project.kpis?.impressions,
+          interactions: project.kpis?.interactions,
+          shares: project.kpis?.shares,
+          profileVisits: project.kpis?.profileVisits,
+        });
+      }
+      if (contentType === 'carrusel' || contentType === 'post') {
+        current.carouselRows.push({
+          title: project.title,
+          views: project.kpis?.plays ?? project.kpis?.impressions,
+          interactions: project.kpis?.interactions,
+          likes: project.kpis?.likes,
+          saves: project.kpis?.saves,
+          shares: project.kpis?.shares,
+          comments: project.kpis?.comments,
+          profileVisits: project.kpis?.profileVisits,
+        });
+      }
+      if (contentType === 'reel' || contentType === 'video') {
+        current.reelRows.push({
+          title: project.title,
+          views: project.kpis?.plays ?? project.kpis?.impressions,
+          interactions: project.kpis?.interactions,
+          likes: project.kpis?.likes,
+          shares: project.kpis?.shares,
+          comments: project.kpis?.comments,
+          saves: project.kpis?.saves,
+        });
+      }
+
+      grouped.set(key, current);
+    }
+
+    return Array.from(grouped.values()).sort((a, b) => a.month.localeCompare(b.month)).map(item => {
+      const engagementRate = item.alcance > 0 ? (item.interacciones / item.alcance) * 100 : 0;
+      const ctr = item.impresiones > 0 ? (item.clics / item.impresiones) * 100 : 0;
+      const expertSummary =
+        engagementRate >= 5
+          ? 'Mes con rendimiento sobresaliente. Se recomienda escalar formatos y creatividades ganadoras con pauta ligera.'
+          : engagementRate >= 2
+            ? 'Mes con desempeño saludable. Conviene iterar hooks y CTA para mejorar interacción y clics.'
+            : 'Mes con oportunidad de optimización. Priorizar pruebas A/B en apertura, copy y segmentación de audiencia.';
+
+      return {
+        ...item,
+        engagementRate,
+        ctr,
+        expertSummary,
+        reportedLeads: item.hasReportedLeads ? item.reportedLeads : undefined,
+      };
+    });
+  }, [activeProjects]);
 
   if (isLoading) {
     return (
@@ -437,8 +582,182 @@ const CronogramaClientePage = () => {
 
             {view === 'list' && (
               <div>
+                {monthlyKpiSummary.length > 0 && (
+                  <Collapsible className="mb-14 border-2 border-black bg-white" defaultOpen={false}>
+                    <CollapsibleTrigger asChild>
+                      <button className="w-full p-6 md:p-8 flex flex-wrap items-center justify-between gap-3 text-left hover:bg-gray-50 transition-colors">
+                        <div>
+                          <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter">KPI Mensual Consolidado</h2>
+                          <p className="text-sm text-gray-500 mt-2">Resumen experto por mes para publicaciones del cronograma de {client.clientName}.</p>
+                        </div>
+                        <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-600">
+                          Desplegar <ChevronDown size={16} />
+                        </span>
+                      </button>
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="px-6 md:px-8 pb-6 md:pb-8">
+                      <div className="space-y-5">
+                        {monthlyKpiSummary.map(item => (
+                          <article key={item.month} className="border border-black/15 p-4 md:p-5 bg-gray-50">
+                            <div className="flex flex-wrap items-center gap-3 justify-between">
+                              <h3 className="text-lg md:text-xl font-black uppercase tracking-tight">{item.month}</h3>
+                              <p className="text-[11px] uppercase tracking-widest font-bold text-gray-500">
+                                {item.publications} publicaciones · {item.reels} reels · {item.videos} videos · {item.carruseles} carruseles · {item.historias} historias · {item.internos} internos
+                              </p>
+                            </div>
+                            <div className="grid grid-cols-2 md:grid-cols-6 gap-3 mt-4">
+                              <div className="bg-white border border-black/10 p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Alcance</p><p className="font-black text-lg">{item.alcance}</p></div>
+                              <div className="bg-white border border-black/10 p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Impresiones</p><p className="font-black text-lg">{item.impresiones}</p></div>
+                              <div className="bg-white border border-black/10 p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Interacciones</p><p className="font-black text-lg">{item.interacciones}</p></div>
+                              <div className="bg-white border border-black/10 p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Reproducciones</p><p className="font-black text-lg">{item.reproducciones}</p></div>
+                              <div className="bg-white border border-blue-200 p-3"><p className="text-[9px] uppercase text-blue-600 font-bold">Engagement</p><p className="font-black text-lg text-blue-700">{item.engagementRate.toFixed(2)}%</p></div>
+                              <div className="bg-white border border-emerald-200 p-3"><p className="text-[9px] uppercase text-emerald-600 font-bold">CTR</p><p className="font-black text-lg text-emerald-700">{item.ctr.toFixed(2)}%</p></div>
+                            </div>
+                            <p className="mt-4 text-sm text-gray-700 border-l-2 border-blue-500 pl-3">
+                              <span className="font-bold">Resumen experto:</span> {item.expertSummary}
+                            </p>
+                            <div className="mt-4 space-y-4">
+                              {item.storyRows.length > 0 && (
+                                <div className="overflow-x-auto border border-black/10 bg-white">
+                                  <table className="w-full text-xs">
+                                    <thead className="bg-gray-100">
+                                      <tr className="text-left">
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Historias</th>
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Alcance</th>
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Impresiones</th>
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Acciones</th>
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Compartidos</th>
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Visitas perfil</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {item.storyRows.map((row, index) => (
+                                        <tr key={`${item.month}-story-${index}`} className="border-t border-black/10">
+                                          <td className="p-2 font-semibold">{row.title}</td>
+                                          <td className="p-2">{row.reach ?? '-'}</td>
+                                          <td className="p-2">{row.impressions ?? '-'}</td>
+                                          <td className="p-2">{row.interactions ?? '-'}</td>
+                                          <td className="p-2">{row.shares ?? '-'}</td>
+                                          <td className="p-2">{row.profileVisits ?? '-'}</td>
+                                        </tr>
+                                      ))}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              )}
+
+                              {item.carouselRows.length > 0 && (
+                                <div className="overflow-x-auto border border-black/10 bg-white">
+                                  <table className="w-full text-xs">
+                                    <thead className="bg-gray-100">
+                                      <tr className="text-left">
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Carruseles / Post</th>
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Visualizaciones</th>
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Interacciones</th>
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Me gusta</th>
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Guardados</th>
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Compartidos</th>
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Comentarios</th>
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Visitas perfil</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {item.carouselRows.map((row, index) => (
+                                        <tr key={`${item.month}-carousel-${index}`} className="border-t border-black/10">
+                                          <td className="p-2 font-semibold">{row.title}</td>
+                                          <td className="p-2">{row.views ?? '-'}</td>
+                                          <td className="p-2">{row.interactions ?? '-'}</td>
+                                          <td className="p-2">{row.likes ?? '-'}</td>
+                                          <td className="p-2">{row.saves ?? '-'}</td>
+                                          <td className="p-2">{row.shares ?? '-'}</td>
+                                          <td className="p-2">{row.comments ?? '-'}</td>
+                                          <td className="p-2">{row.profileVisits ?? '-'}</td>
+                                        </tr>
+                                      ))}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              )}
+
+                              {item.reelRows.length > 0 && (
+                                <div className="overflow-x-auto border border-black/10 bg-white">
+                                  <table className="w-full text-xs">
+                                    <thead className="bg-gray-100">
+                                      <tr className="text-left">
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Reels / Videos</th>
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Visualizaciones</th>
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Interacciones</th>
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Me gusta</th>
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Compartidos</th>
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Guardados</th>
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Comentarios</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {item.reelRows.map((row, index) => (
+                                        <tr key={`${item.month}-reel-${index}`} className="border-t border-black/10">
+                                          <td className="p-2 font-semibold">{row.title}</td>
+                                          <td className="p-2">{row.views ?? '-'}</td>
+                                          <td className="p-2">{row.interactions ?? '-'}</td>
+                                          <td className="p-2">{row.likes ?? '-'}</td>
+                                          <td className="p-2">{row.shares ?? '-'}</td>
+                                          <td className="p-2">{row.saves ?? '-'}</td>
+                                          <td className="p-2">{row.comments ?? '-'}</td>
+                                        </tr>
+                                      ))}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              )}
+
+                              <div className="overflow-x-auto border border-black/10 bg-white">
+                                <table className="w-full text-xs">
+                                  <thead className="bg-gray-100">
+                                    <tr className="text-left">
+                                      <th className="p-2 font-black uppercase tracking-widest text-[10px]">Leads (Instagram/DM)</th>
+                                      <th className="p-2 font-black uppercase tracking-widest text-[10px]">Resultado</th>
+                                      <th className="p-2 font-black uppercase tracking-widest text-[10px]">Fuente</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr className="border-t border-black/10">
+                                      <td className="p-2 font-semibold">Leads registrados</td>
+                                      <td className="p-2">{item.reportedLeads ?? 'Sin dato cargado'}</td>
+                                      <td className="p-2 text-gray-500">Notas KPI del mes</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </article>
+                        ))}
+                      </div>
+                    </CollapsibleContent>
+                  </Collapsible>
+                )}
+
                 {(() => {
                   const getCategory = (project: Project) => {
+                    if (client.clientName === 'MILDRED MORENO') {
+                      const rawTitle = project.title.toUpperCase();
+                      // Espera títulos tipo: "Nombre de pieza _ Historia"
+                      const parts = rawTitle.split('_');
+                      const suffix = parts[parts.length - 1].trim();
+
+                      if (suffix === 'HISTORIA') return 'Historia';
+                      if (suffix === 'REEL' || suffix === 'VIDEO') return 'Reel';
+                      if (suffix === 'POST') return 'Post';
+                      if (suffix === 'CARRUSEL' || suffix === 'CARRUSEL ') return 'Carrusel';
+                      if (suffix === 'PIEZA' || suffix === 'PDF' || suffix === 'CARNET') return 'Pieza';
+
+                      // Fallback suave si el sufijo no viene bien formateado
+                      if (rawTitle.includes('HISTORIA')) return 'Historia';
+                      if (rawTitle.includes('REEL') || rawTitle.includes('VIDEO')) return 'Reel';
+                      if (rawTitle.includes('CARRUSEL')) return 'Carrusel';
+                      if (rawTitle.includes('POST')) return 'Post';
+                      return 'Pieza';
+                    }
+
                     const title = project.title.toUpperCase();
                     if (title.includes('KLARDIE')) return 'Klardie';
                     if (title.includes('MINT')) return 'Mint';
@@ -446,7 +765,10 @@ const CronogramaClientePage = () => {
                     return 'Otros';
                   };
 
-                  const categories = ['Klardie', 'Mint', 'Lion', 'Otros'];
+                  const categories =
+                    client.clientName === 'MILDRED MORENO'
+                      ? ['Historia', 'Reel', 'Post', 'Carrusel', 'Pieza']
+                      : ['Klardie', 'Mint', 'Lion', 'Otros'];
                   const categorizedProjects = activeProjects.reduce((acc, project) => {
                     const category = getCategory(project);
                     if (!acc[category]) acc[category] = [];
