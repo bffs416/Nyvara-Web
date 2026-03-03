@@ -9,7 +9,6 @@
           "title": "PDF INFORMATIVO CARACTERISTICAS DE KLARDIE D+ & R+ PARA LOS EJECUTIVOS",
           "description": "Información estilo brochure con características de los productos, en cuanto a sus componentes y beneficios.",
           "reason": "Para que el Equipo tenga claras las características técnicas de material, con el fin de comercializar el producto a los especialista",
-          "imageUrl": "/cronograma/D+.png",
           "dueDate": "2026-01-30",
           "createdAt": "2024-01-01T00:00:00.000Z",
           "status": "done",
@@ -19,17 +18,17 @@
             "periodMonth": "2026-01",
             "strategicSummary": "Pieza de soporte comercial interno enfocada en claridad tecnica para fuerza de ventas.",
             "notes": "Proyecto interno no orientado a KPIs de redes; medir por adopcion del equipo, uso en visitas y calidad de argumentario."
-          }
+          },
+          "imageUrl": "/cronograma/D+.png"
         },
         {
           "id": "478242",
           "title": "HISTORIA: CAPACITACIÓN D2D MINT™ & KLARDIE (CALI 2026)",
           "description": "Creación de Flyer Vertical (Formato Historia/Reel) para difusión en WhatsApp y redes sociales, optimizado para móviles. Adaptación de identidad para folletería impresa o posts cuadrados (Feed). Integración de Branding: Fusión de la identidad corporativa de Hansbiomed, MINT™ y Klardie con la marca personal de la Dra. Virginia Escobar, manteniendo coherencia visual y jerarquía de logotipos.",
           "reason": "Maximizar la atracción de nuevos prospectos (médicos estéticos) hacia los talleres educativos de Hansbiomed e impulsar la conversión de ventas inmediata, comunicando visualmente una oferta de valor premium que motive la adquisición de la promoción vigente.",
-          "imageUrl": "/cronograma/HILOS MINT - CALI.png",
           "dueDate": "2026-01-30",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "urgent",
+          "status": "completed",
           "kpis": {
             "contentType": "historia",
             "platform": "Instagram",
@@ -48,17 +47,17 @@
             "storyReplies": 0,
             "strategicSummary": "Historia con buen equilibrio entre alcance e intención: obtuvo compartidos y visitas al perfil, señal de interés en el evento.",
             "notes": "Evento MINT. Acciones: 4 (2 compartidos y 2 visitas al perfil)."
-          }
+          },
+          "imageUrl": "/cronograma/HILOS MINT - CALI.png"
         },
         {
           "id": "1",
           "title": "HISTORIA: UPGRADE KLARDIE D+",
           "description": "Mostrar el cambio de la imagen. Mostrar la mayor cantidad de componentes que tienen adicionales. Mostrar un comparativo entre lo que era Dia y la versión mejorada que es D+",
           "reason": "Hacer una visual del Upgrade que tiene D+ vs Dia en comparativa, para que los médicos conozcan el producto y sepan que tiene mejores componentes que sirven para sus procedimientos.",
-          "imageUrl": "/cronograma/3.png",
           "dueDate": "2026-02-05",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "urgent",
+          "status": "completed",
           "kpis": {
             "contentType": "historia",
             "platform": "Instagram",
@@ -77,17 +76,17 @@
             "storyReplies": 0,
             "strategicSummary": "Historia de upgrade con buen alcance base y consumo secuencial estable; la acción principal se concentró en compartidos.",
             "notes": "Klaridie D+ collage."
-          }
+          },
+          "imageUrl": "/cronograma/3.png"
         },
         {
           "id": "895552",
           "title": "HISTORIA: UPGRADE KLARDIE R+",
           "description": "Mostrar el cambio de la imagen. Mostrar la mayor cantidad de componentes que tienen adicionales. Mostrar un comparativo entre lo que era Dia y la versión mejorada que es R+",
           "reason": "Hacer una visual del Upgrade que tiene R+ vs Dia en comparativa, para que los médicos conozcan el producto y sepan que tiene mejores componentes que sirven para sus procedimientos.",
-          "imageUrl": "/cronograma/4.png",
           "dueDate": "2026-02-06",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "urgent",
+          "status": "completed",
           "kpis": {
             "contentType": "historia",
             "platform": "Instagram",
@@ -104,19 +103,19 @@
             "storyNextStory": 13,
             "storyExits": 8,
             "storyReplies": 0,
-            "strategicSummary": "Historia de upgrade con menor profundidad de navegación que otras piezas, pero con señal de compartibilidad.",
+            "strategicSummary": "Historia de upgrade with lower navigation depth than other pieces, but with signals of shareability.",
             "notes": "Klaridie R+ collage."
-          }
+          },
+          "imageUrl": "/cronograma/4.png"
         },
         {
           "id": "421790",
           "title": "CARRUSEL INFORMATIVO: KLARDIE D+ (LANZAMIENTO DE PRODUCTO)",
           "description": "Primeras imágenes serían hablar un poco de las características del producto y de la presentación. Las siguientes imágenes del carrusel serían de aplicación del producto.",
           "reason": "Brindar información amplia del nuevo producto a los clientes. ",
-          "imageUrl": "/cronograma/1.png",
           "dueDate": "2026-02-09",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending",
+          "status": "completed",
           "kpis": {
             "contentType": "carrusel",
             "platform": "Instagram",
@@ -135,19 +134,36 @@
             "feedViewsPercent": 55.9,
             "profileViewsPercent": 24.1,
             "storiesViewsPercent": 18.4,
-            "strategicSummary": "El carrusel D mantuvo buen volumen de visualizaciones y destacó por acciones de consideración (guardados y compartidos).",
+            "strategicSummary": "The carrusel D maintained good volume of views and highlighted consideration actions (saves and shares).",
             "notes": "Visualizaciones: 897. Interacciones: 23."
-          }
+          },
+          "imageUrl": "/cronograma/1.png"
+        },
+        {
+          "id": "4",
+          "title": "CARNET",
+          "description": "Retomando lo conversado por WhatsApp, necesitamos una propuesta de diseño de carnet corporativo, como el de referencia adjunto.\n\nLineamientos:\n\nMedidas: 8,5 cm alto x 5,3 cm ancho\n\nCantidad inicial: 13 carnets\n\nIncluir:\n\nFoto del ejecutivo\n\nDatos básicos\n\nQR (puede dirigir a una imagen o ficha del ejecutivo, no a la web por ahora, ya que está desactualizada)\n\n\nLa idea es que esta plantilla luego pueda compartirse con Talento Humano. Adjunto foto de referencia que tenían",
+          "reason": "OBJETIVO: Contenido Educativo. TITULAR: Carnet corporativo – 2  Propuestas. REFERENCIAS: ADJUNTO correo enviado 4 de febrero",
+          "dueDate": "2026-02-09",
+          "createdAt": "2026-02-06T21:07:36.915476+00:00",
+          "status": "completed",
+          "kpis": {
+            "contentType": "carnet",
+            "platform": "Interno",
+            "periodMonth": "2026-02",
+            "strategicSummary": "Corporate identity asset to standardize sales team presentation and improve brand recognition in the field.",
+            "notes": "Internal project not social media oriented; measure by delivery coverage, production time and print quality."
+          },
+          "imageUrl": "/cronograma/Carnet.jpeg"
         },
         {
           "id": "517116",
           "title": "CARRUSEL INFORMATIVO: KLARDIE R+ (LANZAMIENTO DE PRODUCTO)",
           "description": "Primeras imágenes serían hablar un poco de las características del producto y de la presentación. Las siguientes imágenes del carrusel serían de aplicación del producto.",
           "reason": "Brindar información amplia del nuevo producto a los clientes. ",
-          "imageUrl": "/cronograma/8.png",
           "dueDate": "2026-02-11",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending",
+          "status": "completed",
           "kpis": {
             "contentType": "carrusel",
             "platform": "Instagram",
@@ -167,19 +183,19 @@
             "profileViewsPercent": 15.7,
             "storiesViewsPercent": 13.9,
             "exploreViewsPercent": 0.9,
-            "strategicSummary": "El carrusel R obtuvo igual volumen de visualizaciones y mayor profundidad de interacción, especialmente en guardados.",
+            "strategicSummary": "The carrusel R obtained equal volume of views and greater depth of interaction, especially in saves.",
             "notes": "Visualizaciones: 897. Interacciones: 26."
-          }
+          },
+          "imageUrl": "/cronograma/8.png"
         },
         {
           "id": "150255",
           "title": "HISTORIA: PRE- CARNAVAL DE BARRANQUILLA",
           "description": "Pieza publicitaria para hacer énfasis al cuidado de la piel antes de las fiestas de Barranquilla que van desde el 14 al 18 de febrero, haciendo conciencia de que las personas deben cuidarse la piel.",
           "reason": "La idea con esto es impulsar la venta del producto Fusi-Ket, que está diseñado para pieles sensibles. Apto específicamente para la promoción del carnaval de Barranquilla, por el cuidado que deben de tener antes la piel y la protección debido a la exposición a los rayos solares. ",
-          "imageUrl": "/cronograma/Pre-Carnaval.png",
           "dueDate": "2026-02-12",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending",
+          "status": "completed",
           "kpis": {
             "contentType": "historia",
             "platform": "Instagram",
@@ -196,19 +212,19 @@
             "storyNextStory": 7,
             "storyExits": 17,
             "storyReplies": 0,
-            "strategicSummary": "Historia estacional con buen rendimiento relativo en acciones, especialmente visitas al perfil.",
+            "strategicSummary": "Seasonal story with good relative performance in actions, especially profile visits.",
             "notes": "Carnaval. Acciones: 5 (1 compartido y 4 visitas al perfil)."
-          }
+          },
+          "imageUrl": "/cronograma/Pre-Carnaval.png"
         },
         {
           "id": "064633",
           "title": "HISTORIA: SAN VALENTIN",
           "description": "La idea central es la analogía entre la fusión física del producto y el sentimiento de la fecha de San Valentín.",
           "reason": "Busca transmitir: amor propio, tecnología con propósito, seguridad y respaldo de la marca.",
-          "imageUrl": "/cronograma/Amor& Amistad.png",
           "dueDate": "2026-02-14",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending",
+          "status": "completed",
           "kpis": {
             "contentType": "historia",
             "platform": "Instagram",
@@ -225,19 +241,19 @@
             "storyNextStory": 6,
             "storyExits": 12,
             "storyReplies": 0,
-            "strategicSummary": "Historia de temporada con alcance bajo pero lectura clara de intención por visita al perfil.",
+            "strategicSummary": "Holiday story with low reach but clear signal of intent through profile visit.",
             "notes": "San Valentin."
-          }
+          },
+          "imageUrl": "/cronograma/Amor& Amistad.png"
         },
         {
           "id": "983180",
           "title": "HISTORIA: LION + COSMETICOS / PROMOCION",
           "description": "Pieza Publicitaria, para Promocionar el producto de estimulación Capilar e implante capilar, ya que juntos para la practica medica, funcionan mejor.",
           "reason": "El objetivo es brindar la información a los médicos para que asocien la combinación de ambos productos ",
-          "imageUrl": "/cronograma/Lion+Klardie.png",
           "dueDate": "2026-02-16",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending",
+          "status": "completed",
           "kpis": {
             "contentType": "historia",
             "platform": "Instagram",
@@ -254,19 +270,19 @@
             "storyNextStory": 19,
             "storyExits": 18,
             "storyReplies": 0,
-            "strategicSummary": "Historia promocional con alcance medio y nula acción; requiere CTA más directo para activar conversaciones.",
+            "strategicSummary": "Promotional story with medium reach and no action; requires more direct CTA to activate conversations.",
             "notes": "Promocion especial."
-          }
+          },
+          "imageUrl": "/cronograma/Lion+Klardie.png"
         },
         {
           "id": "090467",
           "title": "HISTORIA: CUIDADO POST CARNAVALES",
           "description": "Una pieza publicitaria que haga referencia al evento que hay en Barranquilla del Carnaval, en el cual le digamos al usuario que utilice el producto después de deshidratación, exposición al sol, y aquí tenemos el producto Fusicare",
           "reason": "El objetivo o el propósito básicamente es que los usuarios, población normal que desea cuidarse la piel, conozca el producto Fusicare, que es para pieles sensibles, irritadas, que necesita cuidado post incluso en ambientes que tienen mucho impacto solar.",
-          "imageUrl": "/cronograma/images.png",
           "dueDate": "2026-02-17",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending",
+          "status": "completed",
           "kpis": {
             "contentType": "historia",
             "platform": "Instagram",
@@ -283,57 +299,38 @@
             "storyNextStory": 13,
             "storyExits": 15,
             "storyReplies": 0,
-            "strategicSummary": "Historia de cuidado post-evento con menor alcance, pero con intención visible en visitas al perfil.",
+            "strategicSummary": "Post-event care story with lower reach, but visible intent in profile visits.",
             "notes": "Fusicare."
-          }
+          },
+          "imageUrl": "/cronograma/images.png"
         },
         {
           "id": "474488",
           "title": "VIDEO: PROTOCOLO KLARDIE D+& R+CON MONOFILAMENTO EN CUERO CABELLUDO",
           "description": "Un video desechando el uso combinado de los hilos monofilamento con el bioestimulador KLARDIE. Combinacion de productos.",
           "reason": "Mostrar la efectividad de los dos productos combinados para estimulación capilar.",
-          "imageUrl": "/cronograma/PDO_Threads_for_Hair_Growth1.webp",
           "dueDate": "2026-02-20",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending",
+          "status": "completed",
           "kpis": {
             "contentType": "video",
             "platform": "Instagram",
             "periodMonth": "2026-02",
             "plays": 378,
             "interactions": 12,
-            "strategicSummary": "Video técnico con rendimiento de interacción moderado; conviene reforzar hook inicial y CTA de cierre para elevar respuesta.",
+            "strategicSummary": "Technical video with moderate interaction performance; should reinforce initial hook and closing CTA to increase response.",
             "notes": "Material base entregado por Hansbiomed con ajuste final de Nyvara para publicación."
-          }
-        },
-        {
-          "id": "184466",
-          "title": "VIDEO POTCAST # 3 MINT: SIN HILOS EN LA LENGUA",
-          "description": "Video para apoyar el concepto de los hilos tensores, con base en la experiencia de dos médicos expertos en la materia, para desinformar las redes y el concepto de los hilos.",
-          "reason": "Generar confianza en los clientes finales y los clientes directos, con el fin de que se incrementen las ventas para Hansbiomed.",
-          "imageUrl": "/cronograma/potcast.png",
-          "dueDate": "2026-02-24",
-          "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending",
-          "kpis": {
-            "contentType": "reel",
-            "platform": "Instagram",
-            "periodMonth": "2026-02",
-            "plays": 1814,
-            "interactions": 43,
-            "strategicSummary": "Fue la pieza audiovisual de mayor desempeño del periodo, validando la co-creación como palanca orgánica.",
-            "notes": "Sin hilos en la lengua (colab speakers)."
-          }
+          },
+          "imageUrl": "/cronograma/PDO_Threads_for_Hair_Growth1.webp"
         },
         {
           "id": "606687",
           "title": "HISTORIA: HILOS TENSORES MINT",
           "description": "Generar tanto deseo como confianza para el paciente y médico.",
           "reason": "Desmentificar el procedimiento de hilos tensores, mostrándolo no como una cirugía agresiva, sino como una intervención de alta precisión tecnológica.",
-          "imageUrl": "/cronograma/Hilos.png",
           "dueDate": "2026-02-23",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending",
+          "status": "completed",
           "kpis": {
             "contentType": "historia",
             "platform": "Instagram",
@@ -351,45 +348,259 @@
             "storyNextStory": 10,
             "storyExits": 6,
             "storyReplies": 1,
-            "strategicSummary": "Historia con interacción cualitativa valiosa al registrar respuesta directa por DM.",
+            "strategicSummary": "Story with valuable qualitative interaction by registering a direct response via DM.",
             "notes": "Hilos MINT. Acciones: 3 (1 respuesta y 2 visitas al perfil)."
-          }
+          },
+          "imageUrl": "/cronograma/Hilos.png"
+        },
+        {
+          "id": "184466",
+          "title": "VIDEO POTCAST # 3 MINT: SIN HILOS EN LA LENGUA",
+          "description": "Video para apoyar el concepto de los hilos tensores, con base en la experiencia de dos médicos expertos en la materia, para desinformar las redes y el concepto de los hilos.",
+          "reason": "Generar confianza en los clientes finales y los clientes directos, con el fin de que se incrementen las ventas para Hansbiomed.",
+          "dueDate": "2026-02-24",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "status": "completed",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram",
+            "periodMonth": "2026-02",
+            "plays": 1814,
+            "interactions": 43,
+            "strategicSummary": "Highest performing audiovisual piece of the period, validating co-creation as an organic lever.",
+            "notes": "Sin hilos en la lengua (colab speakers)."
+          },
+          "imageUrl": "/cronograma/potcast.png"
         },
         {
           "id": "772233",
           "title": "VIDEO: ANIMACIÓN KLARDIE (MÉXICO)",
           "description": "Video animado de Klardie proveniente de la filial de México, destacando las bondades del producto.",
           "reason": "Reforzar la presencia de marca con contenido audiovisual de alta calidad internacional.",
-          "imageUrl": "/cronograma/Guerreros.png",
           "dueDate": "2026-02-26",
           "createdAt": "2024-01-01T00:00:00.000Z",
-          "status": "pending",
+          "status": "completed",
           "kpis": {
             "contentType": "reel",
             "platform": "Instagram",
             "periodMonth": "2026-02",
             "plays": 571,
             "interactions": 20,
-            "strategicSummary": "Video de rendimiento intermedio: mejoró frente a piezas técnicas, pero por debajo del contenido colaborativo.",
+            "strategicSummary": "Intermediate performance video: improved compared to technical pieces, but behind collaborative content.",
             "notes": "Mono con D+."
-          }
+          },
+          "imageUrl": "/cronograma/Guerreros.png"
         },
         {
-          "id": "4",
-          "title": "CARNET",
-          "description": "Retomando lo conversado por WhatsApp, necesitamos una propuesta de diseño de carnet corporativo, como el de referencia adjunto.\n\nLineamientos:\n\nMedidas: 8,5 cm alto x 5,3 cm ancho\n\nCantidad inicial: 13 carnets\n\nIncluir:\n\nFoto del ejecutivo\n\nDatos básicos\n\nQR (puede dirigir a una imagen o ficha del ejecutivo, no a la web por ahora, ya que está desactualizada)\n\n\nLa idea es que esta plantilla luego pueda compartirse con Talento Humano. Adjunto foto de referencia que tenían",
-          "reason": "OBJETIVO: Contenido Educativo. TITULAR: Carnet corporativo – 2  Propuestas. REFERENCIAS: ADJUNTO correo enviado 4 de febrero",
-          "imageUrl": "/cronograma/Carnet.jpeg",
-          "dueDate": "2026-02-09",
-          "createdAt": "2026-02-06T21:07:36.915476+00:00",
+          "id": "1772547292016",
+          "title": "REEL: FUSICARE",
+          "description": "",
+          "reason": "Video para posicionamiento + educación Medico y Paciente",
+          "dueDate": "2026-03-05",
+          "createdAt": "2026-03-03T14:14:52.016Z",
           "status": "pending",
+          "publishTime": "13:00",
           "kpis": {
-            "contentType": "carnet",
-            "platform": "Interno",
-            "periodMonth": "2026-02",
-            "strategicSummary": "Activo de identidad corporativa para estandarizar presentacion del equipo comercial y mejorar reconocimiento de marca en campo.",
-            "notes": "Proyecto interno no orientado a redes; medir por cobertura de entrega, tiempo de produccion y calidad de impresion."
-          }
+            "contentType": "reel",
+            "platform": "Instagram"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "1772547356380",
+          "title": "HISTORIA: SKINCARE INTERACCIÓN CON MEDICOS",
+          "description": "",
+          "reason": "Pieza que lleva a responder la encuesta a medicos sobre si usan el skincare en sus protocolos\n",
+          "dueDate": "2026-03-06",
+          "createdAt": "2026-03-03T14:15:56.380Z",
+          "status": "pending",
+          "publishTime": "09:00",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram",
+            "periodMonth": "2026-03"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "1772547553160",
+          "title": "CARRUSEL (5PP): SKINCARE EDUCATIVO PARA MEDICOS",
+          "description": "",
+          "reason": "Informatico especializado para medicos, adicionalmente base de conocimientos para los ejecutivos en sus visitas\n",
+          "dueDate": "2026-03-07",
+          "createdAt": "2026-03-03T14:19:13.160Z",
+          "status": "pending",
+          "publishTime": "10:00",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "1772547605868",
+          "title": "HISTORIA: DIA DE LA MUJER",
+          "description": "",
+          "reason": "Celebrar el dia de la mujer (fuerza y Belleza) ",
+          "dueDate": "2026-03-08",
+          "createdAt": "2026-03-03T14:20:05.868Z",
+          "status": "pending",
+          "publishTime": "08:30",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "1772547664446",
+          "title": "HISTORIA : DUDAS LION",
+          "description": "",
+          "reason": "conocer si los medicos tienen dudas  respecto a la linea de negocio \n",
+          "dueDate": "2026-03-10",
+          "createdAt": "2026-03-03T14:21:04.446Z",
+          "status": "pending",
+          "publishTime": "09:00",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "1772547725502",
+          "title": "HISTORIA:  RESPUESTAS PREGUNTAS LION",
+          "description": "",
+          "reason": "Pieza gráfica con un fondo profesional y limpio, que permita escribir las respuestas dadas por el equipo de HANS.\nLas respuestas se colocarán tal cual fueron enviadas, con las letras y el formato que genere Instagram, para no consumir varias piezas del paquete.",
+          "dueDate": "2026-03-11",
+          "createdAt": "2026-03-03T14:22:05.502Z",
+          "status": "pending",
+          "publishTime": "09:00",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "1772547834273",
+          "title": "CARRUSEL: POSICIONAMIENTO LION",
+          "description": "",
+          "reason": "Informacion referente a los productos LION , academia para el medico y los ejecutivos ",
+          "dueDate": "2026-03-12",
+          "createdAt": "2026-03-03T14:23:54.273Z",
+          "status": "pending",
+          "publishTime": "13:00",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "1772547909192",
+          "title": "REEL : D+ DIFERENCIACION TECNICA",
+          "description": "",
+          "reason": "¿Porque destaca en el mercado ?",
+          "dueDate": "2026-03-16",
+          "createdAt": "2026-03-03T14:25:09.192Z",
+          "status": "pending",
+          "publishTime": "15:00",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "1772547981047",
+          "title": "HISTORIA:D+ RESULTADOS EN LA DERMIS",
+          "description": "",
+          "reason": "Previsualizacion del efecto bioestimulante de D+ en la dermis, imagenes macro",
+          "dueDate": "2026-03-17",
+          "createdAt": "2026-03-03T14:26:21.047Z",
+          "status": "pending",
+          "publishTime": "11:00",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "1772548045893",
+          "title": "HISTORIA : ENCUESTA R+ ",
+          "description": "",
+          "reason": "Realizar una encuesta de participacion para medicos referente al producto, para conocer si R+ es un complemento dentro de su consulta ",
+          "dueDate": "2026-03-19",
+          "createdAt": "2026-03-03T14:27:25.893Z",
+          "status": "pending",
+          "publishTime": "09:00",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "1772548110123",
+          "title": "POST : R+ MITOS VS REALIDADES",
+          "description": "",
+          "reason": "Aclarar los mitos que incurre la despigmentacion, con este producto",
+          "dueDate": "2026-03-20",
+          "createdAt": "2026-03-03T14:28:30.123Z",
+          "status": "pending",
+          "publishTime": "16:00",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "1772548160252",
+          "title": "CARRUSEL ( 3PP) : HANSBIOMED ",
+          "description": "",
+          "reason": "Mostrar que HANSBIOMED es un ecosistema de soluciones medicas esteticas ",
+          "dueDate": "2026-03-24",
+          "createdAt": "2026-03-03T14:29:20.252Z",
+          "status": "pending",
+          "publishTime": "10:00",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "1772548241910",
+          "title": "HISTORIA : ASESORIA PERSONALIZADA",
+          "description": "",
+          "reason": "Que la comunidad conozca que hansbiomed es un equipo solido, construido , llamado a responder historias para realizar contacto con ejecutivo ",
+          "dueDate": "2026-03-26",
+          "createdAt": "2026-03-03T14:30:41.910Z",
+          "status": "pending",
+          "publishTime": "10:00",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "1772548292481",
+          "title": "HISTORIA: SKIN CARE TIP DE CUIDADO SEMANA SANTA",
+          "description": "",
+          "reason": "Promocion para cuidado de piel - semana santa ",
+          "dueDate": "2026-03-30",
+          "createdAt": "2026-03-03T14:31:32.481Z",
+          "status": "pending",
+          "publishTime": "08:00",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram"
+          },
+          "imageUrl": "/cronograma/default.png"
         }
       ]
     },
