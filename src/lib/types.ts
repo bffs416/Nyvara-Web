@@ -69,6 +69,8 @@ export interface Project {
   status: 'pending' | 'completed' | 'archived' | 'urgent';
   publishTime?: string;
   kpis?: ProjectKpis;
+  attachmentUrl?: string;
+  attachmentName?: string;
 }
 
 export interface Client {

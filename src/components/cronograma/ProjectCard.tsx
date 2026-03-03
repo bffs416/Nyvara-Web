@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Project } from '@/lib/types';
-import { Archive, AlertCircle, Clock, CheckCircle, RotateCcw, Target, Layers, Edit2, Trash2, ChevronDown } from 'lucide-react';
+import { Archive, AlertCircle, Clock, CheckCircle, RotateCcw, Target, Layers, Edit2, Trash2, ChevronDown, Paperclip } from 'lucide-react';
 import Image from 'next/image';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
@@ -210,6 +210,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
                   ID-{project.id}
                 </span>
               </div>
+              {project.attachmentUrl && (
+                <div className="flex flex-col">
+                  <span className="text-[9px] font-black uppercase text-blue-400 tracking-widest mb-2">Archivo Adjunto</span>
+                  <a
+                    href={project.attachmentUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-sm font-black border-b-2 border-blue-600 pb-1 text-blue-600 hover:bg-blue-50 transition-colors"
+                  >
+                    <Paperclip size={14} />
+                    {project.attachmentName || 'Ver archivo'}
+                  </a>
+                </div>
+              )}
             </div>
 
             <Collapsible className="border-2 border-black bg-gray-50" defaultOpen={false}>

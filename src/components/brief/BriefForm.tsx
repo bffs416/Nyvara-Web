@@ -3,7 +3,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState, useTransition, useRef } from "react";
-import { Loader2, FileDown } from "lucide-react";
+import { Loader2, FileDown, Paperclip, X } from "lucide-react";
+import { createClient as createSupabaseClient } from "@/lib/supabase/client";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
@@ -55,6 +56,9 @@ export function BriefForm({ onBriefCreated, onClose, nit, clientName }: BriefFor
   const [isPending, startTransition] = useTransition();
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   const form = useForm<BriefFormValues>({
     resolver: zodResolver(briefFormSchema),
@@ -111,6 +115,63 @@ export function BriefForm({ onBriefCreated, onClose, nit, clientName }: BriefFor
         description: "No se pudo crear el archivo PDF.",
       });
     }
+  };
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsUploading(true);
+    setUploadProgress(10);
+
+    try {
+      const supabase = createSupabaseClient();
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+      const filePath = `brief-attachments/${fileName}`;
+
+      setUploadProgress(30);
+
+      const { data, error } = await supabase.storage
+        .from('project-assets')
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: false
+        });
+
+      if (error) throw error;
+
+      setUploadProgress(70);
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('project-assets')
+        .getPublicUrl(filePath);
+
+      form.setValue("attachmentUrl", publicUrl);
+      form.setValue("attachmentName", file.name);
+
+      setUploadProgress(100);
+      toast({
+        title: "Archivo subido",
+        description: `Se ha adjuntado "${file.name}" correctamente.`,
+      });
+    } catch (error: any) {
+      console.error("Error uploading file:", error);
+      toast({
+        variant: "destructive",
+        title: "Error al subir archivo",
+        description: error.message || "No se pudo subir el archivo.",
+      });
+    } finally {
+      setIsUploading(false);
+      setUploadProgress(0);
+    }
+  };
+
+  const removeAttachment = () => {
+    form.setValue("attachmentUrl", "");
+    form.setValue("attachmentName", "");
+    if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
 
@@ -250,6 +311,60 @@ export function BriefForm({ onBriefCreated, onClose, nit, clientName }: BriefFor
                     <FormItem><FormLabel>Referencias Visuales</FormLabel><FormControl><Input className="bg-gray-100 border-gray-300" placeholder="Links o ideas visuales" {...field} /></FormControl><FormMessage /></FormItem>
                   )} />
                 </div>
+              </div>
+            </div>
+
+            <div>
+              <SectionHeader step="05" title="Archivos Adjuntos" />
+              <div className="space-y-4">
+                <div className="flex items-center gap-4">
+                  <Input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handleFileUpload}
+                    className="hidden"
+                    id="brief-file-upload"
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={isUploading || isPending}
+                    className="border-dashed border-2 border-gray-300 h-24 w-full flex flex-col gap-2 hover:bg-gray-50 hover:border-blue-400 transition-all"
+                  >
+                    {isUploading ? (
+                      <>
+                        <Loader2 className="h-6 w-6 animate-spin text-blue-500" />
+                        <span className="text-xs font-bold uppercase tracking-widest text-blue-600">Subiendo... {uploadProgress}%</span>
+                      </>
+                    ) : (
+                      <>
+                        <Paperclip className="h-6 w-6 text-gray-400" />
+                        <span className="text-xs font-bold uppercase tracking-widest text-gray-500">Haz clic para adjuntar un archivo (Cualquier peso)</span>
+                      </>
+                    )}
+                  </Button>
+                </div>
+
+                {form.watch("attachmentUrl") && (
+                  <div className="flex items-center justify-between p-3 bg-blue-50 border border-blue-100 rounded-md">
+                    <div className="flex items-center gap-3 overflow-hidden">
+                      <Paperclip className="h-4 w-4 text-blue-500 flex-shrink-0" />
+                      <span className="text-sm font-bold text-blue-900 truncate">
+                        {form.watch("attachmentName")}
+                      </span>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={removeAttachment}
+                      className="h-8 w-8 p-0 text-blue-500 hover:text-red-500 hover:bg-transparent"
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                  </div>
+                )}
               </div>
             </div>
 

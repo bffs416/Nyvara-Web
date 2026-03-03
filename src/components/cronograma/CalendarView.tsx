@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Project } from '@/lib/types';
-import { ChevronLeft, ChevronRight, Edit2, Trash2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Edit2, Trash2, Paperclip } from 'lucide-react';
 
 interface CalendarViewProps {
   projects: Project[];
@@ -24,7 +24,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({ projects, onEditProject, on
   const monthName = currentDate.toLocaleString('es-ES', { month: 'long' }).toUpperCase();
 
   const days = Array.from({ length: daysInMonth(year, month) }, (_, i) => i + 1);
-  const padding = Array.from({ length: (startDayOfMonth(year, month) + 6) % 7 }, (_, i) => i); 
+  const padding = Array.from({ length: (startDayOfMonth(year, month) + 6) % 7 }, (_, i) => i);
 
   const dayNames = ['LUN', 'MAR', 'MIE', 'JUE', 'VIE', 'SAB', 'DOM'];
 
@@ -59,7 +59,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({ projects, onEditProject, on
               {d}
             </div>
           ))}
-          
+
           {padding.map(i => (
             <div key={`pad-${i}`} className="p-4 border-r border-b border-black min-h-[140px] bg-gray-50/50"></div>
           ))}
@@ -67,16 +67,16 @@ const CalendarView: React.FC<CalendarViewProps> = ({ projects, onEditProject, on
           {days.map(day => {
             const dayProjects = getProjectsForDay(day);
             const isToday = new Date().toDateString() === new Date(year, month, day).toDateString();
-            
+
             return (
-              <div 
-                key={day} 
+              <div
+                key={day}
                 className={`p-4 border-r border-b border-black min-h-[160px] h-auto transition-all hover:bg-gray-50 flex flex-col gap-2 relative ${isToday ? 'bg-blue-50/30' : ''}`}
               >
                 <span className={`text-sm font-black ${isToday ? 'text-blue-600 underline underline-offset-8' : 'text-gray-300'}`}>
                   {day.toString().padStart(2, '0')}
                 </span>
-                
+
                 <div className="flex flex-col gap-1.5 flex-1 overflow-visible">
                   {dayProjects.map(p => (
                     <div
@@ -84,7 +84,10 @@ const CalendarView: React.FC<CalendarViewProps> = ({ projects, onEditProject, on
                       title={p.title}
                       className="group/item cursor-pointer rounded-sm text-[10px] font-bold p-1.5 bg-black text-white flex items-start justify-between gap-2 shadow-sm hover:bg-blue-600 transition-colors"
                     >
-                      <span className="flex-1 break-words">{p.title}</span>
+                      <div className="flex items-center gap-1 flex-1 overflow-hidden">
+                        {p.attachmentUrl && <Paperclip size={10} className="text-blue-300 flex-shrink-0" />}
+                        <span className="truncate">{p.title}</span>
+                      </div>
                       <div className="flex gap-1 opacity-0 group-hover/item:opacity-100 transition-opacity">
                         <button
                           onClick={(e) => {
@@ -110,7 +113,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({ projects, onEditProject, on
                     </div>
                   ))}
                 </div>
-                
+
                 {dayProjects.length > 3 && (
                   <span className="text-[7px] font-bold text-gray-400 uppercase text-right">
                     + {dayProjects.length - 3} adicionales

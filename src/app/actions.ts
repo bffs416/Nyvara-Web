@@ -287,7 +287,9 @@ export async function processBriefAction(values: BriefFormValues): Promise<{ suc
       imageUrl: `https://picsum.photos/seed/${Date.now().toString()}/800/600`,
       dueDate: values.deadline,
       createdAt: new Date().toISOString(),
-      status: 'pending'
+      status: 'pending',
+      attachmentUrl: values.attachmentUrl,
+      attachmentName: values.attachmentName
     };
 
     // Persist to JSON file if NIT is provided
@@ -323,7 +325,9 @@ export async function processBriefAction(values: BriefFormValues): Promise<{ suc
             due_date: newProject.dueDate,
             status: newProject.status,
             nit: values.nit,
-            client_name: values.clientName || 'Cliente Web'
+            client_name: values.clientName || 'Cliente Web',
+            attachment_url: newProject.attachmentUrl,
+            attachment_name: newProject.attachmentName
           }]);
 
         if (dbError) {

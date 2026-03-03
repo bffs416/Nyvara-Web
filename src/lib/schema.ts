@@ -112,7 +112,11 @@ export const briefFormSchema = z.object({
   references: z.string().optional(),
   otherFormat: z.string().optional(),
   nit: z.string().optional(),
+  attachmentUrl: z.string().optional(),
+  attachmentName: z.string().optional(),
 });
+
+export type BriefFormValues = z.infer<typeof briefFormSchema>;
 
 const projectSchema = z.object({
   id: z.string(),
