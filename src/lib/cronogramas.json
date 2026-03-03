@@ -601,18 +601,6 @@
             "platform": "Instagram"
           },
           "imageUrl": "/cronograma/default.png"
-        },
-        {
-          "id": "1772551350620",
-          "title": "ASASAS",
-          "description": "asdasdasd",
-          "reason": "OBJETIVO: Contenido Educativo. TITULAR: asdasdasd. REFERENCIAS: asdasdasd",
-          "imageUrl": "https://picsum.photos/seed/1772551350620/800/600",
-          "dueDate": "2026-03-18",
-          "createdAt": "2026-03-03T15:22:30.620Z",
-          "status": "pending",
-          "attachmentUrl": "https://blwaxxacneipoaufpiag.supabase.co/storage/v1/object/public/project-assets/brief-attachments/1772551326046-wa1mpjytwui.png",
-          "attachmentName": "MINT.png"
         }
       ]
     },
