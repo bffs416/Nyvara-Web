@@ -85,7 +85,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({ projects, onEditProject, on
                       className="group/item cursor-pointer rounded-sm text-[10px] font-bold p-1.5 bg-black text-white flex items-start justify-between gap-2 shadow-sm hover:bg-blue-600 transition-colors"
                     >
                       <div className="flex items-center gap-1 flex-1 overflow-hidden">
-                        {p.attachmentUrl && <Paperclip size={10} className="text-blue-300 flex-shrink-0" />}
+                        {(p.attachmentUrl || (p.attachments && p.attachments.length > 0)) && <Paperclip size={10} className="text-blue-300 flex-shrink-0" />}
                         <span className="truncate">{p.title}</span>
                       </div>
                       <div className="flex gap-1 opacity-0 group-hover/item:opacity-100 transition-opacity">

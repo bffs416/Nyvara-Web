@@ -118,60 +118,85 @@ export function BriefForm({ onBriefCreated, onClose, nit, clientName }: BriefFor
   };
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
 
     setIsUploading(true);
     setUploadProgress(10);
 
+    const currentAttachments = form.getValues("attachments") || [];
+    const newAttachments = [...currentAttachments];
+
     try {
       const supabase = createSupabaseClient();
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
-      const filePath = `brief-attachments/${fileName}`;
 
-      setUploadProgress(30);
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+        const filePath = `brief-attachments/${fileName}`;
 
-      const { data, error } = await supabase.storage
-        .from('project-assets')
-        .upload(filePath, file, {
-          cacheControl: '3600',
-          upsert: false
+        setUploadProgress(Math.round(10 + ((i / files.length) * 80)));
+
+        const { error } = await supabase.storage
+          .from('project-assets')
+          .upload(filePath, file, {
+            cacheControl: '3600',
+            upsert: false
+          });
+
+        if (error) throw error;
+
+        const { data: { publicUrl } } = supabase.storage
+          .from('project-assets')
+          .getPublicUrl(filePath);
+
+        newAttachments.push({
+          url: publicUrl,
+          name: file.name
         });
+      }
 
-      if (error) throw error;
+      form.setValue("attachments", newAttachments);
 
-      setUploadProgress(70);
-
-      const { data: { publicUrl } } = supabase.storage
-        .from('project-assets')
-        .getPublicUrl(filePath);
-
-      form.setValue("attachmentUrl", publicUrl);
-      form.setValue("attachmentName", file.name);
+      // Also keep single fields for backward compatibility if needed
+      if (newAttachments.length > 0) {
+        form.setValue("attachmentUrl", newAttachments[0].url);
+        form.setValue("attachmentName", newAttachments[0].name);
+      }
 
       setUploadProgress(100);
       toast({
-        title: "Archivo subido",
-        description: `Se ha adjuntado "${file.name}" correctamente.`,
+        title: "Archivos subidos",
+        description: `Se han adjuntado ${files.length} archivo(s) correctamente.`,
       });
     } catch (error: any) {
-      console.error("Error uploading file:", error);
+      console.error("Error uploading files:", error);
       toast({
         variant: "destructive",
-        title: "Error al subir archivo",
-        description: error.message || "No se pudo subir el archivo.",
+        title: "Error al subir archivos",
+        description: error.message || "No se pudieron subir los archivos.",
       });
     } finally {
       setIsUploading(false);
       setUploadProgress(0);
+      if (fileInputRef.current) fileInputRef.current.value = "";
     }
   };
 
-  const removeAttachment = () => {
-    form.setValue("attachmentUrl", "");
-    form.setValue("attachmentName", "");
-    if (fileInputRef.current) fileInputRef.current.value = "";
+  const removeAttachment = (index: number) => {
+    const current = form.getValues("attachments") || [];
+    const filtered = current.filter((_, i) => i !== index);
+    form.setValue("attachments", filtered);
+
+    // Update single fields
+    if (filtered.length > 0) {
+      form.setValue("attachmentUrl", filtered[0].url);
+      form.setValue("attachmentName", filtered[0].name);
+    } else {
+      form.setValue("attachmentUrl", "");
+      form.setValue("attachmentName", "");
+    }
   };
 
 
@@ -324,6 +349,7 @@ export function BriefForm({ onBriefCreated, onClose, nit, clientName }: BriefFor
                     onChange={handleFileUpload}
                     className="hidden"
                     id="brief-file-upload"
+                    multiple
                   />
                   <Button
                     type="button"
@@ -340,31 +366,33 @@ export function BriefForm({ onBriefCreated, onClose, nit, clientName }: BriefFor
                     ) : (
                       <>
                         <Paperclip className="h-6 w-6 text-gray-400" />
-                        <span className="text-xs font-bold uppercase tracking-widest text-gray-500">Haz clic para adjuntar un archivo (Cualquier peso)</span>
+                        <span className="text-xs font-bold uppercase tracking-widest text-gray-500">Haz clic para adjuntar archivos (Cualquier peso)</span>
                       </>
                     )}
                   </Button>
                 </div>
 
-                {form.watch("attachmentUrl") && (
-                  <div className="flex items-center justify-between p-3 bg-blue-50 border border-blue-100 rounded-md">
-                    <div className="flex items-center gap-3 overflow-hidden">
-                      <Paperclip className="h-4 w-4 text-blue-500 flex-shrink-0" />
-                      <span className="text-sm font-bold text-blue-900 truncate">
-                        {form.watch("attachmentName")}
-                      </span>
+                <div className="space-y-2">
+                  {(form.watch("attachments") || []).map((att, index) => (
+                    <div key={index} className="flex items-center justify-between p-3 bg-blue-50 border border-blue-100 rounded-md">
+                      <div className="flex items-center gap-3 overflow-hidden">
+                        <Paperclip className="h-4 w-4 text-blue-500 flex-shrink-0" />
+                        <span className="text-sm font-bold text-blue-900 truncate">
+                          {att.name}
+                        </span>
+                      </div>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => removeAttachment(index)}
+                        className="h-8 w-8 p-0 text-blue-500 hover:text-red-500 hover:bg-transparent"
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
                     </div>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="sm"
-                      onClick={removeAttachment}
-                      className="h-8 w-8 p-0 text-blue-500 hover:text-red-500 hover:bg-transparent"
-                    >
-                      <X className="h-4 w-4" />
-                    </Button>
-                  </div>
-                )}
+                  ))}
+                </div>
               </div>
             </div>
 

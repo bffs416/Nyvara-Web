@@ -289,7 +289,8 @@ export async function processBriefAction(values: BriefFormValues): Promise<{ suc
       createdAt: new Date().toISOString(),
       status: 'pending',
       attachmentUrl: values.attachmentUrl,
-      attachmentName: values.attachmentName
+      attachmentName: values.attachmentName,
+      attachments: values.attachments
     };
 
     // Persist to JSON file if NIT is provided
@@ -327,7 +328,8 @@ export async function processBriefAction(values: BriefFormValues): Promise<{ suc
             nit: values.nit,
             client_name: values.clientName || 'Cliente Web',
             attachment_url: newProject.attachmentUrl,
-            attachment_name: newProject.attachmentName
+            attachment_name: newProject.attachmentName,
+            attachments: newProject.attachments
           }]);
 
         if (dbError) {

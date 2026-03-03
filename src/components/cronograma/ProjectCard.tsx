@@ -231,18 +231,34 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
                   ID-{project.id}
                 </span>
               </div>
-              {project.attachmentUrl && (
-                <div className="flex flex-col">
-                  <span className="text-[9px] font-black uppercase text-blue-400 tracking-widest mb-2">Archivo Adjunto</span>
-                  <a
-                    href={project.attachmentUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm font-black border-b-2 border-blue-600 pb-1 text-blue-600 hover:bg-blue-50 transition-colors"
-                  >
-                    <Paperclip size={14} />
-                    {project.attachmentName || 'Ver archivo'}
-                  </a>
+              {(project.attachmentUrl || (project.attachments && project.attachments.length > 0)) && (
+                <div className="flex flex-col gap-4">
+                  <span className="text-[9px] font-black uppercase text-blue-400 tracking-widest">Archivos Adjuntos</span>
+                  <div className="flex flex-wrap gap-4">
+                    {project.attachmentUrl && (
+                      <a
+                        href={project.attachmentUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-sm font-black border-b-2 border-blue-600 pb-1 text-blue-600 hover:bg-blue-50 transition-colors"
+                      >
+                        <Paperclip size={14} />
+                        {project.attachmentName || 'Ver archivo'}
+                      </a>
+                    )}
+                    {project.attachments?.map((att, idx) => (
+                      <a
+                        key={idx}
+                        href={att.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-sm font-black border-b-2 border-blue-600 pb-1 text-blue-600 hover:bg-blue-50 transition-colors"
+                      >
+                        <Paperclip size={14} />
+                        {att.name}
+                      </a>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>

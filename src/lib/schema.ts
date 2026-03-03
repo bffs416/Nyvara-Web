@@ -114,6 +114,10 @@ export const briefFormSchema = z.object({
   nit: z.string().optional(),
   attachmentUrl: z.string().optional(),
   attachmentName: z.string().optional(),
+  attachments: z.array(z.object({
+    url: z.string(),
+    name: z.string()
+  })).optional(),
 });
 
 export type BriefFormValues = z.infer<typeof briefFormSchema>;

@@ -58,6 +58,19 @@ export interface ProjectKpis {
   notes?: string;
 }
 
+export interface Attachment {
+  url: string;
+  name: string;
+}
+
+export interface KPIProfile {
+  id: string;
+  title: string;
+  description: string;
+  reason: string;
+  imageUrl: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -69,8 +82,9 @@ export interface Project {
   status: 'pending' | 'completed' | 'archived' | 'urgent';
   publishTime?: string;
   kpis?: ProjectKpis;
-  attachmentUrl?: string;
+  attachmentUrl?: string; // Keep for backward compatibility or migration
   attachmentName?: string;
+  attachments?: Attachment[];
 }
 
 export interface Client {
