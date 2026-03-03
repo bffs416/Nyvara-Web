@@ -21,7 +21,11 @@ const CalendarView: React.FC<CalendarViewProps> = ({ projects, onEditProject, on
 
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
-  const monthName = currentDate.toLocaleString('es-ES', { month: 'long' }).toUpperCase();
+  const monthNames = [
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+  ];
+  const monthName = monthNames[currentDate.getMonth()].toUpperCase();
 
   const days = Array.from({ length: daysInMonth(year, month) }, (_, i) => i + 1);
   const padding = Array.from({ length: (startDayOfMonth(year, month) + 6) % 7 }, (_, i) => i);
@@ -38,10 +42,13 @@ const CalendarView: React.FC<CalendarViewProps> = ({ projects, onEditProject, on
 
   return (
     <div className="border-t border-black animate-in fade-in duration-500">
-      <div className="flex justify-between items-center py-8">
-        <h2 className="text-4xl font-black uppercase tracking-tighter">
-          {monthName} <span className="text-gray-300 italic">{year}</span>
-        </h2>
+      <div className="flex justify-between items-end py-10 px-4 group/calheader">
+        <div>
+          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 block mb-2">Cronograma Mensual</span>
+          <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-black flex items-baseline gap-4">
+            {monthName} <span className="text-gray-200 italic font-light">{year}</span>
+          </h2>
+        </div>
         <div className="flex gap-4">
           <button onClick={prevMonth} title="Mes anterior" className="p-2 border border-black hover:bg-black hover:text-white transition-colors">
             <ChevronLeft size={20} />
@@ -71,7 +78,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({ projects, onEditProject, on
             return (
               <div
                 key={day}
-                className={`p-4 border-r border-b border-black min-h-[140px] h-full transition-all hover:bg-gray-50 flex flex-col gap-2 relative ${isToday ? 'bg-blue-50/30' : ''}`}
+                className={`p-4 border-r border-b border-black min-h-[140px] h-auto transition-all hover:bg-gray-50 flex flex-col gap-2 relative ${isToday ? 'bg-blue-50/20' : ''}`}
               >
                 <span className={`text-sm font-black ${isToday ? 'text-blue-600 underline underline-offset-8' : 'text-gray-300'}`}>
                   {day.toString().padStart(2, '0')}
@@ -84,11 +91,26 @@ const CalendarView: React.FC<CalendarViewProps> = ({ projects, onEditProject, on
                       title={p.title}
                       className="group/item cursor-pointer rounded-sm text-[10px] font-bold p-1.5 bg-black text-white flex items-start justify-between gap-2 shadow-sm hover:bg-blue-600 transition-colors"
                     >
-                      <div className="flex items-center gap-1 flex-1 min-w-0">
-                        {(p.attachmentUrl || (p.attachments && p.attachments.length > 0)) && <Paperclip size={10} className="text-blue-300 flex-shrink-0" />}
-                        <span className="truncate">{p.title}</span>
+                      <div className="flex flex-col gap-1 flex-1 min-w-0">
+                        {(() => {
+                          const parts = p.title.split(':');
+                          if (parts.length > 1) {
+                            return (
+                              <>
+                                <span className="text-[7px] uppercase tracking-widest text-blue-300 mb-0.5 line-clamp-1">{parts[0]}</span>
+                                <span className="line-clamp-2 leading-none">{parts.slice(1).join(':').trim()}</span>
+                              </>
+                            );
+                          }
+                          return <span className="line-clamp-2 leading-none">{p.title}</span>
+                        })()}
+                        {(p.attachmentUrl || (p.attachments && p.attachments.length > 0)) && (
+                          <div className="mt-1">
+                            <Paperclip size={8} className="text-blue-300" />
+                          </div>
+                        )}
                       </div>
-                      <div className="flex gap-1 opacity-0 group-hover/item:opacity-100 transition-opacity">
+                      <div className="flex flex-col gap-1 opacity-0 group-hover/item:opacity-100 transition-opacity">
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
