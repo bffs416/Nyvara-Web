@@ -302,7 +302,7 @@
             "strategicSummary": "Post-event care story with lower reach, but visible intent in profile visits.",
             "notes": "Fusicare."
           },
-          "imageUrl": "/cronograma/images.png"
+          "imageUrl": "/cronograma/Fusicare.png"
         },
         {
           "id": "474488",
@@ -321,7 +321,7 @@
             "strategicSummary": "Technical video with moderate interaction performance; should reinforce initial hook and closing CTA to increase response.",
             "notes": "Material base entregado por Hansbiomed con ajuste final de Nyvara para publicación."
           },
-          "imageUrl": "/cronograma/PDO_Threads_for_Hair_Growth1.webp"
+          "imageUrl": "/cronograma/Video LION.png"
         },
         {
           "id": "606687",
@@ -351,7 +351,7 @@
             "strategicSummary": "Story with valuable qualitative interaction by registering a direct response via DM.",
             "notes": "Hilos MINT. Acciones: 3 (1 respuesta y 2 visitas al perfil)."
           },
-          "imageUrl": "/cronograma/Hilos.png"
+          "imageUrl": "/cronograma/Hilos Mint.png"
         },
         {
           "id": "184466",
@@ -601,6 +601,18 @@
             "platform": "Instagram"
           },
           "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "1772551350620",
+          "title": "ASASAS",
+          "description": "asdasdasd",
+          "reason": "OBJETIVO: Contenido Educativo. TITULAR: asdasdasd. REFERENCIAS: asdasdasd",
+          "imageUrl": "https://picsum.photos/seed/1772551350620/800/600",
+          "dueDate": "2026-03-18",
+          "createdAt": "2026-03-03T15:22:30.620Z",
+          "status": "pending",
+          "attachmentUrl": "https://blwaxxacneipoaufpiag.supabase.co/storage/v1/object/public/project-assets/brief-attachments/1772551326046-wa1mpjytwui.png",
+          "attachmentName": "MINT.png"
         }
       ]
     },
