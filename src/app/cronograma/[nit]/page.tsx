@@ -786,7 +786,8 @@ const CronogramaClientePage = () => {
                     const text = (project.title + ' ' + (project.description || '')).toUpperCase();
                     if (text.includes('MINT')) return { label: 'MINT', color: 'bg-emerald-100 text-emerald-700 border-emerald-200' };
                     if (text.includes('LION')) return { label: 'LION', color: 'bg-orange-100 text-orange-700 border-orange-200' };
-                    if (text.includes('KLARDIE')) return { label: 'Klardie', color: 'bg-blue-100 text-blue-700 border-blue-200' };
+                    if (text.includes('KLARDIE') || text.includes('D+') || text.includes('R+') || text.includes('FUSICARE'))
+                      return { label: 'Klardie', color: 'bg-blue-100 text-blue-700 border-blue-200' };
                     return { label: 'Otros', color: 'bg-gray-100 text-gray-700 border-gray-200' };
                   };
 
@@ -797,11 +798,12 @@ const CronogramaClientePage = () => {
                     return acc;
                   }, {} as Record<string, typeof activeProjects>);
 
-                  const contentTypeOrder = ['historia', 'reel', 'carrusel', 'video', 'pdf', 'pieza', 'otros'];
+                  const contentTypeOrder = ['historia', 'reel', 'carrusel', 'post', 'video', 'pdf', 'pieza', 'otros'];
                   const contentTypeLabels: Record<string, string> = {
                     historia: 'Historias',
                     reel: 'Reels',
                     carrusel: 'Carruseles',
+                    post: 'Posts',
                     video: 'Videos',
                     pdf: 'PDFs / Documentos',
                     pieza: 'Piezas Gráficas',
@@ -837,7 +839,16 @@ const CronogramaClientePage = () => {
                           <div className="flex flex-col gap-10">
                             {(() => {
                               const groupedByType = monthProjects.reduce((acc, p) => {
-                                const type = p.kpis?.contentType?.toLowerCase() || 'otros';
+                                const titleLower = p.title.toLowerCase();
+                                let type = p.kpis?.contentType?.toLowerCase() || 'otros';
+
+                                // Prioritize title keywords for categorization
+                                if (titleLower.includes('historia')) type = 'historia';
+                                else if (titleLower.includes('reel')) type = 'reel';
+                                else if (titleLower.includes('carrusel')) type = 'carrusel';
+                                else if (titleLower.includes('post')) type = 'post';
+                                else if (titleLower.includes('video')) type = 'video';
+
                                 if (!acc[type]) acc[type] = [];
                                 acc[type].push(p);
                                 return acc;
