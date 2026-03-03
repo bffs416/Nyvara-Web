@@ -145,14 +145,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
                         <span className="block text-[10px] font-black uppercase tracking-[0.3em] text-blue-500 mb-2 md:mb-3">
                           {prefix}
                         </span>
-                        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase tracking-tighter leading-[1.05] md:leading-[0.95] group-hover:text-blue-600 transition-colors duration-500 break-words text-left">
+                        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase tracking-tight leading-[1.1] md:leading-[1] group-hover:text-blue-600 transition-colors duration-500 break-normal text-left">
                           {main}
                         </h3>
                       </>
                     );
                   }
                   return (
-                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase tracking-tighter leading-[1.05] md:leading-[0.95] group-hover:text-blue-600 transition-colors duration-500 break-words text-left">
+                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase tracking-tight leading-[1.1] md:leading-[1] group-hover:text-blue-600 transition-colors duration-500 break-normal text-left">
                       {project.title}
                     </h3>
                   );
