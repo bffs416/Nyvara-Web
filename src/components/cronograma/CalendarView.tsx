@@ -91,22 +91,23 @@ const CalendarView: React.FC<CalendarViewProps> = ({ projects, onEditProject, on
                       title={p.title}
                       className="group/item cursor-pointer rounded-sm text-[10px] font-bold p-1.5 bg-black text-white flex items-start justify-between gap-2 shadow-sm hover:bg-blue-600 transition-colors"
                     >
-                      <div className="flex flex-col gap-1 flex-1 min-w-0">
+                      <div className="flex flex-col gap-0.5 flex-1 min-w-0">
                         {(() => {
                           const parts = p.title.split(':');
                           if (parts.length > 1) {
                             return (
                               <>
-                                <span className="text-[7px] uppercase tracking-widest text-blue-300 mb-0.5 line-clamp-1">{parts[0]}</span>
-                                <span className="line-clamp-2 leading-none">{parts.slice(1).join(':').trim()}</span>
+                                <span className="text-[7px] uppercase tracking-widest text-blue-300 font-black mb-0.5">{parts[0]}</span>
+                                <span className="leading-tight break-words">{parts.slice(1).join(':').trim()}</span>
                               </>
                             );
                           }
-                          return <span className="line-clamp-2 leading-none">{p.title}</span>
+                          return <span className="leading-tight break-words">{p.title}</span>
                         })()}
                         {(p.attachmentUrl || (p.attachments && p.attachments.length > 0)) && (
-                          <div className="mt-1">
+                          <div className="mt-1 flex items-center gap-1">
                             <Paperclip size={8} className="text-blue-300" />
+                            <span className="text-[7px] text-blue-300 uppercase font-bold">Adjunto</span>
                           </div>
                         )}
                       </div>
