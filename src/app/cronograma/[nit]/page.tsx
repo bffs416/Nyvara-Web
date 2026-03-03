@@ -22,7 +22,7 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
 type PendingAction = {
-  type: 'create' | 'edit' | 'delete' | 'export' | 'import';
+  type: 'create' | 'edit' | 'delete' | 'export' | 'import' | 'view_kpi';
   data?: any;
 };
 
@@ -34,6 +34,7 @@ const CronogramaClientePage = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
+  const [isKpiAuthorized, setIsKpiAuthorized] = useState(false);
 
   const client: Client | undefined = useMemo(() => clients.find(c => c.nit === nit), [nit]);
 
@@ -222,6 +223,11 @@ const CronogramaClientePage = () => {
     setIsAccessCodeModalOpen(true);
   };
 
+  const requestViewKpi = () => {
+    setPendingAction({ type: 'view_kpi' });
+    setIsAccessCodeModalOpen(true);
+  };
+
   const closeAccessCodeModal = () => {
     setIsAccessCodeModalOpen(false);
     setAccessCodeInput('');
@@ -302,6 +308,9 @@ const CronogramaClientePage = () => {
           break;
         case 'import':
           importFileRef.current?.click();
+          break;
+        case 'view_kpi':
+          setIsKpiAuthorized(true);
           break;
       }
       closeAccessCodeModal();
@@ -586,17 +595,36 @@ const CronogramaClientePage = () => {
                   <Collapsible className="mb-14 border-2 border-black bg-white" defaultOpen={false}>
                     <CollapsibleTrigger asChild>
                       <button className="w-full p-6 md:p-8 flex flex-wrap items-center justify-between gap-3 text-left hover:bg-gray-50 transition-colors">
-                        <div>
-                          <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter">KPI Mensual Consolidado</h2>
-                          <p className="text-sm text-gray-500 mt-2">Resumen experto por mes para publicaciones del cronograma de {client.clientName}.</p>
+                        <div className="flex items-center gap-4">
+                          <div>
+                            <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter">KPI Mensual Consolidado</h2>
+                            <p className="text-sm text-gray-500 mt-2">Resumen experto por mes para publicaciones del cronograma de {client.clientName}.</p>
+                          </div>
+                          {!isKpiAuthorized && <Lock className="text-gray-400" size={24} />}
                         </div>
                         <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-600">
-                          Desplegar <ChevronDown size={16} />
+                          {isKpiAuthorized ? "Desplegar" : "Protegido"} <ChevronDown size={16} />
                         </span>
                       </button>
                     </CollapsibleTrigger>
                     <CollapsibleContent className="px-6 md:px-8 pb-6 md:pb-8">
-                      <div className="space-y-5">
+                      {!isKpiAuthorized ? (
+                        <div className="py-12 flex flex-col items-center justify-center border-2 border-dashed border-gray-200 bg-gray-50 rounded-lg">
+                          <Lock className="h-12 w-12 text-gray-300 mb-4" />
+                          <h3 className="text-xl font-bold text-gray-900 mb-2">Sección Protegida</h3>
+                          <p className="text-gray-500 mb-6 text-center max-w-xs">Introduce el código de seguridad para visualizar el resumen de KPIs.</p>
+                          <Button 
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              requestViewKpi();
+                            }}
+                            className="bg-black text-white font-bold uppercase tracking-widest hover:bg-blue-600"
+                          >
+                            Ver KPIs
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="space-y-5">
                         {monthlyKpiSummary.map(item => (
                           <article key={item.month} className="border border-black/15 p-4 md:p-5 bg-gray-50">
                             <div className="flex flex-wrap items-center gap-3 justify-between">
@@ -731,78 +759,76 @@ const CronogramaClientePage = () => {
                             </div>
                           </article>
                         ))}
-                      </div>
+                        </div>
+                      )}
                     </CollapsibleContent>
                   </Collapsible>
                 )}
 
                 {(() => {
-                  const getCategory = (project: Project) => {
-                    if (client.clientName === 'MILDRED MORENO') {
-                      const rawTitle = project.title.toUpperCase();
-                      // Espera títulos tipo: "Nombre de pieza _ Historia"
-                      const parts = rawTitle.split('_');
-                      const suffix = parts[parts.length - 1].trim();
-
-                      if (suffix === 'HISTORIA') return 'Historia';
-                      if (suffix === 'REEL' || suffix === 'VIDEO') return 'Reel';
-                      if (suffix === 'POST') return 'Post';
-                      if (suffix === 'CARRUSEL' || suffix === 'CARRUSEL ') return 'Carrusel';
-                      if (suffix === 'PIEZA' || suffix === 'PDF' || suffix === 'CARNET') return 'Pieza';
-
-                      // Fallback suave si el sufijo no viene bien formateado
-                      if (rawTitle.includes('HISTORIA')) return 'Historia';
-                      if (rawTitle.includes('REEL') || rawTitle.includes('VIDEO')) return 'Reel';
-                      if (rawTitle.includes('CARRUSEL')) return 'Carrusel';
-                      if (rawTitle.includes('POST')) return 'Post';
-                      return 'Pieza';
-                    }
-
-                    const title = project.title.toUpperCase();
-                    if (title.includes('KLARDIE')) return 'Klardie';
-                    if (title.includes('MINT')) return 'Mint';
-                    if (title.includes('LION')) return 'Lion';
-                    return 'Otros';
+                  const getMonthKey = (project: Project) => {
+                    const dateStr = project.kpis?.periodMonth || project.dueDate.slice(0, 7);
+                    return dateStr; // e.g., "2026-02"
                   };
 
-                  const categories =
-                    client.clientName === 'MILDRED MORENO'
-                      ? ['Historia', 'Reel', 'Post', 'Carrusel', 'Pieza']
-                      : ['Klardie', 'Mint', 'Lion', 'Otros'];
-                  const categorizedProjects = activeProjects.reduce((acc, project) => {
-                    const category = getCategory(project);
-                    if (!acc[category]) acc[category] = [];
-                    acc[category].push(project);
+                  const monthNames = [
+                    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+                  ];
+
+                  const formatMonthKey = (key: string) => {
+                    const [year, month] = key.split('-');
+                    const monthIndex = parseInt(month, 10) - 1;
+                    return `${monthNames[monthIndex]} ${year}`;
+                  };
+
+                  const groupedByMonth = activeProjects.reduce((acc, project) => {
+                    const key = getMonthKey(project);
+                    if (!acc[key]) acc[key] = [];
+                    acc[key].push(project);
                     return acc;
                   }, {} as Record<string, typeof activeProjects>);
 
-                  return categories.map(category => {
-                    const categoryProjects = categorizedProjects[category];
-                    if (!categoryProjects || categoryProjects.length === 0) return null;
+                  const sortedMonthKeys = Object.keys(groupedByMonth).sort();
 
+                  return sortedMonthKeys.map((key, index) => {
+                    const monthProjects = groupedByMonth[key];
+                    const monthDisplay = formatMonthKey(key);
+                    
                     return (
-                      <div key={category} className="mb-12">
-                        <div className="flex items-center gap-4 mb-6 border-b-2 border-black/10 pb-2">
-                          <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter text-black/80">
-                            {category}
-                          </h2>
-                          <span className="text-sm font-bold bg-black text-white px-2 py-1 rounded-full">
-                            {categoryProjects.length}
-                          </span>
-                        </div>
-                        <div className="flex flex-col gap-4">
-                          {categoryProjects.map(p => (
-                            <ProjectCard
-                              key={p.id}
-                              project={p}
-                              onArchive={handleArchiveProject}
-                              onEdit={openFormForEdit}
-                              onDelete={requestDeleteProject}
-                              onToggleComplete={handleToggleComplete}
-                            />
-                          ))}
-                        </div>
-                      </div> // Close category div
+                      <Collapsible 
+                        key={key} 
+                        className="mb-8 border-2 border-black bg-white" 
+                        defaultOpen={index === sortedMonthKeys.length - 1} // Open latest month by default
+                      >
+                        <CollapsibleTrigger asChild>
+                          <button className="w-full p-6 md:p-8 flex items-center justify-between text-left hover:bg-gray-50 transition-colors">
+                            <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-black">
+                              {monthDisplay}
+                            </h2>
+                            <div className="flex items-center gap-4">
+                              <span className="text-sm font-bold bg-black text-white px-3 py-1 rounded-full">
+                                {monthProjects.length} Proyectos
+                              </span>
+                              <ChevronDown size={24} className="text-gray-400" />
+                            </div>
+                          </button>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="px-6 md:px-8 pb-8">
+                          <div className="flex flex-col gap-4">
+                            {monthProjects.map(p => (
+                              <ProjectCard
+                                key={p.id}
+                                project={p}
+                                onArchive={handleArchiveProject}
+                                onEdit={openFormForEdit}
+                                onDelete={requestDeleteProject}
+                                onToggleComplete={handleToggleComplete}
+                              />
+                            ))}
+                          </div>
+                        </CollapsibleContent>
+                      </Collapsible>
                     );
                   });
                 })()}
