@@ -613,7 +613,7 @@ const CronogramaClientePage = () => {
                           <Lock className="h-12 w-12 text-gray-300 mb-4" />
                           <h3 className="text-xl font-bold text-gray-900 mb-2">Sección Protegida</h3>
                           <p className="text-gray-500 mb-6 text-center max-w-xs">Introduce el código de seguridad para visualizar el resumen de KPIs.</p>
-                          <Button 
+                          <Button
                             onClick={(e) => {
                               e.stopPropagation();
                               requestViewKpi();
@@ -625,140 +625,140 @@ const CronogramaClientePage = () => {
                         </div>
                       ) : (
                         <div className="space-y-5">
-                        {monthlyKpiSummary.map(item => (
-                          <article key={item.month} className="border border-black/15 p-4 md:p-5 bg-gray-50">
-                            <div className="flex flex-wrap items-center gap-3 justify-between">
-                              <h3 className="text-lg md:text-xl font-black uppercase tracking-tight">{item.month}</h3>
-                              <p className="text-[11px] uppercase tracking-widest font-bold text-gray-500">
-                                {item.publications} publicaciones · {item.reels} reels · {item.videos} videos · {item.carruseles} carruseles · {item.historias} historias · {item.internos} internos
-                              </p>
-                            </div>
-                            <div className="grid grid-cols-2 md:grid-cols-6 gap-3 mt-4">
-                              <div className="bg-white border border-black/10 p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Alcance</p><p className="font-black text-lg">{item.alcance}</p></div>
-                              <div className="bg-white border border-black/10 p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Impresiones</p><p className="font-black text-lg">{item.impresiones}</p></div>
-                              <div className="bg-white border border-black/10 p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Interacciones</p><p className="font-black text-lg">{item.interacciones}</p></div>
-                              <div className="bg-white border border-black/10 p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Reproducciones</p><p className="font-black text-lg">{item.reproducciones}</p></div>
-                              <div className="bg-white border border-blue-200 p-3"><p className="text-[9px] uppercase text-blue-600 font-bold">Engagement</p><p className="font-black text-lg text-blue-700">{item.engagementRate.toFixed(2)}%</p></div>
-                              <div className="bg-white border border-emerald-200 p-3"><p className="text-[9px] uppercase text-emerald-600 font-bold">CTR</p><p className="font-black text-lg text-emerald-700">{item.ctr.toFixed(2)}%</p></div>
-                            </div>
-                            <p className="mt-4 text-sm text-gray-700 border-l-2 border-blue-500 pl-3">
-                              <span className="font-bold">Resumen experto:</span> {item.expertSummary}
-                            </p>
-                            <div className="mt-4 space-y-4">
-                              {item.storyRows.length > 0 && (
-                                <div className="overflow-x-auto border border-black/10 bg-white">
-                                  <table className="w-full text-xs">
-                                    <thead className="bg-gray-100">
-                                      <tr className="text-left">
-                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Historias</th>
-                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Alcance</th>
-                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Impresiones</th>
-                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Acciones</th>
-                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Compartidos</th>
-                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Visitas perfil</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      {item.storyRows.map((row, index) => (
-                                        <tr key={`${item.month}-story-${index}`} className="border-t border-black/10">
-                                          <td className="p-2 font-semibold">{row.title}</td>
-                                          <td className="p-2">{row.reach ?? '-'}</td>
-                                          <td className="p-2">{row.impressions ?? '-'}</td>
-                                          <td className="p-2">{row.interactions ?? '-'}</td>
-                                          <td className="p-2">{row.shares ?? '-'}</td>
-                                          <td className="p-2">{row.profileVisits ?? '-'}</td>
-                                        </tr>
-                                      ))}
-                                    </tbody>
-                                  </table>
-                                </div>
-                              )}
-
-                              {item.carouselRows.length > 0 && (
-                                <div className="overflow-x-auto border border-black/10 bg-white">
-                                  <table className="w-full text-xs">
-                                    <thead className="bg-gray-100">
-                                      <tr className="text-left">
-                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Carruseles / Post</th>
-                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Visualizaciones</th>
-                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Interacciones</th>
-                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Me gusta</th>
-                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Guardados</th>
-                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Compartidos</th>
-                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Comentarios</th>
-                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Visitas perfil</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      {item.carouselRows.map((row, index) => (
-                                        <tr key={`${item.month}-carousel-${index}`} className="border-t border-black/10">
-                                          <td className="p-2 font-semibold">{row.title}</td>
-                                          <td className="p-2">{row.views ?? '-'}</td>
-                                          <td className="p-2">{row.interactions ?? '-'}</td>
-                                          <td className="p-2">{row.likes ?? '-'}</td>
-                                          <td className="p-2">{row.saves ?? '-'}</td>
-                                          <td className="p-2">{row.shares ?? '-'}</td>
-                                          <td className="p-2">{row.comments ?? '-'}</td>
-                                          <td className="p-2">{row.profileVisits ?? '-'}</td>
-                                        </tr>
-                                      ))}
-                                    </tbody>
-                                  </table>
-                                </div>
-                              )}
-
-                              {item.reelRows.length > 0 && (
-                                <div className="overflow-x-auto border border-black/10 bg-white">
-                                  <table className="w-full text-xs">
-                                    <thead className="bg-gray-100">
-                                      <tr className="text-left">
-                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Reels / Videos</th>
-                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Visualizaciones</th>
-                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Interacciones</th>
-                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Me gusta</th>
-                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Compartidos</th>
-                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Guardados</th>
-                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Comentarios</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      {item.reelRows.map((row, index) => (
-                                        <tr key={`${item.month}-reel-${index}`} className="border-t border-black/10">
-                                          <td className="p-2 font-semibold">{row.title}</td>
-                                          <td className="p-2">{row.views ?? '-'}</td>
-                                          <td className="p-2">{row.interactions ?? '-'}</td>
-                                          <td className="p-2">{row.likes ?? '-'}</td>
-                                          <td className="p-2">{row.shares ?? '-'}</td>
-                                          <td className="p-2">{row.saves ?? '-'}</td>
-                                          <td className="p-2">{row.comments ?? '-'}</td>
-                                        </tr>
-                                      ))}
-                                    </tbody>
-                                  </table>
-                                </div>
-                              )}
-
-                              <div className="overflow-x-auto border border-black/10 bg-white">
-                                <table className="w-full text-xs">
-                                  <thead className="bg-gray-100">
-                                    <tr className="text-left">
-                                      <th className="p-2 font-black uppercase tracking-widest text-[10px]">Leads (Instagram/DM)</th>
-                                      <th className="p-2 font-black uppercase tracking-widest text-[10px]">Resultado</th>
-                                      <th className="p-2 font-black uppercase tracking-widest text-[10px]">Fuente</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr className="border-t border-black/10">
-                                      <td className="p-2 font-semibold">Leads registrados</td>
-                                      <td className="p-2">{item.reportedLeads ?? 'Sin dato cargado'}</td>
-                                      <td className="p-2 text-gray-500">Notas KPI del mes</td>
-                                    </tr>
-                                  </tbody>
-                                </table>
+                          {monthlyKpiSummary.map(item => (
+                            <article key={item.month} className="border border-black/15 p-4 md:p-5 bg-gray-50">
+                              <div className="flex flex-wrap items-center gap-3 justify-between">
+                                <h3 className="text-lg md:text-xl font-black uppercase tracking-tight">{item.month}</h3>
+                                <p className="text-[11px] uppercase tracking-widest font-bold text-gray-500">
+                                  {item.publications} publicaciones · {item.reels} reels · {item.videos} videos · {item.carruseles} carruseles · {item.historias} historias · {item.internos} internos
+                                </p>
                               </div>
-                            </div>
-                          </article>
-                        ))}
+                              <div className="grid grid-cols-2 md:grid-cols-6 gap-3 mt-4">
+                                <div className="bg-white border border-black/10 p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Alcance</p><p className="font-black text-lg">{item.alcance}</p></div>
+                                <div className="bg-white border border-black/10 p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Impresiones</p><p className="font-black text-lg">{item.impresiones}</p></div>
+                                <div className="bg-white border border-black/10 p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Interacciones</p><p className="font-black text-lg">{item.interacciones}</p></div>
+                                <div className="bg-white border border-black/10 p-3"><p className="text-[9px] uppercase text-gray-400 font-bold">Reproducciones</p><p className="font-black text-lg">{item.reproducciones}</p></div>
+                                <div className="bg-white border border-blue-200 p-3"><p className="text-[9px] uppercase text-blue-600 font-bold">Engagement</p><p className="font-black text-lg text-blue-700">{item.engagementRate.toFixed(2)}%</p></div>
+                                <div className="bg-white border border-emerald-200 p-3"><p className="text-[9px] uppercase text-emerald-600 font-bold">CTR</p><p className="font-black text-lg text-emerald-700">{item.ctr.toFixed(2)}%</p></div>
+                              </div>
+                              <p className="mt-4 text-sm text-gray-700 border-l-2 border-blue-500 pl-3">
+                                <span className="font-bold">Resumen experto:</span> {item.expertSummary}
+                              </p>
+                              <div className="mt-4 space-y-4">
+                                {item.storyRows.length > 0 && (
+                                  <div className="overflow-x-auto border border-black/10 bg-white">
+                                    <table className="w-full text-xs">
+                                      <thead className="bg-gray-100">
+                                        <tr className="text-left">
+                                          <th className="p-2 font-black uppercase tracking-widest text-[10px]">Historias</th>
+                                          <th className="p-2 font-black uppercase tracking-widest text-[10px]">Alcance</th>
+                                          <th className="p-2 font-black uppercase tracking-widest text-[10px]">Impresiones</th>
+                                          <th className="p-2 font-black uppercase tracking-widest text-[10px]">Acciones</th>
+                                          <th className="p-2 font-black uppercase tracking-widest text-[10px]">Compartidos</th>
+                                          <th className="p-2 font-black uppercase tracking-widest text-[10px]">Visitas perfil</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        {item.storyRows.map((row, index) => (
+                                          <tr key={`${item.month}-story-${index}`} className="border-t border-black/10">
+                                            <td className="p-2 font-semibold">{row.title}</td>
+                                            <td className="p-2">{row.reach ?? '-'}</td>
+                                            <td className="p-2">{row.impressions ?? '-'}</td>
+                                            <td className="p-2">{row.interactions ?? '-'}</td>
+                                            <td className="p-2">{row.shares ?? '-'}</td>
+                                            <td className="p-2">{row.profileVisits ?? '-'}</td>
+                                          </tr>
+                                        ))}
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                )}
+
+                                {item.carouselRows.length > 0 && (
+                                  <div className="overflow-x-auto border border-black/10 bg-white">
+                                    <table className="w-full text-xs">
+                                      <thead className="bg-gray-100">
+                                        <tr className="text-left">
+                                          <th className="p-2 font-black uppercase tracking-widest text-[10px]">Carruseles / Post</th>
+                                          <th className="p-2 font-black uppercase tracking-widest text-[10px]">Visualizaciones</th>
+                                          <th className="p-2 font-black uppercase tracking-widest text-[10px]">Interacciones</th>
+                                          <th className="p-2 font-black uppercase tracking-widest text-[10px]">Me gusta</th>
+                                          <th className="p-2 font-black uppercase tracking-widest text-[10px]">Guardados</th>
+                                          <th className="p-2 font-black uppercase tracking-widest text-[10px]">Compartidos</th>
+                                          <th className="p-2 font-black uppercase tracking-widest text-[10px]">Comentarios</th>
+                                          <th className="p-2 font-black uppercase tracking-widest text-[10px]">Visitas perfil</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        {item.carouselRows.map((row, index) => (
+                                          <tr key={`${item.month}-carousel-${index}`} className="border-t border-black/10">
+                                            <td className="p-2 font-semibold">{row.title}</td>
+                                            <td className="p-2">{row.views ?? '-'}</td>
+                                            <td className="p-2">{row.interactions ?? '-'}</td>
+                                            <td className="p-2">{row.likes ?? '-'}</td>
+                                            <td className="p-2">{row.saves ?? '-'}</td>
+                                            <td className="p-2">{row.shares ?? '-'}</td>
+                                            <td className="p-2">{row.comments ?? '-'}</td>
+                                            <td className="p-2">{row.profileVisits ?? '-'}</td>
+                                          </tr>
+                                        ))}
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                )}
+
+                                {item.reelRows.length > 0 && (
+                                  <div className="overflow-x-auto border border-black/10 bg-white">
+                                    <table className="w-full text-xs">
+                                      <thead className="bg-gray-100">
+                                        <tr className="text-left">
+                                          <th className="p-2 font-black uppercase tracking-widest text-[10px]">Reels / Videos</th>
+                                          <th className="p-2 font-black uppercase tracking-widest text-[10px]">Visualizaciones</th>
+                                          <th className="p-2 font-black uppercase tracking-widest text-[10px]">Interacciones</th>
+                                          <th className="p-2 font-black uppercase tracking-widest text-[10px]">Me gusta</th>
+                                          <th className="p-2 font-black uppercase tracking-widest text-[10px]">Compartidos</th>
+                                          <th className="p-2 font-black uppercase tracking-widest text-[10px]">Guardados</th>
+                                          <th className="p-2 font-black uppercase tracking-widest text-[10px]">Comentarios</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        {item.reelRows.map((row, index) => (
+                                          <tr key={`${item.month}-reel-${index}`} className="border-t border-black/10">
+                                            <td className="p-2 font-semibold">{row.title}</td>
+                                            <td className="p-2">{row.views ?? '-'}</td>
+                                            <td className="p-2">{row.interactions ?? '-'}</td>
+                                            <td className="p-2">{row.likes ?? '-'}</td>
+                                            <td className="p-2">{row.shares ?? '-'}</td>
+                                            <td className="p-2">{row.saves ?? '-'}</td>
+                                            <td className="p-2">{row.comments ?? '-'}</td>
+                                          </tr>
+                                        ))}
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                )}
+
+                                <div className="overflow-x-auto border border-black/10 bg-white">
+                                  <table className="w-full text-xs">
+                                    <thead className="bg-gray-100">
+                                      <tr className="text-left">
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Leads (Instagram/DM)</th>
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Resultado</th>
+                                        <th className="p-2 font-black uppercase tracking-widest text-[10px]">Fuente</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr className="border-t border-black/10">
+                                        <td className="p-2 font-semibold">Leads registrados</td>
+                                        <td className="p-2">{item.reportedLeads ?? 'Sin dato cargado'}</td>
+                                        <td className="p-2 text-gray-500">Notas KPI del mes</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </article>
+                          ))}
                         </div>
                       )}
                     </CollapsibleContent>
@@ -782,6 +782,14 @@ const CronogramaClientePage = () => {
                     return `${monthNames[monthIndex]} ${year}`;
                   };
 
+                  const getProductTag = (project: Project) => {
+                    const text = (project.title + ' ' + (project.description || '')).toUpperCase();
+                    if (text.includes('MINT')) return { label: 'MINT', color: 'bg-emerald-100 text-emerald-700 border-emerald-200' };
+                    if (text.includes('LION')) return { label: 'LION', color: 'bg-orange-100 text-orange-700 border-orange-200' };
+                    if (text.includes('KLARDIE')) return { label: 'Klardie', color: 'bg-blue-100 text-blue-700 border-blue-200' };
+                    return { label: 'Otros', color: 'bg-gray-100 text-gray-700 border-gray-200' };
+                  };
+
                   const groupedByMonth = activeProjects.reduce((acc, project) => {
                     const key = getMonthKey(project);
                     if (!acc[key]) acc[key] = [];
@@ -789,16 +797,27 @@ const CronogramaClientePage = () => {
                     return acc;
                   }, {} as Record<string, typeof activeProjects>);
 
+                  const contentTypeOrder = ['historia', 'reel', 'carrusel', 'video', 'pdf', 'pieza', 'otros'];
+                  const contentTypeLabels: Record<string, string> = {
+                    historia: 'Historias',
+                    reel: 'Reels',
+                    carrusel: 'Carruseles',
+                    video: 'Videos',
+                    pdf: 'PDFs / Documentos',
+                    pieza: 'Piezas Gráficas',
+                    otros: 'Otros Contenidos'
+                  };
+
                   const sortedMonthKeys = Object.keys(groupedByMonth).sort();
 
                   return sortedMonthKeys.map((key, index) => {
                     const monthProjects = groupedByMonth[key];
                     const monthDisplay = formatMonthKey(key);
-                    
+
                     return (
-                      <Collapsible 
-                        key={key} 
-                        className="mb-8 border-2 border-black bg-white" 
+                      <Collapsible
+                        key={key}
+                        className="mb-8 border-2 border-black bg-white"
                         defaultOpen={index === sortedMonthKeys.length - 1} // Open latest month by default
                       >
                         <CollapsibleTrigger asChild>
@@ -815,17 +834,52 @@ const CronogramaClientePage = () => {
                           </button>
                         </CollapsibleTrigger>
                         <CollapsibleContent className="px-6 md:px-8 pb-8">
-                          <div className="flex flex-col gap-4">
-                            {monthProjects.map(p => (
-                              <ProjectCard
-                                key={p.id}
-                                project={p}
-                                onArchive={handleArchiveProject}
-                                onEdit={openFormForEdit}
-                                onDelete={requestDeleteProject}
-                                onToggleComplete={handleToggleComplete}
-                              />
-                            ))}
+                          <div className="flex flex-col gap-10">
+                            {(() => {
+                              const groupedByType = monthProjects.reduce((acc, p) => {
+                                const type = p.kpis?.contentType?.toLowerCase() || 'otros';
+                                if (!acc[type]) acc[type] = [];
+                                acc[type].push(p);
+                                return acc;
+                              }, {} as Record<string, Project[]>);
+
+                              const sortedTypes = Object.keys(groupedByType).sort((a, b) => {
+                                const indexA = contentTypeOrder.indexOf(a);
+                                const indexB = contentTypeOrder.indexOf(b);
+                                return (indexA === -1 ? 99 : indexA) - (indexB === -1 ? 99 : indexB);
+                              });
+
+                              return sortedTypes.map(type => (
+                                <div key={type} className="space-y-4">
+                                  <div className="flex items-center gap-3">
+                                    <div className="h-px flex-1 bg-gray-200"></div>
+                                    <h3 className="text-xs font-black uppercase tracking-[0.2em] text-gray-400">
+                                      {contentTypeLabels[type] || type}
+                                    </h3>
+                                    <div className="h-px flex-1 bg-gray-200"></div>
+                                  </div>
+                                  <div className="flex flex-col gap-4">
+                                    {groupedByType[type].map(p => {
+                                      const product = getProductTag(p);
+                                      return (
+                                        <div key={p.id} className="relative">
+                                          <div className={`absolute -top-2 -right-2 z-10 px-2 py-0.5 rounded border text-[10px] font-black uppercase tracking-tighter shadow-sm ${product.color}`}>
+                                            {product.label}
+                                          </div>
+                                          <ProjectCard
+                                            project={p}
+                                            onArchive={handleArchiveProject}
+                                            onEdit={openFormForEdit}
+                                            onDelete={requestDeleteProject}
+                                            onToggleComplete={handleToggleComplete}
+                                          />
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                              ));
+                            })()}
                           </div>
                         </CollapsibleContent>
                       </Collapsible>
