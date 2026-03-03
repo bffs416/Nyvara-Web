@@ -16,7 +16,9 @@ CREATE TABLE public.projects (
     
     -- Relación con Cliente
     nit TEXT NOT NULL,       -- Identificador del cliente (ej: '901329423')
-    client_name TEXT         -- Nombre opcional para referencia rápida
+    client_name TEXT,        -- Nombre opcional para referencia rápida
+    attachment_url TEXT,     -- URL del archivo adjunto
+    attachment_name TEXT      -- Nombre original del archivo
 );
 
 -- 2. Habilitar seguridad (RLS)
