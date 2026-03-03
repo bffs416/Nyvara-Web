@@ -133,11 +133,32 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
           </div>
 
           <div className="flex-1 space-y-8 w-full min-w-0">
-            <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
-              <h3 className="text-2xl sm:text-3xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] group-hover:text-blue-600 transition-colors duration-500 break-words text-left min-w-0">
-                {project.title}
-              </h3>
-              <div className="flex flex-wrap gap-2 self-end md:self-auto shrink-0">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 w-full">
+              <div className="flex-1 min-w-0">
+                {(() => {
+                  const parts = project.title.split(':');
+                  if (parts.length > 1) {
+                    const prefix = parts[0].trim();
+                    const main = parts.slice(1).join(':').trim();
+                    return (
+                      <>
+                        <span className="block text-[10px] font-black uppercase tracking-[0.3em] text-blue-500 mb-2 md:mb-3">
+                          {prefix}
+                        </span>
+                        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase tracking-tighter leading-[1.05] md:leading-[0.95] group-hover:text-blue-600 transition-colors duration-500 break-words text-left">
+                          {main}
+                        </h3>
+                      </>
+                    );
+                  }
+                  return (
+                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase tracking-tighter leading-[1.05] md:leading-[0.95] group-hover:text-blue-600 transition-colors duration-500 break-words text-left">
+                      {project.title}
+                    </h3>
+                  );
+                })()}
+              </div>
+              <div className="flex flex-wrap gap-2 self-end md:self-auto shrink-0 mt-4 md:mt-0">
                 {!isArchived && onEdit && (
                   <button
                     onClick={() => onEdit(project)}
