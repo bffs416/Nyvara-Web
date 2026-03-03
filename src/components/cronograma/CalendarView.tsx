@@ -71,20 +71,20 @@ const CalendarView: React.FC<CalendarViewProps> = ({ projects, onEditProject, on
             return (
               <div
                 key={day}
-                className={`p-4 border-r border-b border-black min-h-[160px] h-auto transition-all hover:bg-gray-50 flex flex-col gap-2 relative ${isToday ? 'bg-blue-50/30' : ''}`}
+                className={`p-4 border-r border-b border-black min-h-[140px] h-full transition-all hover:bg-gray-50 flex flex-col gap-2 relative ${isToday ? 'bg-blue-50/30' : ''}`}
               >
                 <span className={`text-sm font-black ${isToday ? 'text-blue-600 underline underline-offset-8' : 'text-gray-300'}`}>
                   {day.toString().padStart(2, '0')}
                 </span>
 
-                <div className="flex flex-col gap-1.5 flex-1 overflow-visible">
+                <div className="flex flex-col gap-1.5 flex-1">
                   {dayProjects.map(p => (
                     <div
                       key={p.id}
                       title={p.title}
                       className="group/item cursor-pointer rounded-sm text-[10px] font-bold p-1.5 bg-black text-white flex items-start justify-between gap-2 shadow-sm hover:bg-blue-600 transition-colors"
                     >
-                      <div className="flex items-center gap-1 flex-1 overflow-hidden">
+                      <div className="flex items-center gap-1 flex-1 min-w-0">
                         {(p.attachmentUrl || (p.attachments && p.attachments.length > 0)) && <Paperclip size={10} className="text-blue-300 flex-shrink-0" />}
                         <span className="truncate">{p.title}</span>
                       </div>
