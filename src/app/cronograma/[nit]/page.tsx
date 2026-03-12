@@ -205,9 +205,14 @@ const CronogramaClientePage = () => {
       const ratio = pdfWidth / contentWidth;
       
       if (isCalendar) {
-        // For calendar, we usually want it on 1 or 2 landscape pages
-        const scaledHeight = contentHeight * ratio;
-        pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, scaledHeight);
+        // Ensure it fits both width and height on a single landscape page
+        const fitRatio = Math.min(pdfWidth / contentWidth, pdfHeight / contentHeight);
+        const scaledWidth = contentWidth * fitRatio;
+        const scaledHeight = contentHeight * fitRatio;
+        
+        // Center horizontally if needed
+        const xOffset = (pdfWidth - scaledWidth) / 2;
+        pdf.addImage(imgData, 'JPEG', xOffset, 0, scaledWidth, scaledHeight);
       } else {
         // Multi-page logic for list
         const canvasPageHeight = pdfHeight / ratio;
