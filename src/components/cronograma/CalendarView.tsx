@@ -97,7 +97,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({ projects, onEditProject, on
                           if (parts.length > 1) {
                             return (
                               <>
-                                <span className="text-[7px] uppercase tracking-widest text-blue-300 font-black mb-0.5">{parts[0]}</span>
+                                <span className="text-[7px] uppercase tracking-widest text-blue-400 font-black mb-0.5">{parts[0]}</span>
                                 <span className="leading-tight break-words">{parts.slice(1).join(':').trim()}</span>
                               </>
                             );

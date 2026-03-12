@@ -150,32 +150,38 @@ const CronogramaClientePage = () => {
     setIsGeneratingPDF(true);
     try {
       const element = printRef.current;
+      const isCalendar = view === 'calendar';
       
-      // 1. Prepare for capture: Force all collapsibles to be visible for the capture
-      // We can do this by adding a temporary class to the container
+      // 1. Prepare for capture
       element.classList.add('hide-collapsible-triggers');
       
       // Small delay to ensure any layout changes/animations are settled
-      await new Promise(resolve => setTimeout(resolve, 800));
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
       const canvas = await html2canvas(element, {
-        scale: 2, // High resolution
+        scale: 2,
         useCORS: true,
         logging: false,
         backgroundColor: '#ffffff',
-        windowWidth: 1200, // Fixed width for consistent layout
+        windowWidth: isCalendar ? 1400 : 1200, // Wider for calendar
         onclone: (clonedDoc) => {
-          // In the cloned document, we can manipulate the DOM without affecting the real UI
           const clonedElement = clonedDoc.querySelector('.print-container') as HTMLElement;
           if (clonedElement) {
-            // Find all collapsible contents and force them to be visible
+            // Force all collapsibles open in the clone
             const collapsibles = clonedElement.querySelectorAll('[data-state="closed"]');
             collapsibles.forEach(c => {
               (c as HTMLElement).style.display = 'block';
               (c as HTMLElement).setAttribute('data-state', 'open');
             });
+
+            // Ensure full opacity for everything
+            const allElements = clonedElement.querySelectorAll('*');
+            allElements.forEach(el => {
+              if ((el as HTMLElement).style) {
+                (el as HTMLElement).style.opacity = '1';
+              }
+            });
             
-            // Hide elements that shouldn't be in the PDF
             const noPrint = clonedElement.querySelectorAll('.no-print');
             noPrint.forEach(el => (el as HTMLElement).style.display = 'none');
           }
@@ -184,7 +190,7 @@ const CronogramaClientePage = () => {
 
       const imgData = canvas.toDataURL('image/jpeg', 0.95);
       const pdf = new jsPDF({
-        orientation: 'p',
+        orientation: isCalendar ? 'l' : 'p',
         unit: 'px',
         format: 'a4'
       });
@@ -192,38 +198,41 @@ const CronogramaClientePage = () => {
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
       
-      // Multi-page logic
       const imgProps = pdf.getImageProperties(imgData);
       const contentWidth = imgProps.width;
       const contentHeight = imgProps.height;
       
       const ratio = pdfWidth / contentWidth;
-      const canvasPageHeight = pdfHeight / ratio;
       
-      let heightLeft = contentHeight;
-      let position = 0;
-      let pageNum = 1;
+      if (isCalendar) {
+        // For calendar, we usually want it on 1 or 2 landscape pages
+        const scaledHeight = contentHeight * ratio;
+        pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, scaledHeight);
+      } else {
+        // Multi-page logic for list
+        const canvasPageHeight = pdfHeight / ratio;
+        let heightLeft = contentHeight;
+        let position = 0;
+        let pageNum = 1;
 
-      // Add the first page
-      pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, contentHeight * ratio);
-      heightLeft -= canvasPageHeight;
-
-      // Add subsequent pages if content is longer than one page
-      while (heightLeft > 0) {
-        position = -(pdfHeight * pageNum);
-        pdf.addPage();
         pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, contentHeight * ratio);
         heightLeft -= canvasPageHeight;
-        pageNum++;
+
+        while (heightLeft > 0) {
+          position = -(pdfHeight * pageNum);
+          pdf.addPage();
+          pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, contentHeight * ratio);
+          heightLeft -= canvasPageHeight;
+          pageNum++;
+        }
       }
 
       pdf.save(`cronograma-${client?.clientName}-${new Date().toISOString().split('T')[0]}.pdf`);
       
-      // Clean up
       element.classList.remove('hide-collapsible-triggers');
     } catch (error) {
       console.error('Error generating PDF:', error);
-      alert('Hubo un error al generar el PDF. Puedes intentar imprimir directamente (Ctrl+P) que ya está optimizado.');
+      alert('Hubo un error al generar el PDF. Puedes intentar imprimir directamente (Ctrl+P).');
     } finally {
       setIsGeneratingPDF(false);
     }
@@ -552,74 +561,73 @@ const CronogramaClientePage = () => {
                 Portal de Proyectos para: <strong className="text-blue-600">{client.clientName}</strong>
               </p>
             </div>
-            <div className="flex items-start gap-2 flex-shrink-0">
-              <div className="grid grid-cols-2 gap-2">
-                <button onClick={openFormForNew} className="px-6 py-4 bg-black text-white text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-blue-600 transition-colors">
-                  <Plus size={16} />
-                  Nuevo Proyecto
-                </button>
-                <Dialog open={isBriefFormOpen} onOpenChange={setIsBriefFormOpen}>
-                  <DialogTrigger asChild>
-                    <button className="px-6 py-4 bg-gray-700 text-white text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-gray-800 transition-colors">
-                      <Plus size={16} />
-                      Nuevo Brief
-                    </button>
-                  </DialogTrigger>
-                  <DialogContent className="max-w-4xl h-[90vh] bg-white text-black">
-                    <DialogHeader>
-                      <DialogTitle className="text-2xl font-bold text-gray-900">Protocolo de Registro de Activos Creativos</DialogTitle>
-                    </DialogHeader>
-                    <ScrollArea className="h-full pr-6">
-                      <BriefForm
-                        onBriefCreated={handleBriefCreated}
-                        onClose={() => setIsBriefFormOpen(false)}
-                        nit={nit}
-                        clientName={client?.clientName}
-                      />
-                    </ScrollArea>
-                  </DialogContent>
-                </Dialog>
-                <button onClick={requestImport} className="px-6 py-3 bg-gray-200 text-black text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-gray-300 transition-colors">
-                  <Upload size={14} /> Importar
-                </button>
-                <button onClick={requestExport} className="px-6 py-3 bg-gray-200 text-black text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-gray-300 transition-colors">
-                  <Download size={14} /> Exportar
-                </button>
-                <button
-                  onClick={handleDownloadPDF}
-                  disabled={isGeneratingPDF}
-                  className="col-span-2 px-6 py-3 bg-blue-600 text-white text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors disabled:opacity-50"
-                >
-                  {isGeneratingPDF ? <Loader2 size={14} className="animate-spin" /> : <Download size={14} />}
-                  {isGeneratingPDF ? 'Generando...' : 'Descargar PDF Professional'}
-                </button>
-              </div>
-
-              <div className="flex flex-col gap-2">
-
-                <button onClick={() => {
-                  if (window.confirm('¿Quieres sincronizar con los últimos cambios de la nube? Esto borrará cualquier cambio no guardado que hayas hecho localmente.')) {
-                    localStorage.removeItem(`cronograma_projects_${nit}`);
-                    window.location.reload();
-                  }
-                }} className={`p-4 border border-black hover:bg-blue-50 transition-colors text-blue-600`} title="Sincronizar con la Nube"><RotateCcw size={20} /></button>
-                <button onClick={() => setView('list')} className={`p-4 border border-black transition-colors ${view === 'list' ? 'bg-black text-white' : 'hover:bg-gray-100'}`} title="Vista de Lista"><LayoutGrid size={20} /></button>
-                <button onClick={() => setView('calendar')} className={`p-4 border border-black transition-colors ${view === 'calendar' ? 'bg-black text-white' : 'hover:bg-gray-100'}`} title="Vista de Calendario"><Calendar size={20} /></button>
-                {view === 'list' && (
-                  <button
-                    onClick={() => setShowArchived(!showArchived)}
-                    disabled={archivedProjects.length === 0}
-                    className={`p-4 border border-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${showArchived
-                      ? 'bg-blue-600 text-white'
-                      : 'hover:bg-gray-100'
-                      }`}
-                    title={showArchived ? 'Ocultar Archivo' : `Mostrar Archivo (${archivedProjects.length})`}
-                  >
-                    <Archive size={20} />
+              <div className="flex items-start gap-2 flex-shrink-0 no-print">
+                <div className="grid grid-cols-2 gap-2">
+                  <button onClick={openFormForNew} className="px-6 py-4 bg-black text-white text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-blue-600 transition-colors">
+                    <Plus size={16} />
+                    Nuevo Proyecto
                   </button>
-                )}
+                  <Dialog open={isBriefFormOpen} onOpenChange={setIsBriefFormOpen}>
+                    <DialogTrigger asChild>
+                      <button className="px-6 py-4 bg-gray-700 text-white text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-gray-800 transition-colors">
+                        <Plus size={16} />
+                        Nuevo Brief
+                      </button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-4xl h-[90vh] bg-white text-black">
+                      <DialogHeader>
+                        <DialogTitle className="text-2xl font-bold text-gray-900">Protocolo de Registro de Activos Creativos</DialogTitle>
+                      </DialogHeader>
+                      <ScrollArea className="h-full pr-6">
+                        <BriefForm
+                          onBriefCreated={handleBriefCreated}
+                          onClose={() => setIsBriefFormOpen(false)}
+                          nit={nit}
+                          clientName={client?.clientName}
+                        />
+                      </ScrollArea>
+                    </DialogContent>
+                  </Dialog>
+                  <button onClick={requestImport} className="px-6 py-3 bg-gray-200 text-black text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-gray-300 transition-colors">
+                    <Upload size={14} /> Importar
+                  </button>
+                  <button onClick={requestExport} className="px-6 py-3 bg-gray-200 text-black text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-gray-300 transition-colors">
+                    <Download size={14} /> Exportar
+                  </button>
+                  <button
+                    onClick={handleDownloadPDF}
+                    disabled={isGeneratingPDF}
+                    className="col-span-2 px-6 py-3 bg-blue-600 text-white text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors disabled:opacity-50"
+                  >
+                    {isGeneratingPDF ? <Loader2 size={14} className="animate-spin" /> : <Download size={14} />}
+                    {isGeneratingPDF ? 'Generando...' : 'Descargar PDF Professional'}
+                  </button>
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <button onClick={() => {
+                    if (window.confirm('¿Quieres sincronizar con los últimos cambios de la nube? Esto borrará cualquier cambio no guardado que hayas hecho localmente.')) {
+                      localStorage.removeItem(`cronograma_projects_${nit}`);
+                      window.location.reload();
+                    }
+                  }} className={`p-4 border border-black hover:bg-blue-50 transition-colors text-blue-600`} title="Sincronizar con la Nube"><RotateCcw size={20} /></button>
+                  <button onClick={() => setView('list')} className={`p-4 border border-black transition-colors ${view === 'list' ? 'bg-black text-white' : 'hover:bg-gray-100'}`} title="Vista de Lista"><LayoutGrid size={20} /></button>
+                  <button onClick={() => setView('calendar')} className={`p-4 border border-black transition-colors ${view === 'calendar' ? 'bg-black text-white' : 'hover:bg-gray-100'}`} title="Vista de Calendario"><Calendar size={20} /></button>
+                  {view === 'list' && (
+                    <button
+                      onClick={() => setShowArchived(!showArchived)}
+                      disabled={archivedProjects.length === 0}
+                      className={`p-4 border border-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${showArchived
+                        ? 'bg-blue-600 text-white'
+                        : 'hover:bg-gray-100'
+                        }`}
+                      title={showArchived ? 'Ocultar Archivo' : `Mostrar Archivo (${archivedProjects.length})`}
+                    >
+                      <Archive size={20} />
+                    </button>
+                  )}
+                </div>
               </div>
-            </div>
           </div>
 
           <input type="file" ref={importFileRef} onChange={handleFileSelected} accept=".txt,application/json" className="hidden" />
