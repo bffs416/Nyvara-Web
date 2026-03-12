@@ -149,31 +149,78 @@ const CronogramaClientePage = () => {
 
     setIsGeneratingPDF(true);
     try {
-      // Small delay to ensure any layout changes are settled
-      await new Promise(resolve => setTimeout(resolve, 500));
-
       const element = printRef.current;
+      
+      // 1. Prepare for capture: Force all collapsibles to be visible for the capture
+      // We can do this by adding a temporary class to the container
+      element.classList.add('hide-collapsible-triggers');
+      
+      // Small delay to ensure any layout changes/animations are settled
+      await new Promise(resolve => setTimeout(resolve, 800));
+
       const canvas = await html2canvas(element, {
         scale: 2, // High resolution
         useCORS: true,
         logging: false,
         backgroundColor: '#ffffff',
-        windowWidth: 1280 // Force desktop-like responsive width for capture
+        windowWidth: 1200, // Fixed width for consistent layout
+        onclone: (clonedDoc) => {
+          // In the cloned document, we can manipulate the DOM without affecting the real UI
+          const clonedElement = clonedDoc.querySelector('.print-container') as HTMLElement;
+          if (clonedElement) {
+            // Find all collapsible contents and force them to be visible
+            const collapsibles = clonedElement.querySelectorAll('[data-state="closed"]');
+            collapsibles.forEach(c => {
+              (c as HTMLElement).style.display = 'block';
+              (c as HTMLElement).setAttribute('data-state', 'open');
+            });
+            
+            // Hide elements that shouldn't be in the PDF
+            const noPrint = clonedElement.querySelectorAll('.no-print');
+            noPrint.forEach(el => (el as HTMLElement).style.display = 'none');
+          }
+        }
       });
 
-      const imgData = canvas.toDataURL('image/png');
+      const imgData = canvas.toDataURL('image/jpeg', 0.95);
       const pdf = new jsPDF({
-        orientation: 'portrait',
+        orientation: 'p',
         unit: 'px',
-        format: [canvas.width / 2, canvas.height / 2] // Scale back to normal size
+        format: 'a4'
       });
 
-      const imgProps = pdf.getImageProperties(imgData);
       const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      
+      // Multi-page logic
+      const imgProps = pdf.getImageProperties(imgData);
+      const contentWidth = imgProps.width;
+      const contentHeight = imgProps.height;
+      
+      const ratio = pdfWidth / contentWidth;
+      const canvasPageHeight = pdfHeight / ratio;
+      
+      let heightLeft = contentHeight;
+      let position = 0;
+      let pageNum = 1;
 
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      // Add the first page
+      pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, contentHeight * ratio);
+      heightLeft -= canvasPageHeight;
+
+      // Add subsequent pages if content is longer than one page
+      while (heightLeft > 0) {
+        position = -(pdfHeight * pageNum);
+        pdf.addPage();
+        pdf.addImage(imgData, 'JPEG', 0, position, pdfWidth, contentHeight * ratio);
+        heightLeft -= canvasPageHeight;
+        pageNum++;
+      }
+
       pdf.save(`cronograma-${client?.clientName}-${new Date().toISOString().split('T')[0]}.pdf`);
+      
+      // Clean up
+      element.classList.remove('hide-collapsible-triggers');
     } catch (error) {
       console.error('Error generating PDF:', error);
       alert('Hubo un error al generar el PDF. Puedes intentar imprimir directamente (Ctrl+P) que ya está optimizado.');

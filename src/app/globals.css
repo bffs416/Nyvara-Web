@@ -731,9 +731,45 @@ h1 {
     font-size: 24pt !important;
     border-bottom: 4px solid black !important;
     margin-top: 30px !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   /* Remove scroll areas for printing */
   .scroll-area { height: auto !important; overflow: visible !important; }
+}
+
+/* PDF Capture Helper Styles */
+.hide-collapsible-triggers .CollapsibleTrigger,
+.hide-collapsible-triggers button[data-state] svg,
+.hide-collapsible-triggers .chevron-icon {
+  display: none !important;
+}
+
+.hide-collapsible-triggers [data-state="closed"] {
+  display: block !important;
+  opacity: 1 !important;
+  height: auto !important;
+}
+
+@media print {
+  .calendar-print-wrapper {
+    width: 100% !important;
+    overflow: visible !important;
+  }
+  
+  .grid-cols-7 {
+    display: grid !important;
+    grid-template-columns: repeat(7, 1fr) !important;
+  }
+
+  .min-h-\[140px\] {
+    min-height: 100px !important;
+  }
+
+  .bg-gray-50 {
+    background-color: #f9fafb !important;
+    -webkit-print-color-adjust: exact;
+  }
 }
 

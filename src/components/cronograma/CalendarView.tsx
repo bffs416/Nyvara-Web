@@ -41,7 +41,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({ projects, onEditProject, on
   };
 
   return (
-    <div className="border-t border-black animate-in fade-in duration-500">
+    <div className="border-t border-black animate-in fade-in duration-500 calendar-print-wrapper">
       <div className="flex justify-between items-end py-10 px-4 group/calheader">
         <div>
           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-600 block mb-2">Cronograma Mensual</span>
