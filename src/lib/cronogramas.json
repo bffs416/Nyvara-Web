@@ -414,7 +414,7 @@
             "contentType": "reel",
             "platform": "Instagram"
           },
-          "imageUrl": "/cronograma/default.png"
+          "imageUrl": "/cronograma/Dia de la mujer.png"
         },
         {
           "id": "1772547664446",
@@ -429,7 +429,7 @@
             "contentType": "reel",
             "platform": "Instagram"
           },
-          "imageUrl": "/cronograma/default.png"
+          "imageUrl": "/cronograma/LION_Question.png"
         },
         {
           "id": "1772547725502",
@@ -460,7 +460,7 @@
             "platform": "Instagram",
             "periodMonth": "2026-03"
           },
-          "imageUrl": "/cronograma/default.png"
+          "imageUrl": "/cronograma/Woman.png"
         },
         {
           "id": "1772547834273",
@@ -476,14 +476,14 @@
             "platform": "Instagram",
             "periodMonth": "2026-03"
           },
-          "imageUrl": "/cronograma/default.png"
+          "imageUrl": "/cronograma/24.png"
         },
         {
           "id": "7",
           "title": "ARTE SOLICITUD (EVENTO CALI) PP",
           "description": "Hola Ana,\n\nTe comparto el siguiente brief para la elaboración de una pieza gráfica que será utilizada para difusión digital (principalmente WhatsApp e Instagram).\n\nAdjuntaré imágenes de referencia y la fotografía de la doctora, para que puedan tener una guía visual al momento de desarrollar el diseño.\n\nObjetivo de la pieza\nPromocionar un espacio de capacitación/comercial enfocado en la técnica coreana aplicada a Klárdie D+ y Klárdie R+, dirigido a profesionales interesados en conocer más sobre los productos.\n\nInformación que debe contener la pieza\n\nTítulo o concepto principal:\nTécnica Coreana\n\nProductos protagonistas:\nKlárdie D+ y Klárdie R+\n\nFecha del evento:\n19 de marzo\n\nHora:\nA partir de las 5:00 p. m.\n\nProfesional invitada:\nLiz Clavijo\n\nMensaje de urgencia:\nCupos limitados\n\nCall to Action:\nPara más información\n\nContacto:\nYhency Caballero\nCel: 310 475 45 54\n\nLineamientos visuales\n\nLa pieza debe resaltar Klárdie D+ y Klárdie R+ como protagonistas.\n\nIncluir fotografía de la doctora (adjunta).\n\nMantener línea estética limpia, profesional y alineada con la marca Klárdie.\n\nPensar en un formato que funcione bien para WhatsApp e Instagram.\n\nAdjuntos\n\nFotografías de referencia\n\nFoto de la doctora\n\nReferencias visuales de producto\n\nLa idea es contar con una pieza clara, visualmente atractiva y enfocada en generar interés y contacto de los profesionales.\n\nQuedo atento a la propuesta.\n\nSaludos,\nJairo",
           "reason": "OBJETIVO: Contenido Educativo. TITULAR: Arte Cali. REFERENCIAS: Adjunto fotos e imagenes",
-          "dueDate": "2026-03-15",
+          "dueDate": "2026-03-16",
           "createdAt": "2026-03-03T20:11:39.380387+00:00",
           "status": "pending",
           "kpis": {
@@ -491,14 +491,14 @@
             "platform": "Instagram",
             "periodMonth": "2026-03"
           },
-          "imageUrl": "/cronograma/default.png"
+          "imageUrl": "/cronograma/Tecnica Coreana_Dra Liz.png"
         },
         {
           "id": "1772547356380",
           "title": "HISTORIA: SKINCARE INTERACCIÓN CON MEDICOS",
           "description": "",
           "reason": "Pieza que lleva a responder la encuesta a medicos sobre si usan el skincare en sus protocolos\n",
-          "dueDate": "2026-03-15",
+          "dueDate": "2026-03-26",
           "createdAt": "2026-03-03T14:15:56.380Z",
           "status": "pending",
           "publishTime": "09:00",
@@ -507,14 +507,14 @@
             "platform": "Instagram",
             "periodMonth": "2026-03"
           },
-          "imageUrl": "/cronograma/default.png"
+          "imageUrl": "/cronograma/Fusicare HIstoria.png"
         },
         {
           "id": "1772547909192",
           "title": "REEL : D+ DIFERENCIACION TECNICA",
           "description": "",
           "reason": "¿Porque destaca en el mercado ?",
-          "dueDate": "2026-03-16",
+          "dueDate": "2026-03-18",
           "createdAt": "2026-03-03T14:25:09.192Z",
           "status": "pending",
           "publishTime": "15:00",
@@ -589,7 +589,7 @@
           "title": "CARRUSEL (5PP): SKINCARE EDUCATIVO PARA MEDICOS",
           "description": "",
           "reason": "Informatico especializado para medicos, adicionalmente base de conocimientos para los ejecutivos en sus visitas\n",
-          "dueDate": "2026-03-25",
+          "dueDate": "2026-03-27",
           "createdAt": "2026-03-03T14:19:13.160Z",
           "status": "pending",
           "publishTime": "10:00",
@@ -598,14 +598,14 @@
             "platform": "Instagram",
             "periodMonth": "2026-03"
           },
-          "imageUrl": "/cronograma/default.png"
+          "imageUrl": "/cronograma/17.png"
         },
         {
           "id": "1772548241910",
           "title": "HISTORIA : ASESORIA PERSONALIZADA",
           "description": "",
           "reason": "Que la comunidad conozca que hansbiomed es un equipo solido, construido , llamado a responder historias para realizar contacto con ejecutivo ",
-          "dueDate": "2026-03-26",
+          "dueDate": "2026-03-25",
           "createdAt": "2026-03-03T14:30:41.910Z",
           "status": "pending",
           "publishTime": "10:00",
@@ -716,7 +716,7 @@
           "title": "PIEZA: DIA DE LA MUJER",
           "description": "Contenido conmemorativo por el Día Internacional de la Mujer.",
           "reason": "Fidelización y reconocimiento a la comunidad femenina.",
-          "imageUrl": "/cronograma/default.png",
+          "imageUrl": "/cronograma/Dia de la mujer.png",
           "dueDate": "2026-03-08",
           "createdAt": "2026-03-02T00:00:00.000Z",
           "status": "pending",

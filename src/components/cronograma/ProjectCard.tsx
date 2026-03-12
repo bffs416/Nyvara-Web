@@ -5,6 +5,7 @@ import { Project } from '@/lib/types';
 import { Archive, AlertCircle, Clock, CheckCircle, RotateCcw, Target, Layers, Edit2, Trash2, ChevronDown, Paperclip } from 'lucide-react';
 import Image from 'next/image';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import placeholdersData from '@/lib/placeholder-images.json';
 
 interface ProjectCardProps {
   project: Project;
@@ -108,22 +109,37 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onArchive, onRestore
 
           <div className="w-full xl:w-[450px] flex-shrink-0">
             <div className="relative w-full overflow-hidden border border-black bg-gray-50 shadow-[10px_10px_0px_0px_rgba(0,0,0,0.03)] group-hover:shadow-[20px_20px_0px_0px_rgba(37,99,235,0.08)] transition-all duration-700">
-              {project.imageUrl && (project.imageUrl.endsWith('.mp4') || project.imageUrl.endsWith('.webm') || project.imageUrl.endsWith('.ogg')) ? (
-                <video
-                  src={project.imageUrl}
-                  className="w-full h-auto block"
-                  controls
-                  muted
-                  loop
-                  playsInline
-                />
-              ) : (
-                <img
-                  src={project.imageUrl}
-                  alt={project.title}
-                  className="w-full h-auto block transition-transform duration-[2000ms] group-hover:scale-105"
-                />
-              )}
+              {(() => {
+                const isDefault = !project.imageUrl || project.imageUrl === "/cronograma/default.png" || project.imageUrl === "default.png";
+                let displayUrl = project.imageUrl;
+
+                if (isDefault) {
+                  const m = dateObj.getUTCMonth();
+                  const seasonalUrl = placeholdersData.monthlyPlaceholders.find(p => p.month === m)?.imageUrl;
+                  displayUrl = seasonalUrl || "https://picsum.photos/seed/nyvara_default/800/600";
+                }
+
+                if (displayUrl && (displayUrl.endsWith('.mp4') || displayUrl.endsWith('.webm') || displayUrl.endsWith('.ogg'))) {
+                  return (
+                    <video
+                      src={displayUrl}
+                      className="w-full h-auto block"
+                      controls
+                      muted
+                      loop
+                      playsInline
+                    />
+                  );
+                }
+
+                return (
+                  <img
+                    src={displayUrl}
+                    alt={project.title}
+                    className="w-full h-auto block transition-transform duration-[2000ms] group-hover:scale-105"
+                  />
+                );
+              })()}
               <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-sm text-white text-[8px] font-black uppercase tracking-widest px-3 py-1.5 flex items-center gap-2 pointer-events-none">
                 <Layers size={10} />
                 Visual Asset v.1

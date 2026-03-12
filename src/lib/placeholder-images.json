@@ -90,5 +90,19 @@
       "imageUrl": "https://picsum.photos/seed/t8/100/100",
       "imageHint": "person portrait"
     }
+  ],
+  "monthlyPlaceholders": [
+    { "month": 0, "name": "Enero", "imageUrl": "https://picsum.photos/seed/january_nyvara/800/600" },
+    { "month": 1, "name": "Febrero", "imageUrl": "https://picsum.photos/seed/february_nyvara/800/600" },
+    { "month": 2, "name": "Marzo", "imageUrl": "https://picsum.photos/seed/march_nyvara/800/600" },
+    { "month": 3, "name": "Abril", "imageUrl": "https://picsum.photos/seed/april_nyvara/800/600" },
+    { "month": 4, "name": "Mayo", "imageUrl": "https://picsum.photos/seed/may_nyvara/800/600" },
+    { "month": 5, "name": "Junio", "imageUrl": "https://picsum.photos/seed/june_nyvara/800/600" },
+    { "month": 6, "name": "Julio", "imageUrl": "https://picsum.photos/seed/july_nyvara/800/600" },
+    { "month": 7, "name": "Agosto", "imageUrl": "https://picsum.photos/seed/august_nyvara/800/600" },
+    { "month": 8, "name": "Septiembre", "imageUrl": "https://picsum.photos/seed/september_nyvara/800/600" },
+    { "month": 9, "name": "Octubre", "imageUrl": "https://picsum.photos/seed/october_nyvara/800/600" },
+    { "month": 10, "name": "Noviembre", "imageUrl": "https://picsum.photos/seed/november_nyvara/800/600" },
+    { "month": 11, "name": "Diciembre", "imageUrl": "https://picsum.photos/seed/december_nyvara/800/600" }
   ]
 }
