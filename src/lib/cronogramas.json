@@ -629,6 +629,329 @@
             "platform": "Instagram"
           },
           "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "205621",
+          "title": "PIEZA PUBLICITARIA 1 - EVENTO CALI (D2D)",
+          "description": "Contenido enfocado en promocionar evento presencial en la ciudad de Cali.",
+          "reason": "Captar interés de médicos locales para asistencia al evento D2D.",
+          "dueDate": "2026-04-14",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "Imagen/Diseño",
+            "platform": "Instagram/Facebook",
+            "periodMonth": "2026-04",
+            "strategicSummary": "Promoción de eventos regionales para la línea D2D.",
+            "notes": "CTA dirigido a contacto directo con ejecutiva."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "205622",
+          "title": "HISTORIA 1 - CANALES DE VENTA TELEFÓNICA",
+          "description": "Dar a conocer los canales de comunicación para ventas por teléfono.",
+          "reason": "Facilitar el contacto comercial y la asesoría inmediata al público general.",
+          "dueDate": "2026-04-15",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "Historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-04",
+            "strategicSummary": "Difusión de canales oficiales Hansbiomed.",
+            "notes": "Enfoque en servicio al cliente y conversión rápida."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "205623",
+          "title": "REEL 1 - SIN HILOS EN LA LENGUA PARTE 4",
+          "description": "Video educativo con la Dra. K y el Dr. Alirio sobre la línea Mint.",
+          "reason": "Posicionamiento de marca a través de expertos y fomento de capacitaciones.",
+          "dueDate": "2026-04-17",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "Reel",
+            "platform": "Instagram/TikTok",
+            "periodMonth": "2026-04",
+            "strategicSummary": "Educación médica continua y networking.",
+            "notes": "CTA orientado a inscripciones en capacitaciones."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "205624",
+          "title": "HISTORIA 2 - FUSICARE INTENSIVE BARRIER AMPOULE",
+          "description": "Presentación de beneficios al usar la ampolla Fusicare.",
+          "reason": "Awareness de producto y educación sobre cuidado de la barrera cutánea.",
+          "dueDate": "2026-04-18",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "Historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-04",
+            "strategicSummary": "Fomento de la línea Fusicare para público general.",
+            "notes": "Sin CTA explícito según cronograma."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "205625",
+          "title": "CARRUSEL 2 - COMBINACIÓN CAPILAR LION + D+",
+          "description": "Explicación técnica de la combinación de productos capilares (Piezas 7-10).",
+          "reason": "Mostrar sinergia de productos para tratamientos capilares avanzados.",
+          "dueDate": "2026-04-19",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "Carrusel",
+            "platform": "Instagram",
+            "periodMonth": "2026-04",
+            "strategicSummary": "Estrategia combinada Lion y Klardie D+.",
+            "notes": "Agendamiento de asesoría con el equipo comercial."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "205626",
+          "title": "HISTORIA 7 - ASESORÍAS PERSONALIZADAS",
+          "description": "Invitación a médicos para obtener asesorías a medida.",
+          "reason": "Atracción de nuevos clientes mediante atención personalizada.",
+          "dueDate": "2026-04-20",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "Historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-04",
+            "strategicSummary": "Captación de leads cualificados.",
+            "notes": "CTA: Agendar asesoría personalizada."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "205627",
+          "title": "PUBLICACIÓN 1 - MONO: CALIDAD DE PIEL",
+          "description": "Zonas de aplicación y beneficios de la línea Mono para la mejora de la piel.",
+          "reason": "Resaltar resultados clínicos para especialistas.",
+          "dueDate": "2026-04-20",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "Post Estático",
+            "platform": "Instagram/Facebook",
+            "periodMonth": "2026-04",
+            "strategicSummary": "Enfoque en calidad de piel y resultados clínicos.",
+            "notes": "Fomento de mejora de resultados en consultorio."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "205628",
+          "title": "HISTORIA 3 - INFO PRODUCTO SCARCLINIC",
+          "description": "Información técnica sobre productos Scarclinic.",
+          "reason": "Educar al público general sobre soluciones para cicatrices.",
+          "dueDate": "2026-04-21",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "Historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-04",
+            "strategicSummary": "Educación de producto Scarclinic.",
+            "notes": "CTA: Pregunta a tu asesor."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "205629",
+          "title": "HISTORIA 4 - MINT: SOPORTE Y PROYECCIÓN FACIAL",
+          "description": "Uso de tecnología patentada Mint para soporte y proyección.",
+          "reason": "Destacar la ventaja tecnológica de los hilos Mint para médicos.",
+          "dueDate": "2026-04-22",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "Historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-04",
+            "strategicSummary": "Diferenciación tecnológica en hilos tensores.",
+            "notes": "Optimización de procedimientos médicos."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "205630",
+          "title": "PIEZA PUBLICITARIA 2 - TALLER PEREIRA",
+          "description": "Promoción de taller presencial en Pereira.",
+          "reason": "Convocatoria a médicos de la zona cafetera.",
+          "dueDate": "2026-04-22",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "Imagen",
+            "platform": "Instagram/Facebook",
+            "periodMonth": "2026-04",
+            "strategicSummary": "Marketing de eventos presenciales regionales.",
+            "notes": "Contacto directo con ejecutiva para inscripciones."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "205631",
+          "title": "CARRUSEL 1 - LÍNEA FINE",
+          "description": "Detalle de información de producto y áreas de aplicación.",
+          "reason": "Instruir a médicos sobre la versatilidad de la línea Fine.",
+          "dueDate": "2026-04-23",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "Carrusel",
+            "platform": "Instagram",
+            "periodMonth": "2026-04",
+            "strategicSummary": "Profundización técnica línea Fine.",
+            "notes": "Enfoque en elevar resultados de procedimientos."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "205632",
+          "title": "HISTORIA 5 - LÍNEA LION (IMPLANTACIÓN CAPILAR)",
+          "description": "Optimización de implantación de folículos de forma precisa.",
+          "reason": "Informar sobre eficiencia en procesos capilares al público general.",
+          "dueDate": "2026-04-24",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "Historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-04",
+            "strategicSummary": "Educación sobre tecnología Lion.",
+            "notes": "Mensaje de mejora de resultados."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "205633",
+          "title": "PIEZA PUBLICITARIA 4 - COMPONENTES R+",
+          "description": "Infografía sobre los componentes de Klardie R+.",
+          "reason": "Brindar base científica a los médicos sobre la tecnología R+.",
+          "dueDate": "2026-04-25",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "Imagen",
+            "platform": "Instagram/Facebook",
+            "periodMonth": "2026-04",
+            "strategicSummary": "Marketing de producto basado en ciencia.",
+            "notes": "Conocer la tecnología R+."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "205634",
+          "title": "HISTORIA 8 - FUSICARE CALMING MOIST BALM",
+          "description": "Beneficios de uso del bálsamo calmante Fusicare.",
+          "reason": "Promoción de post-tratamiento y cuidado diario.",
+          "dueDate": "2026-04-26",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "Historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-04",
+            "strategicSummary": "Cuidado de la piel público general.",
+            "notes": "Sin CTA explícito."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "205635",
+          "title": "PIEZA PUBLICITARIA 5 - COMPONENTES D+",
+          "description": "Detalle técnico de los componentes de Klardie D+.",
+          "reason": "Reforzar el conocimiento técnico del médico sobre el producto.",
+          "dueDate": "2026-04-27",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "Imagen",
+            "platform": "Instagram/Facebook",
+            "periodMonth": "2026-04",
+            "strategicSummary": "Soporte técnico para Klardie D+.",
+            "notes": "Descubrimiento de beneficios D+."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "205636",
+          "title": "HISTORIA 6 - CANALES DE VENTA CORREO",
+          "description": "Información sobre canales de comunicación vía correo electrónico.",
+          "reason": "Diversificar canales de atención Hansbiomed.",
+          "dueDate": "2026-04-28",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "Historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-04",
+            "strategicSummary": "Atención al cliente multicanal.",
+            "notes": "CTA: Escríbenos para información completa."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "205637",
+          "title": "REEL 2 - RESPALDO GLOBAL HANSBIOMED",
+          "description": "Video sobre el origen, presencia en Colombia y evolución de la marca.",
+          "reason": "Generar confianza y autoridad de marca ante el público general.",
+          "dueDate": "2026-04-29",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "Reel",
+            "platform": "Instagram/TikTok",
+            "periodMonth": "2026-04",
+            "strategicSummary": "Branding y posicionamiento institucional.",
+            "notes": "CTA: Escríbenos para saber más."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "205638",
+          "title": "PIEZA PUBLICITARIA 6 - MINT: MODELADOS VS CORTADOS",
+          "description": "Diferenciación técnica entre hilos modelados y cortados.",
+          "reason": "Educar al médico sobre la calidad superior de hilos modelados Mint.",
+          "dueDate": "2026-04-30",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "Imagen",
+            "platform": "Instagram/Facebook",
+            "periodMonth": "2026-04",
+            "strategicSummary": "Educación técnica avanzada Mint.",
+            "notes": "Concepto: La elección inteligente."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "205639",
+          "title": "PIEZA PUBLICITARIA 3 - EVENTO IBAGUÉ",
+          "description": "Promoción de evento institucional en la ciudad de Ibagué.",
+          "reason": "Convocatoria regional para médicos en el departamento del Tolima.",
+          "dueDate": "2026-04-30",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "Imagen",
+            "platform": "Instagram/Facebook",
+            "periodMonth": "2026-04",
+            "strategicSummary": "Expansión regional de eventos.",
+            "notes": "Contacto ejecutiva para inscripción."
+          },
+          "imageUrl": "/cronograma/default.png"
         }
       ]
     },
