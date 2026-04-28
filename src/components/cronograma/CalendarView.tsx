@@ -33,11 +33,12 @@ const CalendarView: React.FC<CalendarViewProps> = ({ projects, onEditProject, on
   const dayNames = ['LUN', 'MAR', 'MIE', 'JUE', 'VIE', 'SAB', 'DOM'];
 
   const getProjectsForDay = (day: number) => {
-    return projects.filter(p => {
-      const d = new Date(p.dueDate);
-      // Adjust for timezone differences by comparing UTC dates
-      return d.getUTCDate() === day && d.getUTCMonth() === month && d.getUTCFullYear() === year;
-    });
+    const yearStr = year.toString();
+    const monthStr = (month + 1).toString().padStart(2, '0');
+    const dayStr = day.toString().padStart(2, '0');
+    const targetDate = `${yearStr}-${monthStr}-${dayStr}`;
+
+    return projects.filter(p => p.dueDate === targetDate);
   };
 
   return (
