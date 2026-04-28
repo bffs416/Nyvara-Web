@@ -952,6 +952,342 @@
             "notes": "Contacto ejecutiva para inscripción."
           },
           "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_final_1777373170432_0",
+          "title": "HISTORIA: PROMOCIONES",
+          "description": "Generar expectativa sobre las promociones del mes",
+          "reason": "Público: Médicos. Objetivo: Generar expectativa sobre las promociones del mes",
+          "dueDate": "2026-04-30",
+          "createdAt": "2026-04-28T10:46:10.432Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: Activa recordatorio y prepárate + Comenta MAMÁ y se el primero en conocer la promoción"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_final_1777373170433_1",
+          "title": "HISTORIA: PROMO FINE D+",
+          "description": "Promocionar descuentos mes mamá",
+          "reason": "Público: Médicos. Objetivo: Promocionar descuentos mes mamá",
+          "dueDate": "2026-05-01",
+          "createdAt": "2026-04-28T10:46:10.433Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: Consulta con tu ejecutivo Hansbiomed - Escríbenos antes de que se agote"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_final_1777373170433_2",
+          "title": "HISTORIA: PROMO MONO D+",
+          "description": "Promocionar descuentos mes mamá",
+          "reason": "Público: Médicos. Objetivo: Promocionar descuentos mes mamá",
+          "dueDate": "2026-05-02",
+          "createdAt": "2026-04-28T10:46:10.433Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: Consulta con tu ejecutivo Hansbiomed - Escríbenos antes de que se agote"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_final_1777373170433_3",
+          "title": "HISTORIA: PROMO R+ D+",
+          "description": "Promocionar descuentos mes mamá",
+          "reason": "Público: Médicos. Objetivo: Promocionar descuentos mes mamá",
+          "dueDate": "2026-05-03",
+          "createdAt": "2026-04-28T10:46:10.433Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: Consulta con tu ejecutivo Hansbiomed - Escríbenos antes de que se agote"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_final_1777373170433_4",
+          "title": "HISTORIA: PROMO FUSICARE",
+          "description": "Promocionar descuentos mes mamá",
+          "reason": "Público: Médicos + Pacientes. Objetivo: Promocionar descuentos mes mamá",
+          "dueDate": "2026-05-04",
+          "createdAt": "2026-04-28T10:46:10.433Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: Consulta con tu ejecutivo Hansbiomed - Escríbenos antes de que se agote"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_final_1777373170433_5",
+          "title": "HISTORIA: PROMO MONO (D+ O R+)",
+          "description": "Promocionar descuentos mes mamá",
+          "reason": "Público: Médicos. Objetivo: Promocionar descuentos mes mamá",
+          "dueDate": "2026-05-05",
+          "createdAt": "2026-04-28T10:46:10.433Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: Consulta con tu ejecutivo Hansbiomed - Escríbenos antes de que se agote"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_final_1777373170433_6",
+          "title": "PIEZA PUBLICITARIA: FUSICARE",
+          "description": "Kit completo para regalo de mamá",
+          "reason": "Público: Médicos + Pacientes. Objetivo: Kit completo para regalo de mamá",
+          "dueDate": "2026-05-07",
+          "createdAt": "2026-04-28T10:46:10.433Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza publicitaria",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: Responde 'Regalo' y te enviamos info de la promo del mes"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_final_1777373170433_7",
+          "title": "HISTORIA: HANSBIOMED",
+          "description": "Feliz día de la madre",
+          "reason": "Público: Médicos + Pacientes + Equipo. Objetivo: Feliz día de la madre",
+          "dueDate": "2026-05-10",
+          "createdAt": "2026-04-28T10:46:10.433Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: -"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_final_1777373170433_8",
+          "title": "HISTORIA: HANSBIOMED - COLABORACIÓN",
+          "description": "Fidelización clientes VIP Hans Corea (Planeación de tomas)",
+          "reason": "Público: Médicos. Objetivo: Fidelización clientes VIP Hans Corea (Planeación de tomas)",
+          "dueDate": "2026-05-12",
+          "createdAt": "2026-04-28T10:46:10.433Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: ¿Te gustaría estar en nuestra próxima visita a Corea? | Claro que sí | El otro no me lo pierdo"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_final_1777373170433_9",
+          "title": "CARRUSEL: MINT",
+          "description": "Biomecánica Avanzada (Bidireccional vs. Multidireccional)",
+          "reason": "Público: Médicos. Objetivo: Biomecánica Avanzada (Bidireccional vs. Multidireccional)",
+          "dueDate": "2026-05-13",
+          "createdAt": "2026-04-28T10:46:10.433Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "carrusel",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: Comenta la palabra ANCLAJE y te enviaremos por DM nuestra promoción de este mes"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_final_1777373170433_10",
+          "title": "PIEZA PUBLICITARIA: LION",
+          "description": "Promocionar HT 0,64mm para cejas",
+          "reason": "Público: Médicos + Pacientes. Objetivo: Promocionar HT 0,64mm para cejas",
+          "dueDate": "2026-05-15",
+          "createdAt": "2026-04-28T10:46:10.433Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza publicitaria",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: Revisa nuestro perfil y conoce nuestras líneas"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_final_1777373170433_11",
+          "title": "REEL: MINT",
+          "description": "Línea Mint (Información de cada referencia de hilos)",
+          "reason": "Público: Médicos. Objetivo: Línea Mint (Información de cada referencia de hilos)",
+          "dueDate": "2026-05-18",
+          "createdAt": "2026-04-28T10:46:10.433Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: Comenten la palabra Mint si deseas conocer más"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_final_1777373170433_12",
+          "title": "PIEZA PUBLICITARIA: KLARDIE",
+          "description": "Beneficios R+",
+          "reason": "Público: Médicos. Objetivo: Beneficios R+",
+          "dueDate": "2026-05-21",
+          "createdAt": "2026-04-28T10:46:10.433Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza publicitaria",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: Comentan Klárdie y recibe asesoría"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_final_1777373170433_13",
+          "title": "PIEZA PUBLICITARIA: KLARDIE",
+          "description": "Beneficios D+",
+          "reason": "Público: Médicos. Objetivo: Beneficios D+",
+          "dueDate": "2026-05-25",
+          "createdAt": "2026-04-28T10:46:10.433Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza publicitaria",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: Comentan Klárdie y recibe asesoría"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_final_1777373170433_14",
+          "title": "REEL: HANSBIOMED - COLABORACIÓN",
+          "description": "Fidelización clientes Hans Corea (Planeación de tomas)",
+          "reason": "Público: Médicos. Objetivo: Fidelización clientes Hans Corea (Planeación de tomas)",
+          "dueDate": "2026-05-27",
+          "createdAt": "2026-04-28T10:46:10.433Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: Comenta la palabra COREA y recibe información de cómo lograrlo"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_final_1777373170433_15",
+          "title": "PIEZA PUBLICITARIA: EVENTO CALI",
+          "description": "Promocionar evento",
+          "reason": "Público: Médicos. Objetivo: Promocionar evento",
+          "dueDate": "2026-05-31",
+          "createdAt": "2026-04-28T10:46:10.433Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza publicitaria",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: Más información contactar a la ejecutiva"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_final_1777373170433_16",
+          "title": "PIEZA PUBLICITARIA: EVENTO BOGOTÁ",
+          "description": "Promocionar evento",
+          "reason": "Público: Médicos. Objetivo: Promocionar evento",
+          "dueDate": "2026-05-31",
+          "createdAt": "2026-04-28T10:46:10.433Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza publicitaria",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: Más información contactar a la ejecutiva"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_final_1777373170433_17",
+          "title": "PIEZA PUBLICITARIA: EVENTO MEDELLÍN",
+          "description": "Promocionar evento",
+          "reason": "Público: Médicos. Objetivo: Promocionar evento",
+          "dueDate": "2026-05-31",
+          "createdAt": "2026-04-28T10:46:10.433Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza publicitaria",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: Más información contactar a la ejecutiva"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_final_1777373170433_18",
+          "title": "PIEZA PUBLICITARIA: EVENTO CARTAGENA",
+          "description": "Promocionar evento",
+          "reason": "Público: Médicos. Objetivo: Promocionar evento",
+          "dueDate": "2026-05-31",
+          "createdAt": "2026-04-28T10:46:10.433Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza publicitaria",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: Más información contactar a la ejecutiva"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_final_1777373170433_19",
+          "title": "PIEZA PUBLICITARIA: EVENTO PEREIRA",
+          "description": "Promocionar evento",
+          "reason": "Público: Médicos. Objetivo: Promocionar evento",
+          "dueDate": "2026-05-31",
+          "createdAt": "2026-04-28T10:46:10.433Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza publicitaria",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: Más información contactar a la ejecutiva"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_final_1777373170433_20",
+          "title": "PIEZA PUBLICITARIA: EVENTO IBAGUÉ",
+          "description": "Promocionar evento",
+          "reason": "Público: Médicos. Objetivo: Promocionar evento",
+          "dueDate": "2026-05-31",
+          "createdAt": "2026-04-28T10:46:10.433Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza publicitaria",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: Más información contactar a la ejecutiva"
+          },
+          "imageUrl": "/cronograma/default.png"
         }
       ]
     },
