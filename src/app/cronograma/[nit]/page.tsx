@@ -64,17 +64,24 @@ const CronogramaClientePage = () => {
         try {
           const savedProjectsKey = `cronograma_projects_${nit}`;
           const savedProjects = localStorage.getItem(savedProjectsKey);
+          
+          // Siempre empezamos con los proyectos del JSON como base para asegurar actualizaciones
+          const jsonProjects = client.projects || [];
+          
           if (savedProjects) {
-            loadedProjects = JSON.parse(savedProjects);
+            const localProjects = JSON.parse(savedProjects) as Project[];
+            // Combinar: Proyectos del JSON tienen prioridad si hay IDs duplicados (para forzar updates)
+            // O simplemente añadir los que falten.
+            const jsonIds = new Set(jsonProjects.map(p => p.id));
+            const uniqueLocalProjects = localProjects.filter(p => !jsonIds.has(p.id));
+            loadedProjects = [...jsonProjects, ...uniqueLocalProjects];
           } else {
-            loadedProjects = client.projects;
+            loadedProjects = jsonProjects;
           }
 
           // --- FETCH FROM SUPABASE ---
           fetchProjects(nit).then(supabaseProjects => {
             if (supabaseProjects && supabaseProjects.length > 0) {
-              // Combine local/json projects with Supabase projects
-              // Avoid duplicates based on ID
               const existingIds = new Set(loadedProjects.map(p => p.id));
               const newProjects = supabaseProjects.filter(p => !existingIds.has(p.id));
 
@@ -86,7 +93,7 @@ const CronogramaClientePage = () => {
             }
           });
         } catch (error) {
-          console.error("Failed to load projects from localStorage", error);
+          console.error("Failed to load projects", error);
           loadedProjects = client.projects;
         }
 
