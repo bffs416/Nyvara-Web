@@ -920,12 +920,12 @@
           "imageUrl": "/cronograma/default.png"
         },
         {
-          "id": "hb_may_v3_1778112789501_0",
-          "title": "HISTORIA: PROMOCIONES",
-          "description": "Generar expectativa sobre las promociones del mes",
-          "reason": "Audiencia: Médicos. Objetivo: Generar expectativa sobre las promociones del mes",
+          "id": "hb_may_v4_1778114309384_0",
+          "title": "HISTORIA: EXPECTATIVA DE PROMOCIONES",
+          "description": "Expectativa de promociones",
+          "reason": "Publico: Médicos. Objetivo: Expectativa de promociones",
           "dueDate": "2026-04-30",
-          "createdAt": "2026-05-07T00:13:09.501Z",
+          "createdAt": "2026-05-07T00:38:29.384Z",
           "status": "pending",
           "kpis": {
             "contentType": "historia",
@@ -936,12 +936,12 @@
           "imageUrl": "/cronograma/default.png"
         },
         {
-          "id": "hb_may_v3_1778112789502_1",
-          "title": "HISTORIA: PROMOCIONES",
-          "description": "Generar expectativa sobre las promociones del mes",
-          "reason": "Audiencia: Médicos. Objetivo: Generar expectativa sobre las promociones del mes",
+          "id": "hb_may_v4_1778114309387_1",
+          "title": "HISTORIA: EXPECTATIVA DE PROMOCIONES",
+          "description": "Expectativa de promociones",
+          "reason": "Publico: Médicos. Objetivo: Expectativa de promociones",
           "dueDate": "2026-05-02",
-          "createdAt": "2026-05-07T00:13:09.502Z",
+          "createdAt": "2026-05-07T00:38:29.387Z",
           "status": "pending",
           "kpis": {
             "contentType": "historia",
@@ -952,12 +952,12 @@
           "imageUrl": "/cronograma/default.png"
         },
         {
-          "id": "hb_may_v3_1778112789502_2",
+          "id": "hb_may_v4_1778114309387_2",
           "title": "HISTORIA: PROMO FINE D+",
-          "description": "Promocionar descuentos mes mamá",
-          "reason": "Audiencia: Médicos. Objetivo: Promocionar descuentos mes mamá",
+          "description": "Promo Fine D+",
+          "reason": "Publico: Médicos. Objetivo: Promo Fine D+",
           "dueDate": "2026-05-04",
-          "createdAt": "2026-05-07T00:13:09.502Z",
+          "createdAt": "2026-05-07T00:38:29.387Z",
           "status": "pending",
           "kpis": {
             "contentType": "historia",
@@ -968,12 +968,12 @@
           "imageUrl": "/cronograma/default.png"
         },
         {
-          "id": "hb_may_v3_1778112789502_3",
+          "id": "hb_may_v4_1778114309387_3",
           "title": "HISTORIA: PROMO MONO D+",
-          "description": "Promocionar descuentos mes mamá",
-          "reason": "Audiencia: Médicos. Objetivo: Promocionar descuentos mes mamá",
+          "description": "Promo mono D+",
+          "reason": "Publico: Médicos. Objetivo: Promo mono D+",
           "dueDate": "2026-05-05",
-          "createdAt": "2026-05-07T00:13:09.502Z",
+          "createdAt": "2026-05-07T00:38:29.387Z",
           "status": "pending",
           "kpis": {
             "contentType": "historia",
@@ -984,12 +984,12 @@
           "imageUrl": "/cronograma/default.png"
         },
         {
-          "id": "hb_may_v3_1778112789502_4",
+          "id": "hb_may_v4_1778114309387_4",
           "title": "HISTORIA: PROMO R+ D+",
-          "description": "Promocionar descuentos mes mamá",
-          "reason": "Audiencia: Médicos. Objetivo: Promocionar descuentos mes mamá",
+          "description": "Promo R+ D+",
+          "reason": "Publico: Médicos. Objetivo: Promo R+ D+",
           "dueDate": "2026-05-06",
-          "createdAt": "2026-05-07T00:13:09.502Z",
+          "createdAt": "2026-05-07T00:38:29.387Z",
           "status": "pending",
           "kpis": {
             "contentType": "historia",
@@ -1000,12 +1000,12 @@
           "imageUrl": "/cronograma/default.png"
         },
         {
-          "id": "hb_may_v3_1778112789502_5",
+          "id": "hb_may_v4_1778114309387_5",
           "title": "PIEZA PUBLICITARIA: EVENTO CALI",
-          "description": "Promocionar evento",
-          "reason": "Audiencia: Médicos. Objetivo: Promocionar evento",
+          "description": "Evento Cali",
+          "reason": "Publico: Médicos. Objetivo: Evento Cali",
           "dueDate": "2026-05-06",
-          "createdAt": "2026-05-07T00:13:09.502Z",
+          "createdAt": "2026-05-07T00:38:29.387Z",
           "status": "pending",
           "kpis": {
             "contentType": "pieza publicitaria",
@@ -1016,12 +1016,12 @@
           "imageUrl": "/cronograma/default.png"
         },
         {
-          "id": "hb_may_v3_1778112789502_6",
+          "id": "hb_may_v4_1778114309387_6",
           "title": "HISTORIA: PROMO FUSICARE",
-          "description": "Promocionar descuentos mes mamá",
-          "reason": "Audiencia: Médicos + Pacientes. Objetivo: Promocionar descuentos mes mamá",
+          "description": "Promo Fusicare",
+          "reason": "Publico: Médicos + Pacientes. Objetivo: Promo Fusicare",
           "dueDate": "2026-05-07",
-          "createdAt": "2026-05-07T00:13:09.502Z",
+          "createdAt": "2026-05-07T00:38:29.387Z",
           "status": "pending",
           "kpis": {
             "contentType": "historia",
@@ -1032,12 +1032,12 @@
           "imageUrl": "/cronograma/default.png"
         },
         {
-          "id": "hb_may_v3_1778112789502_7",
-          "title": "PIEZA PUBLICITARIA: FUSICARE",
-          "description": "kit completo para regalo de mama",
-          "reason": "Audiencia: Médicos + Pacientes. Objetivo: kit completo para regalo de mama",
+          "id": "hb_may_v4_1778114309387_7",
+          "title": "PIEZA PUBLICITARIA: FUSICARE PROMO CLIENTE FINAL",
+          "description": "kit fusi completo para regalo de mama",
+          "reason": "Publico: Médicos + Pacientes. Objetivo: kit fusi completo para regalo de mama",
           "dueDate": "2026-05-07",
-          "createdAt": "2026-05-07T00:13:09.502Z",
+          "createdAt": "2026-05-07T00:38:29.387Z",
           "status": "pending",
           "kpis": {
             "contentType": "pieza publicitaria",
@@ -1048,12 +1048,12 @@
           "imageUrl": "/cronograma/default.png"
         },
         {
-          "id": "hb_may_v3_1778112789502_8",
+          "id": "hb_may_v4_1778114309387_8",
           "title": "HISTORIA: PROMO MONO (D+ O R+)",
-          "description": "Promocionar descuentos mes mamá",
-          "reason": "Audiencia: Médicos. Objetivo: Promocionar descuentos mes mamá",
+          "description": "Promo mono (D+ o R+)",
+          "reason": "Publico: Médicos. Objetivo: Promo mono (D+ o R+)",
           "dueDate": "2026-05-08",
-          "createdAt": "2026-05-07T00:13:09.502Z",
+          "createdAt": "2026-05-07T00:38:29.387Z",
           "status": "pending",
           "kpis": {
             "contentType": "historia",
@@ -1064,12 +1064,12 @@
           "imageUrl": "/cronograma/default.png"
         },
         {
-          "id": "hb_may_v3_1778112789502_9",
+          "id": "hb_may_v4_1778114309388_9",
           "title": "PIEZA PUBLICITARIA: EVENTO BARRANQUILLA",
-          "description": "Promocionar evento",
-          "reason": "Audiencia: Médicos. Objetivo: Promocionar evento",
+          "description": "Evento Barranquilla",
+          "reason": "Publico: Médicos. Objetivo: Evento Barranquilla",
           "dueDate": "2026-05-08",
-          "createdAt": "2026-05-07T00:13:09.502Z",
+          "createdAt": "2026-05-07T00:38:29.388Z",
           "status": "pending",
           "kpis": {
             "contentType": "pieza publicitaria",
@@ -1080,12 +1080,12 @@
           "imageUrl": "/cronograma/default.png"
         },
         {
-          "id": "hb_may_v3_1778112789502_10",
-          "title": "HISTORIA: HANSBIOMED",
+          "id": "hb_may_v4_1778114309388_10",
+          "title": "HISTORIA: DIA DE LA MADRE",
           "description": "Feliz dia de la madre",
-          "reason": "Audiencia: Médicos + Pacientes + Equipo. Objetivo: Feliz dia de la madre",
+          "reason": "Publico: Médicos + Pacientes + Equipo. Objetivo: Feliz dia de la madre",
           "dueDate": "2026-05-10",
-          "createdAt": "2026-05-07T00:13:09.502Z",
+          "createdAt": "2026-05-07T00:38:29.388Z",
           "status": "pending",
           "kpis": {
             "contentType": "historia",
@@ -1096,12 +1096,12 @@
           "imageUrl": "/cronograma/default.png"
         },
         {
-          "id": "hb_may_v3_1778112789502_11",
+          "id": "hb_may_v4_1778114309388_11",
           "title": "PIEZA PUBLICITARIA: EVENTO BOGOTÁ",
-          "description": "Promocionar evento",
-          "reason": "Audiencia: Médicos. Objetivo: Promocionar evento",
+          "description": "Evento Bogotá",
+          "reason": "Publico: Médicos. Objetivo: Evento Bogotá",
           "dueDate": "2026-05-11",
-          "createdAt": "2026-05-07T00:13:09.502Z",
+          "createdAt": "2026-05-07T00:38:29.388Z",
           "status": "pending",
           "kpis": {
             "contentType": "pieza publicitaria",
@@ -1112,12 +1112,12 @@
           "imageUrl": "/cronograma/default.png"
         },
         {
-          "id": "hb_may_v3_1778112789502_12",
-          "title": "HISTORIA: HANSBIOMED - COLABORACIÓN",
+          "id": "hb_may_v4_1778114309388_12",
+          "title": "HISTORIA: COREA",
           "description": "Fidelizacion clientes VIP Hans corea (con planeacion de tomas)",
-          "reason": "Audiencia: Médicos. Objetivo: Fidelizacion clientes VIP Hans corea (con planeacion de tomas)",
+          "reason": "Publico: Médicos. Objetivo: Fidelizacion clientes VIP Hans corea (con planeacion de tomas)",
           "dueDate": "2026-05-12",
-          "createdAt": "2026-05-07T00:13:09.502Z",
+          "createdAt": "2026-05-07T00:38:29.388Z",
           "status": "pending",
           "kpis": {
             "contentType": "historia",
@@ -1128,12 +1128,12 @@
           "imageUrl": "/cronograma/default.png"
         },
         {
-          "id": "hb_may_v3_1778112789502_13",
+          "id": "hb_may_v4_1778114309388_13",
           "title": "PIEZA PUBLICITARIA: EVENTO MEDELLIN",
-          "description": "Promocionar evento",
-          "reason": "Audiencia: Médicos. Objetivo: Promocionar evento",
+          "description": "Evento Medellin",
+          "reason": "Publico: Médicos. Objetivo: Evento Medellin",
           "dueDate": "2026-05-13",
-          "createdAt": "2026-05-07T00:13:09.502Z",
+          "createdAt": "2026-05-07T00:38:29.388Z",
           "status": "pending",
           "kpis": {
             "contentType": "pieza publicitaria",
@@ -1144,12 +1144,12 @@
           "imageUrl": "/cronograma/default.png"
         },
         {
-          "id": "hb_may_v3_1778112789502_14",
-          "title": "PIEZA PUBLICITARIA: FACEBOOK",
+          "id": "hb_may_v4_1778114309388_14",
+          "title": "PIEZA PUBLICITARIA: FACEBOOK -MIGRAR USUARIOS",
           "description": "Migrar usuarios a un único perfil de Hans facebook",
-          "reason": "Audiencia: seguidores. Objetivo: Migrar usuarios a un único perfil de Hans facebook",
+          "reason": "Publico: seguidores. Objetivo: Migrar usuarios a un único perfil de Hans facebook",
           "dueDate": "2026-05-14",
-          "createdAt": "2026-05-07T00:13:09.502Z",
+          "createdAt": "2026-05-07T00:38:29.388Z",
           "status": "pending",
           "kpis": {
             "contentType": "pieza publicitaria",
@@ -1160,28 +1160,12 @@
           "imageUrl": "/cronograma/default.png"
         },
         {
-          "id": "hb_may_v3_1778112789502_15",
-          "title": "PIEZA PUBLICITARIA: LION",
-          "description": "Promocinar HT0,64mm para cejas",
-          "reason": "Audiencia: Médicos + Pacientes. Objetivo: Promocinar HT0,64mm para cejas",
-          "dueDate": "2026-05-15",
-          "createdAt": "2026-05-07T00:13:09.502Z",
-          "status": "pending",
-          "kpis": {
-            "contentType": "pieza publicitaria",
-            "platform": "Instagram",
-            "periodMonth": "2026-05",
-            "notes": "CTA: Revisa nuestro perfil y conoce nuestras lineas"
-          },
-          "imageUrl": "/cronograma/default.png"
-        },
-        {
-          "id": "hb_may_v3_1778112789502_16",
+          "id": "hb_may_v4_1778114309388_15",
           "title": "REEL: MINT",
-          "description": "Reel: Linea mint (informacion de cada referencia de hilos)",
-          "reason": "Audiencia: Médicos. Objetivo: Reel: Linea mint (informacion de cada referencia de hilos)",
-          "dueDate": "2026-05-18",
-          "createdAt": "2026-05-07T00:13:09.502Z",
+          "description": "Linea mint (informacion de cada referencia de hilos)",
+          "reason": "Publico: Médicos. Objetivo: Linea mint (informacion de cada referencia de hilos)",
+          "dueDate": "2026-05-15",
+          "createdAt": "2026-05-07T00:38:29.388Z",
           "status": "pending",
           "kpis": {
             "contentType": "reel",
@@ -1192,12 +1176,28 @@
           "imageUrl": "/cronograma/default.png"
         },
         {
-          "id": "hb_may_v3_1778112789502_17",
+          "id": "hb_may_v4_1778114309388_16",
+          "title": "PIEZA PUBLICITARIA: LION",
+          "description": "lion HT0,64mm para cejas",
+          "reason": "Publico: Médicos + Pacientes. Objetivo: lion HT0,64mm para cejas",
+          "dueDate": "2026-05-19",
+          "createdAt": "2026-05-07T00:38:29.388Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza publicitaria",
+            "platform": "Instagram",
+            "periodMonth": "2026-05",
+            "notes": "CTA: Revisa nuestro perfil y conoce nuestras lineas"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_may_v4_1778114309388_17",
           "title": "CARRUSEL: MINT",
           "description": "Biomecánica Avanzada (Bidireccional vs. Multidireccional)",
-          "reason": "Audiencia: Médicos. Objetivo: Biomecánica Avanzada (Bidireccional vs. Multidireccional)",
+          "reason": "Publico: Médicos. Objetivo: Biomecánica Avanzada (Bidireccional vs. Multidireccional)",
           "dueDate": "2026-05-20",
-          "createdAt": "2026-05-07T00:13:09.502Z",
+          "createdAt": "2026-05-07T00:38:29.388Z",
           "status": "pending",
           "kpis": {
             "contentType": "carrusel",
@@ -1208,12 +1208,12 @@
           "imageUrl": "/cronograma/default.png"
         },
         {
-          "id": "hb_may_v3_1778112789502_18",
+          "id": "hb_may_v4_1778114309388_18",
           "title": "PIEZA PUBLICITARIA: KLARDIE",
           "description": "Beneficios R+",
-          "reason": "Audiencia: Médicos. Objetivo: Beneficios R+",
+          "reason": "Publico: Médicos. Objetivo: Beneficios R+",
           "dueDate": "2026-05-21",
-          "createdAt": "2026-05-07T00:13:09.502Z",
+          "createdAt": "2026-05-07T00:38:29.388Z",
           "status": "pending",
           "kpis": {
             "contentType": "pieza publicitaria",
@@ -1224,12 +1224,12 @@
           "imageUrl": "/cronograma/default.png"
         },
         {
-          "id": "hb_may_v3_1778112789502_19",
+          "id": "hb_may_v4_1778114309388_19",
           "title": "PIEZA PUBLICITARIA: KLARDIE",
           "description": "Beneficios D+",
-          "reason": "Audiencia: Médicos. Objetivo: Beneficios D+",
+          "reason": "Publico: Médicos. Objetivo: Beneficios D+",
           "dueDate": "2026-05-25",
-          "createdAt": "2026-05-07T00:13:09.502Z",
+          "createdAt": "2026-05-07T00:38:29.388Z",
           "status": "pending",
           "kpis": {
             "contentType": "pieza publicitaria",
@@ -1240,12 +1240,12 @@
           "imageUrl": "/cronograma/default.png"
         },
         {
-          "id": "hb_may_v3_1778112789502_20",
+          "id": "hb_may_v4_1778114309388_20",
           "title": "REEL: HANSBIOMED - COLABORACIÓN",
-          "description": "Fidelización clientes Hans corea (con planeacion de tomas)",
-          "reason": "Audiencia: Médicos. Objetivo: Fidelización clientes Hans corea (con planeacion de tomas)",
+          "description": "Fidelización clientes Hans corea",
+          "reason": "Publico: Médicos. Objetivo: Fidelización clientes Hans corea",
           "dueDate": "2026-05-27",
-          "createdAt": "2026-05-07T00:13:09.502Z",
+          "createdAt": "2026-05-07T00:38:29.388Z",
           "status": "pending",
           "kpis": {
             "contentType": "reel",
@@ -1256,12 +1256,12 @@
           "imageUrl": "/cronograma/default.png"
         },
         {
-          "id": "hb_may_v3_1778112789502_21",
+          "id": "hb_may_v4_1778114309388_21",
           "title": "PIEZA PUBLICITARIA: EVENTO IBAGUE",
           "description": "Promocionar evento",
-          "reason": "Audiencia: Médicos. Objetivo: Promocionar evento",
+          "reason": "Publico: Médicos. Objetivo: Promocionar evento",
           "dueDate": "2026-05-31",
-          "createdAt": "2026-05-07T00:13:09.502Z",
+          "createdAt": "2026-05-07T00:38:29.388Z",
           "status": "pending",
           "kpis": {
             "contentType": "pieza publicitaria",
