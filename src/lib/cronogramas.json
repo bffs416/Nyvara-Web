@@ -1270,6 +1270,358 @@
             "notes": "CTA: Comenta la palabra COREA y recibe información de como lograrlo"
           },
           "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_0",
+          "title": "1.POST: HANSBIOMED",
+          "description": "¿Quién es HansBiomed Colombia? Conoce nuestras soluciones para medicina estética, regeneración cutánea y restauración capilar.",
+          "reason": "Línea: Hansbiomed. Objetivo: ¿Quién es HansBiomed Colombia? Conoce nuestras soluciones para medicina estética, regeneración cutánea y restauración capilar.",
+          "dueDate": "2026-06-04",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "post",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: Contáctanos para más información."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_1",
+          "title": "1.HISTORIA: MINT",
+          "description": "MINT Tip (Nariz)",
+          "reason": "Línea: MINT. Objetivo: MINT Tip (Nariz)",
+          "dueDate": "2026-06-05",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: Aprende esta técnica en nuestras capacitaciones."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_2",
+          "title": "1.CARRUSEL: MINT + KLÁRDIE",
+          "description": "Rejuvenecimiento Integral",
+          "reason": "Línea: MINT + Klárdie. Objetivo: Rejuvenecimiento Integral",
+          "dueDate": "2026-06-09",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "carrusel",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: Escríbenos al DM si quieres saber qué clínicas en Colombia realizan este protocolo combinado."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_3",
+          "title": "2.HISTORIA: HANSBIOMED",
+          "description": "Tecnología Coreana",
+          "reason": "Línea: Hansbiomed. Objetivo: Tecnología Coreana",
+          "dueDate": "2026-06-10",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: Conoce la tecnología y respaldo científico detrás de nuestras soluciones."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_4",
+          "title": "1.PIEZA PUBLICITARIA: MINT",
+          "description": "Hilos MINT (Lifting sin Cirugía)",
+          "reason": "Línea: MINT. Objetivo: Hilos MINT (Lifting sin Cirugía)",
+          "dueDate": "2026-06-11",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza publicitaria",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: ¿Quieres resultados como estos? Envíanos un DM para ayudarte a encontrar a tu médico MINT más cercano en Colombia."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_5",
+          "title": "8.PIEZA PUBLICITARIA: FUSICARE",
+          "description": "Recuperación postprocedimiento",
+          "reason": "Línea: Fusicare. Objetivo: Recuperación postprocedimiento",
+          "dueDate": "2026-06-12",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza publicitaria",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: Conoce cómo complementar los cuidados posteriores a tus procedimientos."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_6",
+          "title": "2.PIEZA PUBLICITARIA: MINT",
+          "description": "MINT Fix (Fijación Fuerte)",
+          "reason": "Línea: MINT. Objetivo: MINT Fix (Fijación Fuerte)",
+          "dueDate": "2026-06-13",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza publicitaria",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: Escríbanos para recibir asesoría sobre qué pacientes son candidatos ideales para MINT Fix y adquiera el producto."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_7",
+          "title": "3.HISTORIA: LION",
+          "description": "Sistema LION (Versatilidad)",
+          "reason": "Línea: LION. Objetivo: Sistema LION (Versatilidad)",
+          "dueDate": "2026-06-17",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: Conoce los especialistas que usan LION"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_8",
+          "title": "1.REEL: KLÁRDIE",
+          "description": "Klárdie R+ (Manchas y Luminosidad)",
+          "reason": "Línea: Klárdie. Objetivo: Klárdie R+ (Manchas y Luminosidad)",
+          "dueDate": "2026-06-18",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: Solicite asesoría comercial hoy mismo y sume Klárdie R+ a su portafolio de servicios."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_9",
+          "title": "9.PIEZA PUBLICITARIA: FUSICARE",
+          "description": "Hidratación y barrera cutánea",
+          "reason": "Línea: Fusicare. Objetivo: Hidratación y barrera cutánea",
+          "dueDate": "2026-06-18",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza publicitaria",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: Descubre los beneficios de una piel protegida e hidratada."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_10",
+          "title": "3.PIEZA PUBLICITARIA: LION",
+          "description": "Sistema LION (Cero Cicatrices)",
+          "reason": "Línea: LION. Objetivo: Sistema LION (Cero Cicatrices)",
+          "dueDate": "2026-06-19",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza publicitaria",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: Actualice la técnica en su clínica capilar. Contáctenos al DM para conocer cómo hacer la transición al Sistema LION™ y capacitar a su equipo médico."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_11",
+          "title": "4.HISTORIA: HANSBIOMED",
+          "description": "Academia Hanschool / D2D",
+          "reason": "Línea: Hansbiomed. Objetivo: Academia Hanschool / D2D",
+          "dueDate": "2026-06-20",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: Conoce nuestros programas de capacitación y entrenamiento médico."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_12",
+          "title": "5.HISTORIA: HANSBIOMED",
+          "description": "Día del Padre",
+          "reason": "Línea: Hansbiomed. Objetivo: Día del Padre",
+          "dueDate": "2026-06-21",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: Feliz día del Padre"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_13",
+          "title": "4.PIEZA PUBLICITARIA: MINT",
+          "description": "MINT PDO: El secreto de la duración (Moldeado vs. Cortado)",
+          "reason": "Línea: MINT. Objetivo: MINT PDO: El secreto de la duración (Moldeado vs. Cortado)",
+          "dueDate": "2026-06-22",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza publicitaria",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: ¿Eres médico estético? Conoce nuestros productos y eleva el nivel de tus procedimientos."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_14",
+          "title": "5.PIEZA PUBLICITARIA: MINT",
+          "description": "MINT PDO: Calibres personalizados (La física del peso facial)",
+          "reason": "Línea: MINT. Objetivo: MINT PDO: Calibres personalizados (La física del peso facial)",
+          "dueDate": "2026-06-24",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza publicitaria",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: Cada rostro es único y tu tratamiento también debería serlo. Solicita una valoración con un médico certificado HansBiomed."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_15",
+          "title": "2.REEL: LION",
+          "description": "LION (Trasplante Capilar)",
+          "reason": "Línea: LION. Objetivo: LION (Trasplante Capilar)",
+          "dueDate": "2026-06-24",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "reel",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: Especialistas maximicen la tasa de supervivencia folicular en sus procedimientos con nuestros Implantador LION."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_16",
+          "title": "6.HISTORIA: MINT",
+          "description": "Hilos MINT (Seguridad y Anclaje)",
+          "reason": "Línea: MINT. Objetivo: Hilos MINT (Seguridad y Anclaje)",
+          "dueDate": "2026-06-25",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: Realiza tu pedido de MINT PDO hoy. Escríbenos."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_17",
+          "title": "6.PIEZA PUBLICITARIA: KLÁRDIE",
+          "description": "Klárdie D+ (Recuperación de Firmeza)",
+          "reason": "Línea: Klárdie. Objetivo: Klárdie D+ (Recuperación de Firmeza)",
+          "dueDate": "2026-06-26",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza publicitaria",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: Envíenos un DM para recibir la ficha técnica de Klárdie D+ y sumarlo a los protocolos de su clínica."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_18",
+          "title": "7.HISTORIA: LION",
+          "description": "Sistema LION (Esterilidad)",
+          "reason": "Línea: LION. Objetivo: Sistema LION (Esterilidad)",
+          "dueDate": "2026-06-27",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: Solicita tecnología LION"
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_19",
+          "title": "8.HISTORIA: HANSBIOMED",
+          "description": "HansBiomed Colombia (INVIMA)",
+          "reason": "Línea: Hansbiomed. Objetivo: HansBiomed Colombia (INVIMA)",
+          "dueDate": "2026-06-27",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "historia",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: Conoce nuestras líneas de producto."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_20",
+          "title": "7.PIEZA PUBLICITARIA: KLÁRDIE",
+          "description": "Klárdie R+ (Tratamiento de Manchas)",
+          "reason": "Línea: Klárdie. Objetivo: Klárdie R+ (Tratamiento de Manchas)",
+          "dueDate": "2026-06-28",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza publicitaria",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: Envíenos un DM para recibir la ficha técnica de Klárdie R+ y sumarlo a los protocolos de su clínica."
+          },
+          "imageUrl": "/cronograma/default.png"
+        },
+        {
+          "id": "hb_jun_v1_1780507551371_21",
+          "title": "10.PIEZA PUBLICITARIA: FUSICARE",
+          "description": "Cuidado complementario",
+          "reason": "Línea: Fusicare. Objetivo: Cuidado complementario",
+          "dueDate": "2026-06-29",
+          "createdAt": "2026-06-03T17:25:51.364Z",
+          "status": "pending",
+          "kpis": {
+            "contentType": "pieza publicitaria",
+            "platform": "Instagram",
+            "periodMonth": "2026-06",
+            "notes": "CTA: Contáctanos para recibir más información."
+          },
+          "imageUrl": "/cronograma/default.png"
         }
       ]
     },
