@@ -63,4 +63,4 @@ Un video B2B aburrido ya no es simplemente una oportunidad perdida de hacer bran
 **¿Tu estrategia actual está fragmentada y te está costando cierres multimillonarios?** 
 La desconexión entre tus datos comerciales y tus activos visuales es el enemigo. Agenda una sesión de diagnóstico estratégico con **Nyvara**. Analizaremos tu ecosistema actual bajo la lupa del neuromarketing y la analítica de datos, y te mostraremos cómo transformarlo en una máquina de retención y ventas B2B.
 
-[👉 Agenda tu diagnóstico con Nyvara aquí](#contacto)
+[👉 Agenda tu diagnóstico con Nyvara aquí](https://wa.me/573203004537?text=Hola,%20quiero%20agendar%20una%20sesi%C3%B3n%20de%20diagn%C3%B3stico%20con%20Nyvara)

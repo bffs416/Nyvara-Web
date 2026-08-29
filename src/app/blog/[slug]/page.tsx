@@ -140,8 +140,11 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                             /* Énfasis y Citas */
                             [&_em]:text-gray-600 [&_em]:italic [&_em]:font-serif
                             
-                            /* Enlaces */
-                            [&_a]:text-blue-700 [&_a]:underline [&_a]:decoration-4 [&_a]:decoration-blue-300 hover:[&_a]:bg-blue-300 hover:[&_a]:text-black [&_a]:transition-all
+                            /* Enlaces Normales */
+                            [&_p>a]:text-blue-700 [&_p>a]:underline [&_p>a]:decoration-4 [&_p>a]:decoration-blue-300 hover:[&_p>a]:bg-blue-300 hover:[&_p>a]:text-black [&_p>a]:transition-all
+                            
+                            /* Botón CTA de Diagnóstico */
+                            [&_a[href*='wa.me']]:inline-flex [&_a[href*='wa.me']]:items-center [&_a[href*='wa.me']]:justify-center [&_a[href*='wa.me']]:px-8 [&_a[href*='wa.me']]:py-4 [&_a[href*='wa.me']]:bg-yellow-400 [&_a[href*='wa.me']]:text-black [&_a[href*='wa.me']]:font-black [&_a[href*='wa.me']]:uppercase [&_a[href*='wa.me']]:tracking-[0.1em] [&_a[href*='wa.me']]:!no-underline [&_a[href*='wa.me']]:border-4 [&_a[href*='wa.me']]:border-black [&_a[href*='wa.me']]:shadow-[8px_8px_0px_rgba(0,0,0,1)] hover:[&_a[href*='wa.me']]:-translate-y-1 hover:[&_a[href*='wa.me']]:shadow-[12px_12px_0px_rgba(0,0,0,1)] hover:[&_a[href*='wa.me']]:bg-black hover:[&_a[href*='wa.me']]:text-white [&_a[href*='wa.me']]:transition-all [&_a[href*='wa.me']]:mt-4 [&_a[href*='wa.me']]:text-center
                         "
                         dangerouslySetInnerHTML={{ __html: post.content }}
                     />

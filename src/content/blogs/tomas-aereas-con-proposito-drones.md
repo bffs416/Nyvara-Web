@@ -59,4 +59,4 @@ Tu infraestructura instalada, tus activos operativos y tus sedes corporativas no
 **¿Tu contenido actual está proyectando el verdadero músculo y escala de tu empresa?** 
 La fragmentación entre tus datos comerciales y tu contenido visual te está costando cierres multimillonarios. Agenda una sesión de diagnóstico estratégico con **Nyvara**. Analizaremos tus activos visuales actuales bajo la lupa del neuromarketing y te mostraremos, paso a paso, cómo transformarlos en herramientas de cierre B2B imparables. 
 
-[👉 Agenda tu diagnóstico con Nyvara aquí](#contacto)
+[👉 Agenda tu diagnóstico con Nyvara aquí](https://wa.me/573203004537?text=Hola,%20quiero%20agendar%20una%20sesi%C3%B3n%20de%20diagn%C3%B3stico%20con%20Nyvara)

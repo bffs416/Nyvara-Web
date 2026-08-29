@@ -55,4 +55,4 @@ El tamaño de la pantalla no es excusa para entregar un mensaje barato. Los líd
 **¿Tu estrategia actual está fragmentada y tus videos verticales están abaratando tu marca?** 
 La desconexión entre tus datos comerciales y tus activos visuales es el enemigo, y usar tu teléfono celular no es una estrategia B2B escalable. Agenda una sesión de diagnóstico estratégico con **Nyvara**. Analizaremos tu ecosistema actual bajo la lupa del neuromarketing y la analítica de plataformas verticales, y te mostraremos cómo transformarlo en una máquina masiva de retención de prospectos.
 
-[👉 Agenda tu diagnóstico con Nyvara aquí](#contacto)
+[👉 Agenda tu diagnóstico con Nyvara aquí](https://wa.me/573203004537?text=Hola,%20quiero%20agendar%20una%20sesi%C3%B3n%20de%20diagn%C3%B3stico%20con%20Nyvara)
