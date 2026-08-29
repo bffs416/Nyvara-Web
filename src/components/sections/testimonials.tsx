@@ -68,10 +68,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="py-20 md:py-28 bg-gradient-to-br from-[#F5F7FF] via-[#EBF1FF] to-[#F5F7FF] relative overflow-hidden">
-      {/* Decorative Yellow Glow */}
-      <div className="absolute bottom-1/4 -right-20 md:-right-32 w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-primary/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none z-0" />
-
+    <section id="testimonials" className="py-20 md:py-28 bg-transparent relative overflow-hidden">
       <div className="container relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
