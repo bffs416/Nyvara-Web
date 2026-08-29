@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Palette, Presentation, Rocket, Users, Info, Send } from 'lucide-react';
+import { Palette, Presentation, Rocket, Users, Info, Send, Play, Image as ImageIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import {
@@ -90,7 +90,7 @@ const EventosCorporativos = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7 }}
             >
-              <h1 className="text-5xl md:text-7xl font-bold mb-4 text-primary font-headline">Organización de Eventos Corporativos</h1>
+              <h1 className="text-5xl md:text-7xl font-bold mb-4 text-white font-headline">Organización de Eventos Corporativos</h1>
               <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto">
                 Creamos experiencias memorables que conectan tu marca con personas y alcanzan tus objetivos de negocio.
               </p>
@@ -148,6 +148,40 @@ const EventosCorporativos = () => {
                   </DialogContent>
                 </Dialog>
               ))}
+            </motion.section>
+
+            {/* Portfolio Section */}
+            <motion.section
+              className="mb-20"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="text-center mb-12">
+                <h2 className="text-4xl font-bold mb-4 font-headline text-white">Eventos Destacados</h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Mira cómo cobramos vida a los conceptos en eventos de alto impacto para nuestros clientes.
+                </p>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Video Placeholder */}
+                <div className="group relative aspect-video bg-muted rounded-xl overflow-hidden border border-border/50 cursor-pointer flex items-center justify-center">
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors z-10"></div>
+                  <Play className="text-white w-12 h-12 z-20 opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all" />
+                  <span className="absolute bottom-4 left-4 z-20 text-white font-semibold">Resumen de Congreso 2023</span>
+                </div>
+                {/* Image Placeholder 1 */}
+                <div className="group relative aspect-video bg-muted rounded-xl overflow-hidden border border-border/50 cursor-pointer flex items-center justify-center">
+                  <ImageIcon className="text-muted-foreground w-12 h-12 opacity-50" />
+                  <span className="absolute bottom-4 left-4 z-20 text-white font-semibold bg-black/50 px-2 py-1 rounded">Diseño de Stand Feria</span>
+                </div>
+                {/* Image Placeholder 2 */}
+                <div className="group relative aspect-video bg-muted rounded-xl overflow-hidden border border-border/50 cursor-pointer flex items-center justify-center">
+                  <ImageIcon className="text-muted-foreground w-12 h-12 opacity-50" />
+                  <span className="absolute bottom-4 left-4 z-20 text-white font-semibold bg-black/50 px-2 py-1 rounded">Activación de Marca</span>
+                </div>
+              </div>
             </motion.section>
 
             {/* Call to Action */}

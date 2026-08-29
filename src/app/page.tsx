@@ -5,7 +5,8 @@ import Footer from '@/components/layout/footer';
 import Services from '@/components/sections/services';
 import About from '@/components/sections/about';
 import Testimonials from '@/components/sections/testimonials';
-import Contact from '@/components/sections/contact';
+import dynamic from 'next/dynamic';
+const Contact = dynamic(() => import('@/components/sections/contact'), { ssr: false });
 import Hero from '@/components/sections/hero';
 import Marquee from '@/components/sections/marquee';
 

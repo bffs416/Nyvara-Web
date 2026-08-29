@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Megaphone, Calendar, Code, ArrowRight } from 'lucide-react';
+import { Megaphone, Calendar, Code, ArrowRight, Camera } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
@@ -28,6 +28,13 @@ const services = [
     description: "Creamos el motor tecnológico que tu negocio necesita para escalar, desde aplicaciones web hasta soluciones de software a la medida.",
     features: ["Software a Medida", "Aplicaciones Web", "Optimización de Bases de Datos", "Apps Móviles (iOS/Android)"],
     link: "/desarrollo",
+  },
+  {
+    icon: <Camera size={32} className="text-black" />,
+    title: "Recorridos 3D Inmersivos",
+    description: "Lleva tus espacios al mundo digital con recorridos virtuales 360° y tomas aéreas espectaculares.",
+    features: ["Tomas Aéreas con Dron", "Fotografía 360°", "Recorridos Virtuales Interactivos", "Inmersión Total"],
+    link: "/recorridos-virtuales",
   }
 ];
 
@@ -56,7 +63,7 @@ export default function Services() {
       </div>
 
       <div className="container relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
             <motion.div
               key={index}

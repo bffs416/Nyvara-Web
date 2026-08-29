@@ -48,10 +48,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="dark">
+    <html lang="es" suppressHydrationWarning>
       <body className={`${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} ${archivoBlack.variable} font-body bg-background text-foreground antialiased`}>
         <div className="cyber-grid"></div>
         <div className="glow-sphere"></div>
+        <div className="glow-sphere-2"></div>
         <ClientProviders>
           {children}
         </ClientProviders>

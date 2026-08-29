@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Braces, Globe, Database, Smartphone, Info, Send, Play, Image as ImageIcon } from 'lucide-react';
+import { Camera, Video, Monitor, Info, Send, Play, Image as ImageIcon, Glasses } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import {
@@ -18,7 +18,7 @@ import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { siteConfig } from '@/lib/config';
 
-const DesarrolloSoftware = () => {
+const RecorridosVirtualesPage = () => {
   const pageVariants = {
     initial: { opacity: 0, y: 50 },
     animate: { opacity: 1, y: 0, transition: { duration: 0.8 } },
@@ -29,43 +29,33 @@ const DesarrolloSoftware = () => {
 
   const serviceItems = [
     {
-      icon: <Braces size={32} />,
-      title: 'Desarrollo de Software a Medida',
-      description: 'Creamos software a medida para resolver los desafíos únicos de tu operación y darte una ventaja competitiva.',
+      icon: <Video size={32} />,
+      title: 'Fotografía y Video con Dron',
+      description: 'Capturamos ángulos espectaculares e inmersivos desde el aire para destacar la magnitud de tus proyectos.',
       details: {
-        analogy: 'Un software a medida es como un traje de sastrería. En lugar de una solución genérica que no es perfecta para nadie, te confeccionamos una herramienta que se adapta a cada proceso de tu empresa, dándote una ventaja única.',
-        whatIs: 'Es el diseño y construcción de software creado desde cero para un cliente. A diferencia del software pre-empaquetado, cada función se alinea con tus flujos de trabajo, reglas de negocio y objetivos particulares (ej. software contable, gestión de inventarios).',
-        howWeHelp: 'Analizamos a fondo tus operaciones, diseñamos y construimos una solución robusta y escalable que automatiza tareas, elimina cuellos de botella y te da control total sobre tu información, optimizando tu eficiencia y rentabilidad.'
+        analogy: 'Muestra tu proyecto como un halcón. Una vista panorámica que le da a tus clientes la verdadera dimensión y escala del lugar, algo imposible a nivel del suelo.',
+        whatIs: 'Grabación de video en alta resolución (4K) y fotografía aérea usando drones profesionales. Ideal para bienes raíces, construcciones, turismo y eventos al aire libre.',
+        howWeHelp: 'Proveemos pilotos experimentados que capturan las tomas más dinámicas. Editamos el material para resaltar los mejores ángulos, dándole un aspecto cinematográfico a tu marca.'
       }
     },
     {
-      icon: <Globe size={32} />,
-      title: 'Desarrollo de Aplicaciones Web',
-      description: 'Diseñamos y construimos plataformas web potentes, desde sitios corporativos hasta complejas aplicaciones SaaS.',
+      icon: <Camera size={32} />,
+      title: 'Fotografía y Cámaras 360°',
+      description: 'Permitimos que tus clientes exploren espacios detalladamente, mirando en todas direcciones como si estuvieran allí.',
       details: {
-        analogy: 'Tu sitio web es tu principal escaparate al mundo digital. Nosotros lo diseñamos para que cada pasillo sea intuitivo, cada producto brille y el proceso de pago sea tan simple que tus clientes compren con una sonrisa.',
-        whatIs: 'Abarca la creación de cualquier solución accesible a través de un navegador: desde páginas web institucionales, hasta plataformas de e-commerce con pasarelas de pago o aplicaciones web interactivas (Web Apps) con funcionalidades complejas.',
-        howWeHelp: 'Fusionamos diseño UX/UI de vanguardia con tecnología de punta. Creamos plataformas rápidas, seguras y optimizadas para móviles que no solo se ven increíbles, sino que están diseñadas para convertir visitantes en clientes.'
+        analogy: 'Es como teletransportar a tus clientes al interior de tu espacio físico. Pueden mirar arriba, abajo y alrededor, tomando el control de lo que quieren ver.',
+        whatIs: 'Captura de imágenes esféricas interactivas utilizando tecnología de cámaras 360 grados. El usuario interactúa deslizando su pantalla para ver todos los ángulos del entorno.',
+        howWeHelp: 'Capturamos espacios físicos y los convertimos en experiencias inmersivas de alta calidad. Perfecto para inmobiliarias, hoteles, restaurantes, showrooms y museos.'
       }
     },
     {
-      icon: <Database size={32} />,
-      title: 'Diseño y Optimización de Bases de Datos',
-      description: 'Estructuramos tus datos para que sean accesibles, seguros y potentes, garantizando el rendimiento de tus apps.',
+      icon: <Glasses size={32} />,
+      title: 'Recorridos Virtuales Interactivos',
+      description: 'Creamos visitas virtuales fluidas conectando imágenes 360° para una navegación realista paso a paso.',
       details: {
-        analogy: 'Una base de datos es la biblioteca central de tu negocio. Si los libros (datos) están desordenados, encontrar información es una pesadilla. Nosotros diseñamos las estanterías lógicas y el sistema de catalogación para que encuentres cualquier dato en segundos.',
-        whatIs: 'Es la arquitectura fundamental sobre la que se apoya cualquier software. Implica diseñar el modelo lógico y físico de la base de datos (SQL o NoSQL), definir las relaciones y establecer las reglas para garantizar la integridad y seguridad de la información.',
-        howWeHelp: 'Diseñamos bases de datos optimizadas para el rendimiento y la escalabilidad. Aseguramos que tus aplicaciones respondan rápidamente, que tus datos estén protegidos y que la estructura pueda crecer junto con tu negocio.'
-      }
-    },
-    {
-      icon: <Smartphone size={32} />,
-      title: 'Desarrollo de Aplicaciones Móviles (iOS y Android)',
-      description: 'Creamos apps para iOS y Android que llevan tu negocio al bolsillo de tus clientes, mejorando interacción y fidelidad.',
-      details: {
-        analogy: 'Una app es un canal directo y permanente con tu cliente. Es como darle una llave de acceso VIP a tu negocio, permitiéndole interactuar y comprar contigo en cualquier momento y lugar, creando una relación mucho más cercana.',
-        whatIs: 'Es el desarrollo de aplicaciones para smartphones y tablets (iOS y Android). Pueden ser nativas (usando Swift/Kotlin para máximo rendimiento) o híbridas (usando tecnologías como React Native para optimizar costes y tiempos).',
-        howWeHelp: 'Te acompañamos en todo el ciclo: desde la estrategia y el diseño de una experiencia de usuario (UX) intuitiva, hasta el desarrollo, las pruebas y el lanzamiento en las App Stores. Creamos apps que aportan un valor real a tus usuarios.'
+        analogy: 'Es el equivalente digital de dar un tour guiado a puertas abiertas, disponible 24 horas al día, 7 días a la semana, a clientes en cualquier parte del mundo.',
+        whatIs: 'Desarrollo de un recorrido virtual navegable tipo "Google Street View" pero de tu propiedad o negocio, a menudo enriquecido con puntos de información, videos y enlaces.',
+        howWeHelp: 'Integramos las fotos 360° en una plataforma interactiva fluida. Agregamos etiquetas descriptivas y puntos de venta dentro del recorrido, transformando la visita virtual en una potente herramienta comercial.'
       }
     }
   ];
@@ -89,15 +79,15 @@ const DesarrolloSoftware = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7 }}
             >
-              <h1 className="text-5xl md:text-7xl font-bold mb-4 text-white font-headline">Desarrollo de Software y Soluciones Tecnológicas</h1>
+              <h1 className="text-5xl md:text-7xl font-bold mb-4 text-white font-headline">Recorridos Virtuales y Medios Aéreos</h1>
               <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto">
-                Construimos las herramientas digitales que tu negocio necesita para crecer, optimizar y escalar.
+                Teletransporta a tus clientes a tus espacios con experiencias inmersivas en 360° y tomas cinematográficas con dron.
               </p>
             </motion.section>
 
             {/* Services Grid */}
             <motion.section
-              className="grid md:grid-cols-2 gap-10 mb-20"
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 mb-20"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.8 }}
@@ -139,7 +129,7 @@ const DesarrolloSoftware = () => {
                        <DialogClose asChild>
                          <Button asChild className="w-full">
                            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                              Solicitar Asesoría Tecnológica <Send className="ml-2" />
+                              Solicitar Cotización <Send className="ml-2" />
                            </a>
                          </Button>
                       </DialogClose>
@@ -158,9 +148,9 @@ const DesarrolloSoftware = () => {
               transition={{ duration: 0.8 }}
             >
               <div className="text-center mb-12">
-                <h2 className="text-4xl font-bold mb-4 font-headline text-white">Proyectos Tecnológicos</h2>
+                <h2 className="text-4xl font-bold mb-4 font-headline text-white">Nuestra Galería de Trabajos</h2>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Descubre las soluciones de software y plataformas que hemos construido para potenciar empresas.
+                  Da un vistazo a nuestros levantamientos con dron y la calidad inmersiva de nuestras producciones en 360°.
                 </p>
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -168,17 +158,17 @@ const DesarrolloSoftware = () => {
                 <div className="group relative aspect-video bg-muted rounded-xl overflow-hidden border border-border/50 cursor-pointer flex items-center justify-center">
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors z-10"></div>
                   <Play className="text-white w-12 h-12 z-20 opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all" />
-                  <span className="absolute bottom-4 left-4 z-20 text-white font-semibold">Demo de Plataforma SaaS</span>
+                  <span className="absolute bottom-4 left-4 z-20 text-white font-semibold">Toma Aérea con Dron</span>
                 </div>
                 {/* Image Placeholder 1 */}
                 <div className="group relative aspect-video bg-muted rounded-xl overflow-hidden border border-border/50 cursor-pointer flex items-center justify-center">
                   <ImageIcon className="text-muted-foreground w-12 h-12 opacity-50" />
-                  <span className="absolute bottom-4 left-4 z-20 text-white font-semibold bg-black/50 px-2 py-1 rounded">App Móvil para Retail</span>
+                  <span className="absolute bottom-4 left-4 z-20 text-white font-semibold bg-black/50 px-2 py-1 rounded">Foto Esférica 360°</span>
                 </div>
                 {/* Image Placeholder 2 */}
                 <div className="group relative aspect-video bg-muted rounded-xl overflow-hidden border border-border/50 cursor-pointer flex items-center justify-center">
-                  <Globe className="text-muted-foreground w-12 h-12 opacity-50" />
-                  <span className="absolute bottom-4 left-4 z-20 text-white font-semibold bg-black/50 px-2 py-1 rounded">Plataforma Web B2B</span>
+                  <Glasses className="text-muted-foreground w-12 h-12 opacity-50" />
+                  <span className="absolute bottom-4 left-4 z-20 text-white font-semibold bg-black/50 px-2 py-1 rounded">Tour Virtual de Interiores</span>
                 </div>
               </div>
             </motion.section>
@@ -191,13 +181,13 @@ const DesarrolloSoftware = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.6, duration: 0.8 }}
             >
-              <h2 className="text-4xl font-bold mb-4 font-headline">¿Tienes una idea o un problema que resolver?</h2>
+              <h2 className="text-4xl font-bold mb-4 font-headline">¿Listo para destacar tu espacio?</h2>
               <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Nuestro equipo de expertos convertirá tu visión en una solución de software funcional y de alto impacto. ¡Hablemos!
+                Ofrece a tus clientes una experiencia inmersiva única que generará confianza y más ventas.
               </p>
               <Button size="lg" asChild>
                 <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                  Contactar a un Especialista <Send className="ml-2" />
+                  Agendar una Toma <Send className="ml-2" />
                 </a>
               </Button>
             </motion.section>
@@ -210,4 +200,4 @@ const DesarrolloSoftware = () => {
   );
 };
 
-export default DesarrolloSoftware;
+export default RecorridosVirtualesPage;

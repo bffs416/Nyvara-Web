@@ -18,8 +18,8 @@ export default function Hero() {
     }
   };
 
-  const title1 = "Redescubriendo tu Esencia,";
-  const title2 = "Potenciando tu Marca";
+  const title1 = "Hacemos que tus ideas no solo brillen,";
+  const title2 = "sino que se desarrollen.";
 
   const sentence = {
     hidden: { opacity: 1 },
@@ -51,10 +51,10 @@ export default function Hero() {
           playsInline
           className="w-full h-full object-cover"
         >
-          <source src="/hero-background.mp4" type="video/mp4" />
+          <source src="/Hero%20Riendo.mp4" type="video/mp4" />
           Tu navegador no soporta videos.
         </video>
-        <div className="absolute top-0 left-0 w-full h-full bg-background/80"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-black/60 backdrop-blur-[2px]"></div>
       </div>
 
       <motion.div 
@@ -89,7 +89,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="text-lg md:text-xl text-primary font-semibold mb-4 font-headline"
+            className="text-lg md:text-xl text-white/90 font-semibold mb-4 font-headline"
           >
             Más que proveedores, tus socios en crecimiento estratégico.
           </motion.div>
@@ -98,15 +98,15 @@ export default function Hero() {
             variants={sentence}
             initial="hidden"
             animate="visible"
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight text-white"
           >
             {title1.split("").map((char, index) => (
               <motion.span key={char + "-" + index} variants={letter}>
                 {char}
               </motion.span>
             ))}
-            <br />
-            <span className="text-primary">
+            {" "}
+            <span className="text-white/80">
               {title2.split("").map((char, index) => (
                 <motion.span key={char + "-" + index} variants={letter}>
                   {char}
@@ -120,7 +120,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="text-base md:text-lg text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed"
+            className="text-base md:text-lg text-white/70 mb-8 max-w-3xl mx-auto leading-relaxed"
           >
             Fusionamos estrategia, creatividad y tecnología para revelar el verdadero potencial de tu negocio y comunicarlo de forma impactante.
           </motion.div>
@@ -132,13 +132,13 @@ export default function Hero() {
             viewport={{ once: true }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <Button asChild size="lg" className="font-bold px-8 py-4 text-lg">
+            <Button asChild size="lg" className="font-bold px-8 py-4 text-lg bg-white text-black hover:bg-white/90">
               <Link href="/diagnostico">
                 Inicia tu Diagnóstico Estratégico
                 <ArrowRight size={20} />
               </Link>
             </Button>
-            <Button onClick={scrollToServices} variant="outline" size="lg" className="font-semibold px-8 py-4 text-lg">
+            <Button onClick={scrollToServices} variant="outline" size="lg" className="font-semibold px-8 py-4 text-lg border-black/50 text-black hover:bg-blue-900 hover:text-white hover:border-blue-900">
               <Sparkles size={20} />
               Explora Nuestros Servicios
             </Button>
@@ -151,23 +151,23 @@ export default function Hero() {
             viewport={{ once: true }}
             className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
           >
-            <div className="bg-card/50 border border-border/30 rounded-lg p-6 hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] hover:scale-105 transition-all duration-300">
-              <div className="text-3xl font-bold text-primary font-headline">
+            <div className="bg-black/90 border border-white/10 rounded-3xl p-6 hover:shadow-[0_0_20px_4px_rgba(255,255,255,0.2)] hover:scale-105 transition-all duration-300">
+              <div className="text-3xl font-bold text-white font-headline">
                 <AnimatedCounter value={100} suffix="+" />
               </div>
-              <div className="text-muted-foreground">Proyectos Exitosos</div>
+              <div className="text-white/70">Proyectos Exitosos</div>
             </div>
-            <div className="bg-card/50 border border-border/30 rounded-lg p-6 hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] hover:scale-105 transition-all duration-300">
-              <div className="text-3xl font-bold text-primary font-headline">
+            <div className="bg-black/90 border border-white/10 rounded-3xl p-6 hover:shadow-[0_0_20px_4px_rgba(255,255,255,0.2)] hover:scale-105 transition-all duration-300">
+              <div className="text-3xl font-bold text-white font-headline">
                  <AnimatedCounter value={5} suffix="+" />
               </div>
-              <div className="text-muted-foreground">Años de Experiencia</div>
+              <div className="text-white/70">Años de Experiencia</div>
             </div>
-            <div className="bg-card/50 border border-border/30 rounded-lg p-6 hover:shadow-[0_0_20px_4px_hsl(var(--primary)/0.5)] hover:scale-105 transition-all duration-300">
-              <div className="text-3xl font-bold text-primary font-headline">
+            <div className="bg-black/90 border border-white/10 rounded-3xl p-6 hover:shadow-[0_0_20px_4px_rgba(255,255,255,0.2)] hover:scale-105 transition-all duration-300">
+              <div className="text-3xl font-bold text-white font-headline">
                  <AnimatedCounter value={98} suffix="%" />
               </div>
-              <div className="text-muted-foreground">Clientes Satisfechos</div>
+              <div className="text-white/70">Clientes Satisfechos</div>
             </div>
           </motion.div>
         </div>

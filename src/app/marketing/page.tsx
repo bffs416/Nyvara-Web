@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BarChart, Users, Mail, CheckCircle, Send, Info } from 'lucide-react';
+import { BarChart, Mail, Send, Info, Video, Image as ImageIcon, Monitor, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import {
@@ -30,6 +30,36 @@ const MarketingPage = () => {
 
   const serviceItems = [
     { 
+      icon: <Video size={32} />, 
+      title: 'Videos Personalizados Profesionales', 
+      description: 'Producimos contenido audiovisual de alta calidad diseñado para cautivar a tu audiencia y transmitir tu mensaje de forma impactante.',
+      details: {
+        analogy: 'Un video es el equivalente digital de un comercial en horario estelar. Atrapa los sentidos y cuenta la historia de tu marca de una manera que el texto y las imágenes estáticas no pueden lograr.',
+        whatIs: 'Creación de videos a medida, desde la conceptualización y el guion, hasta la grabación y la postproducción profesional. Esto incluye videos corporativos, promocionales y para redes sociales.',
+        howWeHelp: 'Nos encargamos de todo el proceso creativo y técnico. Entregamos piezas audiovisuales optimizadas para diferentes plataformas que generan interacción, construyen confianza y aumentan tus tasas de conversión.'
+      }
+    },
+    { 
+      icon: <ImageIcon size={32} />, 
+      title: 'Imágenes y Fotografía Profesional', 
+      description: 'Capturamos la esencia de tu marca con fotografía e imágenes de primer nivel que elevan tu identidad visual.',
+      details: {
+        analogy: 'Las imágenes de tu marca son como la decoración de tu tienda. Si se ve premium, los clientes perciben tus productos como premium. Una imagen vale más que mil palabras para establecer tu autoridad.',
+        whatIs: 'Servicios de fotografía comercial, de producto y diseño de imágenes gráficas para usar en tu web, campañas de publicidad y presentaciones corporativas.',
+        howWeHelp: 'Producimos un banco de imágenes exclusivo y de alta resolución que refleja la calidad de tu trabajo, asegurando que cada aspecto visual de tu marca se vea impecable y altamente profesional.'
+      }
+    },
+    { 
+      icon: <Monitor size={32} />, 
+      title: 'Páginas Web y Landing Pages', 
+      description: 'Diseñamos y desarrollamos sitios web atractivos, rápidos y optimizados para convertir visitantes en clientes.',
+      details: {
+        analogy: 'Tu página web es tu vendedor estrella que trabaja 24/7 sin descanso. Debe ser acogedor, rápido para responder y muy persuasivo.',
+        whatIs: 'Diseño y desarrollo de páginas web responsivas (adaptables a móviles) y landing pages orientadas a objetivos específicos como captación de leads o ventas.',
+        howWeHelp: 'Creamos experiencias digitales que no solo se ven increíbles, sino que están estructuradas estratégicamente para guiar al usuario hacia la acción, utilizando las últimas tecnologías para garantizar velocidad y seguridad.'
+      }
+    },
+    { 
       icon: <BarChart size={32} />, 
       title: 'Posicionamiento SEO y SEM', 
       description: 'Maximizamos tu visibilidad y atraemos clientes cualificados optimizando tu ranking en Google y gestionando anuncios de pago.',
@@ -37,36 +67,6 @@ const MarketingPage = () => {
         analogy: 'Imagina que internet es una gran biblioteca. El SEO es organizar tu libro en la estantería correcta con un título claro para que lo encuentren al buscar. El SEM es pagar para poner tu libro en un expositor en la entrada principal, asegurando que todos lo vean.',
         whatIs: 'Técnicamente, el SEO (Search Engine Optimization) y SEM (Search Engine Marketing) buscan posicionar tu negocio en la cima de los motores de búsqueda. El SEO mejora tu visibilidad de manera orgánica (gratuita) a largo plazo, mientras que el SEM utiliza anuncios de pago para una visibilidad inmediata y dirigida.',
         howWeHelp: 'En Nyvara, fusionamos ambas disciplinas. Analizamos tu web y a tu competencia, encontramos las palabras clave que tus clientes usan y optimizamos tu sitio. En paralelo, diseñamos campañas de anuncios eficientes que maximizan tu retorno de inversión (ROI), atrayendo un flujo constante de tráfico de alta calidad listo para convertirse en clientes.'
-      }
-    },
-    { 
-      icon: <Users size={32} />, 
-      title: 'Gestión de Redes Sociales', 
-      description: 'Creamos contenido estratégico que construye una comunidad fiel y convierte seguidores en clientes.',
-      details: {
-        analogy: 'Piensa en tus redes sociales como el club social exclusivo de tu marca. Nosotros somos los anfitriones: ponemos buena música (contenido), iniciamos conversaciones interesantes y hacemos que cada miembro se sienta parte de algo especial, convirtiendo tu marca en el alma de la fiesta.',
-        whatIs: 'Se trata del arte de construir y nutrir una comunidad activa en plataformas como Instagram, Facebook o LinkedIn. Va más allá de publicar: es definir la voz de tu marca, interactuar con la audiencia, gestionar tu reputación y convertir seguidores en embajadores.',
-        howWeHelp: 'Nos sumergimos en el ADN de tu marca para crear una estrategia de contenido auténtica. Desarrollamos calendarios editoriales, diseñamos piezas visuales impactantes y gestionamos la conversación diaria. Analizamos las métricas no solo para ver "likes", sino para entender el comportamiento del usuario y optimizar la estrategia hacia tus verdaderos objetivos: reconocimiento, leads o ventas.'
-      }
-    },
-    { 
-      icon: <Mail size={32} />, 
-      title: 'Email Marketing Automatizado', 
-      description: 'Diseñamos campañas de email automatizadas que nutren prospectos, recuperan ventas y fidelizan clientes.',
-      details: {
-        analogy: 'Es como tener una conversación privada y relevante con tus contactos más interesados. En lugar de gritar tu mensaje en una plaza pública, les susurras al oído noticias, historias y ofertas que sabes que les encantarán, fortaleciendo la confianza y la lealtad.',
-        whatIs: 'Es una de las herramientas más directas y rentables para comunicarte con tu base de clientes. A través de correos estratégicos, puedes nutrir a los prospectos (leads), informar sobre novedades, recuperar carritos abandonados y fidelizar a quienes ya te compraron.',
-        howWeHelp: 'Vamos más allá del simple envío. Diseñamos secuencias de automatización (workflows) que funcionan como un vendedor personal 24/7. Segmentamos tu audiencia para enviar mensajes ultra-relevantes, con textos persuasivos (copywriting) y diseños que invitan a la acción, optimizando cada correo para garantizar altas tasas de apertura y conversión.'
-      }
-    },
-    { 
-      icon: <CheckCircle size={32} />, 
-      title: 'Marketing de Contenidos', 
-      description: 'Producimos contenido que responde a las dudas de tu audiencia y te posiciona como una autoridad en tu industria.',
-      details: {
-        analogy: 'En lugar de poner un anuncio que grita "¡Compra mis herramientas!", abres un taller gratuito donde enseñas a la gente a solucionar sus problemas. Les aportas valor real, demuestras tu maestría y, cuando necesiten a un experto de confianza, serás el primero en su mente.',
-        whatIs: 'Es una estrategia enfocada en atraer y retener a una audiencia específica mediante la creación de contenido valioso y relevante. En lugar de interrumpir, atraes. Respondes a las preguntas de tus clientes potenciales antes de que las hagan, construyendo confianza y autoridad.',
-        howWeHelp: 'Nos convertimos en los arquitectos de la narrativa de tu marca. Investigamos los dolores y las pasiones de tu audiencia y los convertimos en artículos de blog, guías, videos o podcasts que les encantará consumir. No solo creamos el contenido, sino que diseñamos una estrategia de distribución inteligente para que posicione tu marca como la referencia indiscutible en tu sector.'
       }
     }
   ];
@@ -90,7 +90,7 @@ const MarketingPage = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <h1 className="text-5xl md:text-7xl font-bold mb-4 text-primary font-headline">Marketing Digital que Genera Resultados</h1>
+              <h1 className="text-5xl md:text-7xl font-bold mb-4 text-white font-headline">Marketing Digital que Genera Resultados</h1>
               <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto">
                 Impulsamos tu marca con estrategias digitales diseñadas para atraer, convertir y fidelizar clientes.
               </p>
@@ -148,6 +148,40 @@ const MarketingPage = () => {
                   </DialogContent>
                 </Dialog>
               ))}
+            </motion.section>
+
+            {/* Portfolio Section */}
+            <motion.section
+              className="mb-20"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="text-center mb-12">
+                <h2 className="text-4xl font-bold mb-4 font-headline text-white">Nuestro Trabajo</h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Explora algunos de nuestros proyectos más recientes. Calidad visual y resultados comprobados.
+                </p>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Video Placeholder */}
+                <div className="group relative aspect-video bg-muted rounded-xl overflow-hidden border border-border/50 cursor-pointer flex items-center justify-center">
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors z-10"></div>
+                  <Play className="text-white w-12 h-12 z-20 opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all" />
+                  <span className="absolute bottom-4 left-4 z-20 text-white font-semibold">Video Promocional</span>
+                </div>
+                {/* Image Placeholder 1 */}
+                <div className="group relative aspect-video bg-muted rounded-xl overflow-hidden border border-border/50 cursor-pointer flex items-center justify-center">
+                  <ImageIcon className="text-muted-foreground w-12 h-12 opacity-50" />
+                  <span className="absolute bottom-4 left-4 z-20 text-white font-semibold bg-black/50 px-2 py-1 rounded">Fotografía de Producto</span>
+                </div>
+                {/* Image Placeholder 2 */}
+                <div className="group relative aspect-video bg-muted rounded-xl overflow-hidden border border-border/50 cursor-pointer flex items-center justify-center">
+                  <Monitor className="text-muted-foreground w-12 h-12 opacity-50" />
+                  <span className="absolute bottom-4 left-4 z-20 text-white font-semibold bg-black/50 px-2 py-1 rounded">Diseño Web UX/UI</span>
+                </div>
+              </div>
             </motion.section>
 
             <motion.section 

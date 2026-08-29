@@ -13,6 +13,7 @@ import { siteConfig } from '@/lib/config';
 const navItems = [
   { name: 'Inicio', href: '/' },
   { name: 'Servicios', href: '/#services' },
+  { name: 'Recorridos 3D', href: '/recorridos-virtuales' },
   { name: 'Nosotros', href: '/#nosotros' },
   { name: 'Diagnóstico', href: '/diagnostico' },
   { name: 'Clientes', href: '/cronograma' },
@@ -75,14 +76,14 @@ const Header = () => {
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        isScrolled ? 'border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60' : 'bg-transparent'
+      className={`sticky top-0 z-50 w-full transition-all duration-500 border-b border-white/10 bg-black/70 backdrop-blur-md supports-[backdrop-filter]:bg-black/50 ${
+        isScrolled ? 'shadow-sm py-0' : 'py-1'
       }`}
     >
-      <nav className="container flex h-20 items-center">
+      <nav className="max-w-7xl mx-auto px-6 flex h-16 items-center">
         <div className="mr-auto flex">
            <Link href="/" className="mr-6 flex items-center space-x-2 cursor-pointer">
-            <motion.div whileHover={{ scale: 1.05 }} className="relative h-16 w-64">
+            <motion.div whileHover={{ scale: 1.05 }} className="relative h-10 w-48">
                 <Image
                   src={siteConfig.logos.header}
                   alt="Nyvara Logo"
@@ -95,9 +96,9 @@ const Header = () => {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-8 text-sm font-medium">
+        <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-white/90">
             {navItems.map((item) => (
-              <button key={item.name} onClick={() => handleNavClick(item.href)} className="transition-colors hover:text-primary">
+              <button key={item.name} onClick={() => handleNavClick(item.href)} className="transition-colors hover:text-white">
                 {item.name}
               </button>
             ))}
@@ -111,7 +112,7 @@ const Header = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden text-foreground"
+              className="md:hidden text-white"
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -122,11 +123,11 @@ const Header = () => {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="absolute top-full left-0 right-0 h-screen md:hidden bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-t border-border/40"
+            className="absolute top-full left-0 right-0 h-screen md:hidden bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-black/60 border-t border-white/10"
           >
             <div className="container flex flex-col space-y-4 p-4 mt-4">
               {navItems.map((item) => (
-                  <button key={item.name} onClick={() => handleNavClick(item.href)} className="text-foreground text-lg hover:text-primary transition-colors duration-300 text-left py-2">
+                  <button key={item.name} onClick={() => handleNavClick(item.href)} className="text-white/90 text-lg hover:text-white transition-colors duration-300 text-left py-2">
                     {item.name}
                   </button>
               ))}

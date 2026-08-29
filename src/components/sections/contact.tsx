@@ -134,7 +134,7 @@ export default function Contact() {
               <p className="text-center text-muted-foreground mb-8">Complete los campos para iniciar el proceso de diagnóstico.</p>
               
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" suppressHydrationWarning>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                         <FormField
