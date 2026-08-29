@@ -14,9 +14,14 @@ const LoadingFallback = () => (
 
 const DiagnosticoPage = () => {
   return (
-    <div className="flex flex-col min-h-screen brutalist-theme">
+    <div className="flex flex-col min-h-screen relative bg-black overflow-hidden">
+      {/* Glow Effects (Same as Home) */}
+      <div className="glow-sphere" />
+      <div className="glow-sphere-2" />
+      <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay pointer-events-none" />
+
       <Header />
-      <main className="flex-1">
+      <main className="flex-1 relative z-10 pt-20 pb-32">
         <Suspense fallback={<LoadingFallback />}>
           <DiagnosticoClient />
         </Suspense>

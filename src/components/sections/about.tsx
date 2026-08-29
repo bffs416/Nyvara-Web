@@ -134,7 +134,7 @@ export default function About() {
                    whileInView={{ opacity: 1, y: 0 }}
                    transition={{ duration: 0.5, delay: 0.3 + (index * 0.1) }}
                    viewport={{ once: true }}
-                   className="md:col-span-1 lg:col-span-3 bg-white rounded-[32px] p-8 shadow-lg border border-gray-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group"
+                   className="md:col-span-1 lg:col-span-3 bg-white rounded-[32px] p-8 shadow-lg border border-gray-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group flex flex-col items-center text-center"
                 >
                    <div className="w-16 h-16 rounded-2xl bg-[#0a0a0a] text-white flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-md">
                       {value.icon}

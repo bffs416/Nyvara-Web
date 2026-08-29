@@ -205,7 +205,7 @@ const Footer = () => {
             </div>
 
             <div className="flex justify-center space-x-6 order-2 md:order-3">
-              <button onClick={() => handleSocialClick('Instagram', 'https://instagram.com')} className="text-muted-foreground hover:text-primary transition-colors"><Instagram size={22} /></button>
+              {/* <button onClick={() => handleSocialClick('Instagram', 'https://instagram.com')} className="text-muted-foreground hover:text-primary transition-colors"><Instagram size={22} /></button> */}
               <button onClick={() => handleSocialClick('LinkedIn', 'https://linkedin.com')} className="text-muted-foreground hover:text-primary transition-colors"><Linkedin size={22} /></button>
             </div>
           </div>

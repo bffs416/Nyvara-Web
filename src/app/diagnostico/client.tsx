@@ -11,18 +11,19 @@ import { siteConfig } from '@/lib/config';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 const SuccessMessage = ({ onReset }: { onReset: () => void }) => (
-    <div className="brut-container">
-        <div className="text-center">
-            <h1 className="brut-h1 !text-2xl !sm:text-4xl">¡Diagnóstico Enviado!</h1>
-            <p className="brut-subtitle">Gracias por tu tiempo.</p>
+    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[40px] p-8 md:p-12 max-w-2xl mx-auto shadow-2xl relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent pointer-events-none" />
+        <div className="text-center relative z-10">
+            <h1 className="font-headline text-3xl md:text-5xl font-extrabold text-white mb-4">¡Diagnóstico Enviado!</h1>
+            <p className="text-gray-400 uppercase tracking-widest text-sm font-bold">Gracias por tu tiempo.</p>
         </div>
-        <p className="text-center my-8">
+        <p className="text-center my-8 text-gray-300 leading-relaxed text-lg relative z-10">
             Has dado un paso fundamental. He recibido tus respuestas y, gracias a los minutos que has invertido, ahora puedo dedicar todo mi esfuerzo y conocimiento en analizar tu visión para construir juntos el camino hacia tu objetivo.
             <br/><br/>
-            <strong className="font-bold">Revisaré personalmente cada detalle y me pondré en contacto contigo muy pronto.</strong>
+            <strong className="text-white font-bold">Revisaré personalmente cada detalle y me pondré en contacto contigo muy pronto.</strong>
         </p>
-        <div className="actions">
-            <button onClick={onReset} className="btn btn-next w-full">Volver al Inicio</button>
+        <div className="flex justify-center mt-10 relative z-10">
+            <button onClick={onReset} className="bg-white text-black hover:bg-gray-200 px-8 py-4 rounded-full font-bold transition-all duration-300 w-full sm:w-auto">Volver al Inicio</button>
         </div>
     </div>
 );
@@ -30,16 +31,17 @@ const SuccessMessage = ({ onReset }: { onReset: () => void }) => (
 const GeneralSuccessMessage = () => {
     const whatsappUrl = `https://wa.me/${siteConfig.contact.phone}?text=${encodeURIComponent("Hola, he completado el Análisis de Necesidades (ADN) y me gustaría recibir mi diagnóstico inicial personalizado.")}`;
     return (
-        <div className="brut-container">
-            <div className="text-center">
-                <h1 className="brut-h1 !text-2xl !sm:text-4xl">¡Análisis Completado!</h1>
-                 <p className="brut-subtitle">Gracias por tu honestidad.</p>
+        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[40px] p-8 md:p-12 max-w-2xl mx-auto shadow-2xl relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent pointer-events-none" />
+            <div className="text-center relative z-10">
+                <h1 className="font-headline text-3xl md:text-5xl font-extrabold text-white mb-4">¡Análisis Completado!</h1>
+                 <p className="text-gray-400 uppercase tracking-widest text-sm font-bold">Gracias por tu honestidad.</p>
             </div>
-            <p className="text-center my-8">
+            <p className="text-center my-8 text-gray-300 leading-relaxed text-lg relative z-10">
                 La información compartida es ahora la materia prima para nuestro análisis. El siguiente paso es contactarnos directamente para recibir tu diagnóstico inicial personalizado y discutir tus oportunidades de crecimiento.
             </p>
-            <div className="actions">
-                 <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn btn-next w-full text-center">
+            <div className="flex justify-center mt-10 relative z-10">
+                 <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="bg-white text-black hover:bg-gray-200 px-8 py-4 rounded-full font-bold transition-all duration-300 w-full sm:w-auto text-center inline-block">
                     Contactar por WhatsApp
                  </a>
             </div>
@@ -49,22 +51,30 @@ const GeneralSuccessMessage = () => {
 
 
 const SectorSelection = ({ onSelect }: { onSelect: (sector: 'health' | 'general') => void }) => (
-  <div className="brut-container">
-     <div className="brut-header">
-        <h1 className="brut-h1 !text-4xl sm:!text-5xl">Paso 1</h1>
-        <span className="brut-subtitle">Elige tu sector</span>
+  <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[40px] p-8 md:p-12 max-w-3xl mx-auto shadow-2xl relative overflow-hidden">
+     <div className="text-center mb-12 relative z-10">
+        <h1 className="font-headline text-4xl sm:text-5xl font-extrabold text-white mb-4">Paso 1</h1>
+        <span className="text-gray-400 uppercase tracking-widest text-sm font-bold">Elige tu sector</span>
     </div>
-    <p className="text-center mb-8">Para ofrecerte el diagnóstico más preciso, por favor, selecciona el área que mejor describe tu negocio.</p>
-    <div className="grid">
-      <div onClick={() => onSelect('health')} className="option-card !flex-col !items-center !text-center !gap-2 !p-8">
-          <HeartPulse className="h-10 w-10 mb-2" />
-          <span className="font-bold text-lg">Sector Salud</span>
-          <span className="font-normal text-sm text-muted-foreground">(Medicina Estética)</span>
+    <p className="text-center mb-10 text-gray-300 text-lg relative z-10">Para ofrecerte el diagnóstico más preciso, por favor, selecciona el área que mejor describe tu negocio.</p>
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative z-10">
+      <div onClick={() => onSelect('health')} className="bg-black/40 border border-white/10 hover:border-white/40 hover:bg-white/5 p-8 rounded-[32px] flex flex-col items-center text-center gap-4 cursor-pointer transition-all duration-300 group">
+          <div className="p-4 bg-white/10 rounded-2xl group-hover:scale-110 transition-transform duration-300">
+             <HeartPulse className="h-10 w-10 text-white" />
+          </div>
+          <div>
+            <div className="font-bold text-xl text-white mb-2">Sector Salud</div>
+            <div className="text-sm text-gray-400">(Medicina Estética)</div>
+          </div>
       </div>
-      <div onClick={() => onSelect('general')} className="option-card !flex-col !items-center !text-center !gap-2 !p-8">
-          <Building className="mb-2 h-10 w-10" />
-          <span className="font-bold text-lg">Otro Sector</span>
-          <span className="font-normal text-sm text-muted-foreground">(Empresas y Profesionales)</span>
+      <div onClick={() => onSelect('general')} className="bg-black/40 border border-white/10 hover:border-white/40 hover:bg-white/5 p-8 rounded-[32px] flex flex-col items-center text-center gap-4 cursor-pointer transition-all duration-300 group">
+          <div className="p-4 bg-white/10 rounded-2xl group-hover:scale-110 transition-transform duration-300">
+             <Building className="mb-2 h-10 w-10 text-white" />
+          </div>
+          <div>
+            <div className="font-bold text-xl text-white mb-2">Otro Sector</div>
+            <div className="text-sm text-gray-400">(Empresas y Profesionales)</div>
+          </div>
       </div>
     </div>
   </div>
@@ -176,20 +186,20 @@ export default function DiagnosticoClient() {
   const renderContent = () => {
     if (isLoading) {
       return (
-        <div className="brut-container text-center">
-            <Loader2 className="h-16 w-16 animate-spin text-black mx-auto mb-4" />
-            <h2 className="text-2xl font-bold">Procesando...</h2>
+        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[40px] p-12 max-w-lg mx-auto shadow-2xl text-center">
+            <Loader2 className="h-16 w-16 animate-spin text-white mx-auto mb-6" />
+            <h2 className="text-2xl font-bold font-headline text-white">Procesando...</h2>
         </div>
       )
     }
 
     if (error) {
       return (
-        <div className="brut-container text-center">
-            <ServerCrash className="h-16 w-16 text-brut-accent mx-auto mb-4" />
-            <h2 className="text-2xl font-bold">¡Oops! Algo salió mal.</h2>
-            <p className="mt-4 mb-6">{error}</p>
-            <button onClick={resetFlow} className="btn btn-next">Intentar de Nuevo</button>
+        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[40px] p-12 max-w-lg mx-auto shadow-2xl text-center">
+            <ServerCrash className="h-16 w-16 text-red-500 mx-auto mb-6" />
+            <h2 className="text-2xl font-bold font-headline text-white">¡Oops! Algo salió mal.</h2>
+            <p className="mt-4 mb-8 text-gray-400">{error}</p>
+            <button onClick={resetFlow} className="bg-white text-black hover:bg-gray-200 px-8 py-3 rounded-full font-bold transition-colors w-full">Intentar de Nuevo</button>
         </div>
       );
     }
@@ -203,23 +213,23 @@ export default function DiagnosticoClient() {
             return null;
         case 'summary':
             return (
-              <div className="brut-container text-center">
-                  <div className="brut-header">
-                     <h1 className="brut-h1 !text-4xl">Paso Final</h1>
-                     <span className="brut-subtitle">Revisa y Guarda tu Resumen</span>
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[40px] p-8 md:p-12 max-w-2xl mx-auto shadow-2xl relative overflow-hidden text-center">
+                  <div className="mb-10 relative z-10">
+                     <h1 className="font-headline text-3xl md:text-5xl font-extrabold text-white mb-4">Paso Final</h1>
+                     <span className="text-gray-400 uppercase tracking-widest text-sm font-bold">Revisa y Guarda tu Resumen</span>
                   </div>
-                  <p className="mb-8">Hemos generado un resumen de tus respuestas. Descárgalo para tus archivos y luego envíalo para que nuestro equipo lo revise.</p>
-                  <div className="actions flex-col gap-4 sm:flex-row">
-                      <button onClick={handleDownloadSummary} className="btn btn-prev">
-                          <Download className="mr-2" />
+                  <p className="mb-10 text-gray-300 text-lg relative z-10">Hemos generado un resumen de tus respuestas. Descárgalo para tus archivos y luego envíalo para que nuestro equipo lo revise.</p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10 mb-8">
+                      <button onClick={handleDownloadSummary} className="bg-transparent border border-white/20 text-white hover:bg-white/10 px-8 py-4 rounded-full font-bold transition-all duration-300 flex items-center justify-center">
+                          <Download className="mr-2 h-5 w-5" />
                           Descargar
                       </button>
-                      <button onClick={handleSendToSupabase} className="btn btn-next">
-                          <Send className="mr-2" />
+                      <button onClick={handleSendToSupabase} className="bg-white text-black hover:bg-gray-200 px-8 py-4 rounded-full font-bold transition-all duration-300 flex items-center justify-center">
+                          <Send className="mr-2 h-5 w-5" />
                           Enviar Diagnóstico
                       </button>
                   </div>
-                  <button onClick={resetFlow} className="mt-8 text-sm underline">Volver al inicio</button>
+                  <button onClick={resetFlow} className="text-sm text-gray-500 hover:text-white underline transition-colors relative z-10">Volver al inicio</button>
               </div>
             );
         case 'sent':
@@ -232,7 +242,7 @@ export default function DiagnosticoClient() {
   }
 
   return (
-    <div className="z-10 relative">
+    <div className="z-10 relative container mx-auto px-4 sm:px-6">
         {renderContent()}
     </div>
   );

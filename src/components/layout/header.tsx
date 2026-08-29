@@ -12,11 +12,8 @@ import { siteConfig } from '@/lib/config';
 
 const navItems = [
   { name: 'Inicio', href: '/' },
-  { name: 'Servicios', href: '/#services' },
-  { name: 'Recorridos 3D', href: '/recorridos-virtuales' },
-  { name: 'Nosotros', href: '/#nosotros' },
   { name: 'Diagnóstico', href: '/diagnostico' },
-  { name: 'Clientes', href: '/cronograma' },
+  { name: 'Blog', href: '/blog' },
 ];
 
 const Header = () => {
