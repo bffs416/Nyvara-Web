@@ -63,6 +63,8 @@ export default function BlogPage() {
                         src={post.imageUrl} 
                         alt={post.title} 
                         fill 
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        quality={60}
                         className="object-cover transition-transform duration-500 group-hover:scale-110"
                       />
                       <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md border border-white/10 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">
