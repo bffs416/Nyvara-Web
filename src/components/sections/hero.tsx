@@ -49,7 +49,8 @@ export default function Hero() {
           loop
           muted
           playsInline
-          className="w-full h-full object-cover"
+          preload="auto"
+          className="w-full h-full object-cover bg-black"
         >
           <source src="/Hero%20Riendo.mp4" type="video/mp4" />
           Tu navegador no soporta videos.
@@ -58,18 +59,18 @@ export default function Hero() {
       </div>
 
       <motion.div 
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.5 }}
         viewport={{ once: true }}
         className="container mx-auto px-6 text-center relative z-10"
       >
         <div className="mx-auto">
           
           <motion.div 
-            initial={{ scale: 0.8, opacity: 0 }} 
+            initial={{ scale: 0.9, opacity: 0 }} 
             animate={{ scale: 1, opacity: 1 }} 
-            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+            transition={{ duration: 0.6, delay: 0.0, ease: "easeOut" }}
             viewport={{ once: true }}
             className="mb-4 flex justify-center floating-animation"
           >
@@ -85,9 +86,9 @@ export default function Hero() {
           </motion.div>
           
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
             viewport={{ once: true }}
             className="text-lg md:text-xl text-white/90 font-semibold mb-4 font-headline"
           >
@@ -95,7 +96,10 @@ export default function Hero() {
           </motion.div>
           
           <motion.h1 
-            variants={sentence}
+            variants={{
+              hidden: { opacity: 1 },
+              visible: { opacity: 1, transition: { delay: 0.2, staggerChildren: 0.02 } }
+            }}
             initial="hidden"
             animate="visible"
             className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight text-white"
@@ -116,9 +120,9 @@ export default function Hero() {
           </motion.h1>
 
           <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
+            initial={{ opacity: 0, y: 10 }} 
             animate={{ opacity: 1, y: 0 }} 
-            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
             viewport={{ once: true }}
             className="text-base md:text-lg text-white/70 mb-8 max-w-3xl mx-auto leading-relaxed"
           >
@@ -126,9 +130,9 @@ export default function Hero() {
           </motion.div>
           
           <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
+            initial={{ opacity: 0, y: 10 }} 
             animate={{ opacity: 1, y: 0 }} 
-            transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
             viewport={{ once: true }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
