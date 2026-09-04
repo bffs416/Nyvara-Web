@@ -1,35 +1,27 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
   typescript: {
     ignoreBuildErrors: true,
   },
   eslint: {
     ignoreDuringBuilds: true,
   },
-  experimental: {
-    // Empty for now, but leaving the key in case it's needed later
+  experimental: {},
+  
+  // ¡Aquí está la regla mágica que conecta la web con los tours de Pano2VR!
+  async rewrites() {
+    return [
+      {
+        source: '/tours/:path*',
+        destination: 'http://192.168.2.16:8086/tours_web/:path*', 
+      },
+    ]
   },
   images: {
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'placehold.co',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'picsum.photos',
-        port: '',
-        pathname: '/**',
-      },
+      { protocol: 'https', hostname: 'placehold.co', port: '', pathname: '/**' },
+      { protocol: 'https', hostname: 'images.unsplash.com', port: '', pathname: '/**' },
+      { protocol: 'https', hostname: 'picsum.photos', port: '', pathname: '/**' },
     ],
   },
   webpack: (config) => {
@@ -46,5 +38,4 @@ const nextConfig = {
     return config;
   },
 };
-
 module.exports = nextConfig;
