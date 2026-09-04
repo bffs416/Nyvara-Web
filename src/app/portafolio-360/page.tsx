@@ -17,7 +17,7 @@ const tours = [
     category: "Espacios Arquitectónicos",
     description: "Exploración interactiva en 360° diseñada para mostrar cada detalle del espacio con total inmersión.",
     iframeUrl: "https://nyvaragroup.com/tours/lourdes/index.html",
-    thumbnail: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80"
+    thumbnail: "/lourdes-thumbnail.png"
   },
   {
     id: "2",
