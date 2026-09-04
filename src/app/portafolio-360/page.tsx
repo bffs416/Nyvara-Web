@@ -13,20 +13,18 @@ import { Button } from '@/components/ui/button';
 const tours = [
   {
     id: "1",
-    title: "Recorrido Industrial Piloto",
-    category: "Planta de Producción",
-    description: "Exploración interactiva en 360° diseñada para mostrar la escala operativa e infraestructura técnica a inversores extranjeros.",
-    // Ruta local dentro de la carpeta public de Next.js
-    iframeUrl: "/tours/tour-1/index.html",
+    title: "Recorrido Virtual Lourdes",
+    category: "Espacios Arquitectónicos",
+    description: "Exploración interactiva en 360° diseñada para mostrar cada detalle del espacio con total inmersión.",
+    iframeUrl: "https://nyvaragroup.com/tours/lourdes/index.html",
     thumbnail: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80"
   },
   {
     id: "2",
-    title: "Proyecto Inmobiliario Premium",
-    category: "Arquitectura Comercial",
-    description: "Visita virtual de alta definición para comercialización de espacios arquitectónicos y salas de ventas a nivel internacional.",
-    // Ruta local dentro de la carpeta public de Next.js
-    iframeUrl: "/tours/tour-2/index.html",
+    title: "Próximo Proyecto",
+    category: "En Desarrollo",
+    description: "Muy pronto publicaremos nuestro próximo recorrido virtual interactivo.",
+    iframeUrl: "", // Enlace vacío hasta que haya un segundo tour
     thumbnail: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80"
   }
 ];
@@ -61,8 +59,8 @@ export default function Portafolio360Page() {
               <motion.div
                 key={tour.id}
                 whileHover={{ y: -10 }}
-                className="group relative cursor-pointer"
-                onClick={() => setActiveTour(tour.id)}
+                className={`group relative ${tour.iframeUrl ? 'cursor-pointer' : 'cursor-not-allowed opacity-60'}`}
+                onClick={() => tour.iframeUrl && setActiveTour(tour.id)}
               >
                 <div className="relative h-72 w-full overflow-hidden border-2 border-white/10 rounded-2xl">
                   <Image 
