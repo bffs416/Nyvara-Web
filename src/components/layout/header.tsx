@@ -12,6 +12,7 @@ import { siteConfig } from '@/lib/config';
 
 const navItems = [
   { name: 'Inicio', href: '/' },
+  { name: 'Portafolio 360', href: '/portafolio-360' },
   { name: 'Diagnóstico', href: '/diagnostico' },
   { name: 'Blog', href: '/blog' },
 ];
