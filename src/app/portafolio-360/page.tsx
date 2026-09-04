@@ -24,7 +24,7 @@ const tours = [
     title: "Apartamento Calle 80",
     category: "Arquitectura Residencial",
     description: "Recorrido virtual inmersivo para la comercialización de este exclusivo proyecto inmobiliario.",
-    iframeUrl: "/tours/APT%20Calle%2080/index.html",
+    iframeUrl: "/tours/APT%20Calle%2080/index.html?v=1",
     thumbnail: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80"
   }
 ];
