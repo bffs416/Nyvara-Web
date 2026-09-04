@@ -15,6 +15,10 @@ const nextConfig = {
         source: '/tours/:path*',
         destination: 'http://192.168.2.16:8086/tours_web/:path*', 
       },
+      {
+        source: '/tours-new/:path*',
+        destination: 'http://192.168.2.16:8100/:path*', 
+      }
     ]
   },
   images: {
