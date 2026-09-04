@@ -21,10 +21,10 @@ const tours = [
   },
   {
     id: "2",
-    title: "Próximo Proyecto",
-    category: "En Desarrollo",
-    description: "Muy pronto publicaremos nuestro próximo recorrido virtual interactivo.",
-    iframeUrl: "", // Enlace vacío hasta que haya un segundo tour
+    title: "Apartamento Calle 80",
+    category: "Arquitectura Residencial",
+    description: "Recorrido virtual inmersivo para la comercialización de este exclusivo proyecto inmobiliario.",
+    iframeUrl: "/tours/APT%20Calle%2080/index.html",
     thumbnail: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80"
   }
 ];
