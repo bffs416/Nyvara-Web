@@ -16,7 +16,7 @@ const tours = [
     title: "Recorrido Virtual Lourdes",
     category: "Espacios Arquitectónicos",
     description: "Exploración interactiva en 360° diseñada para mostrar cada detalle del espacio con total inmersión.",
-    iframeUrl: "https://nyvaragroup.com/tours/lourdes/index.html",
+    iframeUrl: "http://192.168.2.16:8100/lourdes/index.html",
     thumbnail: "/lourdes-thumbnail.png"
   },
   {
