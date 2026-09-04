@@ -16,7 +16,7 @@ const tours = [
     title: "Recorrido Virtual Lourdes",
     category: "Espacios Arquitectónicos",
     description: "Exploración interactiva en 360° diseñada para mostrar cada detalle del espacio con total inmersión.",
-    iframeUrl: "http://192.168.2.16:8100/lourdes/index.html",
+    iframeUrl: "/tours/Lourdes/index.html?v=1",
     thumbnail: "/lourdes-thumbnail.png"
   },
   {
@@ -24,7 +24,7 @@ const tours = [
     title: "Apartamento Calle 80",
     category: "Arquitectura Residencial",
     description: "Recorrido virtual inmersivo para la comercialización de este exclusivo proyecto inmobiliario.",
-    iframeUrl: "http://192.168.2.16:8100/Apt_80/index.html",
+    iframeUrl: "/tours/Apt_80/index.html?v=1",
     thumbnail: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80"
   }
 ];
